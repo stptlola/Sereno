@@ -105,7 +105,7 @@ Version payante : plan de table, RSVP, mini-site, témoins, Pass.
 | M19-02 | [Synchronisation avec l'agenda](V2/M19-02-synchronisation-avec-l-agenda.md) | Calendrier et listes |
 | M19-04 | [Listes libres](V2/M19-04-listes-libres.md) | Calendrier et listes |
 
-## V3 · 69 tickets
+## V3 · 71 tickets
 
 Modules complets : prestataires, jour J, cérémonies, cagnotte, IA…
 
@@ -121,6 +121,7 @@ Modules complets : prestataires, jour J, cérémonies, cagnotte, IA…
 | M6-04 | [Comparateur de devis](V3/M6-04-comparateur-de-devis.md) | Prestataires et comparateur de devis |
 | M6-05 | [Questions types par métier](V3/M6-05-questions-types-par-metier.md) | Prestataires et comparateur de devis |
 | M6-06 | [Appel ou e-mail en un geste](V3/M6-06-appel-ou-e-mail-en-un-geste.md) | Prestataires et comparateur de devis |
+| M6-07 | [Briefs prestataires prêts à envoyer](V3/M6-07-briefs-prestataires-prets-a-envoyer.md) | Prestataires et comparateur de devis |
 | M7-01 | [Cérémonies multiples](V3/M7-01-ceremonies-multiples.md) | Cérémonies, livrets et musiques |
 | M7-02 | [Déroulé type par cérémonie](V3/M7-02-deroule-type-par-ceremonie.md) | Cérémonies, livrets et musiques |
 | M7-03 | [Livret de cérémonie](V3/M7-03-livret-de-ceremonie.md) | Cérémonies, livrets et musiques |
@@ -131,6 +132,7 @@ Modules complets : prestataires, jour J, cérémonies, cagnotte, IA…
 | M8-05 | [Répertoire d'urgence](V3/M8-05-repertoire-d-urgence.md) | Kit Jour J et accès Témoins |
 | M8-06 | [Plan B météo](V3/M8-06-plan-b-meteo.md) | Kit Jour J et accès Témoins |
 | M8-07 | [Vue Jour J mobile](V3/M8-07-vue-jour-j-mobile.md) | Kit Jour J et accès Témoins |
+| M8-08 | [Déroulés de la veille et du lendemain](V3/M8-08-deroules-de-la-veille-et-du-lendemain.md) | Kit Jour J et accès Témoins |
 | M9-01 | [Brunch du lendemain](V3/M9-01-brunch-du-lendemain.md) | Post-mariage |
 | M9-02 | [Cadeaux reçus](V3/M9-02-cadeaux-recus.md) | Post-mariage |
 | M9-03 | [Suivi des remerciements](V3/M9-03-suivi-des-remerciements.md) | Post-mariage |

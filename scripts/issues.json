@@ -511,6 +511,13 @@
   "body": "**Module :** M6 · Prestataires et comparateur de devis  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux appeler ou écrire à un prestataire en un geste, afin de gagner du temps.\n\n## Critères d'acceptation\n\n- [ ] Liens téléphone et e-mail actifs sur mobile\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M6-06-appel-ou-e-mail-en-un-geste.md`](../blob/main/tickets/V3/M6-06-appel-ou-e-mail-en-un-geste.md)\n"
  },
  {
+  "id": "M6-07",
+  "version": "V3",
+  "module": "M6 · Prestataires et comparateur de devis",
+  "title": "M6-07 · Briefs prestataires prêts à envoyer",
+  "body": "**Module :** M6 · Prestataires et comparateur de devis  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux un brief prêt à envoyer à chaque prestataire, afin de lui transmettre toutes les infos utiles sans rien oublier.\n\n## Critères d'acceptation\n\n- [ ] Modèles par métier (photographe, vidéaste, DJ, traiteur, fleuriste, officiant)\n- [ ] Prérempli avec la date, les lieux, les horaires du déroulé, le nombre d'invités, les régimes et les contacts du jour J\n- [ ] Complété par nos souhaits\n- [ ] Export PDF ou lien de lecture seule\n- [ ] Mis à jour si le dossier change\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M6-07-briefs-prestataires-prets-a-envoyer.md`](../blob/main/tickets/V3/M6-07-briefs-prestataires-prets-a-envoyer.md)\n"
+ },
+ {
   "id": "M7-01",
   "version": "V3",
   "module": "M7 · Cérémonies, livrets et musiques",
@@ -593,6 +600,13 @@
   "module": "M8 · Kit Jour J et accès Témoins",
   "title": "M8-07 · Vue Jour J mobile",
   "body": "**Module :** M8 · Kit Jour J et accès Témoins  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux une vue Jour J simplifiée sur mobile, afin de suivre la journée d'un coup d'œil.\n\n## Critères d'acceptation\n\n- [ ] Activée automatiquement à J-1\n- [ ] Affiche le prochain créneau, la checklist et le répertoire\n- [ ] Gros boutons\n- [ ] Utilisable avec une connexion faible\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M8-07-vue-jour-j-mobile.md`](../blob/main/tickets/V3/M8-07-vue-jour-j-mobile.md)\n"
+ },
+ {
+  "id": "M8-08",
+  "version": "V3",
+  "module": "M8 · Kit Jour J et accès Témoins",
+  "title": "M8-08 · Déroulés de la veille et du lendemain",
+  "body": "**Module :** M8 · Kit Jour J et accès Témoins  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux un déroulé de la veille et du lendemain, afin d'organiser tout le week-end et pas seulement le jour J.\n\n## Critères d'acceptation\n\n- [ ] Déroulés J-1 (installation, livraisons, répétition, dîner) et J+1 (brunch, rangement, retours de matériel loué) avec heure, lieu, responsable\n- [ ] Modèles proposés\n- [ ] Partageables avec témoins et prestataires\n- [ ] Affichés dans la vue Jour J à partir de J-1\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M8-08-deroules-de-la-veille-et-du-lendemain.md`](../blob/main/tickets/V3/M8-08-deroules-de-la-veille-et-du-lendemain.md)\n"
  },
  {
   "id": "M9-01",
