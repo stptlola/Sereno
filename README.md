@@ -19,3 +19,13 @@ Sereno accompagne pas à pas les couples qui organisent leur mariage eux-mêmes,
 - Node.js côté serveur, via Next.js
 - PostgreSQL, hébergement en Europe
 - Stripe pour le paiement du Pass
+
+## Créer les issues GitHub
+
+Les 159 tickets sont prêts à devenir des issues, avec étiquettes de version et de module et un jalon par version :
+
+```bash
+GITHUB_TOKEN=votre_jeton python3 scripts/creer-issues.py
+```
+
+Le jeton doit avoir le droit « Issues : lecture et écriture » sur ce dépôt.

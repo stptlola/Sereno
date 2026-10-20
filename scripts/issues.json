@@ -1,0 +1,1115 @@
+[
+ {
+  "id": "M0-01",
+  "version": "MVP",
+  "module": "M0 · Compte, onboarding et Co-pilote",
+  "title": "M0-01 · Inscription par e-mail et mot de passe",
+  "body": "**Module :** M0 · Compte, onboarding et Co-pilote  \n**Version :** MVP\n\n## User story\n\nEn tant que visiteur, je veux créer un compte par e-mail et mot de passe, afin d'enregistrer mon organisation.\n\n## Critères d'acceptation\n\n- [ ] Mot de passe de 8 caractères minimum\n- [ ] E-mail de confirmation envoyé\n- [ ] Message clair si l'e-mail existe déjà\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M0-01-inscription-par-e-mail-et-mot-de-passe.md`](../blob/main/tickets/MVP/M0-01-inscription-par-e-mail-et-mot-de-passe.md)\n"
+ },
+ {
+  "id": "M0-02",
+  "version": "MVP",
+  "module": "M0 · Compte, onboarding et Co-pilote",
+  "title": "M0-02 · Connexion avec Google ou Apple",
+  "body": "**Module :** M0 · Compte, onboarding et Co-pilote  \n**Version :** MVP\n\n## User story\n\nEn tant que visiteur, je veux me connecter avec Google ou Apple, afin de m'inscrire en un clic.\n\n## Critères d'acceptation\n\n- [ ] Compte créé au premier passage\n- [ ] Reconnu aux connexions suivantes\n- [ ] Même e-mail = même compte\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M0-02-connexion-avec-google-ou-apple.md`](../blob/main/tickets/MVP/M0-02-connexion-avec-google-ou-apple.md)\n"
+ },
+ {
+  "id": "M0-03",
+  "version": "MVP",
+  "module": "M0 · Compte, onboarding et Co-pilote",
+  "title": "M0-03 · Connexion et déconnexion",
+  "body": "**Module :** M0 · Compte, onboarding et Co-pilote  \n**Version :** MVP\n\n## User story\n\nEn tant que couple, je veux me connecter et me déconnecter, afin d'accéder à mes données depuis n'importe quel appareil.\n\n## Critères d'acceptation\n\n- [ ] Session conservée 30 jours\n- [ ] Déconnexion depuis le menu\n- [ ] Données identiques sur mobile et ordinateur\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M0-03-connexion-et-deconnexion.md`](../blob/main/tickets/MVP/M0-03-connexion-et-deconnexion.md)\n"
+ },
+ {
+  "id": "M0-04",
+  "version": "MVP",
+  "module": "M0 · Compte, onboarding et Co-pilote",
+  "title": "M0-04 · Réinitialisation du mot de passe",
+  "body": "**Module :** M0 · Compte, onboarding et Co-pilote  \n**Version :** MVP\n\n## User story\n\nEn tant que couple, je veux réinitialiser mon mot de passe, afin de récupérer mon compte.\n\n## Critères d'acceptation\n\n- [ ] Lien envoyé par e-mail, valable 1 heure\n- [ ] Utilisable une seule fois\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M0-04-reinitialisation-du-mot-de-passe.md`](../blob/main/tickets/MVP/M0-04-reinitialisation-du-mot-de-passe.md)\n"
+ },
+ {
+  "id": "M0-05",
+  "version": "MVP",
+  "module": "M0 · Compte, onboarding et Co-pilote",
+  "title": "M0-05 · Questionnaire de démarrage",
+  "body": "**Module :** M0 · Compte, onboarding et Co-pilote  \n**Version :** MVP\n\n## User story\n\nEn tant que couple, je veux répondre à 5 questions au démarrage (date, région, invités estimés, budget, cérémonies), afin d'obtenir un planning adapté.\n\n## Critères d'acceptation\n\n- [ ] Toutes les questions passables sauf la date (ou « pas encore fixée »)\n- [ ] Modifiable plus tard dans les paramètres\n- [ ] Planning et budget générés à la fin\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M0-05-questionnaire-de-demarrage.md`](../blob/main/tickets/MVP/M0-05-questionnaire-de-demarrage.md)\n"
+ },
+ {
+  "id": "M0-06",
+  "version": "MVP",
+  "module": "M0 · Compte, onboarding et Co-pilote",
+  "title": "M0-06 · Prénoms et restrictions alimentaires du couple",
+  "body": "**Module :** M0 · Compte, onboarding et Co-pilote  \n**Version :** MVP\n\n## User story\n\nEn tant que couple, je veux indiquer nos prénoms et nos restrictions alimentaires, afin de personnaliser l'outil.\n\n## Critères d'acceptation\n\n- [ ] Prénoms affichés sur le tableau de bord\n- [ ] Restrictions reprises dans la liste d'invités pour le couple\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M0-06-prenoms-et-restrictions-alimentaires-du-couple.md`](../blob/main/tickets/MVP/M0-06-prenoms-et-restrictions-alimentaires-du-couple.md)\n"
+ },
+ {
+  "id": "M0-07",
+  "version": "MVP",
+  "module": "M0 · Compte, onboarding et Co-pilote",
+  "title": "M0-07 · Invitation du Co-pilote",
+  "body": "**Module :** M0 · Compte, onboarding et Co-pilote  \n**Version :** MVP\n\n## User story\n\nEn tant que couple, je veux envoyer un lien Co-pilote à mon ou ma partenaire, afin d'organiser à deux.\n\n## Critères d'acceptation\n\n- [ ] Lien par e-mail ou à copier\n- [ ] Valable 7 jours\n- [ ] Le co-pilote crée son propre accès et rejoint le même mariage\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M0-07-invitation-du-co-pilote.md`](../blob/main/tickets/MVP/M0-07-invitation-du-co-pilote.md)\n"
+ },
+ {
+  "id": "M0-08",
+  "version": "MVP",
+  "module": "M0 · Compte, onboarding et Co-pilote",
+  "title": "M0-08 · Droits du Co-pilote en temps réel",
+  "body": "**Module :** M0 · Compte, onboarding et Co-pilote  \n**Version :** MVP\n\n## User story\n\nEn tant que co-pilote, je veux voir et modifier tout le mariage, afin de partager la charge.\n\n## Critères d'acceptation\n\n- [ ] Mêmes droits que le créateur, sauf suppression du mariage\n- [ ] Modifications visibles par l'autre sans recharger la page\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M0-08-droits-du-co-pilote-en-temps-reel.md`](../blob/main/tickets/MVP/M0-08-droits-du-co-pilote-en-temps-reel.md)\n"
+ },
+ {
+  "id": "M0-09",
+  "version": "MVP",
+  "module": "M0 · Compte, onboarding et Co-pilote",
+  "title": "M0-09 · Historique des modifications",
+  "body": "**Module :** M0 · Compte, onboarding et Co-pilote  \n**Version :** MVP\n\n## User story\n\nEn tant que couple, je veux savoir qui a fait quelle modification, afin d'éviter les doublons.\n\n## Critères d'acceptation\n\n- [ ] Nom de l'auteur et date sur chaque tâche, dépense et invité modifiés\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M0-09-historique-des-modifications.md`](../blob/main/tickets/MVP/M0-09-historique-des-modifications.md)\n"
+ },
+ {
+  "id": "M1-01",
+  "version": "MVP",
+  "module": "M1 · Tableau de bord",
+  "title": "M1-01 · Compte à rebours",
+  "body": "**Module :** M1 · Tableau de bord  \n**Version :** MVP\n\n## User story\n\nEn tant que couple, je veux voir un compte à rebours jusqu'au jour J, afin de me situer dans le temps.\n\n## Critères d'acceptation\n\n- [ ] Affiche « J-128 » ou « Plus que 128 jours »\n- [ ] « C'est aujourd'hui ! » le jour J\n- [ ] « Date à fixer » sans date\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M1-01-compte-a-rebours.md`](../blob/main/tickets/MVP/M1-01-compte-a-rebours.md)\n"
+ },
+ {
+  "id": "M1-02",
+  "version": "MVP",
+  "module": "M1 · Tableau de bord",
+  "title": "M1-02 · Actions prioritaires de la semaine",
+  "body": "**Module :** M1 · Tableau de bord  \n**Version :** MVP\n\n## User story\n\nEn tant que couple, je veux voir les 3 à 5 prochaines actions prioritaires, afin de savoir quoi faire cette semaine.\n\n## Critères d'acceptation\n\n- [ ] Tâches en retard d'abord, puis échéances les plus proches\n- [ ] Cocher une tâche ici la marque faite partout\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M1-02-actions-prioritaires-de-la-semaine.md`](../blob/main/tickets/MVP/M1-02-actions-prioritaires-de-la-semaine.md)\n"
+ },
+ {
+  "id": "M1-03",
+  "version": "MVP",
+  "module": "M1 · Tableau de bord",
+  "title": "M1-03 · Jauge de budget",
+  "body": "**Module :** M1 · Tableau de bord  \n**Version :** MVP\n\n## User story\n\nEn tant que couple, je veux une jauge de budget, afin de savoir si je reste dans l'enveloppe.\n\n## Critères d'acceptation\n\n- [ ] Prévu, engagé et payé visibles\n- [ ] Passe en couleur alerte si le total engagé dépasse le prévu\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M1-03-jauge-de-budget.md`](../blob/main/tickets/MVP/M1-03-jauge-de-budget.md)\n"
+ },
+ {
+  "id": "M1-04",
+  "version": "MVP",
+  "module": "M1 · Tableau de bord",
+  "title": "M1-04 · Jauge des réponses invités",
+  "body": "**Module :** M1 · Tableau de bord  \n**Version :** MVP\n\n## User story\n\nEn tant que couple, je veux une jauge des réponses invités, afin de suivre les confirmations.\n\n## Critères d'acceptation\n\n- [ ] Confirmés, absents, en attente sur le total invité\n- [ ] Un clic ouvre la liste filtrée\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M1-04-jauge-des-reponses-invites.md`](../blob/main/tickets/MVP/M1-04-jauge-des-reponses-invites.md)\n"
+ },
+ {
+  "id": "M1-05",
+  "version": "MVP",
+  "module": "M1 · Tableau de bord",
+  "title": "M1-05 · Avancement global du planning",
+  "body": "**Module :** M1 · Tableau de bord  \n**Version :** MVP\n\n## User story\n\nEn tant que couple, je veux voir l'avancement global de mon planning, afin de mesurer le chemin parcouru.\n\n## Critères d'acceptation\n\n- [ ] Pourcentage de tâches faites\n- [ ] Message d'encouragement à 25, 50, 75 et 100 %\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M1-05-avancement-global-du-planning.md`](../blob/main/tickets/MVP/M1-05-avancement-global-du-planning.md)\n"
+ },
+ {
+  "id": "M1-06",
+  "version": "V2",
+  "module": "M1 · Tableau de bord",
+  "title": "M1-06 · Prochains paiements",
+  "body": "**Module :** M1 · Tableau de bord  \n**Version :** V2\n\n## User story\n\nEn tant que couple, je veux voir les prochains paiements à prévoir, afin d'anticiper ma trésorerie.\n\n## Critères d'acceptation\n\n- [ ] Les 3 prochaines échéances d'acompte ou de solde, avec montant et date\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V2/M1-06-prochains-paiements.md`](../blob/main/tickets/V2/M1-06-prochains-paiements.md)\n"
+ },
+ {
+  "id": "M1-07",
+  "version": "V2",
+  "module": "M1 · Tableau de bord",
+  "title": "M1-07 · Étapes célébrées",
+  "body": "**Module :** M1 · Tableau de bord  \n**Version :** V2\n\n## User story\n\nEn tant que couple, je veux que mes grandes étapes soient célébrées, afin de rester motivé.\n\n## Critères d'acceptation\n\n- [ ] Étapes : lieu réservé, budget validé, faire-part envoyés, plan de table terminé\n- [ ] Message et petite animation\n- [ ] Aucune incitation commerciale\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V2/M1-07-etapes-celebrees.md`](../blob/main/tickets/V2/M1-07-etapes-celebrees.md)\n"
+ },
+ {
+  "id": "M2-01",
+  "version": "MVP",
+  "module": "M2 · Rétroplanning et tâches",
+  "title": "M2-01 · Génération automatique du planning",
+  "body": "**Module :** M2 · Rétroplanning et tâches  \n**Version :** MVP\n\n## User story\n\nEn tant que couple, je veux un planning généré automatiquement à partir de ma date, afin de ne rien oublier.\n\n## Critères d'acceptation\n\n- [ ] Tâches de l'inscription jusqu'à J+30 issues d'un modèle, quel que soit l'horizon (quelques semaines ou plusieurs années)\n- [ ] Échéances calculées depuis la date\n- [ ] Génération en moins de 5 secondes\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M2-01-generation-automatique-du-planning.md`](../blob/main/tickets/MVP/M2-01-generation-automatique-du-planning.md)\n"
+ },
+ {
+  "id": "M2-02",
+  "version": "MVP",
+  "module": "M2 · Rétroplanning et tâches",
+  "title": "M2-02 · Planning adapté aux cérémonies",
+  "body": "**Module :** M2 · Rétroplanning et tâches  \n**Version :** MVP\n\n## User story\n\nEn tant que couple, je veux que le planning s'adapte à mes cérémonies, afin de n'avoir que des tâches utiles.\n\n## Critères d'acceptation\n\n- [ ] Tâches propres à chaque cérémonie (civile, laïque, religieuse) ajoutées ou retirées selon l'onboarding\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M2-02-planning-adapte-aux-ceremonies.md`](../blob/main/tickets/MVP/M2-02-planning-adapte-aux-ceremonies.md)\n"
+ },
+ {
+  "id": "M2-03",
+  "version": "MVP",
+  "module": "M2 · Rétroplanning et tâches",
+  "title": "M2-03 · Tâches regroupées par période",
+  "body": "**Module :** M2 · Rétroplanning et tâches  \n**Version :** MVP\n\n## User story\n\nEn tant que couple, je veux voir les tâches regroupées par période, afin de lire le planning facilement.\n\n## Critères d'acceptation\n\n- [ ] Périodes : plus de 12 mois (année par année si besoin), 12 mois, 9 mois, 6 mois, 3 mois, 1 mois, semaine du mariage, jour J, après\n- [ ] Période en cours ouverte par défaut\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M2-03-taches-regroupees-par-periode.md`](../blob/main/tickets/MVP/M2-03-taches-regroupees-par-periode.md)\n"
+ },
+ {
+  "id": "M2-04",
+  "version": "MVP",
+  "module": "M2 · Rétroplanning et tâches",
+  "title": "M2-04 · Statut des tâches",
+  "body": "**Module :** M2 · Rétroplanning et tâches  \n**Version :** MVP\n\n## User story\n\nEn tant que couple, je veux changer le statut d'une tâche, afin de suivre l'avancement.\n\n## Critères d'acceptation\n\n- [ ] Statuts : à faire, en cours, fait\n- [ ] Changement en un geste\n- [ ] Date de réalisation enregistrée\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M2-04-statut-des-taches.md`](../blob/main/tickets/MVP/M2-04-statut-des-taches.md)\n"
+ },
+ {
+  "id": "M2-05",
+  "version": "MVP",
+  "module": "M2 · Rétroplanning et tâches",
+  "title": "M2-05 · Créer, modifier, supprimer ou masquer une tâche",
+  "body": "**Module :** M2 · Rétroplanning et tâches  \n**Version :** MVP\n\n## User story\n\nEn tant que couple, je veux ajouter, modifier, supprimer ou masquer une tâche, afin d'adapter le planning à mon mariage.\n\n## Critères d'acceptation\n\n- [ ] Champs : titre, échéance, catégorie, responsable, note\n- [ ] Suppression confirmée\n- [ ] Une tâche masquée se réaffiche depuis un filtre\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M2-05-creer-modifier-supprimer-ou-masquer-une-tache.md`](../blob/main/tickets/MVP/M2-05-creer-modifier-supprimer-ou-masquer-une-tache.md)\n"
+ },
+ {
+  "id": "M2-06",
+  "version": "MVP",
+  "module": "M2 · Rétroplanning et tâches",
+  "title": "M2-06 · Responsable d'une tâche",
+  "body": "**Module :** M2 · Rétroplanning et tâches  \n**Version :** MVP\n\n## User story\n\nEn tant que couple, je veux attribuer une tâche à l'un de nous ou à un proche, afin de répartir le travail.\n\n## Critères d'acceptation\n\n- [ ] Responsable choisi parmi le couple ou un nom libre\n- [ ] Filtre « mes tâches »\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M2-06-responsable-d-une-tache.md`](../blob/main/tickets/MVP/M2-06-responsable-d-une-tache.md)\n"
+ },
+ {
+  "id": "M2-07",
+  "version": "MVP",
+  "module": "M2 · Rétroplanning et tâches",
+  "title": "M2-07 · Conseils sur chaque tâche",
+  "body": "**Module :** M2 · Rétroplanning et tâches  \n**Version :** MVP\n\n## User story\n\nEn tant que couple, je veux une explication courte pour chaque tâche du modèle, afin de savoir comment m'y prendre.\n\n## Critères d'acceptation\n\n- [ ] 1 à 3 phrases par tâche, dans le ton Sereno\n- [ ] Affichée à l'ouverture de la tâche\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M2-07-conseils-sur-chaque-tache.md`](../blob/main/tickets/MVP/M2-07-conseils-sur-chaque-tache.md)\n"
+ },
+ {
+  "id": "M2-08",
+  "version": "MVP",
+  "module": "M2 · Rétroplanning et tâches",
+  "title": "M2-08 · Recalcul si la date change",
+  "body": "**Module :** M2 · Rétroplanning et tâches  \n**Version :** MVP\n\n## User story\n\nEn tant que couple, je veux que les échéances se recalculent si la date change, afin de garder un planning juste.\n\n## Critères d'acceptation\n\n- [ ] Toutes les tâches du modèle décalées\n- [ ] Les tâches personnelles gardent leur date\n- [ ] Message récapitulatif\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M2-08-recalcul-si-la-date-change.md`](../blob/main/tickets/MVP/M2-08-recalcul-si-la-date-change.md)\n"
+ },
+ {
+  "id": "M2-09",
+  "version": "MVP",
+  "module": "M2 · Rétroplanning et tâches",
+  "title": "M2-09 · Retards et échéances légales",
+  "body": "**Module :** M2 · Rétroplanning et tâches  \n**Version :** MVP\n\n## User story\n\nEn tant que couple, je veux voir les tâches en retard et les échéances légales mises en avant, afin de traiter l'urgent.\n\n## Critères d'acceptation\n\n- [ ] Retard signalé en couleur alerte\n- [ ] Badge « légal » sur dossier mairie et publication des bans\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M2-09-retards-et-echeances-legales.md`](../blob/main/tickets/MVP/M2-09-retards-et-echeances-legales.md)\n"
+ },
+ {
+  "id": "M2-10",
+  "version": "MVP",
+  "module": "M2 · Rétroplanning et tâches",
+  "title": "M2-10 · Filtres et recherche des tâches",
+  "body": "**Module :** M2 · Rétroplanning et tâches  \n**Version :** MVP\n\n## User story\n\nEn tant que couple, je veux filtrer et rechercher dans mes tâches, afin de trouver vite.\n\n## Critères d'acceptation\n\n- [ ] Filtres : période, catégorie, responsable, statut\n- [ ] Recherche par mot du titre\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M2-10-filtres-et-recherche-des-taches.md`](../blob/main/tickets/MVP/M2-10-filtres-et-recherche-des-taches.md)\n"
+ },
+ {
+  "id": "M2-11",
+  "version": "MVP",
+  "module": "M2 · Rétroplanning et tâches",
+  "title": "M2-11 · Planning resserré (mariage proche)",
+  "body": "**Module :** M2 · Rétroplanning et tâches  \n**Version :** MVP\n\n## User story\n\nEn tant que couple qui se marie bientôt, je veux un planning resserré réaliste, afin de ne pas être noyé sous des tâches « en retard ».\n\n## Critères d'acceptation\n\n- [ ] Tâches passées réparties entre aujourd'hui et le jour J par ordre de priorité\n- [ ] Alerte douce si un délai est très court (lieu, faire-part)\n- [ ] Message rassurant dans le ton Sereno\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M2-11-planning-resserre-mariage-proche.md`](../blob/main/tickets/MVP/M2-11-planning-resserre-mariage-proche.md)\n"
+ },
+ {
+  "id": "M2-12",
+  "version": "MVP",
+  "module": "M2 · Rétroplanning et tâches",
+  "title": "M2-12 · Planning long (mariage dans plusieurs années)",
+  "body": "**Module :** M2 · Rétroplanning et tâches  \n**Version :** MVP\n\n## User story\n\nEn tant que couple qui se marie dans plusieurs années, je veux un planning qui ne m'impose rien trop tôt, afin d'avancer à mon rythme.\n\n## Critères d'acceptation\n\n- [ ] Seules les tâches d'anticipation sont actives\n- [ ] Les autres apparaissent à leur échéance idéale\n- [ ] Rythme des e-mails adapté\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M2-12-planning-long-mariage-dans-plusieurs-annees.md`](../blob/main/tickets/MVP/M2-12-planning-long-mariage-dans-plusieurs-annees.md)\n"
+ },
+ {
+  "id": "M3-01",
+  "version": "MVP",
+  "module": "M3 · Budget et acomptes",
+  "title": "M3-01 · Budget global",
+  "body": "**Module :** M3 · Budget et acomptes  \n**Version :** MVP\n\n## User story\n\nEn tant que couple, je veux saisir un budget global, afin de fixer mon enveloppe.\n\n## Critères d'acceptation\n\n- [ ] Montant en euros, modifiable à tout moment\n- [ ] Repris de l'onboarding\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M3-01-budget-global.md`](../blob/main/tickets/MVP/M3-01-budget-global.md)\n"
+ },
+ {
+  "id": "M3-02",
+  "version": "MVP",
+  "module": "M3 · Budget et acomptes",
+  "title": "M3-02 · Répartition indicative par poste",
+  "body": "**Module :** M3 · Budget et acomptes  \n**Version :** MVP\n\n## User story\n\nEn tant que couple, je veux une répartition indicative par poste, afin de savoir combien prévoir pour chacun.\n\n## Critères d'acceptation\n\n- [ ] Pourcentages par défaut (lieu, traiteur, tenues, photo et vidéo, musique, déco et fleurs, alliances, papeterie, divers) appliqués au budget\n- [ ] Modifiables en euros ou en %\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M3-02-repartition-indicative-par-poste.md`](../blob/main/tickets/MVP/M3-02-repartition-indicative-par-poste.md)\n"
+ },
+ {
+  "id": "M3-03",
+  "version": "MVP",
+  "module": "M3 · Budget et acomptes",
+  "title": "M3-03 · Gestion des postes de budget",
+  "body": "**Module :** M3 · Budget et acomptes  \n**Version :** MVP\n\n## User story\n\nEn tant que couple, je veux ajouter, renommer ou supprimer un poste, afin de coller à mon mariage.\n\n## Critères d'acceptation\n\n- [ ] Poste supprimé seulement s'il n'a aucune dépense, sinon proposition de déplacer les dépenses\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M3-03-gestion-des-postes-de-budget.md`](../blob/main/tickets/MVP/M3-03-gestion-des-postes-de-budget.md)\n"
+ },
+ {
+  "id": "M3-04",
+  "version": "MVP",
+  "module": "M3 · Budget et acomptes",
+  "title": "M3-04 · Saisie d'une dépense",
+  "body": "**Module :** M3 · Budget et acomptes  \n**Version :** MVP\n\n## User story\n\nEn tant que couple, je veux saisir une dépense dans un poste, afin de suivre le réel.\n\n## Critères d'acceptation\n\n- [ ] Champs : libellé, montant prévu, montant réel, prestataire (texte libre), note\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M3-04-saisie-d-une-depense.md`](../blob/main/tickets/MVP/M3-04-saisie-d-une-depense.md)\n"
+ },
+ {
+  "id": "M3-05",
+  "version": "MVP",
+  "module": "M3 · Budget et acomptes",
+  "title": "M3-05 · Acomptes et soldes",
+  "body": "**Module :** M3 · Budget et acomptes  \n**Version :** MVP\n\n## User story\n\nEn tant que couple, je veux enregistrer acomptes et soldes avec leurs dates, afin de suivre mes paiements.\n\n## Critères d'acceptation\n\n- [ ] Plusieurs versements par dépense\n- [ ] Statut payé ou à payer\n- [ ] Reste à payer calculé\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M3-05-acomptes-et-soldes.md`](../blob/main/tickets/MVP/M3-05-acomptes-et-soldes.md)\n"
+ },
+ {
+  "id": "M3-06",
+  "version": "MVP",
+  "module": "M3 · Budget et acomptes",
+  "title": "M3-06 · Récapitulatif chiffré",
+  "body": "**Module :** M3 · Budget et acomptes  \n**Version :** MVP\n\n## User story\n\nEn tant que couple, je veux un récapitulatif chiffré, afin de connaître ma situation.\n\n## Critères d'acceptation\n\n- [ ] Total prévu, engagé, payé, écart au budget\n- [ ] Mise à jour instantanée\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M3-06-recapitulatif-chiffre.md`](../blob/main/tickets/MVP/M3-06-recapitulatif-chiffre.md)\n"
+ },
+ {
+  "id": "M3-07",
+  "version": "MVP",
+  "module": "M3 · Budget et acomptes",
+  "title": "M3-07 · Alerte de dépassement",
+  "body": "**Module :** M3 · Budget et acomptes  \n**Version :** MVP\n\n## User story\n\nEn tant que couple, je veux être alerté quand un poste dépasse le prévu, afin de réagir à temps.\n\n## Critères d'acceptation\n\n- [ ] Poste et total en couleur alerte\n- [ ] Message dans le ton Sereno : « Le poste traiteur dépasse de 300 €. On regarde ensemble ? »\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M3-07-alerte-de-depassement.md`](../blob/main/tickets/MVP/M3-07-alerte-de-depassement.md)\n"
+ },
+ {
+  "id": "M3-08",
+  "version": "V2",
+  "module": "M3 · Budget et acomptes",
+  "title": "M3-08 · Échéancier des paiements",
+  "body": "**Module :** M3 · Budget et acomptes  \n**Version :** V2\n\n## User story\n\nEn tant que couple, je veux un échéancier des paiements à venir, afin d'anticiper.\n\n## Critères d'acceptation\n\n- [ ] Liste triée par date\n- [ ] Rappel par e-mail 7 jours avant (voir M11)\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V2/M3-08-echeancier-des-paiements.md`](../blob/main/tickets/V2/M3-08-echeancier-des-paiements.md)\n"
+ },
+ {
+  "id": "M3-09",
+  "version": "V3",
+  "module": "M3 · Budget et acomptes",
+  "title": "M3-09 · Export du budget",
+  "body": "**Module :** M3 · Budget et acomptes  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux exporter mon budget, afin de le partager ou l'archiver.\n\n## Critères d'acceptation\n\n- [ ] Export CSV et PDF de tous les postes et versements\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M3-09-export-du-budget.md`](../blob/main/tickets/V3/M3-09-export-du-budget.md)\n"
+ },
+ {
+  "id": "M3-10",
+  "version": "V2",
+  "module": "M3 · Budget et acomptes",
+  "title": "M3-10 · Qui finance quoi",
+  "body": "**Module :** M3 · Budget et acomptes  \n**Version :** V2\n\n## User story\n\nEn tant que couple, je veux indiquer qui finance quoi, afin de suivre la participation de nos proches.\n\n## Critères d'acceptation\n\n- [ ] Financeurs (couple, parents, autres)\n- [ ] Montant promis et versé par financeur\n- [ ] Part de chacun par poste\n- [ ] Reste à financer\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V2/M3-10-qui-finance-quoi.md`](../blob/main/tickets/V2/M3-10-qui-finance-quoi.md)\n"
+ },
+ {
+  "id": "M3-11",
+  "version": "V3",
+  "module": "M3 · Budget et acomptes",
+  "title": "M3-11 · Accès restreint des proches qui financent",
+  "body": "**Module :** M3 · Budget et acomptes  \n**Version :** V3\n\n## User story\n\nEn tant que proche qui participe, je veux voir ma seule part, afin de savoir à quoi sert ma contribution.\n\n## Critères d'acceptation\n\n- [ ] Accès restreint par lien : postes financés et montants, rien d'autre\n- [ ] Versement possible via la cagnotte (M20)\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M3-11-acces-restreint-des-proches-qui-financent.md`](../blob/main/tickets/V3/M3-11-acces-restreint-des-proches-qui-financent.md)\n"
+ },
+ {
+  "id": "M3-12",
+  "version": "V2",
+  "module": "M3 · Budget et acomptes",
+  "title": "M3-12 · Import du budget depuis un tableur",
+  "body": "**Module :** M3 · Budget et acomptes  \n**Version :** V2\n\n## User story\n\nEn tant que couple, je veux importer mon budget depuis un tableur, afin de reprendre le travail déjà fait.\n\n## Critères d'acceptation\n\n- [ ] Import CSV ou Excel\n- [ ] Correspondance des colonnes poste, libellé, prévu, réel\n- [ ] Erreurs listées\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V2/M3-12-import-du-budget-depuis-un-tableur.md`](../blob/main/tickets/V2/M3-12-import-du-budget-depuis-un-tableur.md)\n"
+ },
+ {
+  "id": "M4-01",
+  "version": "MVP",
+  "module": "M4 · Invités et foyers",
+  "title": "M4-01 · Ajout d'un invité",
+  "body": "**Module :** M4 · Invités et foyers  \n**Version :** MVP\n\n## User story\n\nEn tant que couple, je veux ajouter un invité, afin de construire ma liste.\n\n## Critères d'acceptation\n\n- [ ] Champs : prénom, nom, côté (prénom de chaque partenaire, ou commun), catégorie (famille, amis, collègues, autre), e-mail, téléphone\n- [ ] Seul le prénom est obligatoire\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M4-01-ajout-d-un-invite.md`](../blob/main/tickets/MVP/M4-01-ajout-d-un-invite.md)\n"
+ },
+ {
+  "id": "M4-02",
+  "version": "MVP",
+  "module": "M4 · Invités et foyers",
+  "title": "M4-02 · Foyers",
+  "body": "**Module :** M4 · Invités et foyers  \n**Version :** MVP\n\n## User story\n\nEn tant que couple, je veux regrouper les invités en foyers, afin de gérer couples et familles ensemble.\n\n## Critères d'acceptation\n\n- [ ] Un foyer a un nom et une adresse\n- [ ] Une invitation et une réponse par foyer possibles\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M4-02-foyers.md`](../blob/main/tickets/MVP/M4-02-foyers.md)\n"
+ },
+ {
+  "id": "M4-03",
+  "version": "MVP",
+  "module": "M4 · Invités et foyers",
+  "title": "M4-03 · Accompagnants et enfants",
+  "body": "**Module :** M4 · Invités et foyers  \n**Version :** MVP\n\n## User story\n\nEn tant que couple, je veux indiquer les accompagnants et les enfants, afin d'avoir le bon nombre de couverts.\n\n## Critères d'acceptation\n\n- [ ] Accompagnant nommé ou « +1 »\n- [ ] Case enfant avec âge facultatif\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M4-03-accompagnants-et-enfants.md`](../blob/main/tickets/MVP/M4-03-accompagnants-et-enfants.md)\n"
+ },
+ {
+  "id": "M4-04",
+  "version": "MVP",
+  "module": "M4 · Invités et foyers",
+  "title": "M4-04 · Régimes et allergies",
+  "body": "**Module :** M4 · Invités et foyers  \n**Version :** MVP\n\n## User story\n\nEn tant que couple, je veux noter régimes et allergies, afin de prévenir le traiteur.\n\n## Critères d'acceptation\n\n- [ ] Choix multiples (végétarien, végan, sans gluten, sans porc, halal, casher, autre) et champ libre allergies\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M4-04-regimes-et-allergies.md`](../blob/main/tickets/MVP/M4-04-regimes-et-allergies.md)\n"
+ },
+ {
+  "id": "M4-05",
+  "version": "MVP",
+  "module": "M4 · Invités et foyers",
+  "title": "M4-05 · Moments auxquels chaque invité est convié",
+  "body": "**Module :** M4 · Invités et foyers  \n**Version :** MVP\n\n## User story\n\nEn tant que couple, je veux indiquer à quels moments chaque invité est convié, afin de gérer vin d'honneur, dîner et brunch.\n\n## Critères d'acceptation\n\n- [ ] Moments définis par le couple\n- [ ] Cases par invité\n- [ ] Compteurs par moment\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M4-05-moments-auxquels-chaque-invite-est-convie.md`](../blob/main/tickets/MVP/M4-05-moments-auxquels-chaque-invite-est-convie.md)\n"
+ },
+ {
+  "id": "M4-06",
+  "version": "MVP",
+  "module": "M4 · Invités et foyers",
+  "title": "M4-06 · Statut de réponse",
+  "body": "**Module :** M4 · Invités et foyers  \n**Version :** MVP\n\n## User story\n\nEn tant que couple, je veux suivre le statut de réponse, afin de savoir qui vient.\n\n## Critères d'acceptation\n\n- [ ] Statuts : en attente, présent, absent\n- [ ] Modifiable à la main\n- [ ] Date de réponse enregistrée\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M4-06-statut-de-reponse.md`](../blob/main/tickets/MVP/M4-06-statut-de-reponse.md)\n"
+ },
+ {
+  "id": "M4-07",
+  "version": "MVP",
+  "module": "M4 · Invités et foyers",
+  "title": "M4-07 · Compteurs invités en temps réel",
+  "body": "**Module :** M4 · Invités et foyers  \n**Version :** MVP\n\n## User story\n\nEn tant que couple, je veux des compteurs en temps réel, afin de connaître mes chiffres.\n\n## Critères d'acceptation\n\n- [ ] Invités, confirmés, absents, en attente, enfants, repas spéciaux\n- [ ] Justes en permanence\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M4-07-compteurs-invites-en-temps-reel.md`](../blob/main/tickets/MVP/M4-07-compteurs-invites-en-temps-reel.md)\n"
+ },
+ {
+  "id": "M4-08",
+  "version": "MVP",
+  "module": "M4 · Invités et foyers",
+  "title": "M4-08 · Filtres, tri et recherche des invités",
+  "body": "**Module :** M4 · Invités et foyers  \n**Version :** MVP\n\n## User story\n\nEn tant que couple, je veux filtrer, trier et rechercher, afin de m'y retrouver dans 200 invités.\n\n## Critères d'acceptation\n\n- [ ] Filtres par côté, catégorie, statut, moment\n- [ ] Tri par nom\n- [ ] Liste fluide à 200 invités\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M4-08-filtres-tri-et-recherche-des-invites.md`](../blob/main/tickets/MVP/M4-08-filtres-tri-et-recherche-des-invites.md)\n"
+ },
+ {
+  "id": "M4-09",
+  "version": "MVP",
+  "module": "M4 · Invités et foyers",
+  "title": "M4-09 · Import et export CSV des invités",
+  "body": "**Module :** M4 · Invités et foyers  \n**Version :** MVP\n\n## User story\n\nEn tant que couple, je veux importer et exporter ma liste en CSV, afin de reprendre mon fichier Excel.\n\n## Critères d'acceptation\n\n- [ ] Modèle CSV fourni\n- [ ] Correspondance des colonnes à l'import\n- [ ] Erreurs listées ligne par ligne\n- [ ] Export lisible dans Excel\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M4-09-import-et-export-csv-des-invites.md`](../blob/main/tickets/MVP/M4-09-import-et-export-csv-des-invites.md)\n"
+ },
+ {
+  "id": "M4-10",
+  "version": "MVP",
+  "module": "M4 · Invités et foyers",
+  "title": "M4-10 · Détection des doublons",
+  "body": "**Module :** M4 · Invités et foyers  \n**Version :** MVP\n\n## User story\n\nEn tant que couple, je veux être prévenu des doublons, afin d'éviter d'inviter deux fois.\n\n## Critères d'acceptation\n\n- [ ] Alerte si même prénom et nom, ou même e-mail\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M4-10-detection-des-doublons.md`](../blob/main/tickets/MVP/M4-10-detection-des-doublons.md)\n"
+ },
+ {
+  "id": "M4-11",
+  "version": "V2",
+  "module": "M4 · Invités et foyers",
+  "title": "M4-11 · Collecte d'adresses par lien",
+  "body": "**Module :** M4 · Invités et foyers  \n**Version :** V2\n\n## User story\n\nEn tant que couple, je veux envoyer un lien unique pour collecter les adresses des invités, afin de ne plus les demander une par une.\n\n## Critères d'acceptation\n\n- [ ] Lien partageable par SMS, WhatsApp ou e-mail\n- [ ] Formulaire sans compte\n- [ ] Adresses rangées dans le bon foyer, doublons signalés\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V2/M4-11-collecte-d-adresses-par-lien.md`](../blob/main/tickets/V2/M4-11-collecte-d-adresses-par-lien.md)\n"
+ },
+ {
+  "id": "M4-12",
+  "version": "V3",
+  "module": "M4 · Invités et foyers",
+  "title": "M4-12 · Hébergement des invités",
+  "body": "**Module :** M4 · Invités et foyers  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux suivre l'hébergement des invités, afin de savoir qui dort où.\n\n## Critères d'acceptation\n\n- [ ] Liste d'hébergements (nom, adresse, prix, lien)\n- [ ] Invités rattachés\n- [ ] Compteur de places\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M4-12-hebergement-des-invites.md`](../blob/main/tickets/V3/M4-12-hebergement-des-invites.md)\n"
+ },
+ {
+  "id": "M4-13",
+  "version": "V3",
+  "module": "M4 · Invités et foyers",
+  "title": "M4-13 · Transport des invités",
+  "body": "**Module :** M4 · Invités et foyers  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux organiser le transport des invités, afin que personne ne reste bloqué.\n\n## Critères d'acceptation\n\n- [ ] Navettes avec horaires et places\n- [ ] Covoiturage proposé sur le mini-site\n- [ ] Liste des invités sans moyen de transport\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M4-13-transport-des-invites.md`](../blob/main/tickets/V3/M4-13-transport-des-invites.md)\n"
+ },
+ {
+  "id": "M4-14",
+  "version": "V2",
+  "module": "M4 · Invités et foyers",
+  "title": "M4-14 · Listes A et B",
+  "body": "**Module :** M4 · Invités et foyers  \n**Version :** V2\n\n## User story\n\nEn tant que couple, je veux une liste « A » et une liste « B », afin de gérer les invitations en deux vagues.\n\n## Critères d'acceptation\n\n- [ ] Priorité par invité\n- [ ] Une invitation de la liste B proposée quand un invité de la liste A décline\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V2/M4-14-listes-a-et-b.md`](../blob/main/tickets/V2/M4-14-listes-a-et-b.md)\n"
+ },
+ {
+  "id": "M5-01",
+  "version": "V2",
+  "module": "M5 · Mini-site, RSVP, plan de table et rapport tra",
+  "title": "M5-01 · Mini-site du mariage",
+  "body": "**Module :** M5 · Mini-site, RSVP, plan de table et rapport traiteur  \n**Version :** V2\n\n## User story\n\nEn tant que couple, je veux créer un mini-site du mariage, afin de donner les infos pratiques aux invités.\n\n## Critères d'acceptation\n\n- [ ] Sections : accueil, programme, lieux avec carte, hébergements, covoiturage, liste de cadeaux\n- [ ] Aux couleurs Sereno\n- [ ] Adresse du type sereno.fr/lea-et-sam\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V2/M5-01-mini-site-du-mariage.md`](../blob/main/tickets/V2/M5-01-mini-site-du-mariage.md)\n"
+ },
+ {
+  "id": "M5-02",
+  "version": "V2",
+  "module": "M5 · Mini-site, RSVP, plan de table et rapport tra",
+  "title": "M5-02 · Mini-site protégé par mot de passe",
+  "body": "**Module :** M5 · Mini-site, RSVP, plan de table et rapport traiteur  \n**Version :** V2\n\n## User story\n\nEn tant que couple, je veux protéger le mini-site par un mot de passe, afin de garder les infos privées.\n\n## Critères d'acceptation\n\n- [ ] Mot de passe facultatif\n- [ ] Non indexé par les moteurs de recherche\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V2/M5-02-mini-site-protege-par-mot-de-passe.md`](../blob/main/tickets/V2/M5-02-mini-site-protege-par-mot-de-passe.md)\n"
+ },
+ {
+  "id": "M5-03",
+  "version": "V2",
+  "module": "M5 · Mini-site, RSVP, plan de table et rapport tra",
+  "title": "M5-03 · Réponse en ligne des invités (RSVP)",
+  "body": "**Module :** M5 · Mini-site, RSVP, plan de table et rapport traiteur  \n**Version :** V2\n\n## User story\n\nEn tant qu'invité, je veux répondre en ligne sans créer de compte, afin de confirmer facilement.\n\n## Critères d'acceptation\n\n- [ ] Recherche de mon nom ou lien personnel\n- [ ] Réponse pour tout le foyer\n- [ ] Moments, régime, allergies, message\n- [ ] Confirmation affichée\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V2/M5-03-reponse-en-ligne-des-invites-rsvp.md`](../blob/main/tickets/V2/M5-03-reponse-en-ligne-des-invites-rsvp.md)\n"
+ },
+ {
+  "id": "M5-04",
+  "version": "V2",
+  "module": "M5 · Mini-site, RSVP, plan de table et rapport tra",
+  "title": "M5-04 · Réponses reliées à la liste",
+  "body": "**Module :** M5 · Mini-site, RSVP, plan de table et rapport traiteur  \n**Version :** V2\n\n## User story\n\nEn tant que couple, je veux que les réponses arrivent directement dans ma liste, afin de ne rien ressaisir.\n\n## Critères d'acceptation\n\n- [ ] Statut, régime et accompagnants mis à jour\n- [ ] Notification au couple (voir M11)\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V2/M5-04-reponses-reliees-a-la-liste.md`](../blob/main/tickets/V2/M5-04-reponses-reliees-a-la-liste.md)\n"
+ },
+ {
+  "id": "M5-05",
+  "version": "V2",
+  "module": "M5 · Mini-site, RSVP, plan de table et rapport tra",
+  "title": "M5-05 · Date limite et relances RSVP",
+  "body": "**Module :** M5 · Mini-site, RSVP, plan de table et rapport traiteur  \n**Version :** V2\n\n## User story\n\nEn tant que couple, je veux fixer une date limite de réponse et relancer les retardataires, afin de boucler mes chiffres.\n\n## Critères d'acceptation\n\n- [ ] Date affichée sur le site\n- [ ] Relance par e-mail aux foyers en attente, en un clic\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V2/M5-05-date-limite-et-relances-rsvp.md`](../blob/main/tickets/V2/M5-05-date-limite-et-relances-rsvp.md)\n"
+ },
+ {
+  "id": "M5-06",
+  "version": "V2",
+  "module": "M5 · Mini-site, RSVP, plan de table et rapport tra",
+  "title": "M5-06 · Création des tables",
+  "body": "**Module :** M5 · Mini-site, RSVP, plan de table et rapport traiteur  \n**Version :** V2\n\n## User story\n\nEn tant que couple, je veux créer mes tables, afin de préparer le plan.\n\n## Critères d'acceptation\n\n- [ ] Table ronde ou rectangulaire, nom ou numéro, nombre de places\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V2/M5-06-creation-des-tables.md`](../blob/main/tickets/V2/M5-06-creation-des-tables.md)\n"
+ },
+ {
+  "id": "M5-07",
+  "version": "V2",
+  "module": "M5 · Mini-site, RSVP, plan de table et rapport tra",
+  "title": "M5-07 · Plan de table en glisser-déposer",
+  "body": "**Module :** M5 · Mini-site, RSVP, plan de table et rapport traiteur  \n**Version :** V2\n\n## User story\n\nEn tant que couple, je veux placer les invités par glisser-déposer, afin de composer le plan visuellement.\n\n## Critères d'acceptation\n\n- [ ] Invités non placés listés à part\n- [ ] Un foyer peut se déplacer d'un bloc\n- [ ] Fonctionne au doigt sur tablette\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V2/M5-07-plan-de-table-en-glisser-deposer.md`](../blob/main/tickets/V2/M5-07-plan-de-table-en-glisser-deposer.md)\n"
+ },
+ {
+  "id": "M5-08",
+  "version": "V2",
+  "module": "M5 · Mini-site, RSVP, plan de table et rapport tra",
+  "title": "M5-08 · Alertes de placement",
+  "body": "**Module :** M5 · Mini-site, RSVP, plan de table et rapport traiteur  \n**Version :** V2\n\n## User story\n\nEn tant que couple, je veux être alerté des problèmes de placement, afin de les corriger.\n\n## Critères d'acceptation\n\n- [ ] Table pleine\n- [ ] Invité absent placé\n- [ ] Contrainte « pas à côté de » non respectée\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V2/M5-08-alertes-de-placement.md`](../blob/main/tickets/V2/M5-08-alertes-de-placement.md)\n"
+ },
+ {
+  "id": "M5-09",
+  "version": "V2",
+  "module": "M5 · Mini-site, RSVP, plan de table et rapport tra",
+  "title": "M5-09 · Impression du plan de table",
+  "body": "**Module :** M5 · Mini-site, RSVP, plan de table et rapport traiteur  \n**Version :** V2\n\n## User story\n\nEn tant que couple, je veux imprimer mon plan de table, afin de l'afficher le jour J.\n\n## Critères d'acceptation\n\n- [ ] Export PDF du plan visuel et de la liste alphabétique « qui est à quelle table »\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V2/M5-09-impression-du-plan-de-table.md`](../blob/main/tickets/V2/M5-09-impression-du-plan-de-table.md)\n"
+ },
+ {
+  "id": "M5-10",
+  "version": "V2",
+  "module": "M5 · Mini-site, RSVP, plan de table et rapport tra",
+  "title": "M5-10 · Rapport traiteur",
+  "body": "**Module :** M5 · Mini-site, RSVP, plan de table et rapport traiteur  \n**Version :** V2\n\n## User story\n\nEn tant que couple, je veux générer un rapport traiteur, afin de transmettre les bons chiffres.\n\n## Critères d'acceptation\n\n- [ ] PDF : couverts adultes et enfants, régimes et allergies, par table et au total\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V2/M5-10-rapport-traiteur.md`](../blob/main/tickets/V2/M5-10-rapport-traiteur.md)\n"
+ },
+ {
+  "id": "M5-11",
+  "version": "V2",
+  "module": "M5 · Mini-site, RSVP, plan de table et rapport tra",
+  "title": "M5-11 · Questions personnalisées au RSVP",
+  "body": "**Module :** M5 · Mini-site, RSVP, plan de table et rapport traiteur  \n**Version :** V2\n\n## User story\n\nEn tant que couple, je veux ajouter mes propres questions au formulaire de réponse, afin de tout savoir en une fois.\n\n## Critères d'acceptation\n\n- [ ] Questions à choix ou texte libre (chanson préférée, besoin d'hébergement, heure d'arrivée)\n- [ ] Réponses visibles par invité et en synthèse\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V2/M5-11-questions-personnalisees-au-rsvp.md`](../blob/main/tickets/V2/M5-11-questions-personnalisees-au-rsvp.md)\n"
+ },
+ {
+  "id": "M5-12",
+  "version": "V2",
+  "module": "M5 · Mini-site, RSVP, plan de table et rapport tra",
+  "title": "M5-12 · FAQ du mini-site",
+  "body": "**Module :** M5 · Mini-site, RSVP, plan de table et rapport traiteur  \n**Version :** V2\n\n## User story\n\nEn tant que couple, je veux une FAQ sur le mini-site, afin d'éviter les mêmes questions des invités.\n\n## Critères d'acceptation\n\n- [ ] Questions-réponses modifiables\n- [ ] Suggestions par défaut (tenue, parking, enfants, cadeaux)\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V2/M5-12-faq-du-mini-site.md`](../blob/main/tickets/V2/M5-12-faq-du-mini-site.md)\n"
+ },
+ {
+  "id": "M5-13",
+  "version": "V2",
+  "module": "M5 · Mini-site, RSVP, plan de table et rapport tra",
+  "title": "M5-13 · Proposition automatique de plan de table",
+  "body": "**Module :** M5 · Mini-site, RSVP, plan de table et rapport traiteur  \n**Version :** V2\n\n## User story\n\nEn tant que couple, je veux une proposition de plan de table automatique, afin de partir d'une base.\n\n## Critères d'acceptation\n\n- [ ] Placement par foyer et par catégorie, contraintes respectées\n- [ ] Aperçu avant d'appliquer\n- [ ] Tout reste modifiable à la main\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V2/M5-13-proposition-automatique-de-plan-de-table.md`](../blob/main/tickets/V2/M5-13-proposition-automatique-de-plan-de-table.md)\n"
+ },
+ {
+  "id": "M6-01",
+  "version": "V3",
+  "module": "M6 · Prestataires et comparateur de devis",
+  "title": "M6-01 · Carnet de prestataires",
+  "body": "**Module :** M6 · Prestataires et comparateur de devis  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux un carnet de prestataires, afin d'avoir tous mes contacts au même endroit.\n\n## Critères d'acceptation\n\n- [ ] Fiche : nom, métier, contact, téléphone, e-mail, site, statut (contacté, devis reçu, réservé, écarté), note\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M6-01-carnet-de-prestataires.md`](../blob/main/tickets/V3/M6-01-carnet-de-prestataires.md)\n"
+ },
+ {
+  "id": "M6-02",
+  "version": "V3",
+  "module": "M6 · Prestataires et comparateur de devis",
+  "title": "M6-02 · Contrats et devis joints",
+  "body": "**Module :** M6 · Prestataires et comparateur de devis  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux joindre contrats et devis à une fiche, afin de les retrouver.\n\n## Critères d'acceptation\n\n- [ ] PDF ou image, 10 Mo maximum par fichier\n- [ ] Aperçu et téléchargement\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M6-02-contrats-et-devis-joints.md`](../blob/main/tickets/V3/M6-02-contrats-et-devis-joints.md)\n"
+ },
+ {
+  "id": "M6-03",
+  "version": "V3",
+  "module": "M6 · Prestataires et comparateur de devis",
+  "title": "M6-03 · Prestataire relié au budget",
+  "body": "**Module :** M6 · Prestataires et comparateur de devis  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux relier un prestataire réservé à mon budget, afin de suivre ses paiements.\n\n## Critères d'acceptation\n\n- [ ] Crée ou relie la dépense du poste concerné\n- [ ] Acomptes et soldes repris de M3\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M6-03-prestataire-relie-au-budget.md`](../blob/main/tickets/V3/M6-03-prestataire-relie-au-budget.md)\n"
+ },
+ {
+  "id": "M6-04",
+  "version": "V3",
+  "module": "M6 · Prestataires et comparateur de devis",
+  "title": "M6-04 · Comparateur de devis",
+  "body": "**Module :** M6 · Prestataires et comparateur de devis  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux comparer jusqu'à 3 devis pour un même poste, afin de choisir sereinement.\n\n## Critères d'acceptation\n\n- [ ] Tableau côte à côte : prix total, acompte, ce qui est inclus, conditions d'annulation, note personnelle\n- [ ] Choix d'un devis retenu\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M6-04-comparateur-de-devis.md`](../blob/main/tickets/V3/M6-04-comparateur-de-devis.md)\n"
+ },
+ {
+  "id": "M6-05",
+  "version": "V3",
+  "module": "M6 · Prestataires et comparateur de devis",
+  "title": "M6-05 · Questions types par métier",
+  "body": "**Module :** M6 · Prestataires et comparateur de devis  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux des questions types à poser par métier, afin de ne rien oublier en rendez-vous.\n\n## Critères d'acceptation\n\n- [ ] Liste par métier (lieu, traiteur, photographe, DJ, fleuriste…)\n- [ ] Cochable\n- [ ] Réponses notées dans la fiche\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M6-05-questions-types-par-metier.md`](../blob/main/tickets/V3/M6-05-questions-types-par-metier.md)\n"
+ },
+ {
+  "id": "M6-06",
+  "version": "V3",
+  "module": "M6 · Prestataires et comparateur de devis",
+  "title": "M6-06 · Appel ou e-mail en un geste",
+  "body": "**Module :** M6 · Prestataires et comparateur de devis  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux appeler ou écrire à un prestataire en un geste, afin de gagner du temps.\n\n## Critères d'acceptation\n\n- [ ] Liens téléphone et e-mail actifs sur mobile\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M6-06-appel-ou-e-mail-en-un-geste.md`](../blob/main/tickets/V3/M6-06-appel-ou-e-mail-en-un-geste.md)\n"
+ },
+ {
+  "id": "M7-01",
+  "version": "V3",
+  "module": "M7 · Cérémonies, livrets et musiques",
+  "title": "M7-01 · Cérémonies multiples",
+  "body": "**Module :** M7 · Cérémonies, livrets et musiques  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux créer une ou plusieurs cérémonies, afin de gérer civile, laïque et religieuse.\n\n## Critères d'acceptation\n\n- [ ] Types : civile, laïque, catholique, protestante, juive, musulmane, interculturelle, autre\n- [ ] Date, heure et lieu propres\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M7-01-ceremonies-multiples.md`](../blob/main/tickets/V3/M7-01-ceremonies-multiples.md)\n"
+ },
+ {
+  "id": "M7-02",
+  "version": "V3",
+  "module": "M7 · Cérémonies, livrets et musiques",
+  "title": "M7-02 · Déroulé type par cérémonie",
+  "body": "**Module :** M7 · Cérémonies, livrets et musiques  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux un déroulé type par cérémonie, afin de partir d'une base.\n\n## Critères d'acceptation\n\n- [ ] Étapes proposées selon le type, modifiables, réordonnables\n- [ ] Intervenant et durée par étape\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M7-02-deroule-type-par-ceremonie.md`](../blob/main/tickets/V3/M7-02-deroule-type-par-ceremonie.md)\n"
+ },
+ {
+  "id": "M7-03",
+  "version": "V3",
+  "module": "M7 · Cérémonies, livrets et musiques",
+  "title": "M7-03 · Livret de cérémonie",
+  "body": "**Module :** M7 · Cérémonies, livrets et musiques  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux générer un livret de cérémonie, afin de l'imprimer pour les invités.\n\n## Critères d'acceptation\n\n- [ ] Mise en page automatique aux couleurs Sereno\n- [ ] Textes, lectures, chants\n- [ ] Export PDF A5 prêt à imprimer\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M7-03-livret-de-ceremonie.md`](../blob/main/tickets/V3/M7-03-livret-de-ceremonie.md)\n"
+ },
+ {
+  "id": "M7-04",
+  "version": "V3",
+  "module": "M7 · Cérémonies, livrets et musiques",
+  "title": "M7-04 · Musiques par moment",
+  "body": "**Module :** M7 · Cérémonies, livrets et musiques  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux associer une musique à chaque moment, afin de préparer la playlist.\n\n## Critères d'acceptation\n\n- [ ] Titre, artiste, lien facultatif\n- [ ] Moments : entrée, signature, sortie, vin d'honneur, ouverture de bal\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M7-04-musiques-par-moment.md`](../blob/main/tickets/V3/M7-04-musiques-par-moment.md)\n"
+ },
+ {
+  "id": "M7-05",
+  "version": "V3",
+  "module": "M7 · Cérémonies, livrets et musiques",
+  "title": "M7-05 · Partage de la liste des musiques",
+  "body": "**Module :** M7 · Cérémonies, livrets et musiques  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux partager la liste des musiques, afin de la transmettre au DJ ou aux musiciens.\n\n## Critères d'acceptation\n\n- [ ] Export PDF ou lien de lecture seule\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M7-05-partage-de-la-liste-des-musiques.md`](../blob/main/tickets/V3/M7-05-partage-de-la-liste-des-musiques.md)\n"
+ },
+ {
+  "id": "M8-01",
+  "version": "V2",
+  "module": "M8 · Kit Jour J et accès Témoins",
+  "title": "M8-01 · Invitation des témoins",
+  "body": "**Module :** M8 · Kit Jour J et accès Témoins  \n**Version :** V2\n\n## User story\n\nEn tant que couple, je veux inviter un témoin ou un coordinateur, afin de lui confier la logistique.\n\n## Critères d'acceptation\n\n- [ ] Invitation par e-mail\n- [ ] Jusqu'à 6 personnes\n- [ ] Accès retirable à tout moment\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V2/M8-01-invitation-des-temoins.md`](../blob/main/tickets/V2/M8-01-invitation-des-temoins.md)\n"
+ },
+ {
+  "id": "M8-02",
+  "version": "V2",
+  "module": "M8 · Kit Jour J et accès Témoins",
+  "title": "M8-02 · Vue Témoin restreinte",
+  "body": "**Module :** M8 · Kit Jour J et accès Témoins  \n**Version :** V2\n\n## User story\n\nEn tant que témoin, je veux voir uniquement ce qui me concerne, afin d'aider sans tout le dossier.\n\n## Critères d'acceptation\n\n- [ ] Accès aux tâches qui me sont attribuées et aux contacts utiles\n- [ ] Aucun accès au budget ni aux données des invités\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V2/M8-02-vue-temoin-restreinte.md`](../blob/main/tickets/V2/M8-02-vue-temoin-restreinte.md)\n"
+ },
+ {
+  "id": "M8-03",
+  "version": "V3",
+  "module": "M8 · Kit Jour J et accès Témoins",
+  "title": "M8-03 · Déroulé du jour J",
+  "body": "**Module :** M8 · Kit Jour J et accès Témoins  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux construire le déroulé du jour J heure par heure, afin que chacun sache quoi faire.\n\n## Critères d'acceptation\n\n- [ ] Créneaux avec heure, lieu, responsable, prestataire\n- [ ] Partageable avec témoins et prestataires en lecture seule\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M8-03-deroule-du-jour-j.md`](../blob/main/tickets/V3/M8-03-deroule-du-jour-j.md)\n"
+ },
+ {
+  "id": "M8-04",
+  "version": "V3",
+  "module": "M8 · Kit Jour J et accès Témoins",
+  "title": "M8-04 · Checklist du matin",
+  "body": "**Module :** M8 · Kit Jour J et accès Témoins  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux une checklist du matin, afin de ne rien oublier.\n\n## Critères d'acceptation\n\n- [ ] Liste type (alliances, pièces d'identité, livret de famille, stylos, trousse de secours, chargeurs) modifiable et cochable\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M8-04-checklist-du-matin.md`](../blob/main/tickets/V3/M8-04-checklist-du-matin.md)\n"
+ },
+ {
+  "id": "M8-05",
+  "version": "V3",
+  "module": "M8 · Kit Jour J et accès Témoins",
+  "title": "M8-05 · Répertoire d'urgence",
+  "body": "**Module :** M8 · Kit Jour J et accès Témoins  \n**Version :** V3\n\n## User story\n\nEn tant que couple ou témoin, je veux un répertoire d'urgence, afin de joindre un prestataire en un clic.\n\n## Critères d'acceptation\n\n- [ ] Prestataires réservés et témoins, avec bouton d'appel direct\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M8-05-repertoire-d-urgence.md`](../blob/main/tickets/V3/M8-05-repertoire-d-urgence.md)\n"
+ },
+ {
+  "id": "M8-06",
+  "version": "V3",
+  "module": "M8 · Kit Jour J et accès Témoins",
+  "title": "M8-06 · Plan B météo",
+  "body": "**Module :** M8 · Kit Jour J et accès Témoins  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux préparer un plan B météo, afin de réagir sereinement.\n\n## Critères d'acceptation\n\n- [ ] Consignes rédigées à l'avance\n- [ ] Un bouton « activer le plan B » prévient témoins et prestataires concernés\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M8-06-plan-b-meteo.md`](../blob/main/tickets/V3/M8-06-plan-b-meteo.md)\n"
+ },
+ {
+  "id": "M8-07",
+  "version": "V3",
+  "module": "M8 · Kit Jour J et accès Témoins",
+  "title": "M8-07 · Vue Jour J mobile",
+  "body": "**Module :** M8 · Kit Jour J et accès Témoins  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux une vue Jour J simplifiée sur mobile, afin de suivre la journée d'un coup d'œil.\n\n## Critères d'acceptation\n\n- [ ] Activée automatiquement à J-1\n- [ ] Affiche le prochain créneau, la checklist et le répertoire\n- [ ] Gros boutons\n- [ ] Utilisable avec une connexion faible\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M8-07-vue-jour-j-mobile.md`](../blob/main/tickets/V3/M8-07-vue-jour-j-mobile.md)\n"
+ },
+ {
+  "id": "M9-01",
+  "version": "V3",
+  "module": "M9 · Post-mariage",
+  "title": "M9-01 · Brunch du lendemain",
+  "body": "**Module :** M9 · Post-mariage  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux organiser le brunch du lendemain, afin de le gérer comme un moment à part.\n\n## Critères d'acceptation\n\n- [ ] Utilise le moment « brunch » de M4 : liste des conviés, réponses, compteur\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M9-01-brunch-du-lendemain.md`](../blob/main/tickets/V3/M9-01-brunch-du-lendemain.md)\n"
+ },
+ {
+  "id": "M9-02",
+  "version": "V3",
+  "module": "M9 · Post-mariage",
+  "title": "M9-02 · Cadeaux reçus",
+  "body": "**Module :** M9 · Post-mariage  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux noter les cadeaux reçus, afin de savoir qui remercier.\n\n## Critères d'acceptation\n\n- [ ] Par foyer : cadeau ou montant, note\n- [ ] Statut « remercié »\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M9-02-cadeaux-recus.md`](../blob/main/tickets/V3/M9-02-cadeaux-recus.md)\n"
+ },
+ {
+  "id": "M9-03",
+  "version": "V3",
+  "module": "M9 · Post-mariage",
+  "title": "M9-03 · Suivi des remerciements",
+  "body": "**Module :** M9 · Post-mariage  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux suivre l'envoi des remerciements, afin de n'oublier personne.\n\n## Critères d'acceptation\n\n- [ ] Liste des foyers non remerciés\n- [ ] Export des adresses pour l'impression des cartes\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M9-03-suivi-des-remerciements.md`](../blob/main/tickets/V3/M9-03-suivi-des-remerciements.md)\n"
+ },
+ {
+  "id": "M9-04",
+  "version": "V3",
+  "module": "M9 · Post-mariage",
+  "title": "M9-04 · Récapitulatif final",
+  "body": "**Module :** M9 · Post-mariage  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux un récapitulatif final, afin de garder une trace.\n\n## Critères d'acceptation\n\n- [ ] Bilan : budget final, nombre d'invités, prestataires, tâches réalisées\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M9-04-recapitulatif-final.md`](../blob/main/tickets/V3/M9-04-recapitulatif-final.md)\n"
+ },
+ {
+  "id": "M9-05",
+  "version": "V3",
+  "module": "M9 · Post-mariage",
+  "title": "M9-05 · Archive complète du mariage",
+  "body": "**Module :** M9 · Post-mariage  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux exporter l'archive complète du mariage, afin de la conserver.\n\n## Critères d'acceptation\n\n- [ ] ZIP contenant le PDF récapitulatif, les exports CSV et les documents joints\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M9-05-archive-complete-du-mariage.md`](../blob/main/tickets/V3/M9-05-archive-complete-du-mariage.md)\n"
+ },
+ {
+  "id": "M9-06",
+  "version": "V3",
+  "module": "M9 · Post-mariage",
+  "title": "M9-06 · Avis et parrainage",
+  "body": "**Module :** M9 · Post-mariage  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux donner mon avis sur Sereno, afin d'aider d'autres couples.\n\n## Critères d'acceptation\n\n- [ ] Demande à J+15\n- [ ] Note sur 5 et commentaire\n- [ ] Lien de parrainage\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M9-06-avis-et-parrainage.md`](../blob/main/tickets/V3/M9-06-avis-et-parrainage.md)\n"
+ },
+ {
+  "id": "M10-01",
+  "version": "V2",
+  "module": "M10 · Pass Mariage Sérénité",
+  "title": "M10-01 · Page de l'offre Pass",
+  "body": "**Module :** M10 · Pass Mariage Sérénité  \n**Version :** V2\n\n## User story\n\nEn tant que couple gratuit, je veux comprendre ce que débloque le Pass, afin de décider en connaissance de cause.\n\n## Critères d'acceptation\n\n- [ ] Page comparative gratuit / Pass\n- [ ] Prix affiché TTC\n- [ ] Achat unique, sans abonnement\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V2/M10-01-page-de-l-offre-pass.md`](../blob/main/tickets/V2/M10-01-page-de-l-offre-pass.md)\n"
+ },
+ {
+  "id": "M10-02",
+  "version": "V2",
+  "module": "M10 · Pass Mariage Sérénité",
+  "title": "M10-02 · Proposition du Pass au bon moment",
+  "body": "**Module :** M10 · Pass Mariage Sérénité  \n**Version :** V2\n\n## User story\n\nEn tant que couple gratuit, je veux qu'on me propose le Pass au bon moment, afin de ne pas être bloqué sans explication.\n\n## Critères d'acceptation\n\n- [ ] Proposé au 31e invité, à l'ouverture du plan de table, du mini-site et des exports\n- [ ] Message dans le ton Sereno\n- [ ] Fermable\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V2/M10-02-proposition-du-pass-au-bon-moment.md`](../blob/main/tickets/V2/M10-02-proposition-du-pass-au-bon-moment.md)\n"
+ },
+ {
+  "id": "M10-03",
+  "version": "V2",
+  "module": "M10 · Pass Mariage Sérénité",
+  "title": "M10-03 · Paiement du Pass",
+  "body": "**Module :** M10 · Pass Mariage Sérénité  \n**Version :** V2\n\n## User story\n\nEn tant que couple, je veux payer par carte, Apple Pay ou Google Pay, afin d'acheter simplement.\n\n## Critères d'acceptation\n\n- [ ] Paiement via un prestataire reconnu (Stripe envisagé)\n- [ ] Aucune donnée bancaire stockée chez Sereno\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V2/M10-03-paiement-du-pass.md`](../blob/main/tickets/V2/M10-03-paiement-du-pass.md)\n"
+ },
+ {
+  "id": "M10-04",
+  "version": "V2",
+  "module": "M10 · Pass Mariage Sérénité",
+  "title": "M10-04 · Déblocage immédiat",
+  "body": "**Module :** M10 · Pass Mariage Sérénité  \n**Version :** V2\n\n## User story\n\nEn tant que couple, je veux un accès débloqué immédiatement, afin de continuer sans attendre.\n\n## Critères d'acceptation\n\n- [ ] Fonctions débloquées dès la confirmation, pour les deux membres du couple\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V2/M10-04-deblocage-immediat.md`](../blob/main/tickets/V2/M10-04-deblocage-immediat.md)\n"
+ },
+ {
+  "id": "M10-05",
+  "version": "V2",
+  "module": "M10 · Pass Mariage Sérénité",
+  "title": "M10-05 · Facture",
+  "body": "**Module :** M10 · Pass Mariage Sérénité  \n**Version :** V2\n\n## User story\n\nEn tant que couple, je veux recevoir une facture, afin de garder une preuve d'achat.\n\n## Critères d'acceptation\n\n- [ ] Facture PDF envoyée par e-mail et disponible dans les paramètres\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V2/M10-05-facture.md`](../blob/main/tickets/V2/M10-05-facture.md)\n"
+ },
+ {
+  "id": "M10-06",
+  "version": "V2",
+  "module": "M10 · Pass Mariage Sérénité",
+  "title": "M10-06 · Codes promo",
+  "body": "**Module :** M10 · Pass Mariage Sérénité  \n**Version :** V2\n\n## User story\n\nEn tant que couple, je veux un code promo, afin de profiter d'une offre ou d'un parrainage.\n\n## Critères d'acceptation\n\n- [ ] Code saisi au paiement\n- [ ] Réduction en % ou en euros\n- [ ] Date d'expiration\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V2/M10-06-codes-promo.md`](../blob/main/tickets/V2/M10-06-codes-promo.md)\n"
+ },
+ {
+  "id": "M10-07",
+  "version": "V2",
+  "module": "M10 · Pass Mariage Sérénité",
+  "title": "M10-07 · Remboursement sous 14 jours",
+  "body": "**Module :** M10 · Pass Mariage Sérénité  \n**Version :** V2\n\n## User story\n\nEn tant que couple, je veux pouvoir être remboursé dans les 14 jours, afin d'acheter sans risque.\n\n## Critères d'acceptation\n\n- [ ] Demande depuis le support\n- [ ] Accès retiré après remboursement\n- [ ] Délai à confirmer avec un juriste\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V2/M10-07-remboursement-sous-14-jours.md`](../blob/main/tickets/V2/M10-07-remboursement-sous-14-jours.md)\n"
+ },
+ {
+  "id": "M11-01",
+  "version": "MVP",
+  "module": "M11 · Notifications et rappels",
+  "title": "M11-01 · E-mail hebdomadaire des priorités",
+  "body": "**Module :** M11 · Notifications et rappels  \n**Version :** MVP\n\n## User story\n\nEn tant que couple, je veux un e-mail hebdomadaire avec mes priorités, afin de garder le rythme.\n\n## Critères d'acceptation\n\n- [ ] Envoyé le lundi matin\n- [ ] 3 à 5 tâches de la semaine et les retards\n- [ ] Lien direct vers le planning\n- [ ] Mensuel si le mariage est lointain\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M11-01-e-mail-hebdomadaire-des-priorites.md`](../blob/main/tickets/MVP/M11-01-e-mail-hebdomadaire-des-priorites.md)\n"
+ },
+ {
+  "id": "M11-02",
+  "version": "MVP",
+  "module": "M11 · Notifications et rappels",
+  "title": "M11-02 · Rappel avant échéance importante",
+  "body": "**Module :** M11 · Notifications et rappels  \n**Version :** MVP\n\n## User story\n\nEn tant que couple, je veux un rappel avant une échéance importante, afin de ne pas la manquer.\n\n## Critères d'acceptation\n\n- [ ] E-mail 7 jours avant les échéances légales et les tâches marquées importantes\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M11-02-rappel-avant-echeance-importante.md`](../blob/main/tickets/MVP/M11-02-rappel-avant-echeance-importante.md)\n"
+ },
+ {
+  "id": "M11-03",
+  "version": "V2",
+  "module": "M11 · Notifications et rappels",
+  "title": "M11-03 · Rappel avant paiement",
+  "body": "**Module :** M11 · Notifications et rappels  \n**Version :** V2\n\n## User story\n\nEn tant que couple, je veux un rappel avant un paiement, afin de prévoir la somme.\n\n## Critères d'acceptation\n\n- [ ] E-mail 7 jours avant chaque acompte ou solde à payer\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V2/M11-03-rappel-avant-paiement.md`](../blob/main/tickets/V2/M11-03-rappel-avant-paiement.md)\n"
+ },
+ {
+  "id": "M11-04",
+  "version": "V2",
+  "module": "M11 · Notifications et rappels",
+  "title": "M11-04 · Résumé des nouvelles réponses",
+  "body": "**Module :** M11 · Notifications et rappels  \n**Version :** V2\n\n## User story\n\nEn tant que couple, je veux être prévenu des nouvelles réponses d'invités, afin de suivre sans vérifier.\n\n## Critères d'acceptation\n\n- [ ] Résumé quotidien des réponses reçues, pas un e-mail par réponse\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V2/M11-04-resume-des-nouvelles-reponses.md`](../blob/main/tickets/V2/M11-04-resume-des-nouvelles-reponses.md)\n"
+ },
+ {
+  "id": "M11-05",
+  "version": "V2",
+  "module": "M11 · Notifications et rappels",
+  "title": "M11-05 · Notifications sur le téléphone",
+  "body": "**Module :** M11 · Notifications et rappels  \n**Version :** V2\n\n## User story\n\nEn tant que couple, je veux des notifications sur mon téléphone, afin d'être prévenu sans ouvrir mes e-mails.\n\n## Critères d'acceptation\n\n- [ ] Notifications de l'application installée (PWA), activées seulement avec mon accord\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V2/M11-05-notifications-sur-le-telephone.md`](../blob/main/tickets/V2/M11-05-notifications-sur-le-telephone.md)\n"
+ },
+ {
+  "id": "M11-06",
+  "version": "MVP",
+  "module": "M11 · Notifications et rappels",
+  "title": "M11-06 · Choix des notifications",
+  "body": "**Module :** M11 · Notifications et rappels  \n**Version :** MVP\n\n## User story\n\nEn tant que couple, je veux choisir les notifications que je reçois, afin de ne pas être submergé.\n\n## Critères d'acceptation\n\n- [ ] Réglage par type de message\n- [ ] Désinscription en un clic depuis chaque e-mail\n- [ ] Un e-mail par jour au plus\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M11-06-choix-des-notifications.md`](../blob/main/tickets/MVP/M11-06-choix-des-notifications.md)\n"
+ },
+ {
+  "id": "M12-01",
+  "version": "MVP",
+  "module": "M12 · Paramètres, RGPD et support",
+  "title": "M12-01 · Infos du mariage",
+  "body": "**Module :** M12 · Paramètres, RGPD et support  \n**Version :** MVP\n\n## User story\n\nEn tant que couple, je veux modifier les infos du mariage, afin de les tenir à jour.\n\n## Critères d'acceptation\n\n- [ ] Date, lieu, budget, cérémonies, prénoms\n- [ ] Un changement de date déclenche M2-08\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M12-01-infos-du-mariage.md`](../blob/main/tickets/MVP/M12-01-infos-du-mariage.md)\n"
+ },
+ {
+  "id": "M12-02",
+  "version": "MVP",
+  "module": "M12 · Paramètres, RGPD et support",
+  "title": "M12-02 · Profil",
+  "body": "**Module :** M12 · Paramètres, RGPD et support  \n**Version :** MVP\n\n## User story\n\nEn tant que couple, je veux modifier mon profil, afin de gérer mon accès.\n\n## Critères d'acceptation\n\n- [ ] Nom, e-mail (avec confirmation), mot de passe, vouvoiement ou tutoiement\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M12-02-profil.md`](../blob/main/tickets/MVP/M12-02-profil.md)\n"
+ },
+ {
+  "id": "M12-03",
+  "version": "MVP",
+  "module": "M12 · Paramètres, RGPD et support",
+  "title": "M12-03 · Export de toutes mes données (RGPD)",
+  "body": "**Module :** M12 · Paramètres, RGPD et support  \n**Version :** MVP\n\n## User story\n\nEn tant que couple, je veux exporter toutes mes données, afin d'exercer mon droit à la portabilité.\n\n## Critères d'acceptation\n\n- [ ] Archive téléchargeable sous 24 heures maximum, au format CSV et JSON\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M12-03-export-de-toutes-mes-donnees-rgpd.md`](../blob/main/tickets/MVP/M12-03-export-de-toutes-mes-donnees-rgpd.md)\n"
+ },
+ {
+  "id": "M12-04",
+  "version": "MVP",
+  "module": "M12 · Paramètres, RGPD et support",
+  "title": "M12-04 · Suppression du compte (RGPD)",
+  "body": "**Module :** M12 · Paramètres, RGPD et support  \n**Version :** MVP\n\n## User story\n\nEn tant que couple, je veux supprimer mon compte et mes données, afin d'exercer mon droit à l'effacement.\n\n## Critères d'acceptation\n\n- [ ] Double confirmation\n- [ ] Suppression effective sous 30 jours\n- [ ] E-mail de confirmation\n- [ ] Le co-pilote est prévenu\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M12-04-suppression-du-compte-rgpd.md`](../blob/main/tickets/MVP/M12-04-suppression-du-compte-rgpd.md)\n"
+ },
+ {
+  "id": "M12-05",
+  "version": "MVP",
+  "module": "M12 · Paramètres, RGPD et support",
+  "title": "M12-05 · Bandeau cookies",
+  "body": "**Module :** M12 · Paramètres, RGPD et support  \n**Version :** MVP\n\n## User story\n\nEn tant que visiteur, je veux accepter ou refuser les cookies non essentiels, afin de contrôler mon suivi.\n\n## Critères d'acceptation\n\n- [ ] Bandeau avec « tout refuser » aussi visible que « tout accepter »\n- [ ] Choix modifiable\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M12-05-bandeau-cookies.md`](../blob/main/tickets/MVP/M12-05-bandeau-cookies.md)\n"
+ },
+ {
+  "id": "M12-06",
+  "version": "MVP",
+  "module": "M12 · Paramètres, RGPD et support",
+  "title": "M12-06 · Contact du support",
+  "body": "**Module :** M12 · Paramètres, RGPD et support  \n**Version :** MVP\n\n## User story\n\nEn tant que couple, je veux contacter le support, afin d'obtenir de l'aide.\n\n## Critères d'acceptation\n\n- [ ] Formulaire ou adresse e-mail\n- [ ] Accusé de réception automatique\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M12-06-contact-du-support.md`](../blob/main/tickets/MVP/M12-06-contact-du-support.md)\n"
+ },
+ {
+  "id": "M12-07",
+  "version": "MVP",
+  "module": "M12 · Paramètres, RGPD et support",
+  "title": "M12-07 · Pages légales",
+  "body": "**Module :** M12 · Paramètres, RGPD et support  \n**Version :** MVP\n\n## User story\n\nEn tant que visiteur, je veux lire les mentions légales, CGU et politique de confidentialité, afin de savoir à quoi je m'engage.\n\n## Critères d'acceptation\n\n- [ ] Pages accessibles depuis le pied de page et l'inscription\n- [ ] Acceptation des CGU à l'inscription\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M12-07-pages-legales.md`](../blob/main/tickets/MVP/M12-07-pages-legales.md)\n"
+ },
+ {
+  "id": "M13-01",
+  "version": "V3",
+  "module": "M13 · Cortège, fiançailles et EVJF/EVG",
+  "title": "M13-01 · Liste du cortège",
+  "body": "**Module :** M13 · Cortège, fiançailles et EVJF/EVG  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux lister mon cortège, afin de savoir qui fait quoi.\n\n## Critères d'acceptation\n\n- [ ] Personnes rattachées à un partenaire\n- [ ] Rôle libre (témoin, demoiselle ou garçon d'honneur, porteur des alliances, officiant ami)\n- [ ] Contacts\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M13-01-liste-du-cortege.md`](../blob/main/tickets/V3/M13-01-liste-du-cortege.md)\n"
+ },
+ {
+  "id": "M13-02",
+  "version": "V3",
+  "module": "M13 · Cortège, fiançailles et EVJF/EVG",
+  "title": "M13-02 · Tenues et consignes du cortège",
+  "body": "**Module :** M13 · Cortège, fiançailles et EVJF/EVG  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux noter la tenue et les consignes de chaque membre du cortège, afin d'harmoniser le jour J.\n\n## Critères d'acceptation\n\n- [ ] Tenue, couleur, horaires de préparation, mission\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M13-02-tenues-et-consignes-du-cortege.md`](../blob/main/tickets/V3/M13-02-tenues-et-consignes-du-cortege.md)\n"
+ },
+ {
+  "id": "M13-03",
+  "version": "V3",
+  "module": "M13 · Cortège, fiançailles et EVJF/EVG",
+  "title": "M13-03 · Cadeaux du cortège",
+  "body": "**Module :** M13 · Cortège, fiançailles et EVJF/EVG  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux suivre les cadeaux pour mon cortège, afin de remercier chacun.\n\n## Critères d'acceptation\n\n- [ ] Idée, budget, acheté, offert\n- [ ] Dépense liée au budget\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M13-03-cadeaux-du-cortege.md`](../blob/main/tickets/V3/M13-03-cadeaux-du-cortege.md)\n"
+ },
+ {
+  "id": "M13-04",
+  "version": "V3",
+  "module": "M13 · Cortège, fiançailles et EVJF/EVG",
+  "title": "M13-04 · Fête de fiançailles",
+  "body": "**Module :** M13 · Cortège, fiançailles et EVJF/EVG  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux préparer la fête de fiançailles, afin de l'organiser comme un mini-événement.\n\n## Critères d'acceptation\n\n- [ ] Date, lieu, invités choisis dans la liste, budget, tâches propres\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M13-04-fete-de-fiancailles.md`](../blob/main/tickets/V3/M13-04-fete-de-fiancailles.md)\n"
+ },
+ {
+  "id": "M13-05",
+  "version": "V3",
+  "module": "M13 · Cortège, fiançailles et EVJF/EVG",
+  "title": "M13-05 · Espace EVJF/EVG des témoins",
+  "body": "**Module :** M13 · Cortège, fiançailles et EVJF/EVG  \n**Version :** V3\n\n## User story\n\nEn tant que témoin, je veux organiser l'EVJF ou l'EVG, afin de préparer la surprise sans le couple.\n\n## Critères d'acceptation\n\n- [ ] Espace visible seulement par les témoins invités\n- [ ] Participants, activités, budget partagé, tâches\n- [ ] Invisible pour le couple sauf partage\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M13-05-espace-evjf-evg-des-temoins.md`](../blob/main/tickets/V3/M13-05-espace-evjf-evg-des-temoins.md)\n"
+ },
+ {
+  "id": "M14-01",
+  "version": "V3",
+  "module": "M14 · Tenues et beauté",
+  "title": "M14-01 · Suivi de la tenue",
+  "body": "**Module :** M14 · Tenues et beauté  \n**Version :** V3\n\n## User story\n\nEn tant que partenaire, je veux suivre ma tenue, afin de ne rien oublier jusqu'au jour J.\n\n## Critères d'acceptation\n\n- [ ] Pièces (tenue, chaussures, accessoires)\n- [ ] Boutique, prix, statut (repérée, commandée, reçue, retouchée)\n- [ ] Dépense liée au budget\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M14-01-suivi-de-la-tenue.md`](../blob/main/tickets/V3/M14-01-suivi-de-la-tenue.md)\n"
+ },
+ {
+  "id": "M14-02",
+  "version": "V3",
+  "module": "M14 · Tenues et beauté",
+  "title": "M14-02 · Essayages et retouches",
+  "body": "**Module :** M14 · Tenues et beauté  \n**Version :** V3\n\n## User story\n\nEn tant que partenaire, je veux planifier essayages et retouches, afin de respecter les délais.\n\n## Critères d'acceptation\n\n- [ ] Rendez-vous datés ajoutés au planning\n- [ ] Rappel par e-mail (M11)\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M14-02-essayages-et-retouches.md`](../blob/main/tickets/V3/M14-02-essayages-et-retouches.md)\n"
+ },
+ {
+  "id": "M14-03",
+  "version": "V3",
+  "module": "M14 · Tenues et beauté",
+  "title": "M14-03 · Coiffure et maquillage",
+  "body": "**Module :** M14 · Tenues et beauté  \n**Version :** V3\n\n## User story\n\nEn tant que partenaire, je veux organiser coiffure et maquillage, afin de bien gérer le matin du mariage.\n\n## Critères d'acceptation\n\n- [ ] Essai, prestataire, horaires du jour J repris dans le déroulé (M8-03)\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M14-03-coiffure-et-maquillage.md`](../blob/main/tickets/V3/M14-03-coiffure-et-maquillage.md)\n"
+ },
+ {
+  "id": "M14-04",
+  "version": "V3",
+  "module": "M14 · Tenues et beauté",
+  "title": "M14-04 · Mode « surprise » pour la tenue",
+  "body": "**Module :** M14 · Tenues et beauté  \n**Version :** V3\n\n## User story\n\nEn tant que partenaire, je veux masquer ma tenue à l'autre, afin de garder la surprise.\n\n## Critères d'acceptation\n\n- [ ] Option « surprise » par partenaire : photos et détails cachés au co-pilote\n- [ ] Le montant reste visible dans le budget\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M14-04-mode-surprise-pour-la-tenue.md`](../blob/main/tickets/V3/M14-04-mode-surprise-pour-la-tenue.md)\n"
+ },
+ {
+  "id": "M15-01",
+  "version": "V3",
+  "module": "M15 · Réception : repas, boissons, déco et animati",
+  "title": "M15-01 · Menu",
+  "body": "**Module :** M15 · Réception : repas, boissons, déco et animations  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux composer mon menu, afin de le valider avec le traiteur.\n\n## Critères d'acceptation\n\n- [ ] Entrée, plat, dessert, menu enfant, options régimes\n- [ ] Repris dans le rapport traiteur (M5-10)\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M15-01-menu.md`](../blob/main/tickets/V3/M15-01-menu.md)\n"
+ },
+ {
+  "id": "M15-02",
+  "version": "V3",
+  "module": "M15 · Réception : repas, boissons, déco et animati",
+  "title": "M15-02 · Calcul des boissons",
+  "body": "**Module :** M15 · Réception : repas, boissons, déco et animations  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux estimer les quantités de boissons, afin de ne pas manquer ni gaspiller.\n\n## Critères d'acceptation\n\n- [ ] Calcul selon le nombre d'adultes présents et la durée : champagne, vin, bière, softs, eau\n- [ ] Hypothèses modifiables\n- [ ] Résultat en bouteilles\n- [ ] Mention « à consommer avec modération »\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M15-02-calcul-des-boissons.md`](../blob/main/tickets/V3/M15-02-calcul-des-boissons.md)\n"
+ },
+ {
+  "id": "M15-03",
+  "version": "V3",
+  "module": "M15 · Réception : repas, boissons, déco et animati",
+  "title": "M15-03 · Inventaire de la déco",
+  "body": "**Module :** M15 · Réception : repas, boissons, déco et animations  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux un inventaire de la déco, afin de savoir ce que j'ai, ce que j'achète ou loue.\n\n## Critères d'acceptation\n\n- [ ] Article, quantité, source (acheté, loué, prêté, fait maison), prix, à rendre après le mariage\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M15-03-inventaire-de-la-deco.md`](../blob/main/tickets/V3/M15-03-inventaire-de-la-deco.md)\n"
+ },
+ {
+  "id": "M15-04",
+  "version": "V3",
+  "module": "M15 · Réception : repas, boissons, déco et animati",
+  "title": "M15-04 · Compositions florales",
+  "body": "**Module :** M15 · Réception : repas, boissons, déco et animations  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux lister mes compositions florales, afin de briefer le fleuriste.\n\n## Critères d'acceptation\n\n- [ ] Bouquet, boutonnières, centres de table, arche\n- [ ] Quantités\n- [ ] Photos d'inspiration\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M15-04-compositions-florales.md`](../blob/main/tickets/V3/M15-04-compositions-florales.md)\n"
+ },
+ {
+  "id": "M15-05",
+  "version": "V3",
+  "module": "M15 · Réception : repas, boissons, déco et animati",
+  "title": "M15-05 · Animations",
+  "body": "**Module :** M15 · Réception : repas, boissons, déco et animations  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux planifier les animations, afin de rythmer la soirée.\n\n## Critères d'acceptation\n\n- [ ] Animation, heure, responsable, matériel\n- [ ] Repris dans le déroulé (M8-03)\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M15-05-animations.md`](../blob/main/tickets/V3/M15-05-animations.md)\n"
+ },
+ {
+  "id": "M16-01",
+  "version": "V3",
+  "module": "M16 · Papeterie",
+  "title": "M16-01 · Suivi des supports de papeterie",
+  "body": "**Module :** M16 · Papeterie  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux suivre chaque support de papeterie, afin de respecter les délais d'impression.\n\n## Critères d'acceptation\n\n- [ ] Save-the-date, faire-part, menus, marque-places, livrets, remerciements\n- [ ] Quantité calculée depuis la liste\n- [ ] Statut (en création, commandé, reçu)\n- [ ] Dépense liée\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M16-01-suivi-des-supports-de-papeterie.md`](../blob/main/tickets/V3/M16-01-suivi-des-supports-de-papeterie.md)\n"
+ },
+ {
+  "id": "M16-02",
+  "version": "V3",
+  "module": "M16 · Papeterie",
+  "title": "M16-02 · Suivi des envois par foyer",
+  "body": "**Module :** M16 · Papeterie  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux suivre l'envoi par foyer, afin de savoir qui a reçu quoi.\n\n## Critères d'acceptation\n\n- [ ] Case « envoyé » par foyer et par support\n- [ ] Filtre des foyers oubliés\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M16-02-suivi-des-envois-par-foyer.md`](../blob/main/tickets/V3/M16-02-suivi-des-envois-par-foyer.md)\n"
+ },
+ {
+  "id": "M16-03",
+  "version": "V3",
+  "module": "M16 · Papeterie",
+  "title": "M16-03 · Save-the-date numérique",
+  "body": "**Module :** M16 · Papeterie  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux envoyer un save-the-date numérique, afin d'annoncer la date rapidement.\n\n## Critères d'acceptation\n\n- [ ] Modèles aux couleurs du mini-site\n- [ ] Envoi par e-mail ou lien\n- [ ] Suivi des ouvertures facultatif\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M16-03-save-the-date-numerique.md`](../blob/main/tickets/V3/M16-03-save-the-date-numerique.md)\n"
+ },
+ {
+  "id": "M16-04",
+  "version": "V3",
+  "module": "M16 · Papeterie",
+  "title": "M16-04 · Étiquettes d'adresses",
+  "body": "**Module :** M16 · Papeterie  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux exporter les adresses au format étiquettes, afin d'imprimer les enveloppes.\n\n## Critères d'acceptation\n\n- [ ] Export CSV et PDF planche d'étiquettes\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M16-04-etiquettes-d-adresses.md`](../blob/main/tickets/V3/M16-04-etiquettes-d-adresses.md)\n"
+ },
+ {
+  "id": "M16-05",
+  "version": "V3",
+  "module": "M16 · Papeterie",
+  "title": "M16-05 · Marque-places imprimables",
+  "body": "**Module :** M16 · Papeterie  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux générer marque-places et plan de table imprimables, afin de les imprimer moi-même.\n\n## Critères d'acceptation\n\n- [ ] PDF à partir du plan de table (M5)\n- [ ] Modèles de mise en page\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M16-05-marque-places-imprimables.md`](../blob/main/tickets/V3/M16-05-marque-places-imprimables.md)\n"
+ },
+ {
+  "id": "M17-01",
+  "version": "V3",
+  "module": "M17 · Photo et vidéo",
+  "title": "M17-01 · Liste des photos à faire",
+  "body": "**Module :** M17 · Photo et vidéo  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux une liste des photos à ne pas manquer, afin de la transmettre au photographe.\n\n## Critères d'acceptation\n\n- [ ] Liste type modifiable (groupes de famille, moments clés, détails)\n- [ ] Export PDF ou lien\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M17-01-liste-des-photos-a-faire.md`](../blob/main/tickets/V3/M17-01-liste-des-photos-a-faire.md)\n"
+ },
+ {
+  "id": "M17-02",
+  "version": "V3",
+  "module": "M17 · Photo et vidéo",
+  "title": "M17-02 · Photos de groupe",
+  "body": "**Module :** M17 · Photo et vidéo  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux préparer les photos de groupe, afin que le moment soit rapide.\n\n## Critères d'acceptation\n\n- [ ] Groupes composés à partir de la liste d'invités\n- [ ] Ordre de passage\n- [ ] Responsable pour rassembler les gens\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M17-02-photos-de-groupe.md`](../blob/main/tickets/V3/M17-02-photos-de-groupe.md)\n"
+ },
+ {
+  "id": "M17-03",
+  "version": "V4",
+  "module": "M17 · Photo et vidéo",
+  "title": "M17-03 · Partage des photos des invités (QR code)",
+  "body": "**Module :** M17 · Photo et vidéo  \n**Version :** V4\n\n## User story\n\nEn tant qu'invité, je veux partager mes photos et vidéos du mariage, afin que le couple les récupère.\n\n## Critères d'acceptation\n\n- [ ] QR code affiché le jour J\n- [ ] Envoi sans compte ni application\n- [ ] Galerie privée du couple\n- [ ] Téléchargement en lot\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V4/M17-03-partage-des-photos-des-invites-qr-code.md`](../blob/main/tickets/V4/M17-03-partage-des-photos-des-invites-qr-code.md)\n"
+ },
+ {
+  "id": "M17-04",
+  "version": "V4",
+  "module": "M17 · Photo et vidéo",
+  "title": "M17-04 · Modération de la galerie",
+  "body": "**Module :** M17 · Photo et vidéo  \n**Version :** V4\n\n## User story\n\nEn tant que couple, je veux modérer la galerie, afin de garder seulement ce que je veux.\n\n## Critères d'acceptation\n\n- [ ] Masquer ou supprimer une photo\n- [ ] Galerie partageable avec les invités ou non\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V4/M17-04-moderation-de-la-galerie.md`](../blob/main/tickets/V4/M17-04-moderation-de-la-galerie.md)\n"
+ },
+ {
+  "id": "M18-01",
+  "version": "V3",
+  "module": "M18 · Lune de miel",
+  "title": "M18-01 · Planification de la lune de miel",
+  "body": "**Module :** M18 · Lune de miel  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux planifier ma lune de miel, afin de préparer le voyage en parallèle du mariage.\n\n## Critères d'acceptation\n\n- [ ] Destination, dates, étapes\n- [ ] Formalités (passeport, visa, vaccins) transformées en tâches datées\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M18-01-planification-de-la-lune-de-miel.md`](../blob/main/tickets/V3/M18-01-planification-de-la-lune-de-miel.md)\n"
+ },
+ {
+  "id": "M18-02",
+  "version": "V3",
+  "module": "M18 · Lune de miel",
+  "title": "M18-02 · Budget de lune de miel",
+  "body": "**Module :** M18 · Lune de miel  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux un budget de lune de miel séparé, afin de ne pas le confondre avec celui du mariage.\n\n## Critères d'acceptation\n\n- [ ] Postes : transport, hébergement, activités, repas\n- [ ] Total visible à part et en option dans le budget global\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M18-02-budget-de-lune-de-miel.md`](../blob/main/tickets/V3/M18-02-budget-de-lune-de-miel.md)\n"
+ },
+ {
+  "id": "M18-03",
+  "version": "V3",
+  "module": "M18 · Lune de miel",
+  "title": "M18-03 · Réservations du voyage",
+  "body": "**Module :** M18 · Lune de miel  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux centraliser mes réservations, afin de tout retrouver sur place.\n\n## Critères d'acceptation\n\n- [ ] Vol, hôtel, location : dates, numéro de réservation, pièce jointe\n- [ ] Consultables hors connexion sur mobile\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M18-03-reservations-du-voyage.md`](../blob/main/tickets/V3/M18-03-reservations-du-voyage.md)\n"
+ },
+ {
+  "id": "M18-04",
+  "version": "V3",
+  "module": "M18 · Lune de miel",
+  "title": "M18-04 · Valise de lune de miel",
+  "body": "**Module :** M18 · Lune de miel  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux une liste de valise, afin de ne rien oublier.\n\n## Critères d'acceptation\n\n- [ ] Liste type modifiable et cochable, par partenaire\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M18-04-valise-de-lune-de-miel.md`](../blob/main/tickets/V3/M18-04-valise-de-lune-de-miel.md)\n"
+ },
+ {
+  "id": "M19-01",
+  "version": "V2",
+  "module": "M19 · Calendrier et listes",
+  "title": "M19-01 · Vue calendrier",
+  "body": "**Module :** M19 · Calendrier et listes  \n**Version :** V2\n\n## User story\n\nEn tant que couple, je veux une vue calendrier, afin de voir toutes mes échéances au même endroit.\n\n## Critères d'acceptation\n\n- [ ] Vue mois et semaine : tâches, rendez-vous, paiements, essayages\n- [ ] Clic pour ouvrir l'élément\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V2/M19-01-vue-calendrier.md`](../blob/main/tickets/V2/M19-01-vue-calendrier.md)\n"
+ },
+ {
+  "id": "M19-02",
+  "version": "V2",
+  "module": "M19 · Calendrier et listes",
+  "title": "M19-02 · Synchronisation avec l'agenda",
+  "body": "**Module :** M19 · Calendrier et listes  \n**Version :** V2\n\n## User story\n\nEn tant que couple, je veux synchroniser Sereno avec mon agenda, afin de voir mes échéances dans mon téléphone.\n\n## Critères d'acceptation\n\n- [ ] Lien d'abonnement iCal compatible Google Agenda, Apple Calendrier et Outlook\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V2/M19-02-synchronisation-avec-l-agenda.md`](../blob/main/tickets/V2/M19-02-synchronisation-avec-l-agenda.md)\n"
+ },
+ {
+  "id": "M19-03",
+  "version": "V3",
+  "module": "M19 · Calendrier et listes",
+  "title": "M19-03 · Valise du jour J",
+  "body": "**Module :** M19 · Calendrier et listes  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux une valise du jour J, afin de préparer ce qu'on emporte sur le lieu.\n\n## Critères d'acceptation\n\n- [ ] Liste type (tenues de rechange, kit de couture, alliances, discours, chargeurs)\n- [ ] Liée à la checklist du matin (M8-04)\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M19-03-valise-du-jour-j.md`](../blob/main/tickets/V3/M19-03-valise-du-jour-j.md)\n"
+ },
+ {
+  "id": "M19-04",
+  "version": "V2",
+  "module": "M19 · Calendrier et listes",
+  "title": "M19-04 · Listes libres",
+  "body": "**Module :** M19 · Calendrier et listes  \n**Version :** V2\n\n## User story\n\nEn tant que couple, je veux créer mes propres listes, afin de noter idées et achats.\n\n## Critères d'acceptation\n\n- [ ] Listes libres cochables (courses, idées, à acheter)\n- [ ] Partagées avec le co-pilote\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V2/M19-04-listes-libres.md`](../blob/main/tickets/V2/M19-04-listes-libres.md)\n"
+ },
+ {
+  "id": "M20-01",
+  "version": "V3",
+  "module": "M20 · Cagnotte et liste de cadeaux",
+  "title": "M20-01 · Ouverture d'une cagnotte",
+  "body": "**Module :** M20 · Cagnotte et liste de cadeaux  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux ouvrir une cagnotte, afin que les invités participent à un projet.\n\n## Critères d'acceptation\n\n- [ ] Titre, description, photo, objectif facultatif\n- [ ] Vérification d'identité du couple avant la première collecte\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M20-01-ouverture-d-une-cagnotte.md`](../blob/main/tickets/V3/M20-01-ouverture-d-une-cagnotte.md)\n"
+ },
+ {
+  "id": "M20-02",
+  "version": "V3",
+  "module": "M20 · Cagnotte et liste de cadeaux",
+  "title": "M20-02 · Cagnotte en « expériences »",
+  "body": "**Module :** M20 · Cagnotte et liste de cadeaux  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux découper la cagnotte en « expériences », afin de rendre la participation concrète.\n\n## Critères d'acceptation\n\n- [ ] Exemples : dîner, plongée, nuit d'hôtel\n- [ ] Montant suggéré\n- [ ] Jauge de financement par expérience\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M20-02-cagnotte-en-experiences.md`](../blob/main/tickets/V3/M20-02-cagnotte-en-experiences.md)\n"
+ },
+ {
+  "id": "M20-03",
+  "version": "V3",
+  "module": "M20 · Cagnotte et liste de cadeaux",
+  "title": "M20-03 · Participation des invités par carte",
+  "body": "**Module :** M20 · Cagnotte et liste de cadeaux  \n**Version :** V3\n\n## User story\n\nEn tant qu'invité, je veux participer par carte sans créer de compte, afin d'offrir simplement.\n\n## Critères d'acceptation\n\n- [ ] Montant libre ou suggéré\n- [ ] Message au couple\n- [ ] Reçu par e-mail\n- [ ] Paiement sécurisé\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M20-03-participation-des-invites-par-carte.md`](../blob/main/tickets/V3/M20-03-participation-des-invites-par-carte.md)\n"
+ },
+ {
+  "id": "M20-04",
+  "version": "V3",
+  "module": "M20 · Cagnotte et liste de cadeaux",
+  "title": "M20-04 · Liste de cadeaux classique",
+  "body": "**Module :** M20 · Cagnotte et liste de cadeaux  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux une liste de cadeaux classique, afin que les invités réservent un objet.\n\n## Critères d'acceptation\n\n- [ ] Article avec lien marchand, prix, photo\n- [ ] Réservé ou offert\n- [ ] Pas de doublon possible\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M20-04-liste-de-cadeaux-classique.md`](../blob/main/tickets/V3/M20-04-liste-de-cadeaux-classique.md)\n"
+ },
+ {
+  "id": "M20-05",
+  "version": "V3",
+  "module": "M20 · Cagnotte et liste de cadeaux",
+  "title": "M20-05 · Suivi des participations",
+  "body": "**Module :** M20 · Cagnotte et liste de cadeaux  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux suivre les participations, afin de savoir qui remercier.\n\n## Critères d'acceptation\n\n- [ ] Liste des contributeurs, montants et messages\n- [ ] Reliée aux cadeaux reçus (M9-02)\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M20-05-suivi-des-participations.md`](../blob/main/tickets/V3/M20-05-suivi-des-participations.md)\n"
+ },
+ {
+  "id": "M20-06",
+  "version": "V3",
+  "module": "M20 · Cagnotte et liste de cadeaux",
+  "title": "M20-06 · Virement des fonds au couple",
+  "body": "**Module :** M20 · Cagnotte et liste de cadeaux  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux récupérer l'argent sur mon compte bancaire, afin de l'utiliser.\n\n## Critères d'acceptation\n\n- [ ] Virement vers l'IBAN du couple\n- [ ] Frais affichés avant validation\n- [ ] Historique des virements\n- [ ] Fonds jamais détenus par Sereno (prestataire de paiement agréé)\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M20-06-virement-des-fonds-au-couple.md`](../blob/main/tickets/V3/M20-06-virement-des-fonds-au-couple.md)\n"
+ },
+ {
+  "id": "M21-01",
+  "version": "V3",
+  "module": "M21 · Accompagnement par un wedding planner",
+  "title": "M21-01 · Réservation d'une visio avec un wedding planner",
+  "body": "**Module :** M21 · Accompagnement par un wedding planner  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux réserver une visio avec un wedding planner, afin d'être débloqué sur un point précis.\n\n## Critères d'acceptation\n\n- [ ] Sessions de 30 ou 60 minutes\n- [ ] Créneaux disponibles affichés\n- [ ] Prix affiché TTC avant paiement\n- [ ] Annulation gratuite jusqu'à 24 h avant\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M21-01-reservation-d-une-visio-avec-un-wedding-planner.md`](../blob/main/tickets/V3/M21-01-reservation-d-une-visio-avec-un-wedding-planner.md)\n"
+ },
+ {
+  "id": "M21-02",
+  "version": "V3",
+  "module": "M21 · Accompagnement par un wedding planner",
+  "title": "M21-02 · Préparation de la session",
+  "body": "**Module :** M21 · Accompagnement par un wedding planner  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux préparer ma session, afin d'en tirer le maximum.\n\n## Critères d'acceptation\n\n- [ ] Sujet et questions saisis à la réservation\n- [ ] Accès du planner à une vue en lecture seule du mariage, avec mon accord\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M21-02-preparation-de-la-session.md`](../blob/main/tickets/V3/M21-02-preparation-de-la-session.md)\n"
+ },
+ {
+  "id": "M21-03",
+  "version": "V3",
+  "module": "M21 · Accompagnement par un wedding planner",
+  "title": "M21-03 · Compte rendu de session",
+  "body": "**Module :** M21 · Accompagnement par un wedding planner  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux un compte rendu après la session, afin de garder les conseils.\n\n## Critères d'acceptation\n\n- [ ] Notes du planner et actions proposées, ajoutables en tâches en un clic\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M21-03-compte-rendu-de-session.md`](../blob/main/tickets/V3/M21-03-compte-rendu-de-session.md)\n"
+ },
+ {
+  "id": "M21-04",
+  "version": "V3",
+  "module": "M21 · Accompagnement par un wedding planner",
+  "title": "M21-04 · Question écrite à un planner",
+  "body": "**Module :** M21 · Accompagnement par un wedding planner  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux poser une question écrite, afin d'avoir un avis sans rendez-vous.\n\n## Critères d'acceptation\n\n- [ ] Question payée à l'unité\n- [ ] Réponse sous 48 heures ouvrées\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M21-04-question-ecrite-a-un-planner.md`](../blob/main/tickets/V3/M21-04-question-ecrite-a-un-planner.md)\n"
+ },
+ {
+  "id": "M21-05",
+  "version": "V3",
+  "module": "M21 · Accompagnement par un wedding planner",
+  "title": "M21-05 · Note de la session",
+  "body": "**Module :** M21 · Accompagnement par un wedding planner  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux noter la session, afin d'aider Sereno à garder de bons planners.\n\n## Critères d'acceptation\n\n- [ ] Note sur 5 et commentaire\n- [ ] Visible par Sereno\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M21-05-note-de-la-session.md`](../blob/main/tickets/V3/M21-05-note-de-la-session.md)\n"
+ },
+ {
+  "id": "M22-01",
+  "version": "V3",
+  "module": "M22 · Assistant IA",
+  "title": "M22-01 · Questions à l'assistant IA",
+  "body": "**Module :** M22 · Assistant IA  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux poser une question sur mon organisation, afin d'avoir une réponse adaptée à mon mariage.\n\n## Critères d'acceptation\n\n- [ ] Réponse qui tient compte de la date, du budget, du nombre d'invités et de l'avancement\n- [ ] Ton Sereno\n- [ ] Indique quand consulter un professionnel\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M22-01-questions-a-l-assistant-ia.md`](../blob/main/tickets/V3/M22-01-questions-a-l-assistant-ia.md)\n"
+ },
+ {
+  "id": "M22-02",
+  "version": "V3",
+  "module": "M22 · Assistant IA",
+  "title": "M22-02 · Conseil transformé en tâches",
+  "body": "**Module :** M22 · Assistant IA  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux transformer un conseil en tâches, afin de passer à l'action.\n\n## Critères d'acceptation\n\n- [ ] Tâches proposées, ajoutées au planning en un clic après validation\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M22-02-conseil-transforme-en-taches.md`](../blob/main/tickets/V3/M22-02-conseil-transforme-en-taches.md)\n"
+ },
+ {
+  "id": "M22-03",
+  "version": "V3",
+  "module": "M22 · Assistant IA",
+  "title": "M22-03 · Aide à l'écriture des vœux",
+  "body": "**Module :** M22 · Assistant IA  \n**Version :** V3\n\n## User story\n\nEn tant que partenaire, je veux de l'aide pour écrire mes vœux, afin d'exprimer ce que je ressens.\n\n## Critères d'acceptation\n\n- [ ] Questions guidées sur notre histoire\n- [ ] Propositions à retravailler\n- [ ] Le texte reste privé, invisible pour l'autre partenaire\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M22-03-aide-a-l-ecriture-des-vux.md`](../blob/main/tickets/V3/M22-03-aide-a-l-ecriture-des-vux.md)\n"
+ },
+ {
+  "id": "M22-04",
+  "version": "V3",
+  "module": "M22 · Assistant IA",
+  "title": "M22-04 · Aide au discours des témoins",
+  "body": "**Module :** M22 · Assistant IA  \n**Version :** V3\n\n## User story\n\nEn tant que témoin, je veux de l'aide pour mon discours, afin d'être à l'aise le jour J.\n\n## Critères d'acceptation\n\n- [ ] Structure, anecdotes à placer, durée indicative\n- [ ] Accessible depuis la vue Témoin\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M22-04-aide-au-discours-des-temoins.md`](../blob/main/tickets/V3/M22-04-aide-au-discours-des-temoins.md)\n"
+ },
+ {
+  "id": "M22-05",
+  "version": "V3",
+  "module": "M22 · Assistant IA",
+  "title": "M22-05 · Préparation des rendez-vous prestataires",
+  "body": "**Module :** M22 · Assistant IA  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux préparer mes rendez-vous prestataires, afin de poser les bonnes questions.\n\n## Critères d'acceptation\n\n- [ ] Questions adaptées au métier et à notre situation, ajoutées à la fiche prestataire (M6-05)\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M22-05-preparation-des-rendez-vous-prestataires.md`](../blob/main/tickets/V3/M22-05-preparation-des-rendez-vous-prestataires.md)\n"
+ },
+ {
+  "id": "M22-06",
+  "version": "V3",
+  "module": "M22 · Assistant IA",
+  "title": "M22-06 · Avis sur le budget",
+  "body": "**Module :** M22 · Assistant IA  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux un avis sur mon budget, afin de repérer les déséquilibres.\n\n## Critères d'acceptation\n\n- [ ] Analyse de la répartition et des dépassements\n- [ ] Suggestions d'économies\n- [ ] Jamais de recommandation commerciale\n- [ ] N'invente ni prix ni prestataires\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M22-06-avis-sur-le-budget.md`](../blob/main/tickets/V3/M22-06-avis-sur-le-budget.md)\n"
+ }
+]
