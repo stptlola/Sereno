@@ -3,7 +3,7 @@
 Une fiche par ticket, rangée par version. Chaque ticket existe aussi en issue GitHub, avec les étiquettes de version et de module.
 
 
-## MVP · 57 tickets
+## MVP · 62 tickets
 
 Premier produit testé gratuitement par les couples.
 
@@ -18,6 +18,11 @@ Premier produit testé gratuitement par les couples.
 | M0-07 | [Invitation du Co-pilote](MVP/M0-07-invitation-du-co-pilote.md) | Compte, onboarding et Co-pilote |
 | M0-08 | [Droits du Co-pilote en temps réel](MVP/M0-08-droits-du-co-pilote-en-temps-reel.md) | Compte, onboarding et Co-pilote |
 | M0-09 | [Historique des modifications](MVP/M0-09-historique-des-modifications.md) | Compte, onboarding et Co-pilote |
+| M0-10 | [Découvrir son planning avant de créer un compte](MVP/M0-10-decouvrir-son-planning-avant-de-creer-un-compte.md) | Compte, onboarding et Co-pilote |
+| M0-11 | [Indiquer ce qui est déjà réservé](MVP/M0-11-indiquer-ce-qui-est-deja-reserve.md) | Compte, onboarding et Co-pilote |
+| M0-12 | [Retour rassurant après les réponses](MVP/M0-12-retour-rassurant-apres-les-reponses.md) | Compte, onboarding et Co-pilote |
+| M0-13 | [Récapitulatif personnalisé](MVP/M0-13-recapitulatif-personnalise.md) | Compte, onboarding et Co-pilote |
+| M0-14 | [Messages d'erreur clairs à l'inscription](MVP/M0-14-messages-d-erreur-clairs-a-l-inscription.md) | Compte, onboarding et Co-pilote |
 | M1-01 | [Compte à rebours](MVP/M1-01-compte-a-rebours.md) | Tableau de bord |
 | M1-02 | [Actions prioritaires de la semaine](MVP/M1-02-actions-prioritaires-de-la-semaine.md) | Tableau de bord |
 | M1-03 | [Jauge de budget](MVP/M1-03-jauge-de-budget.md) | Tableau de bord |
@@ -67,12 +72,13 @@ Premier produit testé gratuitement par les couples.
 | M12-06 | [Contact du support](MVP/M12-06-contact-du-support.md) | Paramètres, RGPD et support |
 | M12-07 | [Pages légales](MVP/M12-07-pages-legales.md) | Paramètres, RGPD et support |
 
-## V2 · 38 tickets
+## V2 · 39 tickets
 
 Version payante : plan de table, RSVP, mini-site, témoins, Pass.
 
 | ID | Ticket | Module |
 | --- | --- | --- |
+| M0-15 | [Mariage d'exemple](V2/M0-15-mariage-d-exemple.md) | Compte, onboarding et Co-pilote |
 | M1-06 | [Prochains paiements](V2/M1-06-prochains-paiements.md) | Tableau de bord |
 | M1-07 | [Étapes célébrées](V2/M1-07-etapes-celebrees.md) | Tableau de bord |
 | M3-08 | [Échéancier des paiements](V2/M3-08-echeancier-des-paiements.md) | Budget et acomptes |

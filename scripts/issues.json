@@ -32,7 +32,7 @@
   "version": "MVP",
   "module": "M0 · Compte, onboarding et Co-pilote",
   "title": "M0-05 · Questionnaire de démarrage",
-  "body": "**Module :** M0 · Compte, onboarding et Co-pilote  \n**Version :** MVP\n\n## User story\n\nEn tant que couple, je veux répondre à 5 questions au démarrage (date, région, invités estimés, budget, cérémonies), afin d'obtenir un planning adapté.\n\n## Critères d'acceptation\n\n- [ ] Toutes les questions passables sauf la date (ou « pas encore fixée »)\n- [ ] Modifiable plus tard dans les paramètres\n- [ ] Planning et budget générés à la fin\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M0-05-questionnaire-de-demarrage.md`](../blob/main/tickets/MVP/M0-05-questionnaire-de-demarrage.md)\n"
+  "body": "**Module :** M0 · Compte, onboarding et Co-pilote  \n**Version :** MVP\n\n## User story\n\nEn tant que couple, je veux répondre à six écrans courts au démarrage (prénoms, date, invités estimés, budget, cérémonies, ce qui est déjà réservé), avant même de créer mon compte, afin d'obtenir un planning adapté.\n\n## Critères d'acceptation\n\n- [ ] Toutes les questions passables sauf la date (ou « pas encore fixée »)\n- [ ] Modifiable plus tard dans les paramètres\n- [ ] Planning et budget générés à la fin\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M0-05-questionnaire-de-demarrage.md`](../blob/main/tickets/MVP/M0-05-questionnaire-de-demarrage.md)\n"
  },
  {
   "id": "M0-06",
@@ -61,6 +61,48 @@
   "module": "M0 · Compte, onboarding et Co-pilote",
   "title": "M0-09 · Historique des modifications",
   "body": "**Module :** M0 · Compte, onboarding et Co-pilote  \n**Version :** MVP\n\n## User story\n\nEn tant que couple, je veux savoir qui a fait quelle modification, afin d'éviter les doublons.\n\n## Critères d'acceptation\n\n- [ ] Nom de l'auteur et date sur chaque tâche, dépense et invité modifiés\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M0-09-historique-des-modifications.md`](../blob/main/tickets/MVP/M0-09-historique-des-modifications.md)\n"
+ },
+ {
+  "id": "M0-10",
+  "version": "MVP",
+  "module": "M0 · Compte, onboarding et Co-pilote",
+  "title": "M0-10 · Découvrir son planning avant de créer un compte",
+  "body": "**Module :** M0 · Compte, onboarding et Co-pilote  \n**Version :** MVP\n\n## User story\n\nEn tant que visiteur, je veux découvrir mon planning avant de créer un compte, afin de voir ce que Sereno m'apporte.\n\n## Critères d'acceptation\n\n- [ ] Questionnaire accessible sans compte\n- [ ] Réponses gardées sur l'appareil\n- [ ] Compte demandé seulement pour sauvegarder, avec la mention « rien à payer »\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M0-10-decouvrir-son-planning-avant-de-creer-un-compte.md`](../blob/main/tickets/MVP/M0-10-decouvrir-son-planning-avant-de-creer-un-compte.md)\n"
+ },
+ {
+  "id": "M0-11",
+  "version": "MVP",
+  "module": "M0 · Compte, onboarding et Co-pilote",
+  "title": "M0-11 · Indiquer ce qui est déjà réservé",
+  "body": "**Module :** M0 · Compte, onboarding et Co-pilote  \n**Version :** MVP\n\n## User story\n\nEn tant que couple, je veux indiquer ce qui est déjà réservé, afin de ne pas repartir de zéro.\n\n## Critères d'acceptation\n\n- [ ] Choix multiples (lieu, traiteur, photographe, vidéaste, DJ, fleuriste, coiffure et maquillage, rien encore)\n- [ ] Tâches correspondantes cochées d'office (M2-13)\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M0-11-indiquer-ce-qui-est-deja-reserve.md`](../blob/main/tickets/MVP/M0-11-indiquer-ce-qui-est-deja-reserve.md)\n"
+ },
+ {
+  "id": "M0-12",
+  "version": "MVP",
+  "module": "M0 · Compte, onboarding et Co-pilote",
+  "title": "M0-12 · Retour rassurant après les réponses",
+  "body": "**Module :** M0 · Compte, onboarding et Co-pilote  \n**Version :** MVP\n\n## User story\n\nEn tant que couple, je veux un retour rassurant après mes réponses, afin de me sentir accompagné dès le départ.\n\n## Critères d'acceptation\n\n- [ ] Message court adapté à l'horizon et au nombre d'invités\n- [ ] Ton Sereno\n- [ ] Aucun chiffre alarmant ni non sourcé\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M0-12-retour-rassurant-apres-les-reponses.md`](../blob/main/tickets/MVP/M0-12-retour-rassurant-apres-les-reponses.md)\n"
+ },
+ {
+  "id": "M0-13",
+  "version": "MVP",
+  "module": "M0 · Compte, onboarding et Co-pilote",
+  "title": "M0-13 · Récapitulatif personnalisé",
+  "body": "**Module :** M0 · Compte, onboarding et Co-pilote  \n**Version :** MVP\n\n## User story\n\nEn tant que couple, je veux un récapitulatif personnalisé à la fin du questionnaire, afin de comprendre ce qui m'attend.\n\n## Critères d'acceptation\n\n- [ ] Prénoms, temps restant, nombre de tâches dont celles déjà faites, les 3 priorités de la semaine\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M0-13-recapitulatif-personnalise.md`](../blob/main/tickets/MVP/M0-13-recapitulatif-personnalise.md)\n"
+ },
+ {
+  "id": "M0-14",
+  "version": "MVP",
+  "module": "M0 · Compte, onboarding et Co-pilote",
+  "title": "M0-14 · Messages d'erreur clairs à l'inscription",
+  "body": "**Module :** M0 · Compte, onboarding et Co-pilote  \n**Version :** MVP\n\n## User story\n\nEn tant que visiteur, je veux des messages d'erreur clairs à l'inscription, afin de ne pas rester bloqué.\n\n## Critères d'acceptation\n\n- [ ] Messages en français\n- [ ] E-mail déjà utilisé : proposition de se connecter ou de réinitialiser le mot de passe\n- [ ] Aucune réponse du questionnaire perdue\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M0-14-messages-d-erreur-clairs-a-l-inscription.md`](../blob/main/tickets/MVP/M0-14-messages-d-erreur-clairs-a-l-inscription.md)\n"
+ },
+ {
+  "id": "M0-15",
+  "version": "V2",
+  "module": "M0 · Compte, onboarding et Co-pilote",
+  "title": "M0-15 · Mariage d'exemple",
+  "body": "**Module :** M0 · Compte, onboarding et Co-pilote  \n**Version :** V2\n\n## User story\n\nEn tant que visiteur curieux, je veux explorer Sereno avec un mariage d'exemple, afin de découvrir l'outil sans rien saisir.\n\n## Critères d'acceptation\n\n- [ ] Données d'exemple (tâches, budget, invités) clairement signalées\n- [ ] Un bouton pour démarrer mon propre mariage efface l'exemple\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V2/M0-15-mariage-d-exemple.md`](../blob/main/tickets/V2/M0-15-mariage-d-exemple.md)\n"
  },
  {
   "id": "M1-01",

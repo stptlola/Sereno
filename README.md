@@ -11,7 +11,7 @@ Sereno accompagne pas à pas les couples qui organisent leur mariage eux-mêmes,
 
 ## Tickets
 
-170 tickets, dont 57 pour le MVP, 38 pour la V2, 73 pour la V3 et 2 pour la V4 : voir [`tickets/`](tickets/README.md) et l’onglet **Issues** du dépôt.
+176 tickets, dont 62 pour le MVP, 39 pour la V2, 73 pour la V3 et 2 pour la V4 : voir [`tickets/`](tickets/README.md) et l’onglet **Issues** du dépôt.
 
 ## Pile technique prévue
 

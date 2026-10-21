@@ -5,7 +5,7 @@
 
 ## User story
 
-En tant que couple, je veux répondre à 5 questions au démarrage (date, région, invités estimés, budget, cérémonies), afin d'obtenir un planning adapté.
+En tant que couple, je veux répondre à six écrans courts au démarrage (prénoms, date, invités estimés, budget, cérémonies, ce qui est déjà réservé), avant même de créer mon compte, afin d'obtenir un planning adapté.
 
 ## Critères d'acceptation
 
