@@ -9,7 +9,7 @@ En tant que couple, je veux créer une ou plusieurs cérémonies, afin de gérer
 
 ## Critères d'acceptation
 
-- [ ] Types : civile, laïque, catholique, protestante, juive, musulmane, interculturelle, autre
+- [ ] Types : civile, laïque, catholique, protestante, orthodoxe, juive, musulmane, hindoue, interculturelle, autre
 - [ ] Date, heure et lieu propres
 
 ## Définition de « terminé »

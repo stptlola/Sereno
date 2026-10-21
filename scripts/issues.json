@@ -196,6 +196,20 @@
   "body": "**Module :** M2 · Rétroplanning et tâches  \n**Version :** MVP\n\n## User story\n\nEn tant que couple qui se marie dans plusieurs années, je veux un planning qui ne m'impose rien trop tôt, afin d'avancer à mon rythme.\n\n## Critères d'acceptation\n\n- [ ] Seules les tâches d'anticipation sont actives\n- [ ] Les autres apparaissent à leur échéance idéale\n- [ ] Rythme des e-mails adapté\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M2-12-planning-long-mariage-dans-plusieurs-annees.md`](../blob/main/tickets/MVP/M2-12-planning-long-mariage-dans-plusieurs-annees.md)\n"
  },
  {
+  "id": "M2-13",
+  "version": "MVP",
+  "module": "M2 · Rétroplanning et tâches",
+  "title": "M2-13 · Planning adapté à la situation du couple",
+  "body": "**Module :** M2 · Rétroplanning et tâches  \n**Version :** MVP\n\n## User story\n\nEn tant que couple, je veux que le planning s'adapte à notre situation, afin de ne voir que les tâches qui nous concernent.\n\n## Critères d'acceptation\n\n- [ ] Règles d'adaptation du modèle de tâches appliquées (cérémonies, temps restant, prestataires déjà réservés, enfants, brunch, étranger, lune de miel)\n- [ ] Une tâche masquée par une condition se réactive si la réponse change\n- [ ] Tâches cochées d'office signalées comme telles\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M2-13-planning-adapte-a-la-situation-du-couple.md`](../blob/main/tickets/MVP/M2-13-planning-adapte-a-la-situation-du-couple.md)\n"
+ },
+ {
+  "id": "M2-14",
+  "version": "MVP",
+  "module": "M2 · Rétroplanning et tâches",
+  "title": "M2-14 · Questions posées au bon moment",
+  "body": "**Module :** M2 · Rétroplanning et tâches  \n**Version :** MVP\n\n## User story\n\nEn tant que couple, je veux qu'on me pose les questions utiles au bon moment, afin de ne pas avoir un long questionnaire au départ.\n\n## Critères d'acceptation\n\n- [ ] Questions « enfants invités ? », « brunch prévu ? », « mariage à l'étranger ? », « lune de miel ? » posées dans le tableau de bord quand elles deviennent utiles\n- [ ] Réponse en un geste\n- [ ] Possibilité de répondre plus tard\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M2-14-questions-posees-au-bon-moment.md`](../blob/main/tickets/MVP/M2-14-questions-posees-au-bon-moment.md)\n"
+ },
+ {
   "id": "M3-01",
   "version": "MVP",
   "module": "M3 · Budget et acomptes",
@@ -564,7 +578,7 @@
   "version": "V3",
   "module": "M7 · Cérémonies, livrets et musiques",
   "title": "M7-01 · Cérémonies multiples",
-  "body": "**Module :** M7 · Cérémonies, livrets et musiques  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux créer une ou plusieurs cérémonies, afin de gérer civile, laïque et religieuse.\n\n## Critères d'acceptation\n\n- [ ] Types : civile, laïque, catholique, protestante, juive, musulmane, interculturelle, autre\n- [ ] Date, heure et lieu propres\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M7-01-ceremonies-multiples.md`](../blob/main/tickets/V3/M7-01-ceremonies-multiples.md)\n"
+  "body": "**Module :** M7 · Cérémonies, livrets et musiques  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux créer une ou plusieurs cérémonies, afin de gérer civile, laïque et religieuse.\n\n## Critères d'acceptation\n\n- [ ] Types : civile, laïque, catholique, protestante, orthodoxe, juive, musulmane, hindoue, interculturelle, autre\n- [ ] Date, heure et lieu propres\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M7-01-ceremonies-multiples.md`](../blob/main/tickets/V3/M7-01-ceremonies-multiples.md)\n"
  },
  {
   "id": "M7-02",

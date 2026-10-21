@@ -3,7 +3,7 @@
 Une fiche par ticket, rangée par version. Chaque ticket existe aussi en issue GitHub, avec les étiquettes de version et de module.
 
 
-## MVP · 55 tickets
+## MVP · 57 tickets
 
 Premier produit testé gratuitement par les couples.
 
@@ -35,6 +35,8 @@ Premier produit testé gratuitement par les couples.
 | M2-10 | [Filtres et recherche des tâches](MVP/M2-10-filtres-et-recherche-des-taches.md) | Rétroplanning et tâches |
 | M2-11 | [Planning resserré (mariage proche)](MVP/M2-11-planning-resserre-mariage-proche.md) | Rétroplanning et tâches |
 | M2-12 | [Planning long (mariage dans plusieurs années)](MVP/M2-12-planning-long-mariage-dans-plusieurs-annees.md) | Rétroplanning et tâches |
+| M2-13 | [Planning adapté à la situation du couple](MVP/M2-13-planning-adapte-a-la-situation-du-couple.md) | Rétroplanning et tâches |
+| M2-14 | [Questions posées au bon moment](MVP/M2-14-questions-posees-au-bon-moment.md) | Rétroplanning et tâches |
 | M3-01 | [Budget global](MVP/M3-01-budget-global.md) | Budget et acomptes |
 | M3-02 | [Répartition indicative par poste](MVP/M3-02-repartition-indicative-par-poste.md) | Budget et acomptes |
 | M3-03 | [Gestion des postes de budget](MVP/M3-03-gestion-des-postes-de-budget.md) | Budget et acomptes |
