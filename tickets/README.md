@@ -3,7 +3,7 @@
 Une fiche par ticket, rangée par version. Chaque ticket existe aussi en issue GitHub, avec les étiquettes de version et de module.
 
 
-## MVP · 53 tickets
+## MVP · 55 tickets
 
 Premier produit testé gratuitement par les couples.
 
@@ -42,6 +42,8 @@ Premier produit testé gratuitement par les couples.
 | M3-05 | [Acomptes et soldes](MVP/M3-05-acomptes-et-soldes.md) | Budget et acomptes |
 | M3-06 | [Récapitulatif chiffré](MVP/M3-06-recapitulatif-chiffre.md) | Budget et acomptes |
 | M3-07 | [Alerte de dépassement](MVP/M3-07-alerte-de-depassement.md) | Budget et acomptes |
+| M3-13 | [Sous-postes de budget suggérés](MVP/M3-13-sous-postes-de-budget-suggeres.md) | Budget et acomptes |
+| M3-14 | [Statut de chaque dépense](MVP/M3-14-statut-de-chaque-depense.md) | Budget et acomptes |
 | M4-01 | [Ajout d'un invité](MVP/M4-01-ajout-d-un-invite.md) | Invités et foyers |
 | M4-02 | [Foyers](MVP/M4-02-foyers.md) | Invités et foyers |
 | M4-03 | [Accompagnants et enfants](MVP/M4-03-accompagnants-et-enfants.md) | Invités et foyers |
@@ -63,7 +65,7 @@ Premier produit testé gratuitement par les couples.
 | M12-06 | [Contact du support](MVP/M12-06-contact-du-support.md) | Paramètres, RGPD et support |
 | M12-07 | [Pages légales](MVP/M12-07-pages-legales.md) | Paramètres, RGPD et support |
 
-## V2 · 35 tickets
+## V2 · 36 tickets
 
 Version payante : plan de table, RSVP, mini-site, témoins, Pass.
 
@@ -74,6 +76,7 @@ Version payante : plan de table, RSVP, mini-site, témoins, Pass.
 | M3-08 | [Échéancier des paiements](V2/M3-08-echeancier-des-paiements.md) | Budget et acomptes |
 | M3-10 | [Qui finance quoi](V2/M3-10-qui-finance-quoi.md) | Budget et acomptes |
 | M3-12 | [Import du budget depuis un tableur](V2/M3-12-import-du-budget-depuis-un-tableur.md) | Budget et acomptes |
+| M3-15 | [Dépense rattachée à un moment](V2/M3-15-depense-rattachee-a-un-moment.md) | Budget et acomptes |
 | M4-11 | [Collecte d'adresses par lien](V2/M4-11-collecte-d-adresses-par-lien.md) | Invités et foyers |
 | M4-14 | [Listes A et B](V2/M4-14-listes-a-et-b.md) | Invités et foyers |
 | M5-01 | [Mini-site du mariage](V2/M5-01-mini-site-du-mariage.md) | Mini-site, RSVP, plan de table et rapport traiteur |

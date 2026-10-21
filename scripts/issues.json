@@ -207,7 +207,7 @@
   "version": "MVP",
   "module": "M3 · Budget et acomptes",
   "title": "M3-02 · Répartition indicative par poste",
-  "body": "**Module :** M3 · Budget et acomptes  \n**Version :** MVP\n\n## User story\n\nEn tant que couple, je veux une répartition indicative par poste, afin de savoir combien prévoir pour chacun.\n\n## Critères d'acceptation\n\n- [ ] Pourcentages par défaut (lieu, traiteur, tenues, photo et vidéo, musique, déco et fleurs, alliances, papeterie, divers) appliqués au budget\n- [ ] Modifiables en euros ou en %\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M3-02-repartition-indicative-par-poste.md`](../blob/main/tickets/MVP/M3-02-repartition-indicative-par-poste.md)\n"
+  "body": "**Module :** M3 · Budget et acomptes  \n**Version :** MVP\n\n## User story\n\nEn tant que couple, je veux une répartition indicative par poste, afin de savoir combien prévoir pour chacun.\n\n## Critères d'acceptation\n\n- [ ] Pourcentages par défaut (lieu et réception, traiteur et boissons, tenues, beauté, photo et vidéo, animation, déco et fleurs, alliances, papeterie, transport, divers) appliqués au budget\n- [ ] Modifiables en euros ou en %\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M3-02-repartition-indicative-par-poste.md`](../blob/main/tickets/MVP/M3-02-repartition-indicative-par-poste.md)\n"
  },
  {
   "id": "M3-03",
@@ -278,6 +278,27 @@
   "module": "M3 · Budget et acomptes",
   "title": "M3-12 · Import du budget depuis un tableur",
   "body": "**Module :** M3 · Budget et acomptes  \n**Version :** V2\n\n## User story\n\nEn tant que couple, je veux importer mon budget depuis un tableur, afin de reprendre le travail déjà fait.\n\n## Critères d'acceptation\n\n- [ ] Import CSV ou Excel\n- [ ] Correspondance des colonnes poste, libellé, prévu, réel\n- [ ] Erreurs listées\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V2/M3-12-import-du-budget-depuis-un-tableur.md`](../blob/main/tickets/V2/M3-12-import-du-budget-depuis-un-tableur.md)\n"
+ },
+ {
+  "id": "M3-13",
+  "version": "MVP",
+  "module": "M3 · Budget et acomptes",
+  "title": "M3-13 · Sous-postes de budget suggérés",
+  "body": "**Module :** M3 · Budget et acomptes  \n**Version :** MVP\n\n## User story\n\nEn tant que couple, je veux des sous-postes suggérés dans chaque poste, afin de penser à toutes les dépenses.\n\n## Critères d'acceptation\n\n- [ ] Environ 60 suggestions rangées par poste (réception, tenues, beauté, animation, déco, photo et vidéo, papeterie, transport, alliances, extras comme la garde d'enfants ou un créateur de contenu)\n- [ ] Activables en un clic\n- [ ] Masquables\n- [ ] Lignes libres possibles\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M3-13-sous-postes-de-budget-suggeres.md`](../blob/main/tickets/MVP/M3-13-sous-postes-de-budget-suggeres.md)\n"
+ },
+ {
+  "id": "M3-14",
+  "version": "MVP",
+  "module": "M3 · Budget et acomptes",
+  "title": "M3-14 · Statut de chaque dépense",
+  "body": "**Module :** M3 · Budget et acomptes  \n**Version :** MVP\n\n## User story\n\nEn tant que couple, je veux un statut sur chaque dépense, afin de voir d'un coup d'œil ce qui est réservé.\n\n## Critères d'acceptation\n\n- [ ] Statuts : à chercher, devis reçu, réservé, payé\n- [ ] Pastille de couleur\n- [ ] Filtre par statut\n- [ ] « payé » automatique quand tous les versements sont payés\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/MVP/M3-14-statut-de-chaque-depense.md`](../blob/main/tickets/MVP/M3-14-statut-de-chaque-depense.md)\n"
+ },
+ {
+  "id": "M3-15",
+  "version": "V2",
+  "module": "M3 · Budget et acomptes",
+  "title": "M3-15 · Dépense rattachée à un moment",
+  "body": "**Module :** M3 · Budget et acomptes  \n**Version :** V2\n\n## User story\n\nEn tant que couple, je veux rattacher une dépense à un moment du week-end, afin de distinguer par exemple le traiteur du vin d'honneur et celui du dîner.\n\n## Critères d'acceptation\n\n- [ ] Moments de M4-05 (vin d'honneur, dîner, brunch…) au choix\n- [ ] Total par moment\n- [ ] Facultatif\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V2/M3-15-depense-rattachee-a-un-moment.md`](../blob/main/tickets/V2/M3-15-depense-rattachee-a-un-moment.md)\n"
  },
  {
   "id": "M4-01",

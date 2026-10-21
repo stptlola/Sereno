@@ -11,7 +11,7 @@ Sereno accompagne pas à pas les couples qui organisent leur mariage eux-mêmes,
 
 ## Tickets
 
-161 tickets, dont 53 pour le MVP, 35 pour la V2, 71 pour la V3 et 2 pour la V4 : voir [`tickets/`](tickets/README.md) et l’onglet **Issues** du dépôt.
+164 tickets, dont 55 pour le MVP, 36 pour la V2, 71 pour la V3 et 2 pour la V4 : voir [`tickets/`](tickets/README.md) et l’onglet **Issues** du dépôt.
 
 ## Pile technique prévue
 
@@ -19,7 +19,6 @@ Sereno accompagne pas à pas les couples qui organisent leur mariage eux-mêmes,
 - Node.js côté serveur, via Next.js
 - PostgreSQL, hébergement en Europe
 - Stripe pour le paiement du Pass
-
 ## Créer les issues GitHub
 
 Les tickets sont prêts à devenir des issues, avec étiquettes de version et de module et un jalon par version :
