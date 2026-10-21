@@ -65,7 +65,7 @@ Premier produit testé gratuitement par les couples.
 | M12-06 | [Contact du support](MVP/M12-06-contact-du-support.md) | Paramètres, RGPD et support |
 | M12-07 | [Pages légales](MVP/M12-07-pages-legales.md) | Paramètres, RGPD et support |
 
-## V2 · 36 tickets
+## V2 · 38 tickets
 
 Version payante : plan de table, RSVP, mini-site, témoins, Pass.
 
@@ -79,6 +79,7 @@ Version payante : plan de table, RSVP, mini-site, témoins, Pass.
 | M3-15 | [Dépense rattachée à un moment](V2/M3-15-depense-rattachee-a-un-moment.md) | Budget et acomptes |
 | M4-11 | [Collecte d'adresses par lien](V2/M4-11-collecte-d-adresses-par-lien.md) | Invités et foyers |
 | M4-14 | [Listes A et B](V2/M4-14-listes-a-et-b.md) | Invités et foyers |
+| M4-15 | [Import des contacts du téléphone](V2/M4-15-import-des-contacts-du-telephone.md) | Invités et foyers |
 | M5-01 | [Mini-site du mariage](V2/M5-01-mini-site-du-mariage.md) | Mini-site, RSVP, plan de table et rapport traiteur |
 | M5-02 | [Mini-site protégé par mot de passe](V2/M5-02-mini-site-protege-par-mot-de-passe.md) | Mini-site, RSVP, plan de table et rapport traiteur |
 | M5-03 | [Réponse en ligne des invités (RSVP)](V2/M5-03-reponse-en-ligne-des-invites-rsvp.md) | Mini-site, RSVP, plan de table et rapport traiteur |
@@ -92,6 +93,7 @@ Version payante : plan de table, RSVP, mini-site, témoins, Pass.
 | M5-11 | [Questions personnalisées au RSVP](V2/M5-11-questions-personnalisees-au-rsvp.md) | Mini-site, RSVP, plan de table et rapport traiteur |
 | M5-12 | [FAQ du mini-site](V2/M5-12-faq-du-mini-site.md) | Mini-site, RSVP, plan de table et rapport traiteur |
 | M5-13 | [Proposition automatique de plan de table](V2/M5-13-proposition-automatique-de-plan-de-table.md) | Mini-site, RSVP, plan de table et rapport traiteur |
+| M5-14 | [Actualités du couple](V2/M5-14-actualites-du-couple.md) | Mini-site, RSVP, plan de table et rapport traiteur |
 | M8-01 | [Invitation des témoins](V2/M8-01-invitation-des-temoins.md) | Kit Jour J et accès Témoins |
 | M8-02 | [Vue Témoin restreinte](V2/M8-02-vue-temoin-restreinte.md) | Kit Jour J et accès Témoins |
 | M10-01 | [Page de l'offre Pass](V2/M10-01-page-de-l-offre-pass.md) | Pass Mariage Sérénité |
@@ -108,7 +110,7 @@ Version payante : plan de table, RSVP, mini-site, témoins, Pass.
 | M19-02 | [Synchronisation avec l'agenda](V2/M19-02-synchronisation-avec-l-agenda.md) | Calendrier et listes |
 | M19-04 | [Listes libres](V2/M19-04-listes-libres.md) | Calendrier et listes |
 
-## V3 · 71 tickets
+## V3 · 73 tickets
 
 Modules complets : prestataires, jour J, cérémonies, cagnotte, IA…
 
@@ -118,6 +120,7 @@ Modules complets : prestataires, jour J, cérémonies, cagnotte, IA…
 | M3-11 | [Accès restreint des proches qui financent](V3/M3-11-acces-restreint-des-proches-qui-financent.md) | Budget et acomptes |
 | M4-12 | [Hébergement des invités](V3/M4-12-hebergement-des-invites.md) | Invités et foyers |
 | M4-13 | [Transport des invités](V3/M4-13-transport-des-invites.md) | Invités et foyers |
+| M5-15 | [Échanges entre invités](V3/M5-15-echanges-entre-invites.md) | Mini-site, RSVP, plan de table et rapport traiteur |
 | M6-01 | [Carnet de prestataires](V3/M6-01-carnet-de-prestataires.md) | Prestataires et comparateur de devis |
 | M6-02 | [Contrats et devis joints](V3/M6-02-contrats-et-devis-joints.md) | Prestataires et comparateur de devis |
 | M6-03 | [Prestataire relié au budget](V3/M6-03-prestataire-relie-au-budget.md) | Prestataires et comparateur de devis |
@@ -136,6 +139,7 @@ Modules complets : prestataires, jour J, cérémonies, cagnotte, IA…
 | M8-06 | [Plan B météo](V3/M8-06-plan-b-meteo.md) | Kit Jour J et accès Témoins |
 | M8-07 | [Vue Jour J mobile](V3/M8-07-vue-jour-j-mobile.md) | Kit Jour J et accès Témoins |
 | M8-08 | [Déroulés de la veille et du lendemain](V3/M8-08-deroules-de-la-veille-et-du-lendemain.md) | Kit Jour J et accès Témoins |
+| M8-09 | [Pointage des arrivées par QR code](V3/M8-09-pointage-des-arrivees-par-qr-code.md) | Kit Jour J et accès Témoins |
 | M9-01 | [Brunch du lendemain](V3/M9-01-brunch-du-lendemain.md) | Post-mariage |
 | M9-02 | [Cadeaux reçus](V3/M9-02-cadeaux-recus.md) | Post-mariage |
 | M9-03 | [Suivi des remerciements](V3/M9-03-suivi-des-remerciements.md) | Post-mariage |

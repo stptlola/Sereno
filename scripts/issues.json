@@ -399,6 +399,13 @@
   "body": "**Module :** M4 · Invités et foyers  \n**Version :** V2\n\n## User story\n\nEn tant que couple, je veux une liste « A » et une liste « B », afin de gérer les invitations en deux vagues.\n\n## Critères d'acceptation\n\n- [ ] Priorité par invité\n- [ ] Une invitation de la liste B proposée quand un invité de la liste A décline\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V2/M4-14-listes-a-et-b.md`](../blob/main/tickets/V2/M4-14-listes-a-et-b.md)\n"
  },
  {
+  "id": "M4-15",
+  "version": "V2",
+  "module": "M4 · Invités et foyers",
+  "title": "M4-15 · Import des contacts du téléphone",
+  "body": "**Module :** M4 · Invités et foyers  \n**Version :** V2\n\n## User story\n\nEn tant que couple, je veux importer des invités depuis les contacts de mon téléphone, afin de construire ma liste plus vite.\n\n## Critères d'acceptation\n\n- [ ] Sélection de contacts depuis le téléphone quand le navigateur le permet (sinon import d'un fichier vCard)\n- [ ] Prénom, nom, e-mail et téléphone repris\n- [ ] Doublons signalés\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V2/M4-15-import-des-contacts-du-telephone.md`](../blob/main/tickets/V2/M4-15-import-des-contacts-du-telephone.md)\n"
+ },
+ {
   "id": "M5-01",
   "version": "V2",
   "module": "M5 · Mini-site, RSVP, plan de table et rapport tra",
@@ -488,6 +495,20 @@
   "module": "M5 · Mini-site, RSVP, plan de table et rapport tra",
   "title": "M5-13 · Proposition automatique de plan de table",
   "body": "**Module :** M5 · Mini-site, RSVP, plan de table et rapport traiteur  \n**Version :** V2\n\n## User story\n\nEn tant que couple, je veux une proposition de plan de table automatique, afin de partir d'une base.\n\n## Critères d'acceptation\n\n- [ ] Placement par foyer et par catégorie, contraintes respectées\n- [ ] Aperçu avant d'appliquer\n- [ ] Tout reste modifiable à la main\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V2/M5-13-proposition-automatique-de-plan-de-table.md`](../blob/main/tickets/V2/M5-13-proposition-automatique-de-plan-de-table.md)\n"
+ },
+ {
+  "id": "M5-14",
+  "version": "V2",
+  "module": "M5 · Mini-site, RSVP, plan de table et rapport tra",
+  "title": "M5-14 · Actualités du couple",
+  "body": "**Module :** M5 · Mini-site, RSVP, plan de table et rapport traiteur  \n**Version :** V2\n\n## User story\n\nEn tant que couple, je veux publier des actualités sur le mini-site, afin de tenir les invités informés.\n\n## Critères d'acceptation\n\n- [ ] Message court avec photo facultative\n- [ ] Envoi par e-mail aux invités qui l'ont accepté\n- [ ] Historique des actualités sur le mini-site\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V2/M5-14-actualites-du-couple.md`](../blob/main/tickets/V2/M5-14-actualites-du-couple.md)\n"
+ },
+ {
+  "id": "M5-15",
+  "version": "V3",
+  "module": "M5 · Mini-site, RSVP, plan de table et rapport tra",
+  "title": "M5-15 · Échanges entre invités",
+  "body": "**Module :** M5 · Mini-site, RSVP, plan de table et rapport traiteur  \n**Version :** V3\n\n## User story\n\nEn tant qu'invité, je veux échanger avec les autres invités, afin de m'organiser avec eux.\n\n## Critères d'acceptation\n\n- [ ] Fil de messages sur le mini-site, accessible avec le lien personnel\n- [ ] Sujets proposés (covoiturage, hébergement, surprise)\n- [ ] Modération par le couple\n- [ ] Désactivable\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M5-15-echanges-entre-invites.md`](../blob/main/tickets/V3/M5-15-echanges-entre-invites.md)\n"
  },
  {
   "id": "M6-01",
@@ -628,6 +649,13 @@
   "module": "M8 · Kit Jour J et accès Témoins",
   "title": "M8-08 · Déroulés de la veille et du lendemain",
   "body": "**Module :** M8 · Kit Jour J et accès Témoins  \n**Version :** V3\n\n## User story\n\nEn tant que couple, je veux un déroulé de la veille et du lendemain, afin d'organiser tout le week-end et pas seulement le jour J.\n\n## Critères d'acceptation\n\n- [ ] Déroulés J-1 (installation, livraisons, répétition, dîner) et J+1 (brunch, rangement, retours de matériel loué) avec heure, lieu, responsable\n- [ ] Modèles proposés\n- [ ] Partageables avec témoins et prestataires\n- [ ] Affichés dans la vue Jour J à partir de J-1\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M8-08-deroules-de-la-veille-et-du-lendemain.md`](../blob/main/tickets/V3/M8-08-deroules-de-la-veille-et-du-lendemain.md)\n"
+ },
+ {
+  "id": "M8-09",
+  "version": "V3",
+  "module": "M8 · Kit Jour J et accès Témoins",
+  "title": "M8-09 · Pointage des arrivées par QR code",
+  "body": "**Module :** M8 · Kit Jour J et accès Témoins  \n**Version :** V3\n\n## User story\n\nEn tant que témoin, je veux pointer les invités à leur arrivée, afin de savoir qui est là et d'ajuster avec le traiteur.\n\n## Critères d'acceptation\n\n- [ ] QR code personnel par foyer dans l'e-mail de confirmation\n- [ ] Scan depuis la vue Témoin ou recherche par nom\n- [ ] Liste des présents en temps réel\n- [ ] Fonctionne avec une connexion faible\n\n## Définition de « terminé »\n\n- Fonctionne sur mobile et ordinateur.\n- Respecte le livre de marque Sereno (couleurs, typographies, ton).\n- Données sauvegardées et visibles par le co-pilote.\n- Textes en français relus, termes inclusifs : partenaires désignés par leurs prénoms, jamais « la mariée » / « le marié ».\n\n---\nFiche : [`tickets/V3/M8-09-pointage-des-arrivees-par-qr-code.md`](../blob/main/tickets/V3/M8-09-pointage-des-arrivees-par-qr-code.md)\n"
  },
  {
   "id": "M9-01",
