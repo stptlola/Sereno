@@ -12,6 +12,7 @@ export interface MariagePrepare {
     budgetTotalCents: number | null;
     estimatedGuests: number | null;
     ceremonies: ReponsesDemarrage["ceremonies"];
+    religion: string | null;
     bookedVendors: string[];
   };
   taches: {
@@ -44,7 +45,7 @@ export function preparerMariage(
 ): MariagePrepare {
   const dateMariage = lireDate(reponses.date);
   const dateDebut = normaliser(aujourdhui);
-  const ceremonies = reponses.ceremonies.length > 0 ? reponses.ceremonies : (["CIVILE"] as const);
+  const ceremonies: ReponsesDemarrage["ceremonies"] = reponses.ceremonies.length > 0 ? reponses.ceremonies : ["CIVILE"];
   const planning = genererPlanning(modeles, {
     dateMariage,
     dateDebut,
@@ -63,6 +64,7 @@ export function preparerMariage(
       budgetTotalCents,
       estimatedGuests: reponses.invites ?? null,
       ceremonies: [...ceremonies],
+      religion: ceremonies.includes("RELIGIEUSE") ? (reponses.culte ?? null) : null,
       bookedVendors: [...reponses.dejaReserve],
     },
     taches: planning.taches.map((t) => ({

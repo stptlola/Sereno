@@ -33,6 +33,13 @@ describe("réponses du démarrage", () => {
     expect(schemaReponses.parse({ invites: "beaucoup" }).invites).toBeUndefined();
   });
 
+  it("garde le culte seulement pour une cérémonie religieuse", () => {
+    const avec = preparerMariage(schemaReponses.parse({ ceremonies: ["CIVILE", "RELIGIEUSE"], culte: "juif" }), MODELE_TACHES, new Date("2026-10-23"));
+    const sans = preparerMariage(schemaReponses.parse({ ceremonies: ["CIVILE"], culte: "juif" }), MODELE_TACHES, new Date("2026-10-23"));
+    expect(avec.mariage.religion).toBe("juif");
+    expect(sans.mariage.religion).toBeNull();
+  });
+
   it("refuse un prestataire inconnu", () => {
     expect(schemaReponses.safeParse({ dejaReserve: ["traiteurx"] }).success).toBe(false);
   });
