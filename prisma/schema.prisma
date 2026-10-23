@@ -125,6 +125,7 @@ model Wedding {
   guests            Guest[]
   moments           Moment[]
   activity          ActivityLog[]
+  invitations       Invitation[]
 }
 
 model Member {
@@ -139,6 +140,23 @@ model Member {
 
   @@unique([weddingId, userId])
   @@index([userId])
+}
+
+// Invitation à rejoindre un mariage (Co-pilote, M0-07 ; témoins plus tard, M8-01).
+// Seule l'empreinte SHA-256 du jeton est stockée : le lien envoyé ne peut pas être reconstitué depuis la base.
+model Invitation {
+  id          String     @id @default(cuid())
+  weddingId   String
+  wedding     Wedding    @relation(fields: [weddingId], references: [id], onDelete: Cascade)
+  role        RoleMembre
+  email       String?
+  tokenHash   String     @unique
+  invitedById String
+  expiresAt   DateTime
+  acceptedAt  DateTime?
+  createdAt   DateTime   @default(now())
+
+  @@index([weddingId])
 }
 
 // ---------- Planning

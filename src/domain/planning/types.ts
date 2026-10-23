@@ -20,7 +20,7 @@ export interface ModeleTache {
 
 /** Prestataires que le couple peut déclarer « déjà réservés » à l'inscription (M0-11). */
 export const PRESTATAIRES_RESERVABLES = {
-  lieu: ["T009", "T010"],
+  lieu: ["T006", "T009", "T010"],
   traiteur: ["T015"],
   photographe: ["T016"],
   videaste: ["T017"],

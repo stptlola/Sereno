@@ -23,8 +23,8 @@ Toutes les versions sont figées dans `package.json` et `package-lock.json`, et 
 | Accès aux données | Prisma | 6.19.3 | Schéma lisible, migrations versionnées ; branche 6 retenue pour sa maturité. |
 | Validation | Zod | 4.6.5 | Variables d'environnement et données des formulaires. |
 | Tests | Vitest | 4.1.11 | Rapide, compatible TypeScript sans configuration. |
-| Authentification | Better Auth (prévu) | à figer au ticket M0-01 | E-mail et mot de passe, Google et Apple, sessions en base ; tables déjà présentes dans le schéma. |
-| E-mails | SMTP (Nodemailer, prévu) | à figer au ticket M0-01 | Indépendant du fournisseur ; Mailpit en local. |
+| Authentification | Better Auth | 1.7.7 | E-mail et mot de passe, Google et Apple, sessions en base ; télémétrie désactivée. |
+| E-mails | SMTP (Nodemailer) | 10.0.15 | Indépendant du fournisseur ; Mailpit en local, affichage dans les logs sans SMTP. |
 | Paiement | Stripe (prévu, V2) | — | Paiement du Pass sans stocker de données bancaires (M10). |
 | Déploiement | Docker + Coolify | — | Voir `DEPLOIEMENT.md`. |
 
@@ -85,7 +85,7 @@ Le module `src/domain/planning` implémente la génération du planning (tickets
 - les conditions (enfants, brunch, animal, lune de miel) et les tâches cochées d'office quand un prestataire est déjà réservé ;
 - la date provisoire à 12 mois quand le mariage n'a pas encore de date.
 
-L'écran `/commencer` utilise déjà ce module : le parcours de démarrage en six écrans et le récapitulatif fonctionnent, sans compte ni base. La sauvegarde arrivera avec l'authentification.
+L'écran `/commencer` utilise ce module : le couple répond aux six écrans, voit son planning, puis crée son compte pour le sauvegarder (les réponses attendent sur l'appareil). Le module `src/domain/mariage` prépare alors le mariage, ses tâches et ses 11 postes de budget, en une seule transaction.
 
 ## 7. Authentification et droits
 
@@ -105,7 +105,7 @@ L'écran `/commencer` utilise déjà ce module : le parcours de démarrage en si
 ## 9. Qualité
 
 - **Tests unitaires** (Vitest) pour toute règle de `src/domain` ; un ticket métier n'est terminé que si ses règles sont testées.
-- **Tests de bout en bout** (Playwright) à ajouter avec les premiers écrans connectés : inscription, démarrage, cocher une tâche.
+- **Tests de bout en bout** (Playwright) : le parcours complet a été vérifié dans un navigateur (démarrage, inscription, tableau de bord, tâche cochée, invitation et arrivée du Co-pilote, erreurs, mot de passe oublié) ; ces scénarios seront ajoutés au dépôt et à la CI.
 - **Intégration continue** (GitHub Actions, `.github/workflows/ci.yml`) à chaque push et pull request : installation, génération Prisma, vérification des types, tests, construction Next.js, puis construction de l'image Docker.
 - **Branches** : `main` toujours déployable ; une branche par ticket (`m2-04-statut-taches`), fusionnée par pull request quand la CI est verte.
 - **Commits** en français, au présent, avec l'identifiant du ticket (« M2-04 : changement de statut des tâches »).
@@ -148,7 +148,7 @@ L'écran `/commencer` utilise déjà ce module : le parcours de démarrage en si
 | Étape | Contenu | Tickets |
 | --- | --- | --- |
 | 0 · Socle (fait) | Projet, schéma, migrations, modèle de tâches, Docker, Coolify, CI, génération du planning, écran de démarrage | M2-01, M2-08, M2-11 à M2-13 (logique), M0-10, M0-11, M0-13 (sans sauvegarde) |
-| 1 · Comptes | Better Auth, inscription, connexion, Google et Apple, sauvegarde du démarrage, Co-pilote, erreurs claires | M0-01 à M0-09, M0-12, M0-14 |
+| 1 · Comptes (fait) | Better Auth, inscription, connexion, mot de passe oublié, Google et Apple, sauvegarde du démarrage, premier tableau de bord, Co-pilote, erreurs claires | M0-01 à M0-14 (hors temps réel et paramètres) |
 | 2 · Planning et tableau de bord | Écrans planning et tâche, statuts, filtres, tableau de bord | M1-01 à M1-05, M2-03 à M2-10, M2-14 |
 | 3 · Budget | Postes, dépenses, versements, alertes, sous-postes suggérés | M3-01 à M3-07, M3-13, M3-14 |
 | 4 · Invités | Foyers, réponses, régimes, moments, import et export CSV | M4-01 à M4-10 |

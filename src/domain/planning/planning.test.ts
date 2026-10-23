@@ -110,7 +110,7 @@ describe("conditions et réservations", () => {
   it("coche d'office les tâches d'un prestataire déjà réservé", () => {
     const p = genererPlanning(MODELE_TACHES, { ...base, dejaReserve: ["lieu", "photographe"] });
     const faites = p.taches.filter((t) => t.cocheeDOffice).map((t) => t.modeleId).sort();
-    expect(faites).toEqual(["T009", "T010", "T016"]);
+    expect(faites).toEqual(["T006", "T009", "T010", "T016"]);
   });
 
   it("exclut l'EVJF/EVG, réservé à l'espace des témoins", () => {

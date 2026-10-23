@@ -30,15 +30,15 @@ La route `GET /api/health` renvoie `200` quand l'application et la base réponde
 | `SMTP_USER` | En production | `bonjour@sereno.fr` | Identifiant SMTP. |
 | `SMTP_PASSWORD` | En production | (clé SMTP) | Mot de passe ou clé SMTP. |
 | `MAIL_FROM` | Non | `Sereno <bonjour@sereno.fr>` | Expéditeur des e-mails ; le domaine doit être validé chez le fournisseur SMTP (SPF, DKIM). |
-| `GOOGLE_CLIENT_ID` | Non | `…apps.googleusercontent.com` | Connexion avec Google (ticket M0-02). |
+| `GOOGLE_CLIENT_ID` | Non | `…apps.googleusercontent.com` | Connexion avec Google. Le bouton n'apparaît que si les deux variables Google sont renseignées. Adresse de redirection à déclarer dans la console Google : `https://app.sereno.fr/api/auth/callback/google`. |
 | `GOOGLE_CLIENT_SECRET` | Non | (secret Google) | Idem. |
-| `APPLE_CLIENT_ID` | Non | `fr.sereno.web` | Connexion avec Apple (ticket M0-02). |
+| `APPLE_CLIENT_ID` | Non | `fr.sereno.web` | Connexion avec Apple, même principe. Adresse de retour à déclarer chez Apple : `https://app.sereno.fr/api/auth/callback/apple`. |
 | `APPLE_CLIENT_SECRET` | Non | (secret Apple) | Idem. |
 | `TZ` | Non (Europe/Paris) | `Europe/Paris` | Fuseau horaire du conteneur, déjà réglé dans l'image. |
 
 Pour l'option Docker Compose ci-dessous, trois variables servent en plus à créer la base : `POSTGRES_USER` (défaut `sereno`), `POSTGRES_PASSWORD` (obligatoire) et `POSTGRES_DB` (défaut `sereno`). `DATABASE_URL` est alors construite automatiquement.
 
-Les variables SMTP et de connexion Google ou Apple deviendront obligatoires au fur et à mesure que les tickets correspondants seront livrés ; ce tableau sera tenu à jour.
+Sans SMTP, les e-mails (confirmation d'adresse, mot de passe oublié, invitation du Co-pilote) ne partent pas : ils sont seulement écrits dans les logs. C'est pratique en développement, mais en production, renseignez le SMTP avant d'ouvrir l'application aux couples.
 
 ## Option A (conseillée) : application Dockerfile et base PostgreSQL Coolify
 

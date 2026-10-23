@@ -1,6 +1,8 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import Link from "next/link";
+import { useEffect, useMemo, useState } from "react";
+import { CLE_STOCKAGE_DEMARRAGE } from "@/domain/mariage/reponses";
 import {
   genererPlanning,
   MODELE_TACHES,
@@ -68,6 +70,11 @@ export function Demarrage() {
   });
   const termine = etape >= ETAPES.length;
 
+  // Les réponses restent sur l'appareil jusqu'à la création du compte (M0-10).
+  useEffect(() => {
+    if (termine) localStorage.setItem(CLE_STOCKAGE_DEMARRAGE, JSON.stringify(r));
+  }, [termine, r]);
+
   const planning = useMemo(
     () =>
       genererPlanning(MODELE_TACHES, {
@@ -134,11 +141,15 @@ export function Demarrage() {
             ))}
           </div>
         </details>
-        <div className="rounded-md border border-or p-5">
+        <div className="flex flex-col gap-3 rounded-md border border-or p-5">
           <p className="font-semibold">Sauvegarder mon planning</p>
-          <p className="mt-1 text-sm text-ink-muted">
-            Rien à payer. La création de compte arrive très bientôt dans cette version de test.
-          </p>
+          <p className="text-sm text-ink-muted">Rien à payer. Retrouvez-le sur tous vos appareils et ouvrez-le à votre partenaire.</p>
+          <Link href="/inscription?retour=/bienvenue" className="self-start rounded-full bg-ink px-6 py-3 font-semibold text-surface">
+            Créer mon compte
+          </Link>
+          <Link href="/connexion?retour=/bienvenue" className="self-start text-sm text-bronze underline">
+            J’ai déjà un compte
+          </Link>
         </div>
         <button type="button" onClick={() => setEtape(0)} className="self-start text-sm text-bronze underline">
           Modifier mes réponses

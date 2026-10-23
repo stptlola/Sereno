@@ -11,12 +11,15 @@ export default function Accueil() {
         Un planning qui s’adapte à votre date, votre budget sous contrôle et vos invités au même endroit.
         Vraiment gratuit pour commencer, sans pub ni démarchage.
       </p>
-      <div>
+      <div className="flex flex-wrap items-center gap-4">
         <Link
           href="/commencer"
           className="inline-flex items-center rounded-full bg-ink px-6 py-3 font-semibold text-surface transition hover:bg-bronze"
         >
           Commencer
+        </Link>
+        <Link href="/connexion" className="text-sm font-semibold text-bronze underline">
+          J’ai déjà un compte
         </Link>
       </div>
     </main>
