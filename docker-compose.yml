@@ -1,0 +1,48 @@
+# Application + base de données, prêtes pour Coolify (type « Docker Compose ») ou un serveur Docker.
+# Les variables marquées « :? » sont obligatoires : voir DEPLOIEMENT.md.
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-sereno}:${POSTGRES_PASSWORD:?Mot de passe de la base requis}@db:5432/${POSTGRES_DB:-sereno}
+      APP_URL: ${APP_URL:?Adresse publique requise, ex. https://app.sereno.fr}
+      AUTH_SECRET: ${AUTH_SECRET:?Secret de 32 caractères minimum requis}
+      SMTP_HOST: ${SMTP_HOST:-}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_USER: ${SMTP_USER:-}
+      SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+      MAIL_FROM: ${MAIL_FROM:-Sereno <bonjour@sereno.fr>}
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET:-}
+      APPLE_CLIENT_ID: ${APPLE_CLIENT_ID:-}
+      APPLE_CLIENT_SECRET: ${APPLE_CLIENT_SECRET:-}
+    depends_on:
+      db:
+        condition: service_healthy
+    expose:
+      - "3000"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:3000/api/health"]
+      interval: 30s
+      timeout: 5s
+      start_period: 40s
+      retries: 3
+
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-sereno}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Mot de passe de la base requis}
+      POSTGRES_DB: ${POSTGRES_DB:-sereno}
+    volumes:
+      - sereno-db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-sereno} -d ${POSTGRES_DB:-sereno}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  sereno-db:

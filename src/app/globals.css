@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+/* Jetons du livre de marque Sereno (direction Neutre doré). */
+@theme {
+  --color-surface: #f7f4ee;
+  --color-surface-raised: #ffffff;
+  --color-surface-soft: #ece6dc;
+  --color-line: #e5ded3;
+  --color-ink: #2a2622;
+  --color-ink-muted: #665e56;
+  --color-or: #c9a45c;
+  --color-bronze: #7a5b21;
+  --color-grege: #d9cfc1;
+  --color-alerte: #a3402a;
+  --font-display: var(--font-bricolage), system-ui, sans-serif;
+  --font-sans: var(--font-figtree), system-ui, sans-serif;
+  --radius-sm: 8px;
+  --radius-md: 16px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-surface: #1f1c19;
+    --color-surface-raised: #2a2622;
+    --color-surface-soft: #34302b;
+    --color-line: #403a34;
+    --color-ink: #f7f4ee;
+    --color-ink-muted: #bdb3a7;
+    --color-bronze: #d9b978;
+    --color-alerte: #e08a74;
+  }
+}
+
+html {
+  background: var(--color-surface);
+  color: var(--color-ink);
+}
+
+body {
+  font-family: var(--font-sans);
+  min-height: 100dvh;
+}

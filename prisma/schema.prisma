@@ -1,0 +1,343 @@
+// Schéma de la base de données Sereno (MVP).
+// Montants en centimes d'euro (Int), dates de mariage et échéances en date seule (@db.Date).
+// Les modèles User, Session, Account et Verification suivent la forme attendue par Better Auth
+// (authentification, ticket M0-01) : ne pas renommer leurs champs.
+
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ---------- Authentification (Better Auth)
+
+model User {
+  id            String    @id
+  name          String
+  email         String    @unique
+  emailVerified Boolean   @default(false)
+  image         String?
+  tutoiement    Boolean   @default(false)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  sessions      Session[]
+  accounts      Account[]
+  memberships   Member[]
+
+  @@map("user")
+}
+
+model Session {
+  id        String   @id
+  expiresAt DateTime
+  token     String   @unique
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@index([userId])
+  @@map("account")
+}
+
+model Verification {
+  id         String   @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([identifier])
+  @@map("verification")
+}
+
+// ---------- Mariage et membres
+
+enum Ceremonie {
+  CIVILE
+  LAIQUE
+  RELIGIEUSE
+}
+
+enum RoleMembre {
+  CREATEUR
+  COPILOTE
+  TEMOIN
+}
+
+model Wedding {
+  id                String      @id @default(cuid())
+  partner1Name      String
+  partner2Name      String?
+  date              DateTime?   @db.Date
+  dateIsTentative   Boolean     @default(false)
+  startDate         DateTime    @default(now()) @db.Date
+  region            String?
+  venue             String?
+  budgetTotalCents  Int?
+  estimatedGuests   Int?
+  ceremonies        Ceremonie[]
+  religion          String?
+  // Réponses aux questions posées au bon moment (M2-14) : null = pas encore répondu.
+  hasChildren       Boolean?
+  hasBrunch         Boolean?
+  isAbroad          Boolean?
+  hasHoneymoon      Boolean?
+  hasPet            Boolean?
+  // Prestataires déjà réservés à l'inscription (M0-11) : clés du domaine planning.
+  bookedVendors     String[]
+  passActive        Boolean     @default(false)
+  passPurchasedAt   DateTime?
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+  members           Member[]
+  tasks             Task[]
+  budgetCategories  BudgetCategory[]
+  expenses          Expense[]
+  households        Household[]
+  guests            Guest[]
+  moments           Moment[]
+  activity          ActivityLog[]
+}
+
+model Member {
+  id        String     @id @default(cuid())
+  weddingId String
+  wedding   Wedding    @relation(fields: [weddingId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role      RoleMembre
+  invitedAt DateTime   @default(now())
+  joinedAt  DateTime?
+
+  @@unique([weddingId, userId])
+  @@index([userId])
+}
+
+// ---------- Planning
+
+enum StatutTache {
+  A_FAIRE
+  EN_COURS
+  FAIT
+}
+
+// Modèle de tâches maintenu par Sereno (data/modele-taches.json, chargé par prisma/seed.mjs).
+model TaskTemplate {
+  id              String  @id // T001…
+  titre           String
+  rubrique        String
+  sousRubrique    String?
+  ceremonie       String  // ALL, CIVILE, LAIQUE, RELIGIEUSE
+  repere          String? // LEGAL, IMPORTANT, ANTICIPATION, SECRET
+  decalageMois    Int
+  decalageJours   Int
+  libelleEcheance String
+  condition       String? // enfants, brunch, animal, luneDeMiel
+  facultative     Boolean @default(false)
+  conseil         String
+  ordre           Int
+  version         Int
+  tasks           Task[]
+}
+
+model Task {
+  id            String        @id @default(cuid())
+  weddingId     String
+  wedding       Wedding       @relation(fields: [weddingId], references: [id], onDelete: Cascade)
+  templateId    String?
+  template      TaskTemplate? @relation(fields: [templateId], references: [id], onDelete: SetNull)
+  title         String
+  tip           String?
+  category      String
+  idealDate     DateTime?     @db.Date
+  dueDate       DateTime?     @db.Date
+  status        StatutTache   @default(A_FAIRE)
+  assignee      String?
+  note          String?
+  hidden        Boolean       @default(false)
+  autoCompleted Boolean       @default(false)
+  completedAt   DateTime?
+  createdById   String?
+  updatedById   String?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  @@index([weddingId, dueDate])
+}
+
+// ---------- Budget
+
+enum StatutDepense {
+  A_CHERCHER
+  DEVIS_RECU
+  RESERVE
+  PAYE
+}
+
+model BudgetCategory {
+  id           String    @id @default(cuid())
+  weddingId    String
+  wedding      Wedding   @relation(fields: [weddingId], references: [id], onDelete: Cascade)
+  name         String
+  plannedCents Int       @default(0)
+  order        Int       @default(0)
+  expenses     Expense[]
+
+  @@index([weddingId])
+}
+
+model Expense {
+  id           String         @id @default(cuid())
+  weddingId    String
+  wedding      Wedding        @relation(fields: [weddingId], references: [id], onDelete: Cascade)
+  categoryId   String
+  category     BudgetCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  label        String
+  plannedCents Int?
+  actualCents  Int?
+  vendor       String?
+  payer        String?
+  status       StatutDepense  @default(A_CHERCHER)
+  note         String?
+  momentId     String?
+  moment       Moment?        @relation(fields: [momentId], references: [id], onDelete: SetNull)
+  payments     Payment[]
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+
+  @@index([weddingId])
+  @@index([categoryId])
+}
+
+model Payment {
+  id          String    @id @default(cuid())
+  expenseId   String
+  expense     Expense   @relation(fields: [expenseId], references: [id], onDelete: Cascade)
+  amountCents Int
+  dueDate     DateTime? @db.Date
+  isPaid      Boolean   @default(false)
+  paidAt      DateTime?
+
+  @@index([expenseId])
+}
+
+// ---------- Invités
+
+enum Cote {
+  PARTENAIRE_1
+  PARTENAIRE_2
+  COMMUN
+}
+
+enum TrancheAge {
+  ADULTE
+  ENFANT
+}
+
+enum Reponse {
+  EN_ATTENTE
+  PRESENT
+  ABSENT
+}
+
+model Household {
+  id        String   @id @default(cuid())
+  weddingId String
+  wedding   Wedding  @relation(fields: [weddingId], references: [id], onDelete: Cascade)
+  name      String
+  address   String?
+  guests    Guest[]
+
+  @@index([weddingId])
+}
+
+model Guest {
+  id          String        @id @default(cuid())
+  weddingId   String
+  wedding     Wedding       @relation(fields: [weddingId], references: [id], onDelete: Cascade)
+  householdId String?
+  household   Household?    @relation(fields: [householdId], references: [id], onDelete: SetNull)
+  firstName   String
+  lastName    String?
+  side        Cote          @default(COMMUN)
+  category    String?
+  ageGroup    TrancheAge    @default(ADULTE)
+  age         Int?
+  email       String?
+  phone       String?
+  diets       String[]
+  allergies   String?
+  rsvp        Reponse       @default(EN_ATTENTE)
+  rsvpAt      DateTime?
+  plusOne     Boolean       @default(false)
+  listB       Boolean       @default(false)
+  moments     GuestMoment[]
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  @@index([weddingId])
+}
+
+model Moment {
+  id        String        @id @default(cuid())
+  weddingId String
+  wedding   Wedding       @relation(fields: [weddingId], references: [id], onDelete: Cascade)
+  name      String
+  startsAt  DateTime?
+  guests    GuestMoment[]
+  expenses  Expense[]
+
+  @@index([weddingId])
+}
+
+model GuestMoment {
+  guestId  String
+  guest    Guest  @relation(fields: [guestId], references: [id], onDelete: Cascade)
+  momentId String
+  moment   Moment @relation(fields: [momentId], references: [id], onDelete: Cascade)
+
+  @@id([guestId, momentId])
+}
+
+// ---------- Historique (M0-09)
+
+model ActivityLog {
+  id        String   @id @default(cuid())
+  weddingId String
+  wedding   Wedding  @relation(fields: [weddingId], references: [id], onDelete: Cascade)
+  userId    String?
+  entity    String
+  entityId  String
+  action    String
+  createdAt DateTime @default(now())
+
+  @@index([weddingId, createdAt])
+}

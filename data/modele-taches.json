@@ -1,0 +1,2233 @@
+{
+ "version": 1,
+ "source": "Cahier des charges Sereno, onglet Modèle de tâches",
+ "taches": [
+  {
+   "id": "T001",
+   "titre": "Savourer les fiançailles et annoncer la nouvelle",
+   "rubrique": "Nous deux",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": "ANTICIPATION",
+   "decalage": {
+    "mois": -18,
+    "jours": 0
+   },
+   "libelleEcheance": "J-18 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Prenez le temps d'en profiter avant de vous lancer, tout le reste peut attendre quelques semaines.",
+   "ordre": 1
+  },
+  {
+   "id": "T002",
+   "titre": "Imaginer ensemble votre mariage idéal",
+   "rubrique": "Nous deux",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": "ANTICIPATION",
+   "decalage": {
+    "mois": -18,
+    "jours": 0
+   },
+   "libelleEcheance": "J-18 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Taille, ambiance, saison, ville ou campagne : notez chacun vos trois envies essentielles, puis comparez.",
+   "ordre": 2
+  },
+  {
+   "id": "T003",
+   "titre": "Fixer le budget global et qui y participe",
+   "rubrique": "Budget",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": "IMPORTANT",
+   "decalage": {
+    "mois": -18,
+    "jours": 0
+   },
+   "libelleEcheance": "J-18 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Parlez-en tôt avec vos proches qui souhaitent contribuer, pour savoir sur quoi compter.",
+   "ordre": 3
+  },
+  {
+   "id": "T004",
+   "titre": "Mettre en place une épargne mensuelle",
+   "rubrique": "Budget",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": "ANTICIPATION",
+   "decalage": {
+    "mois": -18,
+    "jours": 0
+   },
+   "libelleEcheance": "J-18 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Divisez le reste à financer par le nombre de mois restants : c'est votre objectif d'épargne.",
+   "ordre": 4
+  },
+  {
+   "id": "T005",
+   "titre": "Choisir la saison et deux ou trois dates possibles",
+   "rubrique": "Nous deux",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": "ANTICIPATION",
+   "decalage": {
+    "mois": -18,
+    "jours": 0
+   },
+   "libelleEcheance": "J-18 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Garder plusieurs dates possibles facilite la réservation du lieu.",
+   "ordre": 5
+  },
+  {
+   "id": "T006",
+   "titre": "Repérer les lieux très demandés",
+   "rubrique": "Réception",
+   "sousRubrique": "Lieu",
+   "ceremonie": "ALL",
+   "repere": "ANTICIPATION",
+   "decalage": {
+    "mois": -18,
+    "jours": 0
+   },
+   "libelleEcheance": "J-18 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Les lieux prisés se réservent souvent 18 à 24 mois à l'avance, surtout le samedi entre mai et septembre.",
+   "ordre": 6
+  },
+  {
+   "id": "T007",
+   "titre": "Faire une première estimation du nombre d'invités",
+   "rubrique": "Invités",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": "IMPORTANT",
+   "decalage": {
+    "mois": -16,
+    "jours": 0
+   },
+   "libelleEcheance": "J-16 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Ce chiffre guide le choix du lieu et le budget ; une fourchette suffit pour l'instant.",
+   "ordre": 7
+  },
+  {
+   "id": "T008",
+   "titre": "Choisir vos témoins",
+   "rubrique": "Cortège et EVJF/EVG",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": -14,
+    "jours": 0
+   },
+   "libelleEcheance": "J-14 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Le mariage civil demande deux à quatre témoins majeurs au total ; ils peuvent être de la famille ou des amis.",
+   "ordre": 8
+  },
+  {
+   "id": "T009",
+   "titre": "Visiter les lieux de réception",
+   "rubrique": "Réception",
+   "sousRubrique": "Lieu",
+   "ceremonie": "ALL",
+   "repere": "IMPORTANT",
+   "decalage": {
+    "mois": -12,
+    "jours": 0
+   },
+   "libelleEcheance": "J-12 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Vérifiez la capacité, l'heure de fin, les hébergements proches et l'accessibilité pour les personnes âgées ou à mobilité réduite.",
+   "ordre": 9
+  },
+  {
+   "id": "T010",
+   "titre": "Réserver le lieu de réception",
+   "rubrique": "Réception",
+   "sousRubrique": "Lieu",
+   "ceremonie": "ALL",
+   "repere": "IMPORTANT",
+   "decalage": {
+    "mois": -12,
+    "jours": 0
+   },
+   "libelleEcheance": "J-12 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Lisez les conditions d'annulation et ce qui est inclus (mobilier, vaisselle, traiteur imposé ou non).",
+   "ordre": 10
+  },
+  {
+   "id": "T011",
+   "titre": "Fixer la date définitive",
+   "rubrique": "Nous deux",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": "IMPORTANT",
+   "decalage": {
+    "mois": -12,
+    "jours": 0
+   },
+   "libelleEcheance": "J-12 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Une fois le lieu réservé, reportez la date dans l'onglet Accueil : toutes les échéances se recalculent.",
+   "ordre": 11
+  },
+  {
+   "id": "T012",
+   "titre": "Contacter la mairie pour réserver la date",
+   "rubrique": "Démarches",
+   "sousRubrique": null,
+   "ceremonie": "CIVILE",
+   "repere": "LEGAL",
+   "decalage": {
+    "mois": -12,
+    "jours": 0
+   },
+   "libelleEcheance": "J-12 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Le mariage civil se célèbre dans la commune où l'un de vous, ou l'un de vos parents, a son domicile ou sa résidence ; demandez les créneaux disponibles.",
+   "ordre": 12
+  },
+  {
+   "id": "T013",
+   "titre": "Rencontrer le lieu de culte ou l'officiant religieux",
+   "rubrique": "Cérémonie",
+   "sousRubrique": "Religieuse",
+   "ceremonie": "RELIGIEUSE",
+   "repere": "IMPORTANT",
+   "decalage": {
+    "mois": -12,
+    "jours": 0
+   },
+   "libelleEcheance": "J-12 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Une préparation au mariage sur plusieurs mois est souvent demandée.",
+   "ordre": 13
+  },
+  {
+   "id": "T014",
+   "titre": "Choisir l'officiant de la cérémonie laïque",
+   "rubrique": "Cérémonie",
+   "sousRubrique": "Laïque",
+   "ceremonie": "LAIQUE",
+   "repere": null,
+   "decalage": {
+    "mois": -11,
+    "jours": 0
+   },
+   "libelleEcheance": "J-11 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Un ou une officiante professionnelle, ou un proche à l'aise à l'oral.",
+   "ordre": 14
+  },
+  {
+   "id": "T015",
+   "titre": "Réserver le traiteur",
+   "rubrique": "Réception",
+   "sousRubrique": "Traiteur",
+   "ceremonie": "ALL",
+   "repere": "IMPORTANT",
+   "decalage": {
+    "mois": -11,
+    "jours": 0
+   },
+   "libelleEcheance": "J-11 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Vérifiez d'abord si le lieu impose un traiteur ; demandez si la dégustation est incluse.",
+   "ordre": 15
+  },
+  {
+   "id": "T016",
+   "titre": "Réserver le photographe",
+   "rubrique": "Réception",
+   "sousRubrique": "Photo et vidéo",
+   "ceremonie": "ALL",
+   "repere": "IMPORTANT",
+   "decalage": {
+    "mois": -11,
+    "jours": 0
+   },
+   "libelleEcheance": "J-11 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Regardez un reportage complet, pas seulement les meilleures photos.",
+   "ordre": 16
+  },
+  {
+   "id": "T119",
+   "titre": "Faire des photos de fiançailles",
+   "rubrique": "Réception",
+   "sousRubrique": "Photo et vidéo",
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": -11,
+    "jours": 0
+   },
+   "libelleEcheance": "J-11 mois",
+   "condition": null,
+   "facultative": true,
+   "conseil": "Idéal pour vos save-the-date et pour faire connaissance avec votre photographe.",
+   "ordre": 17
+  },
+  {
+   "id": "T120",
+   "titre": "Comparer les devis des prestataires clés",
+   "rubrique": "Prestataires",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": -11,
+    "jours": 0
+   },
+   "libelleEcheance": "J-11 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Deux ou trois devis par métier suffisent ; comparez ce qui est inclus, pas seulement le prix.",
+   "ordre": 18
+  },
+  {
+   "id": "T017",
+   "titre": "Réserver le vidéaste",
+   "rubrique": "Réception",
+   "sousRubrique": "Photo et vidéo",
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": -10,
+    "jours": 0
+   },
+   "libelleEcheance": "J-10 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Demandez la durée du film et le délai de livraison.",
+   "ordre": 19
+  },
+  {
+   "id": "T018",
+   "titre": "Réserver le DJ ou les musiciens",
+   "rubrique": "Réception",
+   "sousRubrique": "Musique",
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": -10,
+    "jours": 0
+   },
+   "libelleEcheance": "J-10 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Précisez l'heure de fin et le matériel fourni (sono, micros pour les discours).",
+   "ordre": 20
+  },
+  {
+   "id": "T019",
+   "titre": "Étudier une assurance annulation mariage",
+   "rubrique": "Budget",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": -10,
+    "jours": 0
+   },
+   "libelleEcheance": "J-10 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Comparez ce qui est couvert : maladie, intempéries, défaillance d'un prestataire.",
+   "ordre": 21
+  },
+  {
+   "id": "T020",
+   "titre": "Bloquer des hébergements pour les invités qui viennent de loin",
+   "rubrique": "Réception",
+   "sousRubrique": "Hébergement",
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": -10,
+    "jours": 0
+   },
+   "libelleEcheance": "J-10 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Une liste de quelques adresses à proximité suffit souvent ; certains hôtels proposent des tarifs de groupe.",
+   "ordre": 22
+  },
+  {
+   "id": "T021",
+   "titre": "Ouvrir le mini-site avec la date et le lieu",
+   "rubrique": "Invités",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": -10,
+    "jours": 0
+   },
+   "libelleEcheance": "J-10 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "La date et le lieu suffisent pour l'instant : le lien accompagnera vos save-the-date.",
+   "ordre": 23
+  },
+  {
+   "id": "T022",
+   "titre": "Envoyer les save-the-date",
+   "rubrique": "Papeterie",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": -10,
+    "jours": 0
+   },
+   "libelleEcheance": "J-10 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Surtout si beaucoup d'invités doivent voyager ou poser des congés.",
+   "ordre": 24
+  },
+  {
+   "id": "T121",
+   "titre": "Signer les contrats et verser les acomptes",
+   "rubrique": "Budget",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": "IMPORTANT",
+   "decalage": {
+    "mois": -10,
+    "jours": 0
+   },
+   "libelleEcheance": "J-10 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Relisez les conditions d'annulation et notez chaque échéance de paiement dans l'onglet Budget.",
+   "ordre": 25
+  },
+  {
+   "id": "T023",
+   "titre": "Choisir le thème, les couleurs et l'ambiance",
+   "rubrique": "Réception",
+   "sousRubrique": "Déco",
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": -9,
+    "jours": 0
+   },
+   "libelleEcheance": "J-9 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Un moodboard partagé avec votre partenaire aide à vous mettre d'accord avant de briefer les prestataires.",
+   "ordre": 26
+  },
+  {
+   "id": "T024",
+   "titre": "Commencer la recherche des tenues",
+   "rubrique": "Tenues et beauté",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": "IMPORTANT",
+   "decalage": {
+    "mois": -9,
+    "jours": 0
+   },
+   "libelleEcheance": "J-9 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Pour une tenue sur mesure ou à commander, les délais atteignent souvent 6 à 9 mois.",
+   "ordre": 27
+  },
+  {
+   "id": "T025",
+   "titre": "Commander les tenues",
+   "rubrique": "Tenues et beauté",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": "IMPORTANT",
+   "decalage": {
+    "mois": -8,
+    "jours": 0
+   },
+   "libelleEcheance": "J-8 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Notez la date de livraison prévue et celle des essayages.",
+   "ordre": 28
+  },
+  {
+   "id": "T026",
+   "titre": "Réserver le fleuriste",
+   "rubrique": "Réception",
+   "sousRubrique": "Fleurs",
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": -8,
+    "jours": 0
+   },
+   "libelleEcheance": "J-8 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Venez avec vos couleurs et quelques photos d'inspiration.",
+   "ordre": 29
+  },
+  {
+   "id": "T027",
+   "titre": "Réserver coiffure et maquillage",
+   "rubrique": "Tenues et beauté",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": -8,
+    "jours": 0
+   },
+   "libelleEcheance": "J-8 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Demandez si le déplacement le matin du mariage est possible, et à quelle heure.",
+   "ordre": 30
+  },
+  {
+   "id": "T028",
+   "titre": "Choisir votre cortège",
+   "rubrique": "Cortège et EVJF/EVG",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": -8,
+    "jours": 0
+   },
+   "libelleEcheance": "J-8 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Demoiselles et garçons d'honneur, porteurs des alliances : expliquez à chacun ce que vous attendez de lui.",
+   "ordre": 31
+  },
+  {
+   "id": "T029",
+   "titre": "Réserver les animations",
+   "rubrique": "Réception",
+   "sousRubrique": "Animations",
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": -7,
+    "jours": 0
+   },
+   "libelleEcheance": "J-7 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Photobooth, magicien, jeux pour les enfants : choisissez une ou deux idées plutôt que tout à la fois.",
+   "ordre": 32
+  },
+  {
+   "id": "T030",
+   "titre": "Réserver la location de matériel",
+   "rubrique": "Réception",
+   "sousRubrique": "Lieu",
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": -7,
+    "jours": 0
+   },
+   "libelleEcheance": "J-7 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Chapiteau, mobilier, éclairage, vaisselle : vérifiez ce que le lieu fournit déjà.",
+   "ordre": 33
+  },
+  {
+   "id": "T031",
+   "titre": "Organiser le transport des invités",
+   "rubrique": "Réception",
+   "sousRubrique": "Transport",
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": -7,
+    "jours": 0
+   },
+   "libelleEcheance": "J-7 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Navette entre cérémonie, réception et hébergements ; c'est aussi plus sûr après la fête.",
+   "ordre": 34
+  },
+  {
+   "id": "T032",
+   "titre": "Réserver le moyen de transport des mariés",
+   "rubrique": "Réception",
+   "sousRubrique": "Transport",
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": -7,
+    "jours": 0
+   },
+   "libelleEcheance": "J-7 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Voiture de collection, calèche, vélo ou van : prévoyez le trajet entre cérémonie et réception, et qui conduit.",
+   "ordre": 35
+  },
+  {
+   "id": "T033",
+   "titre": "Prévoir la garde des enfants le jour J",
+   "rubrique": "Réception",
+   "sousRubrique": "Enfants",
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": -7,
+    "jours": 0
+   },
+   "libelleEcheance": "J-7 mois",
+   "condition": "enfants",
+   "facultative": false,
+   "conseil": "Un ou une baby-sitter dans un espace dédié permet aux parents de profiter de la soirée.",
+   "ordre": 36
+  },
+  {
+   "id": "T034",
+   "titre": "Choisir la destination de la lune de miel",
+   "rubrique": "Voyage de noces",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": -7,
+    "jours": 0
+   },
+   "libelleEcheance": "J-7 mois",
+   "condition": "luneDeMiel",
+   "facultative": false,
+   "conseil": "Partir juste après ou quelques mois plus tard : choisissez selon vos congés et votre budget.",
+   "ordre": 37
+  },
+  {
+   "id": "T035",
+   "titre": "Vérifier passeports, visas et vaccins",
+   "rubrique": "Voyage de noces",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": "IMPORTANT",
+   "decalage": {
+    "mois": -7,
+    "jours": 0
+   },
+   "libelleEcheance": "J-7 mois",
+   "condition": "luneDeMiel",
+   "facultative": false,
+   "conseil": "Certains pays exigent un passeport valable plus de six mois après le retour ; les délais de renouvellement peuvent être longs.",
+   "ordre": 38
+  },
+  {
+   "id": "T104",
+   "titre": "Choisir votre régime matrimonial",
+   "rubrique": "Démarches",
+   "sousRubrique": null,
+   "ceremonie": "CIVILE",
+   "repere": "LEGAL",
+   "decalage": {
+    "mois": -7,
+    "jours": 0
+   },
+   "libelleEcheance": "J-7 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Communauté réduite aux acquêts (par défaut), séparation de biens ou autre : renseignez-vous ensemble, puis faites-vous conseiller par un notaire.",
+   "ordre": 39
+  },
+  {
+   "id": "T036",
+   "titre": "Créer la liste de cadeaux ou la cagnotte",
+   "rubrique": "Cadeaux",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": -6,
+    "jours": 0
+   },
+   "libelleEcheance": "J-6 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Ajoutez-la au mini-site avant l'envoi des faire-part.",
+   "ordre": 40
+  },
+  {
+   "id": "T037",
+   "titre": "Finaliser la liste d'invités",
+   "rubrique": "Invités",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": "IMPORTANT",
+   "decalage": {
+    "mois": -6,
+    "jours": 0
+   },
+   "libelleEcheance": "J-6 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Gardez une liste B pour inviter d'autres proches si certains déclinent.",
+   "ordre": 41
+  },
+  {
+   "id": "T118",
+   "titre": "Compléter le mini-site du mariage",
+   "rubrique": "Invités",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": -6,
+    "jours": 0
+   },
+   "libelleEcheance": "J-6 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Programme, hébergements, transport, FAQ : tout ce que les invités demanderont, avant l'envoi des faire-part.",
+   "ordre": 42
+  },
+  {
+   "id": "T038",
+   "titre": "Collecter les adresses des invités",
+   "rubrique": "Invités",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": -6,
+    "jours": 0
+   },
+   "libelleEcheance": "J-6 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Un seul lien envoyé à tout le monde évite de relancer chacun.",
+   "ordre": 43
+  },
+  {
+   "id": "T039",
+   "titre": "Choisir et commander les faire-part",
+   "rubrique": "Papeterie",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": -6,
+    "jours": 0
+   },
+   "libelleEcheance": "J-6 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Comptez un faire-part par foyer, et quelques exemplaires en plus.",
+   "ordre": 44
+  },
+  {
+   "id": "T040",
+   "titre": "Rencontrer un notaire si vous souhaitez un contrat de mariage",
+   "rubrique": "Démarches",
+   "sousRubrique": null,
+   "ceremonie": "CIVILE",
+   "repere": "LEGAL",
+   "decalage": {
+    "mois": -6,
+    "jours": 0
+   },
+   "libelleEcheance": "J-6 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Sans contrat, vous êtes mariés sous le régime de la communauté réduite aux acquêts. Le contrat se signe avant le mariage ; le notaire remet un certificat à joindre au dossier de la mairie.",
+   "ordre": 45
+  },
+  {
+   "id": "T105",
+   "titre": "Réserver le traiteur ou le buffet du brunch",
+   "rubrique": "Réception",
+   "sousRubrique": "Brunch",
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": -6,
+    "jours": 0
+   },
+   "libelleEcheance": "J-6 mois",
+   "condition": "brunch",
+   "facultative": false,
+   "conseil": "Food-truck, buffet ou restes du dîner : vérifiez ce que permet le lieu le lendemain.",
+   "ordre": 46
+  },
+  {
+   "id": "T122",
+   "titre": "Poser vos congés pour le mariage et la lune de miel",
+   "rubrique": "Nous deux",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": -6,
+    "jours": 0
+   },
+   "libelleEcheance": "J-6 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Le Code du travail prévoit un congé de 4 jours pour votre mariage ; votre convention collective peut prévoir davantage.",
+   "ordre": 47
+  },
+  {
+   "id": "T041",
+   "titre": "Choisir les alliances",
+   "rubrique": "Tenues et beauté",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": -5,
+    "jours": 0
+   },
+   "libelleEcheance": "J-5 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Prévoyez quelques semaines pour une gravure ou une mise à taille.",
+   "ordre": 48
+  },
+  {
+   "id": "T042",
+   "titre": "Faire les essais de coiffure et de maquillage",
+   "rubrique": "Tenues et beauté",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": -5,
+    "jours": 0
+   },
+   "libelleEcheance": "J-5 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Apportez une photo de votre tenue et faites des photos de l'essai, à la lumière du jour.",
+   "ordre": 49
+  },
+  {
+   "id": "T043",
+   "titre": "Choisir les tenues du cortège",
+   "rubrique": "Cortège et EVJF/EVG",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": -5,
+    "jours": 0
+   },
+   "libelleEcheance": "J-5 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Donnez une couleur ou un style plutôt qu'une tenue imposée : chacun sera plus à l'aise.",
+   "ordre": 50
+  },
+  {
+   "id": "T044",
+   "titre": "Choisir le cadeau des invités",
+   "rubrique": "Cadeaux",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": -5,
+    "jours": 0
+   },
+   "libelleEcheance": "J-5 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Dragées, plantes, objets personnalisés, douceurs locales ou don à une association : commandez tôt si c'est personnalisé.",
+   "ordre": 51
+  },
+  {
+   "id": "T050",
+   "titre": "Envoyer les faire-part",
+   "rubrique": "Papeterie",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": "IMPORTANT",
+   "decalage": {
+    "mois": -4,
+    "jours": 0
+   },
+   "libelleEcheance": "J-4 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Quatre mois laissent aux invités le temps de poser des congés ; fixez une date limite de réponse environ six semaines avant le jour J.",
+   "ordre": 52
+  },
+  {
+   "id": "T045",
+   "titre": "Choisir les cadeaux du cortège et des témoins",
+   "rubrique": "Cadeaux",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": -4,
+    "jours": 0
+   },
+   "libelleEcheance": "J-4 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Un petit mot personnel compte souvent plus que le cadeau lui-même.",
+   "ordre": 53
+  },
+  {
+   "id": "T046",
+   "titre": "Réserver la nuit de noces",
+   "rubrique": "Réception",
+   "sousRubrique": "Hébergement",
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": -4,
+    "jours": 0
+   },
+   "libelleEcheance": "J-4 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Proche de la réception, avec un départ tardif le lendemain si possible.",
+   "ordre": 54
+  },
+  {
+   "id": "T047",
+   "titre": "Écrire le déroulé de chaque cérémonie",
+   "rubrique": "Cérémonie",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": -4,
+    "jours": 0
+   },
+   "libelleEcheance": "J-4 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Entrées, lectures, musiques, échange des alliances : partez d'un déroulé type et adaptez-le.",
+   "ordre": 55
+  },
+  {
+   "id": "T113",
+   "titre": "Suivre la préparation au mariage religieux",
+   "rubrique": "Cérémonie",
+   "sousRubrique": "Religieuse",
+   "ceremonie": "RELIGIEUSE",
+   "repere": "IMPORTANT",
+   "decalage": {
+    "mois": -4,
+    "jours": 0
+   },
+   "libelleEcheance": "J-4 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Rencontres avec l'officiant et dossier propre au culte : notez les dates des rendez-vous.",
+   "ordre": 56
+  },
+  {
+   "id": "T048",
+   "titre": "Réserver les vols et hébergements de la lune de miel",
+   "rubrique": "Voyage de noces",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": -4,
+    "jours": 0
+   },
+   "libelleEcheance": "J-4 mois",
+   "condition": "luneDeMiel",
+   "facultative": false,
+   "conseil": "Si vous partez juste après, prévoyez une journée tampon pour souffler.",
+   "ordre": 57
+  },
+  {
+   "id": "T049",
+   "titre": "Organiser l'enterrement de vie de célibataire (à confier aux témoins)",
+   "rubrique": "Cortège et EVJF/EVG",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": "SECRET",
+   "decalage": {
+    "mois": -4,
+    "jours": 0
+   },
+   "libelleEcheance": "J-4 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "À confier aux témoins, qui garderont la surprise.",
+   "ordre": 58
+  },
+  {
+   "id": "T123",
+   "titre": "Préparer l'ouverture du bal",
+   "rubrique": "Réception",
+   "sousRubrique": "Musique",
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": -4,
+    "jours": 0
+   },
+   "libelleEcheance": "J-4 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Choisissez votre chanson ; quelques cours de danse suffisent pour être à l'aise, si vous le souhaitez.",
+   "ordre": 59
+  },
+  {
+   "id": "T124",
+   "titre": "Réserver le lieu des préparatifs du matin",
+   "rubrique": "Réception",
+   "sousRubrique": "Lieu",
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": -4,
+    "jours": 0
+   },
+   "libelleEcheance": "J-4 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Un endroit lumineux et calme, avec de la place pour la coiffure, le maquillage et le photographe.",
+   "ordre": 60
+  },
+  {
+   "id": "T051",
+   "titre": "Faire la dégustation avec le traiteur",
+   "rubrique": "Réception",
+   "sousRubrique": "Traiteur",
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": -3,
+    "jours": 0
+   },
+   "libelleEcheance": "J-3 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Venez avec vos questions sur les régimes, le menu enfant et le repas des prestataires.",
+   "ordre": 61
+  },
+  {
+   "id": "T107",
+   "titre": "Valider le cocktail du vin d'honneur",
+   "rubrique": "Réception",
+   "sousRubrique": "Vin d'honneur",
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": -3,
+    "jours": 0
+   },
+   "libelleEcheance": "J-3 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Nombre de pièces par personne et ateliers éventuels : comptez davantage si le dîner commence tard.",
+   "ordre": 62
+  },
+  {
+   "id": "T052",
+   "titre": "Choisir la pièce montée ou le gâteau",
+   "rubrique": "Réception",
+   "sousRubrique": "Gâteau",
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": -3,
+    "jours": 0
+   },
+   "libelleEcheance": "J-3 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Vérifiez si le traiteur s'en charge ou s'il faut un pâtissier à part.",
+   "ordre": 63
+  },
+  {
+   "id": "T053",
+   "titre": "Estimer les quantités de boissons",
+   "rubrique": "Réception",
+   "sousRubrique": "Boissons",
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": -3,
+    "jours": 0
+   },
+   "libelleEcheance": "J-3 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Selon le nombre d'adultes et la durée de la fête ; vérifiez s'il y a un droit de bouchon si vous fournissez vos boissons.",
+   "ordre": 64
+  },
+  {
+   "id": "T054",
+   "titre": "Prévoir le repas des prestataires",
+   "rubrique": "Réception",
+   "sousRubrique": "Traiteur",
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": -3,
+    "jours": 0
+   },
+   "libelleEcheance": "J-3 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Photographe, DJ, vidéaste restent souvent toute la soirée ; leur repas est parfois prévu au contrat.",
+   "ordre": 65
+  },
+  {
+   "id": "T106",
+   "titre": "Vérifier l'assurance responsabilité civile pour l'événement",
+   "rubrique": "Budget",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": "IMPORTANT",
+   "decalage": {
+    "mois": -3,
+    "jours": 0
+   },
+   "libelleEcheance": "J-3 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Beaucoup de lieux l'exigent au contrat ; une extension de votre assurance habitation suffit parfois.",
+   "ordre": 66
+  },
+  {
+   "id": "T055",
+   "titre": "Préparer la playlist et la liste des musiques à éviter",
+   "rubrique": "Réception",
+   "sousRubrique": "Musique",
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": -3,
+    "jours": 0
+   },
+   "libelleEcheance": "J-3 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Choisissez les moments clés (entrée, ouverture du bal) et laissez le reste au DJ.",
+   "ordre": 67
+  },
+  {
+   "id": "T114",
+   "titre": "Choisir musiques et lectures de la cérémonie religieuse",
+   "rubrique": "Cérémonie",
+   "sousRubrique": "Religieuse",
+   "ceremonie": "RELIGIEUSE",
+   "repere": null,
+   "decalage": {
+    "mois": -3,
+    "jours": 0
+   },
+   "libelleEcheance": "J-3 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Le lieu de culte a parfois une liste de chants et de textes possibles ; demandez-la.",
+   "ordre": 68
+  },
+  {
+   "id": "T056",
+   "titre": "Préparer la liste des photos à ne pas manquer",
+   "rubrique": "Réception",
+   "sousRubrique": "Photo et vidéo",
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": -3,
+    "jours": 0
+   },
+   "libelleEcheance": "J-3 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Groupes de famille, détails, moments clés : désignez un proche pour rassembler les gens.",
+   "ordre": 69
+  },
+  {
+   "id": "T057",
+   "titre": "Préparer le livret de cérémonie",
+   "rubrique": "Papeterie",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": -3,
+    "jours": 0
+   },
+   "libelleEcheance": "J-3 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Déroulé, textes, chants : prévoyez l'impression un mois avant.",
+   "ordre": 70
+  },
+  {
+   "id": "T058",
+   "titre": "Demander à la mairie la liste des pièces du dossier",
+   "rubrique": "Démarches",
+   "sousRubrique": null,
+   "ceremonie": "CIVILE",
+   "repere": "LEGAL",
+   "decalage": {
+    "mois": -3,
+    "jours": 0
+   },
+   "libelleEcheance": "J-3 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Chaque mairie a ses délais ; certaines demandent le dossier plusieurs mois avant, renseignez-vous tôt.",
+   "ordre": 71
+  },
+  {
+   "id": "T125",
+   "titre": "Vérifier les règles du lieu et de la commune",
+   "rubrique": "Démarches",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": -3,
+    "jours": 0
+   },
+   "libelleEcheance": "J-3 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Horaires de fin, niveau sonore, feux d'artifice, bougies : mieux vaut savoir avant de prévoir.",
+   "ordre": 72
+  },
+  {
+   "id": "T126",
+   "titre": "Vérifier la validité de vos pièces d'identité",
+   "rubrique": "Démarches",
+   "sousRubrique": null,
+   "ceremonie": "CIVILE",
+   "repere": "LEGAL",
+   "decalage": {
+    "mois": -3,
+    "jours": 0
+   },
+   "libelleEcheance": "J-3 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "La mairie les demande pour le dossier et le jour J ; un renouvellement peut prendre plusieurs semaines.",
+   "ordre": 73
+  },
+  {
+   "id": "T059",
+   "titre": "Demander vos copies intégrales d'acte de naissance",
+   "rubrique": "Démarches",
+   "sousRubrique": null,
+   "ceremonie": "CIVILE",
+   "repere": "LEGAL",
+   "decalage": {
+    "mois": -2,
+    "jours": 0
+   },
+   "libelleEcheance": "J-2 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Elles doivent dater de moins de 3 mois au dépôt du dossier, ou de moins de 6 mois si elles sont délivrées à l'étranger.",
+   "ordre": 74
+  },
+  {
+   "id": "T060",
+   "titre": "Rassembler les informations des témoins",
+   "rubrique": "Démarches",
+   "sousRubrique": null,
+   "ceremonie": "CIVILE",
+   "repere": "LEGAL",
+   "decalage": {
+    "mois": -2,
+    "jours": 0
+   },
+   "libelleEcheance": "J-2 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Nom, date et lieu de naissance, profession, adresse et pièce d'identité de chaque témoin.",
+   "ordre": 75
+  },
+  {
+   "id": "T061",
+   "titre": "Déposer le dossier de mariage à la mairie",
+   "rubrique": "Démarches",
+   "sousRubrique": null,
+   "ceremonie": "CIVILE",
+   "repere": "LEGAL",
+   "decalage": {
+    "mois": -2,
+    "jours": 0
+   },
+   "libelleEcheance": "J-2 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "La présence des deux futurs époux est souvent demandée, et une audition peut avoir lieu.",
+   "ordre": 76
+  },
+  {
+   "id": "T062",
+   "titre": "Faire le premier essayage et les retouches",
+   "rubrique": "Tenues et beauté",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": -2,
+    "jours": 0
+   },
+   "libelleEcheance": "J-2 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Venez avec les chaussures et les sous-vêtements prévus pour le jour J.",
+   "ordre": 77
+  },
+  {
+   "id": "T063",
+   "titre": "Acheter chaussures et accessoires",
+   "rubrique": "Tenues et beauté",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": -2,
+    "jours": 0
+   },
+   "libelleEcheance": "J-2 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Portez vos chaussures chez vous quelques soirées pour les assouplir.",
+   "ordre": 78
+  },
+  {
+   "id": "T064",
+   "titre": "Envoyer un brief à chaque prestataire",
+   "rubrique": "Prestataires",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": "IMPORTANT",
+   "decalage": {
+    "mois": -2,
+    "jours": 0
+   },
+   "libelleEcheance": "J-2 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Horaires, adresses, contacts et vos souhaits : un brief clair évite les malentendus le jour J.",
+   "ordre": 79
+  },
+  {
+   "id": "T065",
+   "titre": "Préparer vos vœux, discours ou textes",
+   "rubrique": "Cérémonie",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": -2,
+    "jours": 0
+   },
+   "libelleEcheance": "J-2 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Commencez par une anecdote ; lisez-le à voix haute pour vérifier la durée.",
+   "ordre": 80
+  },
+  {
+   "id": "T108",
+   "titre": "Commander vin, champagne et softs",
+   "rubrique": "Réception",
+   "sousRubrique": "Boissons",
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": -2,
+    "jours": 0
+   },
+   "libelleEcheance": "J-2 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Seulement si le traiteur ne les fournit pas ; demandez la reprise des bouteilles non ouvertes.",
+   "ordre": 81
+  },
+  {
+   "id": "T109",
+   "titre": "Préparer la signalétique, le panneau d'accueil et le livre d'or",
+   "rubrique": "Réception",
+   "sousRubrique": "Lieu",
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": -2,
+    "jours": 0
+   },
+   "libelleEcheance": "J-2 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Fléchez le parking, la cérémonie et les toilettes ; le panneau d'accueil peut afficher le plan de table.",
+   "ordre": 82
+  },
+  {
+   "id": "T110",
+   "titre": "Préparer le coin enfants",
+   "rubrique": "Réception",
+   "sousRubrique": "Enfants",
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": -2,
+    "jours": 0
+   },
+   "libelleEcheance": "J-2 mois",
+   "condition": "enfants",
+   "facultative": false,
+   "conseil": "Jeux, coloriages et un coin calme pour dormir.",
+   "ordre": 83
+  },
+  {
+   "id": "T115",
+   "titre": "Prévoir la participation aux frais de la cérémonie religieuse",
+   "rubrique": "Cérémonie",
+   "sousRubrique": "Religieuse",
+   "ceremonie": "RELIGIEUSE",
+   "repere": null,
+   "decalage": {
+    "mois": -2,
+    "jours": 0
+   },
+   "libelleEcheance": "J-2 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Le montant est souvent libre ou indicatif : renseignez-vous auprès du lieu de culte.",
+   "ordre": 84
+  },
+  {
+   "id": "T116",
+   "titre": "Briefer les proches qui prendront la parole à la cérémonie laïque",
+   "rubrique": "Cérémonie",
+   "sousRubrique": "Laïque",
+   "ceremonie": "LAIQUE",
+   "repere": null,
+   "decalage": {
+    "mois": -2,
+    "jours": 0
+   },
+   "libelleEcheance": "J-2 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Donnez à chacun une durée (deux à trois minutes) et l'ordre de passage.",
+   "ordre": 85
+  },
+  {
+   "id": "T066",
+   "titre": "Relancer les invités qui n'ont pas répondu",
+   "rubrique": "Invités",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": 0,
+    "jours": -35
+   },
+   "libelleEcheance": "J-5 semaines",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Un message court et chaleureux suffit.",
+   "ordre": 86
+  },
+  {
+   "id": "T067",
+   "titre": "Faire le plan de table",
+   "rubrique": "Invités",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": "IMPORTANT",
+   "decalage": {
+    "mois": -1,
+    "jours": 0
+   },
+   "libelleEcheance": "J-1 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Commencez par les tables des proches, puis par groupes d'amis ; gardez une ou deux places de secours.",
+   "ordre": 87
+  },
+  {
+   "id": "T068",
+   "titre": "Transmettre couverts, régimes et allergies au traiteur",
+   "rubrique": "Réception",
+   "sousRubrique": "Traiteur",
+   "ceremonie": "ALL",
+   "repere": "IMPORTANT",
+   "decalage": {
+    "mois": -1,
+    "jours": 0
+   },
+   "libelleEcheance": "J-1 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "L'onglet Invités compte les régimes et les allergies pour vous.",
+   "ordre": 88
+  },
+  {
+   "id": "T069",
+   "titre": "Construire le déroulé du jour J heure par heure",
+   "rubrique": "Jour J",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": "IMPORTANT",
+   "decalage": {
+    "mois": -1,
+    "jours": 0
+   },
+   "libelleEcheance": "J-1 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Ajoutez de la marge entre chaque moment : les photos et les trajets prennent toujours plus de temps que prévu.",
+   "ordre": 89
+  },
+  {
+   "id": "T070",
+   "titre": "Préparer les déroulés de la veille et du lendemain",
+   "rubrique": "Réception",
+   "sousRubrique": "Brunch",
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": -1,
+    "jours": 0
+   },
+   "libelleEcheance": "J-1 mois",
+   "condition": "brunch",
+   "facultative": false,
+   "conseil": "Installation, livraisons, répétition ; puis brunch, rangement et retours de matériel.",
+   "ordre": 90
+  },
+  {
+   "id": "T071",
+   "titre": "Confier leurs missions aux témoins",
+   "rubrique": "Cortège et EVJF/EVG",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": -1,
+    "jours": 0
+   },
+   "libelleEcheance": "J-1 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Une personne par mission : alliances, enveloppes, discours, contact des prestataires le jour J.",
+   "ordre": 91
+  },
+  {
+   "id": "T072",
+   "titre": "Préparer le plan B météo",
+   "rubrique": "Jour J",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": -1,
+    "jours": 0
+   },
+   "libelleEcheance": "J-1 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Où se replier en cas de pluie, et qui prévient qui.",
+   "ordre": 92
+  },
+  {
+   "id": "T073",
+   "titre": "Préparer les enveloppes des soldes à payer le jour J",
+   "rubrique": "Budget",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": -1,
+    "jours": 0
+   },
+   "libelleEcheance": "J-1 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Listez ce qui se paie sur place et confiez les enveloppes à un témoin.",
+   "ordre": 93
+  },
+  {
+   "id": "T111",
+   "titre": "Prévoir le snack de fin de soirée et le bar de nuit",
+   "rubrique": "Réception",
+   "sousRubrique": "Soirée",
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": -1,
+    "jours": 0
+   },
+   "libelleEcheance": "J-1 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Mini-burgers, crêpes ou brioches vers 1 heure du matin ; prévoyez aussi eau et softs.",
+   "ordre": 94
+  },
+  {
+   "id": "T117",
+   "titre": "Acheter les accessoires des rituels laïques",
+   "rubrique": "Cérémonie",
+   "sousRubrique": "Laïque",
+   "ceremonie": "LAIQUE",
+   "repere": null,
+   "decalage": {
+    "mois": -1,
+    "jours": 0
+   },
+   "libelleEcheance": "J-1 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Ruban, sable, bougies ou arbre à planter, selon les rituels choisis.",
+   "ordre": 95
+  },
+  {
+   "id": "T127",
+   "titre": "Organiser les prises de parole de la soirée",
+   "rubrique": "Réception",
+   "sousRubrique": "Animations",
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": -1,
+    "jours": 0
+   },
+   "libelleEcheance": "J-1 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Listez qui parle, dans quel ordre et à quel moment ; prévenez le DJ pour le micro.",
+   "ordre": 96
+  },
+  {
+   "id": "T128",
+   "titre": "Prévoir l'urne pour les cartes et enveloppes",
+   "rubrique": "Cadeaux",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": -1,
+    "jours": 0
+   },
+   "libelleEcheance": "J-1 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Fermée ou surveillée, et confiée à une personne de confiance en fin de soirée.",
+   "ordre": 97
+  },
+  {
+   "id": "T129",
+   "titre": "Prévoir le confort des invités selon la saison",
+   "rubrique": "Réception",
+   "sousRubrique": "Lieu",
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": -1,
+    "jours": 0
+   },
+   "libelleEcheance": "J-1 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Eau et ombre en été, plaids et chauffage en hiver, chaussons pour la piste de danse.",
+   "ordre": 98
+  },
+  {
+   "id": "T130",
+   "titre": "Prévoir la garde de votre animal",
+   "rubrique": "Nous deux",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": -1,
+    "jours": 0
+   },
+   "libelleEcheance": "J-1 mois",
+   "condition": "animal",
+   "facultative": false,
+   "conseil": "Pensez au week-end entier, et à la lune de miel.",
+   "ordre": 99
+  },
+  {
+   "id": "T074",
+   "titre": "Imprimer menus, marque-places et plan de table",
+   "rubrique": "Papeterie",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": 0,
+    "jours": -21
+   },
+   "libelleEcheance": "J-3 semaines",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Attendez les dernières réponses, mais gardez une semaine de marge pour l'impression.",
+   "ordre": 100
+  },
+  {
+   "id": "T075",
+   "titre": "Faire le dernier essayage",
+   "rubrique": "Tenues et beauté",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": 0,
+    "jours": -21
+   },
+   "libelleEcheance": "J-3 semaines",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Faites quelques pas de danse avec : c'est le meilleur test.",
+   "ordre": 101
+  },
+  {
+   "id": "T076",
+   "titre": "Vérifier la publication des bans",
+   "rubrique": "Démarches",
+   "sousRubrique": null,
+   "ceremonie": "CIVILE",
+   "repere": "LEGAL",
+   "decalage": {
+    "mois": 0,
+    "jours": -21
+   },
+   "libelleEcheance": "J-3 semaines",
+   "condition": null,
+   "facultative": false,
+   "conseil": "La mairie l'affiche au moins 10 jours avant le mariage ; vérifiez simplement qu'elle a bien lieu.",
+   "ordre": 102
+  },
+  {
+   "id": "T077",
+   "titre": "Confirmer horaires et adresses avec chaque prestataire",
+   "rubrique": "Prestataires",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": "IMPORTANT",
+   "decalage": {
+    "mois": 0,
+    "jours": -14
+   },
+   "libelleEcheance": "J-2 semaines",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Un appel rapide à chacun, avec le déroulé sous les yeux.",
+   "ordre": 103
+  },
+  {
+   "id": "T078",
+   "titre": "Envoyer le déroulé aux prestataires et aux témoins",
+   "rubrique": "Jour J",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": 0,
+    "jours": -14
+   },
+   "libelleEcheance": "J-2 semaines",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Un lien partagé suffit, et il reste à jour.",
+   "ordre": 104
+  },
+  {
+   "id": "T079",
+   "titre": "Récupérer les alliances",
+   "rubrique": "Tenues et beauté",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": 0,
+    "jours": -14
+   },
+   "libelleEcheance": "J-2 semaines",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Essayez-les une dernière fois, puis confiez-les à la personne qui les portera.",
+   "ordre": 105
+  },
+  {
+   "id": "T080",
+   "titre": "Préparer le cadeau des invités",
+   "rubrique": "Cadeaux",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": 0,
+    "jours": -14
+   },
+   "libelleEcheance": "J-2 semaines",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Emballage et étiquettes avec des proches : un bon moment à partager.",
+   "ordre": 106
+  },
+  {
+   "id": "T081",
+   "titre": "Préparer le kit de survie",
+   "rubrique": "Jour J",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": 0,
+    "jours": -14
+   },
+   "libelleEcheance": "J-2 semaines",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Couture, pansements, mouchoirs, anti-douleurs, chargeur, épingles, déodorant.",
+   "ordre": 107
+  },
+  {
+   "id": "T082",
+   "titre": "Préparer la valise de la lune de miel",
+   "rubrique": "Voyage de noces",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": 0,
+    "jours": -14
+   },
+   "libelleEcheance": "J-2 semaines",
+   "condition": "luneDeMiel",
+   "facultative": false,
+   "conseil": "Papiers et réservations à part, dans un sac à main.",
+   "ordre": 108
+  },
+  {
+   "id": "T083",
+   "titre": "Confirmer le nombre définitif de couverts au traiteur",
+   "rubrique": "Réception",
+   "sousRubrique": "Traiteur",
+   "ceremonie": "ALL",
+   "repere": "IMPORTANT",
+   "decalage": {
+    "mois": 0,
+    "jours": -7
+   },
+   "libelleEcheance": "J-7 jours",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Vérifiez au contrat jusqu'à quand le nombre peut changer.",
+   "ordre": 109
+  },
+  {
+   "id": "T084",
+   "titre": "Récupérer les tenues",
+   "rubrique": "Tenues et beauté",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": 0,
+    "jours": -7
+   },
+   "libelleEcheance": "J-7 jours",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Rangez-les sur cintre, dans une housse, loin de la lumière.",
+   "ordre": 110
+  },
+  {
+   "id": "T112",
+   "titre": "Préparer les cautions",
+   "rubrique": "Budget",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": 0,
+    "jours": -7
+   },
+   "libelleEcheance": "J-7 jours",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Lieu, matériel loué, sono, tenues : notez à qui et quand chaque caution doit être rendue.",
+   "ordre": 111
+  },
+  {
+   "id": "T085",
+   "titre": "Prendre soin de vous",
+   "rubrique": "Tenues et beauté",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": 0,
+    "jours": -5
+   },
+   "libelleEcheance": "J-5 jours",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Ongles, soins, sommeil : évitez toute nouveauté beauté cette semaine.",
+   "ordre": 112
+  },
+  {
+   "id": "T131",
+   "titre": "Regarder la météo et décider du plan B",
+   "rubrique": "Jour J",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": 0,
+    "jours": -5
+   },
+   "libelleEcheance": "J-5 jours",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Décidez au plus tard la veille, et prévenez témoins et prestataires concernés.",
+   "ordre": 113
+  },
+  {
+   "id": "T086",
+   "titre": "Préparer la valise du jour J",
+   "rubrique": "Jour J",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": 0,
+    "jours": -3
+   },
+   "libelleEcheance": "J-3 jours",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Tenue de rechange, chaussures confortables, discours, pièces d'identité, alliances, kit de survie.",
+   "ordre": 114
+  },
+  {
+   "id": "T087",
+   "titre": "Livrer la déco et le matériel sur le lieu",
+   "rubrique": "Réception",
+   "sousRubrique": "Lieu",
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": 0,
+    "jours": -2
+   },
+   "libelleEcheance": "J-2 jours",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Faites une liste de ce qui part et de ce qui doit revenir.",
+   "ordre": 115
+  },
+  {
+   "id": "T088",
+   "titre": "Déléguer ce qui reste",
+   "rubrique": "Nous deux",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": 0,
+    "jours": -2
+   },
+   "libelleEcheance": "J-2 jours",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Ce qui n'est pas fait maintenant peut être confié à un témoin : vous avez le droit de souffler.",
+   "ordre": 116
+  },
+  {
+   "id": "T089",
+   "titre": "Installer la salle et la déco",
+   "rubrique": "Réception",
+   "sousRubrique": "Lieu",
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": 0,
+    "jours": -1
+   },
+   "libelleEcheance": "J-1",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Entourez-vous de proches et gardez la soirée pour vous reposer.",
+   "ordre": 117
+  },
+  {
+   "id": "T090",
+   "titre": "Répéter la cérémonie",
+   "rubrique": "Cérémonie",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": 0,
+    "jours": -1
+   },
+   "libelleEcheance": "J-1",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Entrées, places, signal pour la musique : 30 minutes suffisent.",
+   "ordre": 118
+  },
+  {
+   "id": "T091",
+   "titre": "Remettre alliances, enveloppes et papiers aux témoins",
+   "rubrique": "Cortège et EVJF/EVG",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": "IMPORTANT",
+   "decalage": {
+    "mois": 0,
+    "jours": -1
+   },
+   "libelleEcheance": "J-1",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Chaque objet confié à une personne précise.",
+   "ordre": 119
+  },
+  {
+   "id": "T092",
+   "titre": "Partager un dîner avec vos proches",
+   "rubrique": "Nous deux",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": 0,
+    "jours": -1
+   },
+   "libelleEcheance": "J-1",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Facultatif, mais un bon moyen de remercier ceux qui vous aident.",
+   "ordre": 120
+  },
+  {
+   "id": "T093",
+   "titre": "Prendre un vrai petit-déjeuner",
+   "rubrique": "Jour J",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": 0,
+    "jours": 0
+   },
+   "libelleEcheance": "Jour J",
+   "condition": null,
+   "facultative": false,
+   "conseil": "La journée sera longue : mangez et buvez de l'eau.",
+   "ordre": 121
+  },
+  {
+   "id": "T094",
+   "titre": "Vérifier la checklist du matin",
+   "rubrique": "Jour J",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": "IMPORTANT",
+   "decalage": {
+    "mois": 0,
+    "jours": 0
+   },
+   "libelleEcheance": "Jour J",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Alliances, pièces d'identité, discours, kit de survie : tout est dans l'onglet Jour J.",
+   "ordre": 122
+  },
+  {
+   "id": "T095",
+   "titre": "Profiter de votre journée",
+   "rubrique": "Nous deux",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": 0,
+    "jours": 0
+   },
+   "libelleEcheance": "Jour J",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Vos témoins s'occupent du reste.",
+   "ordre": 123
+  },
+  {
+   "id": "T096",
+   "titre": "Rendre le matériel loué",
+   "rubrique": "Réception",
+   "sousRubrique": "Lieu",
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": 0,
+    "jours": 3
+   },
+   "libelleEcheance": "J+3 jours",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Vérifiez la liste de ce qui doit revenir, pour récupérer vos cautions.",
+   "ordre": 124
+  },
+  {
+   "id": "T097",
+   "titre": "Noter les cadeaux reçus",
+   "rubrique": "Cadeaux",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": 0,
+    "jours": 7
+   },
+   "libelleEcheance": "J+7 jours",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Faites-le vite, tant que vous vous souvenez de qui a offert quoi.",
+   "ordre": 125
+  },
+  {
+   "id": "T098",
+   "titre": "Faire nettoyer les tenues",
+   "rubrique": "Tenues et beauté",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": 0,
+    "jours": 14
+   },
+   "libelleEcheance": "J+2 semaines",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Plus on attend, plus les taches sont difficiles à enlever.",
+   "ordre": 126
+  },
+  {
+   "id": "T099",
+   "titre": "Envoyer les remerciements",
+   "rubrique": "Cadeaux",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": 1,
+    "jours": 0
+   },
+   "libelleEcheance": "J+1 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Une photo du jour J et un mot personnel font toujours plaisir.",
+   "ordre": 127
+  },
+  {
+   "id": "T100",
+   "titre": "Laisser un avis à vos prestataires",
+   "rubrique": "Prestataires",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": 1,
+    "jours": 0
+   },
+   "libelleEcheance": "J+1 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Un avis détaillé aide les futurs couples.",
+   "ordre": 128
+  },
+  {
+   "id": "T101",
+   "titre": "Faire les démarches après le mariage",
+   "rubrique": "Démarches",
+   "sousRubrique": null,
+   "ceremonie": "CIVILE",
+   "repere": "LEGAL",
+   "decalage": {
+    "mois": 1,
+    "jours": 0
+   },
+   "libelleEcheance": "J+1 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Chacun peut utiliser le nom de l'autre comme nom d'usage, sans obligation ; prévenez les organismes concernés (banque, employeur, impôts).",
+   "ordre": 129
+  },
+  {
+   "id": "T102",
+   "titre": "Récupérer photos et vidéo",
+   "rubrique": "Après le mariage",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": 2,
+    "jours": 0
+   },
+   "libelleEcheance": "J+2 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Sauvegardez-les en deux endroits.",
+   "ordre": 130
+  },
+  {
+   "id": "T103",
+   "titre": "Créer l'album photo",
+   "rubrique": "Après le mariage",
+   "sousRubrique": null,
+   "ceremonie": "ALL",
+   "repere": null,
+   "decalage": {
+    "mois": 3,
+    "jours": 0
+   },
+   "libelleEcheance": "J+3 mois",
+   "condition": null,
+   "facultative": false,
+   "conseil": "Une sélection courte se feuillette plus volontiers qu'un album de 300 photos.",
+   "ordre": 131
+  }
+ ]
+}

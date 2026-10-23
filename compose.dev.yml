@@ -1,0 +1,22 @@
+# Services pour le développement local : la base et une boîte mail de test.
+# Lancer avec : docker compose -f compose.dev.yml up -d
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: sereno
+      POSTGRES_PASSWORD: sereno
+      POSTGRES_DB: sereno
+    ports:
+      - "5432:5432"
+    volumes:
+      - sereno-db-dev:/var/lib/postgresql/data
+
+  mail:
+    image: axllent/mailpit:latest
+    ports:
+      - "8025:8025" # interface web : http://localhost:8025
+      - "1025:1025" # SMTP
+
+volumes:
+  sereno-db-dev:

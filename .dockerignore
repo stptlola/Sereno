@@ -1,0 +1,15 @@
+node_modules
+.next
+.git
+.github
+coverage
+tickets
+docs
+*.md
+!README.md
+.env
+.env.*
+!.env.example
+Dockerfile
+docker-compose*.yml
+compose*.yml
