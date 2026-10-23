@@ -3,7 +3,7 @@
 Une fiche par ticket, rangée par version. Chaque ticket existe aussi en issue GitHub, avec les étiquettes de version et de module.
 
 
-## MVP · 63 tickets
+## MVP · 64 tickets
 
 Premier produit testé gratuitement par les couples.
 
@@ -62,6 +62,7 @@ Premier produit testé gratuitement par les couples.
 | M4-09 | [Import et export CSV des invités](MVP/M4-09-import-et-export-csv-des-invites.md) | Invités et foyers |
 | M4-10 | [Détection des doublons](MVP/M4-10-detection-des-doublons.md) | Invités et foyers |
 | M4-17 | [Lien de l'invité avec le couple](MVP/M4-17-lien-de-l-invite-avec-le-couple.md) | Invités et foyers |
+| M4-19 | [Vues par côté, alphabétique et tableau](MVP/M4-19-vues-par-cote-alphabetique-et-tableau.md) | Invités et foyers |
 | M11-01 | [E-mail hebdomadaire des priorités](MVP/M11-01-e-mail-hebdomadaire-des-priorites.md) | Notifications et rappels |
 | M11-02 | [Rappel avant échéance importante](MVP/M11-02-rappel-avant-echeance-importante.md) | Notifications et rappels |
 | M11-06 | [Choix des notifications](MVP/M11-06-choix-des-notifications.md) | Notifications et rappels |
@@ -73,7 +74,7 @@ Premier produit testé gratuitement par les couples.
 | M12-06 | [Contact du support](MVP/M12-06-contact-du-support.md) | Paramètres, RGPD et support |
 | M12-07 | [Pages légales](MVP/M12-07-pages-legales.md) | Paramètres, RGPD et support |
 
-## V2 · 45 tickets
+## V2 · 49 tickets
 
 Version payante : plan de table, RSVP, mini-site, témoins, Pass.
 
@@ -82,6 +83,8 @@ Version payante : plan de table, RSVP, mini-site, témoins, Pass.
 | M0-15 | [Mariage d'exemple](V2/M0-15-mariage-d-exemple.md) | Compte, onboarding et Co-pilote |
 | M1-06 | [Prochains paiements](V2/M1-06-prochains-paiements.md) | Tableau de bord |
 | M1-07 | [Étapes célébrées](V2/M1-07-etapes-celebrees.md) | Tableau de bord |
+| M1-08 | [Vue d'ensemble visuelle du mariage](V2/M1-08-vue-d-ensemble-visuelle-du-mariage.md) | Tableau de bord |
+| M2-15 | [Sous-étapes des tâches](V2/M2-15-sous-etapes-des-taches.md) | Rétroplanning et tâches |
 | M3-08 | [Échéancier des paiements](V2/M3-08-echeancier-des-paiements.md) | Budget et acomptes |
 | M3-10 | [Qui finance quoi](V2/M3-10-qui-finance-quoi.md) | Budget et acomptes |
 | M3-12 | [Import du budget depuis un tableur](V2/M3-12-import-du-budget-depuis-un-tableur.md) | Budget et acomptes |
@@ -111,6 +114,7 @@ Version payante : plan de table, RSVP, mini-site, témoins, Pass.
 | M5-23 | [Retrouver la table d'un invité le jour J](V2/M5-23-retrouver-la-table-d-un-invite-le-jour-j.md) | Mini-site, RSVP, plan de table et rapport traiteur |
 | M8-01 | [Invitation des témoins](V2/M8-01-invitation-des-temoins.md) | Kit Jour J et accès Témoins |
 | M8-02 | [Vue Témoin restreinte](V2/M8-02-vue-temoin-restreinte.md) | Kit Jour J et accès Témoins |
+| M8-11 | [Déroulé du jour J prérempli](V2/M8-11-deroule-du-jour-j-prerempli.md) | Kit Jour J et accès Témoins |
 | M10-01 | [Page de l'offre Pass](V2/M10-01-page-de-l-offre-pass.md) | Pass Mariage Sérénité |
 | M10-02 | [Proposition du Pass au bon moment](V2/M10-02-proposition-du-pass-au-bon-moment.md) | Pass Mariage Sérénité |
 | M10-03 | [Paiement du Pass](V2/M10-03-paiement-du-pass.md) | Pass Mariage Sérénité |
@@ -121,11 +125,12 @@ Version payante : plan de table, RSVP, mini-site, témoins, Pass.
 | M11-03 | [Rappel avant paiement](V2/M11-03-rappel-avant-paiement.md) | Notifications et rappels |
 | M11-04 | [Résumé des nouvelles réponses](V2/M11-04-resume-des-nouvelles-reponses.md) | Notifications et rappels |
 | M11-05 | [Notifications sur le téléphone](V2/M11-05-notifications-sur-le-telephone.md) | Notifications et rappels |
+| M12-08 | [Masquer les modules inutilisés](V2/M12-08-masquer-les-modules-inutilises.md) | Paramètres, RGPD et support |
 | M19-01 | [Vue calendrier](V2/M19-01-vue-calendrier.md) | Calendrier et listes |
 | M19-02 | [Synchronisation avec l'agenda](V2/M19-02-synchronisation-avec-l-agenda.md) | Calendrier et listes |
 | M19-04 | [Listes libres](V2/M19-04-listes-libres.md) | Calendrier et listes |
 
-## V3 · 77 tickets
+## V3 · 78 tickets
 
 Modules complets : prestataires, jour J, cérémonies, cagnotte, IA…
 
@@ -159,6 +164,7 @@ Modules complets : prestataires, jour J, cérémonies, cagnotte, IA…
 | M8-07 | [Vue Jour J mobile](V3/M8-07-vue-jour-j-mobile.md) | Kit Jour J et accès Témoins |
 | M8-08 | [Déroulés de la veille et du lendemain](V3/M8-08-deroules-de-la-veille-et-du-lendemain.md) | Kit Jour J et accès Témoins |
 | M8-09 | [Pointage des arrivées par QR code](V3/M8-09-pointage-des-arrivees-par-qr-code.md) | Kit Jour J et accès Témoins |
+| M8-10 | [Météo habituelle et coucher du soleil](V3/M8-10-meteo-habituelle-et-coucher-du-soleil.md) | Kit Jour J et accès Témoins |
 | M9-01 | [Brunch du lendemain](V3/M9-01-brunch-du-lendemain.md) | Post-mariage |
 | M9-02 | [Cadeaux reçus](V3/M9-02-cadeaux-recus.md) | Post-mariage |
 | M9-03 | [Suivi des remerciements](V3/M9-03-suivi-des-remerciements.md) | Post-mariage |
