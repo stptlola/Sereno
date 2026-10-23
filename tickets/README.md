@@ -3,7 +3,7 @@
 Une fiche par ticket, rangée par version. Chaque ticket existe aussi en issue GitHub, avec les étiquettes de version et de module.
 
 
-## MVP · 62 tickets
+## MVP · 63 tickets
 
 Premier produit testé gratuitement par les couples.
 
@@ -61,6 +61,7 @@ Premier produit testé gratuitement par les couples.
 | M4-08 | [Filtres, tri et recherche des invités](MVP/M4-08-filtres-tri-et-recherche-des-invites.md) | Invités et foyers |
 | M4-09 | [Import et export CSV des invités](MVP/M4-09-import-et-export-csv-des-invites.md) | Invités et foyers |
 | M4-10 | [Détection des doublons](MVP/M4-10-detection-des-doublons.md) | Invités et foyers |
+| M4-17 | [Lien de l'invité avec le couple](MVP/M4-17-lien-de-l-invite-avec-le-couple.md) | Invités et foyers |
 | M11-01 | [E-mail hebdomadaire des priorités](MVP/M11-01-e-mail-hebdomadaire-des-priorites.md) | Notifications et rappels |
 | M11-02 | [Rappel avant échéance importante](MVP/M11-02-rappel-avant-echeance-importante.md) | Notifications et rappels |
 | M11-06 | [Choix des notifications](MVP/M11-06-choix-des-notifications.md) | Notifications et rappels |
@@ -72,7 +73,7 @@ Premier produit testé gratuitement par les couples.
 | M12-06 | [Contact du support](MVP/M12-06-contact-du-support.md) | Paramètres, RGPD et support |
 | M12-07 | [Pages légales](MVP/M12-07-pages-legales.md) | Paramètres, RGPD et support |
 
-## V2 · 39 tickets
+## V2 · 45 tickets
 
 Version payante : plan de table, RSVP, mini-site, témoins, Pass.
 
@@ -88,6 +89,7 @@ Version payante : plan de table, RSVP, mini-site, témoins, Pass.
 | M4-11 | [Collecte d'adresses par lien](V2/M4-11-collecte-d-adresses-par-lien.md) | Invités et foyers |
 | M4-14 | [Listes A et B](V2/M4-14-listes-a-et-b.md) | Invités et foyers |
 | M4-15 | [Import des contacts du téléphone](V2/M4-15-import-des-contacts-du-telephone.md) | Invités et foyers |
+| M4-16 | [Plat choisi par chaque invité](V2/M4-16-plat-choisi-par-chaque-invite.md) | Invités et foyers |
 | M5-01 | [Mini-site du mariage](V2/M5-01-mini-site-du-mariage.md) | Mini-site, RSVP, plan de table et rapport traiteur |
 | M5-02 | [Mini-site protégé par mot de passe](V2/M5-02-mini-site-protege-par-mot-de-passe.md) | Mini-site, RSVP, plan de table et rapport traiteur |
 | M5-03 | [Réponse en ligne des invités (RSVP)](V2/M5-03-reponse-en-ligne-des-invites-rsvp.md) | Mini-site, RSVP, plan de table et rapport traiteur |
@@ -102,6 +104,11 @@ Version payante : plan de table, RSVP, mini-site, témoins, Pass.
 | M5-12 | [FAQ du mini-site](V2/M5-12-faq-du-mini-site.md) | Mini-site, RSVP, plan de table et rapport traiteur |
 | M5-13 | [Proposition automatique de plan de table](V2/M5-13-proposition-automatique-de-plan-de-table.md) | Mini-site, RSVP, plan de table et rapport traiteur |
 | M5-14 | [Actualités du couple](V2/M5-14-actualites-du-couple.md) | Mini-site, RSVP, plan de table et rapport traiteur |
+| M5-16 | [Plan de salle à l'échelle](V2/M5-16-plan-de-salle-a-l-echelle.md) | Mini-site, RSVP, plan de table et rapport traiteur |
+| M5-17 | [Tables de toutes formes et places numérotées](V2/M5-17-tables-de-toutes-formes-et-places-numerotees.md) | Mini-site, RSVP, plan de table et rapport traiteur |
+| M5-19 | [Supports imprimés générés depuis le plan](V2/M5-19-supports-imprimes-generes-depuis-le-plan.md) | Mini-site, RSVP, plan de table et rapport traiteur |
+| M5-20 | [Proposition de placement intelligente](V2/M5-20-proposition-de-placement-intelligente.md) | Mini-site, RSVP, plan de table et rapport traiteur |
+| M5-23 | [Retrouver la table d'un invité le jour J](V2/M5-23-retrouver-la-table-d-un-invite-le-jour-j.md) | Mini-site, RSVP, plan de table et rapport traiteur |
 | M8-01 | [Invitation des témoins](V2/M8-01-invitation-des-temoins.md) | Kit Jour J et accès Témoins |
 | M8-02 | [Vue Témoin restreinte](V2/M8-02-vue-temoin-restreinte.md) | Kit Jour J et accès Témoins |
 | M10-01 | [Page de l'offre Pass](V2/M10-01-page-de-l-offre-pass.md) | Pass Mariage Sérénité |
@@ -118,7 +125,7 @@ Version payante : plan de table, RSVP, mini-site, témoins, Pass.
 | M19-02 | [Synchronisation avec l'agenda](V2/M19-02-synchronisation-avec-l-agenda.md) | Calendrier et listes |
 | M19-04 | [Listes libres](V2/M19-04-listes-libres.md) | Calendrier et listes |
 
-## V3 · 73 tickets
+## V3 · 77 tickets
 
 Modules complets : prestataires, jour J, cérémonies, cagnotte, IA…
 
@@ -128,7 +135,11 @@ Modules complets : prestataires, jour J, cérémonies, cagnotte, IA…
 | M3-11 | [Accès restreint des proches qui financent](V3/M3-11-acces-restreint-des-proches-qui-financent.md) | Budget et acomptes |
 | M4-12 | [Hébergement des invités](V3/M4-12-hebergement-des-invites.md) | Invités et foyers |
 | M4-13 | [Transport des invités](V3/M4-13-transport-des-invites.md) | Invités et foyers |
+| M4-18 | [Champs personnalisés de la fiche invité](V3/M4-18-champs-personnalises-de-la-fiche-invite.md) | Invités et foyers |
 | M5-15 | [Échanges entre invités](V3/M5-15-echanges-entre-invites.md) | Mini-site, RSVP, plan de table et rapport traiteur |
+| M5-18 | [Invités représentés sur le plan](V3/M5-18-invites-representes-sur-le-plan.md) | Mini-site, RSVP, plan de table et rapport traiteur |
+| M5-21 | [Plan de la cérémonie](V3/M5-21-plan-de-la-ceremonie.md) | Mini-site, RSVP, plan de table et rapport traiteur |
+| M5-22 | [Plan B météo pour le plan de table](V3/M5-22-plan-b-meteo-pour-le-plan-de-table.md) | Mini-site, RSVP, plan de table et rapport traiteur |
 | M6-01 | [Carnet de prestataires](V3/M6-01-carnet-de-prestataires.md) | Prestataires et comparateur de devis |
 | M6-02 | [Contrats et devis joints](V3/M6-02-contrats-et-devis-joints.md) | Prestataires et comparateur de devis |
 | M6-03 | [Prestataire relié au budget](V3/M6-03-prestataire-relie-au-budget.md) | Prestataires et comparateur de devis |
