@@ -34,6 +34,8 @@ La route `GET /api/health` renvoie `200` quand l'application et la base réponde
 | `GOOGLE_CLIENT_SECRET` | Non | (secret Google) | Idem. |
 | `APPLE_CLIENT_ID` | Non | `fr.sereno.web` | Connexion avec Apple, même principe. Adresse de retour à déclarer chez Apple : `https://app.sereno.fr/api/auth/callback/apple`. |
 | `APPLE_CLIENT_SECRET` | Non | (secret Apple) | Idem. |
+| `CRON_SECRET` | Pour les rappels | (48 caractères aléatoires) | Protège l'envoi quotidien des e-mails de rappel. Générer avec `openssl rand -hex 24`. Sans lui, les rappels sont désactivés. |
+| `SUPPORT_EMAIL` | Non | `bonjour@sereno.fr` | Adresse qui reçoit les messages du formulaire de contact. Par défaut, l'adresse de `MAIL_FROM`. |
 | `TZ` | Non (Europe/Paris) | `Europe/Paris` | Fuseau horaire du conteneur, déjà réglé dans l'image. |
 
 Pour l'option Docker Compose ci-dessous, trois variables servent en plus à créer la base : `POSTGRES_USER` (défaut `sereno`), `POSTGRES_PASSWORD` (obligatoire) et `POSTGRES_DB` (défaut `sereno`). `DATABASE_URL` est alors construite automatiquement.
@@ -61,6 +63,19 @@ Le fichier `docker-compose.yml` décrit l'application et sa base. Dans Coolify, 
 3. Déployer. Les données de la base sont conservées dans le volume `sereno-db`.
 
 Le même fichier fonctionne sur n'importe quel serveur Docker : créer un fichier `.env` avec ces variables, puis `docker compose up -d --build`.
+
+## E-mails de rappel (tâche planifiée)
+
+Chaque matin, Sereno envoie les priorités de la semaine (le lundi) et les rappels d'échéances importantes (une semaine avant). L'envoi est déclenché par une tâche planifiée qui appelle l'application :
+
+1. Renseigner `CRON_SECRET` dans les variables de l'application, puis redéployer.
+2. Dans Coolify, ouvrir l'application, onglet *Scheduled Tasks*, puis *Add* :
+   - *Name* : `rappels`
+   - *Command* : `wget -qO- --post-data="" --header="Authorization: Bearer $CRON_SECRET" http://127.0.0.1:3000/api/cron/rappels`
+   - *Frequency* : `0 8 * * *` (tous les jours à 8 h ; le fuseau de l'image est Europe/Paris)
+3. Lancer la tâche une fois à la main : la réponse indique le nombre d'e-mails prévus et envoyés.
+
+La tâche peut être relancée sans risque : une même personne ne reçoit jamais plus d'un e-mail par jour. Chaque e-mail contient un lien de désinscription en un clic.
 
 ## Sauvegardes
 

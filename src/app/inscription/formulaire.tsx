@@ -66,7 +66,15 @@ export function FormulaireInscription({ retour, google, apple }: { retour: strin
           {envoi ? "Création…" : "Créer mon compte"}
         </Bouton>
         <p className="text-center text-sm text-ink-muted">
-          Rien à payer. En créant votre compte, vous acceptez les conditions d’utilisation.
+          Rien à payer. En créant votre compte, vous acceptez les{" "}
+          <Link href="/conditions" className="underline">
+            conditions d’utilisation
+          </Link>{" "}
+          et la{" "}
+          <Link href="/confidentialite" className="underline">
+            politique de confidentialité
+          </Link>
+          .
         </p>
       </form>
       <p className="text-center text-sm">

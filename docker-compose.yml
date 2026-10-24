@@ -17,6 +17,8 @@ services:
       GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET:-}
       APPLE_CLIENT_ID: ${APPLE_CLIENT_ID:-}
       APPLE_CLIENT_SECRET: ${APPLE_CLIENT_SECRET:-}
+      CRON_SECRET: ${CRON_SECRET:-}
+      SUPPORT_EMAIL: ${SUPPORT_EMAIL:-}
     depends_on:
       db:
         condition: service_healthy

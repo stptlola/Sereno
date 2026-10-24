@@ -19,6 +19,10 @@ const schema = z.object({
   GOOGLE_CLIENT_SECRET: z.string().optional(),
   APPLE_CLIENT_ID: z.string().optional(),
   APPLE_CLIENT_SECRET: z.string().optional(),
+  /** Protège l'envoi quotidien des rappels (tâche planifiée). Sans lui, l'envoi est désactivé. */
+  CRON_SECRET: z.string().min(24, "CRON_SECRET doit faire au moins 24 caractères").optional(),
+  /** Adresse qui reçoit les messages du formulaire de contact (par défaut, l'expéditeur des e-mails). */
+  SUPPORT_EMAIL: z.email().optional(),
 });
 
 export type Env = z.infer<typeof schema>;

@@ -99,7 +99,8 @@ L'écran `/commencer` utilise ce module : le couple répond aux six écrans, voi
 - En-têtes de sécurité HTTP activés dans `next.config.ts` ; HTTPS géré par Coolify.
 - Secrets uniquement dans les variables d'environnement de Coolify, jamais dans le dépôt (`.env` est ignoré par Git).
 - Export complet des données (M12-03) et suppression du compte sous 30 jours (M12-04).
-- Bandeau cookies seulement si des cookies non essentiels sont ajoutés ; au MVP, seuls les cookies de session sont utilisés.
+- Pas de bandeau cookies : seul le cookie de session, indispensable, est utilisé. Un bandeau deviendra nécessaire si un outil de mesure d'audience ou des cookies non essentiels sont ajoutés.
+- Les liens sans connexion (désinscription) sont signés par HMAC-SHA256 avec `AUTH_SECRET` ; l'appel de la tâche planifiée est protégé par `CRON_SECRET`, comparé à temps constant.
 - Mots de passe hachés par Better Auth ; limitation du nombre de tentatives de connexion.
 
 ## 9. Qualité
@@ -152,6 +153,6 @@ L'écran `/commencer` utilise ce module : le couple répond aux six écrans, voi
 | 2 · Planning et tableau de bord (fait) | Tableau de bord en cartes, frise par périodes, détail et ajout de tâches, statuts, responsable, masquage, filtres et recherche, paramètres du mariage avec recalcul animé | M1-01 à M1-05, M2-03 à M2-10, M12-01 |
 | 3 · Budget (fait) | Postes et enveloppes, dépenses, acomptes et soldes, statut « payé » automatique, alertes de dépassement, sous-postes suggérés en un clic | M3-01 à M3-07, M3-13, M3-14 |
 | 4 · Invités (fait) | Ajout rapide avec alerte de doublon, foyers, accompagnants, enfants, régimes et allergies, moments, réponses en un geste, compteurs, vues par côté, A à Z et tableau, recherche, import et export CSV pour Excel | M4-01 à M4-10, M4-17, M4-19 |
-| 5 · Rappels et RGPD | E-mails hebdomadaires et rappels, paramètres, export et suppression, pages légales | M11-01, M11-02, M11-06, M12-01 à M12-07 |
+| 5 · Rappels et RGPD (fait) | Rappels par e-mail (tâche planifiée Coolify, un e-mail par jour au plus, désinscription signée en un clic), préférences, prénom et mot de passe, export JSON, suppression du compte avec transmission au partenaire, contact, pages légales (textes à compléter) | M11-01, M11-02, M11-06, M12-01 à M12-07 |
 
-À l'issue de l'étape 5, le MVP est prêt pour les premiers couples testeurs.
+Le MVP est complet : il reste à compléter les textes légaux, configurer le SMTP et la tâche planifiée en production, puis l'ouvrir aux premiers couples testeurs.

@@ -25,6 +25,9 @@ export interface Courriel {
   sujet: string;
   texte: string;
   lien?: { libelle: string; url: string };
+  /** Lien de désinscription en un clic, en bas de l'e-mail et dans l'en-tête List-Unsubscribe. */
+  desinscription?: string;
+  repondreA?: string;
 }
 
 const echapper = (s: string) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c] ?? c);
@@ -40,15 +43,27 @@ function enHtml(c: Courriel): string {
   return `<div style="background:#F7F4EE;padding:32px 16px;font-family:Arial,sans-serif;color:#2A2622;font-size:16px;line-height:1.5">
 <div style="max-width:520px;margin:0 auto;background:#fff;border-radius:16px;padding:32px">
 <p style="margin:0 0 24px;font-weight:700;letter-spacing:.08em;color:#7A5B21">SERENO</p>${paragraphes}${bouton}
-<p style="margin:24px 0 0;font-size:13px;color:#665E56">Votre mariage, l’esprit léger.</p></div></div>`;
+<p style="margin:24px 0 0;font-size:13px;color:#665E56">Votre mariage, l’esprit léger.</p>${
+    c.desinscription
+      ? `<p style="margin:12px 0 0;font-size:12px;color:#665E56">Vous recevez cet e-mail car vous organisez votre mariage sur Sereno. <a href="${echapper(c.desinscription)}" style="color:#7A5B21">Ne plus recevoir ces e-mails</a>.</p>`
+      : ""
+  }</div></div>`;
 }
 
 export async function envoyer(c: Courriel): Promise<void> {
   const t = transporteur();
-  const texte = c.lien ? `${c.texte}\n\n${c.lien.libelle} : ${c.lien.url}` : c.texte;
+  const texte = [c.texte, c.lien && `${c.lien.libelle} : ${c.lien.url}`, c.desinscription && `Ne plus recevoir ces e-mails : ${c.desinscription}`].filter(Boolean).join("\n\n");
   if (!t) {
     console.info(`[e-mail non envoyé, SMTP non configuré] À : ${c.a} · ${c.sujet}\n${texte}`);
     return;
   }
-  await t.sendMail({ from: env().MAIL_FROM, to: c.a, subject: c.sujet, text: texte, html: enHtml(c) });
+  await t.sendMail({
+    from: env().MAIL_FROM,
+    to: c.a,
+    replyTo: c.repondreA,
+    subject: c.sujet,
+    text: texte,
+    html: enHtml(c),
+    headers: c.desinscription ? { "List-Unsubscribe": `<${c.desinscription}>`, "List-Unsubscribe-Post": "List-Unsubscribe=One-Click" } : undefined,
+  });
 }
