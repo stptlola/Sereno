@@ -18,10 +18,13 @@ function CaseTache({ tache }: { tache: VueTache }) {
       <input type="hidden" name="id" value={tache.id} />
       <button
         type="submit"
-        aria-label={tache.faite ? `Rouvrir : ${tache.titre}` : `Marquer comme faite : ${tache.titre}`}
-        className={`flex h-6 w-6 items-center justify-center rounded-sm border-2 ${tache.faite ? "border-ink bg-ink text-surface" : "border-line bg-surface-raised hover:border-or"}`}
+        aria-label={tache.faite ? `Rouvrir : ${tache.titre}` : `Marquer comme faite : ${tache.titre}${tache.enCours ? " (en cours)" : ""}`}
+        className={`flex h-6 w-6 items-center justify-center rounded-sm border-2 ${
+          tache.faite ? "border-ink bg-ink text-surface" : tache.enCours ? "border-or bg-surface-raised" : "border-line bg-surface-raised hover:border-or"
+        }`}
       >
         {tache.faite && "✓"}
+        {!tache.faite && tache.enCours && <span aria-hidden className="h-2.5 w-2.5 rounded-[3px] bg-or" />}
       </button>
     </form>
   );
@@ -61,7 +64,7 @@ export default async function TableauDeBord() {
   const prenoms = [mariage.partner1Name, mariage.partner2Name].filter(Boolean).join(" et ");
 
   return (
-    <main className="mx-auto flex min-h-dvh max-w-3xl flex-col gap-8 px-6 py-10">
+    <main className="mx-auto flex min-h-dvh max-w-3xl flex-col gap-8 px-6 pt-0 pb-24">
       <Navigation actif="/tableau-de-bord" />
 
       <EnTeteMariage prenoms={prenoms} jours={ecartJours(aujourdhui, dateMariage)} date={dateMariage} provisoire={mariage.date === null} />

@@ -31,7 +31,7 @@ function Titre({ t, className = "" }: { t: VueTache; className?: string }) {
 function Etiquettes({ t }: { t: VueTache }) {
   return (
     <>
-      {t.enCours && !t.faite && <span className="shrink-0 rounded-full bg-surface-soft px-2 py-0.5 text-xs font-semibold text-bronze">En cours</span>}
+      {t.enCours && !t.faite && <span className="shrink-0 rounded-full bg-or px-2.5 py-0.5 text-xs font-semibold text-ink">En cours</span>}
       {t.responsable && <span className="shrink-0 text-xs text-ink-muted">{t.responsable}</span>}
       {t.legale && <span className="shrink-0 text-xs font-semibold text-bronze">Démarche</span>}
     </>
@@ -148,7 +148,7 @@ export function ProchainesEtapes({
       <h2 className="font-display text-2xl">{cetteSemaine ? "Cette semaine" : "Vos prochaines étapes"}</h2>
       {taches.length === 0 && <p className="text-ink-muted">Tout est fait pour l’instant. Profitez-en !</p>}
       {taches.map((t) => (
-        <div key={t.id} className="flex gap-4 rounded-md border border-line bg-surface-raised p-4">
+        <div key={t.id} className={`flex gap-4 rounded-md border bg-surface-raised p-4 ${t.enCours && !t.faite ? "border-or border-l-4" : "border-line"}`}>
           {caseACocher?.(t)}
           <div className="flex-1">
             <div className="flex flex-wrap items-baseline justify-between gap-2">
@@ -221,7 +221,10 @@ export function FrisePlanning({
                 </summary>
                 <ul className="flex flex-col border-t border-line px-4 py-2">
                   {p.taches.map((t) => (
-                    <li key={t.id} className="flex items-center gap-3 border-b border-line py-2 last:border-b-0">
+                    <li
+                      key={t.id}
+                      className={`flex items-center gap-3 border-b border-line py-2 last:border-b-0 ${t.enCours && !t.faite ? "-mx-4 border-l-4 border-l-or bg-surface-soft px-3" : ""}`}
+                    >
                       {caseACocher?.(t)}
                       <Titre t={t} className={`flex-1 ${t.faite ? "text-ink-muted line-through" : ""}`} />
                       <Etiquettes t={t} />

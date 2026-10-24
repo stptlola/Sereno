@@ -7,7 +7,13 @@ import { ajouterMois, MODELE_TACHES, normaliser, planifierMiseAJour } from "@/do
 import { accesEcriture, lireDateJour } from "@/lib/acces";
 import { db } from "@/lib/db";
 
-export type EtatParametres = { message?: string; erreur?: string };
+export type EtatParametres = {
+  message?: string;
+  erreur?: string;
+  recalcul?: { recalculees: number; ajoutees: number; retirees: number };
+  /** Incrémenté à chaque enregistrement, pour rejouer l'animation. */
+  essai?: number;
+};
 
 const schema = z.object({
   partner1Name: z.string().trim().min(1, "Indiquez au moins un prénom.").max(60),
@@ -22,7 +28,7 @@ const schema = z.object({
  * Modifie les informations du mariage (M12-01). Si la date ou les cérémonies changent,
  * le planning est recalculé (M2-08) : tâches recalées, ajoutées ou masquées.
  */
-export async function modifierMariage(_: EtatParametres, formData: FormData): Promise<EtatParametres> {
+export async function modifierMariage(precedent: EtatParametres, formData: FormData): Promise<EtatParametres> {
   const { user, mariage } = await accesEcriture();
   const lu = schema.safeParse({
     partner1Name: formData.get("partner1Name"),
@@ -103,5 +109,9 @@ export async function modifierMariage(_: EtatParametres, formData: FormData): Pr
     maj.aMasquer.length && `${maj.aMasquer.length} tâche${maj.aMasquer.length > 1 ? "s" : ""} retirée${maj.aMasquer.length > 1 ? "s" : ""}`,
   ].filter(Boolean);
   const sansDate = date === null ? ` Date provisoire : ${new Intl.DateTimeFormat("fr-FR", { month: "long", year: "numeric", timeZone: "UTC" }).format(ajouterMois(aujourdhui, 12))}.` : "";
-  return { message: `C’est enregistré.${changes.length ? ` Votre planning est à jour : ${changes.join(", ")}.` : ""}${sansDate}` };
+  return {
+    essai: (precedent.essai ?? 0) + 1,
+    message: `C’est enregistré.${changes.length ? ` Votre planning est à jour : ${changes.join(", ")}.` : ""}${sansDate}`,
+    recalcul: { recalculees: maj.aDater.length, ajoutees: maj.aCreer.length, retirees: maj.aMasquer.length },
+  };
 }

@@ -1,7 +1,10 @@
 "use client";
-import { useActionState } from "react";
+import { useActionState, useRef, useState } from "react";
 import { Bouton, Champ, Message } from "@/components/ui";
 import { modifierMariage, type EtatParametres } from "../actions/parametres";
+import { RecalculEnCours, RecalculTermine } from "./recalcul";
+
+const DUREE_MINIMALE_MS = 1800;
 
 const CEREMONIES = [
   { valeur: "CIVILE", libelle: "Civile" },
@@ -30,9 +33,29 @@ export interface ValeursMariage {
 }
 
 export function FormulaireParametres({ valeurs }: { valeurs: ValeursMariage }) {
-  const [etat, action, enCours] = useActionState<EtatParametres, FormData>(modifierMariage, {});
+  const [recalcule, setRecalcule] = useState(false);
+  const changementRef = useRef(false);
+  const [etat, action, enCours] = useActionState<EtatParametres, FormData>(async (precedent, formData) => {
+    const [resultat] = await Promise.all([
+      modifierMariage(precedent, formData),
+      new Promise((r) => setTimeout(r, changementRef.current ? DUREE_MINIMALE_MS : 0)),
+    ]);
+    return resultat;
+  }, {});
+
+  // On n'anime que si la date ou les cérémonies changent : c'est là que le planning est recalculé.
+  // Calculé à l'envoi, hors de l'action, pour que l'animation s'affiche tout de suite.
+  function avantEnvoi(e: React.FormEvent<HTMLFormElement>) {
+    const f = new FormData(e.currentTarget);
+    const changement =
+      String(f.get("date") ?? "") !== valeurs.date ||
+      f.getAll("ceremonies").map(String).sort().join() !== [...valeurs.ceremonies].sort().join();
+    changementRef.current = changement;
+    setRecalcule(changement);
+  }
+
   return (
-    <form action={action} className="flex flex-col gap-5">
+    <form action={action} onSubmit={avantEnvoi} className="flex flex-col gap-5">
       <div className="grid gap-4 sm:grid-cols-2">
         <Champ libelle="Prénom 1" id="partner1Name" name="partner1Name" defaultValue={valeurs.partner1Name} required maxLength={60} />
         <Champ libelle="Prénom 2" id="partner2Name" name="partner2Name" defaultValue={valeurs.partner2Name} maxLength={60} />
@@ -65,7 +88,9 @@ export function FormulaireParametres({ valeurs }: { valeurs: ValeursMariage }) {
         </select>
       </label>
       {etat.erreur && <Message>{etat.erreur}</Message>}
-      {etat.message && <Message type="info">{etat.message}</Message>}
+      {enCours && recalcule && <RecalculEnCours />}
+      {!enCours && etat.recalcul && recalcule && <RecalculTermine key={etat.essai} {...etat.recalcul} />}
+      {!enCours && etat.message && !recalcule && <Message type="info">{etat.message}</Message>}
       <Bouton type="submit" disabled={enCours}>
         {enCours ? "Enregistrement…" : "Enregistrer"}
       </Bouton>
