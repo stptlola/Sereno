@@ -26,7 +26,7 @@ export default async function PageTache({ params }: { params: Promise<{ id: stri
   const personnelle = !tache.templateId;
 
   return (
-    <main className="mx-auto flex min-h-dvh max-w-2xl flex-col gap-8 px-6 pt-0 pb-24">
+    <main className="mx-auto flex min-h-dvh max-w-2xl flex-col gap-8 px-6 pt-0 pb-28 sm:pb-24">
       <Navigation />
       <Link href="/tableau-de-bord" className="text-sm text-bronze underline">
         ← Retour au planning

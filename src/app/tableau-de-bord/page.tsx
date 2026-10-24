@@ -82,7 +82,7 @@ export default async function TableauDeBord({ searchParams }: { searchParams: Pr
   const prenoms = [mariage.partner1Name, mariage.partner2Name].filter(Boolean).join(" et ");
 
   return (
-    <main className="mx-auto flex min-h-dvh max-w-3xl flex-col gap-8 px-6 pt-0 pb-24">
+    <main className="mx-auto flex min-h-dvh max-w-3xl flex-col gap-8 px-6 pt-0 pb-28 sm:pb-24">
       <Navigation actif="/tableau-de-bord" />
 
       <EnTeteMariage prenoms={prenoms} jours={ecartJours(aujourdhui, dateMariage)} date={dateMariage} provisoire={mariage.date === null} />

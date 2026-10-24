@@ -12,7 +12,7 @@ const MODELE = "data:text/csv;charset=utf-8," + encodeURIComponent("\uFEFFPréno
 export default async function PageImport() {
   const { mariage } = await accesEcriture();
   return (
-    <main className="mx-auto flex min-h-dvh max-w-2xl flex-col gap-8 px-6 pt-0 pb-24">
+    <main className="mx-auto flex min-h-dvh max-w-2xl flex-col gap-8 px-6 pt-0 pb-28 sm:pb-24">
       <Navigation actif="/invites" />
       <Link href="/invites" className="text-sm text-bronze underline">
         ← Retour aux invités

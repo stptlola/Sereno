@@ -10,7 +10,7 @@ export const dynamic = "force-dynamic";
 export default async function PageParametres() {
   const { mariage } = await accesEcriture();
   return (
-    <main className="mx-auto flex min-h-dvh max-w-2xl flex-col gap-8 px-6 pt-0 pb-24">
+    <main className="mx-auto flex min-h-dvh max-w-2xl flex-col gap-8 px-6 pt-0 pb-28 sm:pb-24">
       <Navigation actif="/parametres" />
       <div>
         <h1 className="font-display text-3xl">Votre mariage</h1>

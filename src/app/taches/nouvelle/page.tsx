@@ -12,7 +12,7 @@ export default async function PageNouvelleTache() {
   const { mariage } = await accesEcriture();
   const responsables = [mariage.partner1Name, mariage.partner2Name, "Nous deux"].filter((r): r is string => Boolean(r));
   return (
-    <main className="mx-auto flex min-h-dvh max-w-2xl flex-col gap-8 px-6 pt-0 pb-24">
+    <main className="mx-auto flex min-h-dvh max-w-2xl flex-col gap-8 px-6 pt-0 pb-28 sm:pb-24">
       <Navigation actif="/taches/nouvelle" />
       <h1 className="font-display text-3xl">Ajouter une tâche</h1>
       <form action={ajouterTache} className="flex flex-col gap-5">
