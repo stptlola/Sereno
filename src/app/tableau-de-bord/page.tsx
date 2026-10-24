@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { CartesChiffres, EnTeteMariage, FrisePlanning, ProchainesEtapes, type VueTache } from "@/components/tableau";
 import { bilan } from "@/domain/budget/calculs";
+import { compter } from "@/domain/invites/invites";
 import { ajouterMois, ecartJours, filtrer, filtresActifs, lireFiltres, normaliser, rubriqueDe } from "@/domain/planning";
 import { db } from "@/lib/db";
 import { mariageDe, utilisateurRequis } from "@/lib/session";
@@ -39,7 +40,7 @@ export default async function TableauDeBord({ searchParams }: { searchParams: Pr
   if (!acces) redirect("/commencer");
   const { mariage, role } = acces;
 
-  const [taches, postes, copilote, masquees] = await Promise.all([
+  const [taches, postes, copilote, masquees, invites] = await Promise.all([
     db.task.findMany({
       where: { weddingId: mariage.id, hidden: false },
       orderBy: [{ dueDate: "asc" }, { createdAt: "asc" }],
@@ -48,7 +49,11 @@ export default async function TableauDeBord({ searchParams }: { searchParams: Pr
     db.budgetCategory.findMany({ where: { weddingId: mariage.id }, orderBy: { order: "asc" }, include: { expenses: { include: { payments: true } } } }),
     db.member.findFirst({ where: { weddingId: mariage.id, role: "COPILOTE" }, include: { user: true } }),
     db.task.findMany({ where: { weddingId: mariage.id, hiddenByCouple: true }, orderBy: { dueDate: "asc" } }),
+    db.guest.findMany({ where: { weddingId: mariage.id }, select: { side: true, ageGroup: true, rsvp: true, diets: true, plusOne: true, firstName: true } }),
   ]);
+  const compteurs = compter(
+    invites.map((g) => ({ prenom: g.firstName, nom: null, cote: g.side, lien: null, age: g.ageGroup, email: null, reponse: g.rsvp, regimes: g.diets, accompagnant: g.plusOne, moments: [] })),
+  );
 
   const aujourdhui = normaliser(new Date());
   const dateMariage = mariage.date ?? ajouterMois(mariage.startDate, 12);
@@ -88,6 +93,8 @@ export default async function TableauDeBord({ searchParams }: { searchParams: Pr
         postes={postes.map((p) => ({ nom: p.name, prevuCentimes: p.plannedCents }))}
         invites={mariage.estimatedGuests}
         lienBudget="/budget"
+        lienInvites="/invites"
+        presents={{ personnes: compteurs.personnes, presents: compteurs.presents, enAttente: compteurs.enAttente }}
         engageCentimes={
           bilan(
             mariage.budgetTotalCents,

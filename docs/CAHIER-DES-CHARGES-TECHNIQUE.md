@@ -151,7 +151,7 @@ L'écran `/commencer` utilise ce module : le couple répond aux six écrans, voi
 | 1 · Comptes (fait) | Better Auth, inscription, connexion, mot de passe oublié, Google et Apple, sauvegarde du démarrage, premier tableau de bord, Co-pilote, erreurs claires | M0-01 à M0-14 (hors temps réel et paramètres) |
 | 2 · Planning et tableau de bord (fait) | Tableau de bord en cartes, frise par périodes, détail et ajout de tâches, statuts, responsable, masquage, filtres et recherche, paramètres du mariage avec recalcul animé | M1-01 à M1-05, M2-03 à M2-10, M12-01 |
 | 3 · Budget (fait) | Postes et enveloppes, dépenses, acomptes et soldes, statut « payé » automatique, alertes de dépassement, sous-postes suggérés en un clic | M3-01 à M3-07, M3-13, M3-14 |
-| 4 · Invités | Foyers, réponses, régimes, moments, import et export CSV | M4-01 à M4-10 |
+| 4 · Invités (fait) | Ajout rapide avec alerte de doublon, foyers, accompagnants, enfants, régimes et allergies, moments, réponses en un geste, compteurs, vues par côté, A à Z et tableau, recherche, import et export CSV pour Excel | M4-01 à M4-10, M4-17, M4-19 |
 | 5 · Rappels et RGPD | E-mails hebdomadaires et rappels, paramètres, export et suppression, pages légales | M11-01, M11-02, M11-06, M12-01 à M12-07 |
 
 À l'issue de l'étape 5, le MVP est prêt pour les premiers couples testeurs.

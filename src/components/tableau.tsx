@@ -110,6 +110,8 @@ export function CartesChiffres({
   invites,
   engageCentimes,
   lienBudget,
+  presents,
+  lienInvites,
 }: {
   faites: number;
   total: number;
@@ -119,6 +121,9 @@ export function CartesChiffres({
   /** Montant déjà engagé (tableau de bord connecté) : remplace le détail des postes. */
   engageCentimes?: number;
   lienBudget?: string;
+  /** Invités réellement enregistrés (tableau de bord connecté) : nombre de personnes et de présents. */
+  presents?: { personnes: number; presents: number; enAttente: number };
+  lienInvites?: string;
 }) {
   const avancement = total ? Math.round((faites / total) * 100) : 0;
   const principaux = [...postes].sort((a, b) => b.prevuCentimes - a.prevuCentimes).slice(0, 3);
@@ -142,9 +147,16 @@ export function CartesChiffres({
         {budgetCentimes ? euros(budgetCentimes) : "À définir"}
         {engageCentimes !== undefined && budgetCentimes ? <Barre pourcent={(engageCentimes / budgetCentimes) * 100} /> : null}
       </Carte>
-      <Carte libelle="Invités" pied={invites ? `Environ ${Math.ceil(invites / 10)} tables de 10` : "Une estimation suffit pour commencer."}>
-        {invites ? `${invites}` : "À estimer"}
-      </Carte>
+      {presents && presents.personnes > 0 ? (
+        <Carte libelle="Invités" href={lienInvites} pied={`${presents.presents} présents, ${presents.enAttente} en attente`}>
+          {presents.personnes}
+          <Barre pourcent={(presents.presents / presents.personnes) * 100} />
+        </Carte>
+      ) : (
+        <Carte libelle="Invités" href={lienInvites} pied={invites ? `Environ ${Math.ceil(invites / 10)} tables de 10` : "Une estimation suffit pour commencer."}>
+          {invites ? `${invites}` : "À estimer"}
+        </Carte>
+      )}
     </section>
   );
 }

@@ -1,5 +1,5 @@
 "use client";
-import { useActionState, useRef, useState } from "react";
+import { startTransition, useActionState, useRef, useState } from "react";
 import { Bouton, Champ, Message } from "@/components/ui";
 import { modifierMariage, type EtatParametres } from "../actions/parametres";
 import { RecalculEnCours, RecalculTermine } from "./recalcul";
@@ -45,17 +45,20 @@ export function FormulaireParametres({ valeurs }: { valeurs: ValeursMariage }) {
 
   // On n'anime que si la date ou les cérémonies changent : c'est là que le planning est recalculé.
   // Calculé à l'envoi, hors de l'action, pour que l'animation s'affiche tout de suite.
+  // Envoi géré à la main, pour que React ne vide pas le formulaire (sinon la saisie serait perdue en cas d'erreur).
   function avantEnvoi(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
     const f = new FormData(e.currentTarget);
     const changement =
       String(f.get("date") ?? "") !== valeurs.date ||
       f.getAll("ceremonies").map(String).sort().join() !== [...valeurs.ceremonies].sort().join();
     changementRef.current = changement;
     setRecalcule(changement);
+    startTransition(() => action(f));
   }
 
   return (
-    <form action={action} onSubmit={avantEnvoi} className="flex flex-col gap-5">
+    <form onSubmit={avantEnvoi} className="flex flex-col gap-5">
       <div className="grid gap-4 sm:grid-cols-2">
         <Champ libelle="Prénom 1" id="partner1Name" name="partner1Name" defaultValue={valeurs.partner1Name} required maxLength={60} />
         <Champ libelle="Prénom 2" id="partner2Name" name="partner2Name" defaultValue={valeurs.partner2Name} maxLength={60} />
