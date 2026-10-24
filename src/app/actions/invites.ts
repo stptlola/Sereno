@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
+import { preparerInvitation, PREFIXE_ACCOMPAGNANT } from "@/domain/invites/invitation";
 import { doublonDe, importer, LIENS, REGIMES } from "@/domain/invites/invites";
 import { accesEcriture } from "@/lib/acces";
 import { db } from "@/lib/db";
@@ -34,37 +35,78 @@ async function foyer(weddingId: string, nom: string | null): Promise<string | nu
 
 export type EtatAjout = { erreur?: string; doublon?: { id: string; nom: string }; ajoute?: string; essai?: number };
 
-/** Ajoute un invité, en prévenant d'un doublon probable (M4-01, M4-10). */
-export async function ajouterInvite(precedent: EtatAjout, formData: FormData): Promise<EtatAjout> {
+/**
+ * Ajoute une invitation entière : une personne, un couple ou une famille, avec son foyer (M4-01 à M4-03).
+ * Prévient d'un doublon probable avant d'ajouter (M4-10).
+ */
+export async function ajouterInvitation(precedent: EtatAjout, formData: FormData): Promise<EtatAjout> {
   const { user, mariage } = await accesEcriture();
-  const p = prenom.safeParse(formData.get("firstName"));
-  if (!p.success) return { erreur: p.error.issues[0]?.message };
-  const nom = texte(60).parse(formData.get("lastName") ?? "");
-  const email = texte(120).parse(formData.get("email") ?? "");
+  const type = z.enum(["personne", "couple", "famille"]).catch("personne").parse(formData.get("type"));
+  const lignes = Array.from({ length: 12 }, (_, i) => ({
+    prenom: String(formData.get(`prenom-${i}`) ?? ""),
+    nom: String(formData.get(`nom-${i}`) ?? ""),
+    enfant: formData.get(`enfant-${i}`) === "on",
+  }));
+  const prep = preparerInvitation(type, lignes, String(formData.get("nomCommun") ?? ""), formData.get("accompagnant") === "on");
+  if ("erreur" in prep) return { erreur: prep.erreur, essai: precedent.essai };
+
   const existants = await db.guest.findMany({ where: { weddingId: mariage.id }, select: { id: true, firstName: true, lastName: true, email: true } });
-  if (existants.length >= MAX_INVITES) return { erreur: "Vous avez atteint le nombre maximal d’invités." };
+  if (existants.length + prep.personnes.length > MAX_INVITES) return { erreur: "Vous avez atteint le nombre maximal d’invités." };
   if (formData.get("confirmerDoublon") !== "1") {
-    const d = doublonDe({ prenom: p.data, nom, email }, existants.map((e) => ({ id: e.id, prenom: e.firstName, nom: e.lastName, email: e.email })));
-    if (d) {
-      const e = existants.find((x) => x.id === d)!;
-      return { doublon: { id: d, nom: [e.firstName, e.lastName].filter(Boolean).join(" ") }, essai: precedent.essai };
+    for (const p of prep.personnes.filter((x) => !x.aConfirmer)) {
+      const d = doublonDe({ prenom: p.prenom, nom: p.nom, email: null }, existants.map((e) => ({ id: e.id, prenom: e.firstName, nom: e.lastName, email: e.email })));
+      if (d) {
+        const e = existants.find((x) => x.id === d)!;
+        return { doublon: { id: d, nom: [e.firstName, e.lastName].filter(Boolean).join(" ") }, essai: precedent.essai };
+      }
     }
   }
-  const g = await db.guest.create({
+  const cote_ = cote.parse(formData.get("side"));
+  const lien_ = lien.parse(formData.get("category") || undefined) ?? null;
+  await db.$transaction(async (tx) => {
+    const foyerId = prep.foyer ? (await tx.household.create({ data: { weddingId: mariage.id, name: prep.foyer } })).id : null;
+    for (const p of prep.personnes) {
+      const g = await tx.guest.create({
+        data: { weddingId: mariage.id, householdId: foyerId, firstName: p.prenom, lastName: p.nom, side: cote_, category: lien_, ageGroup: p.enfant ? "ENFANT" : "ADULTE" },
+      });
+      await tx.activityLog.create({ data: { weddingId: mariage.id, userId: user.id, entity: "Guest", entityId: g.id, action: "cree" } });
+    }
+  });
+  rafraichir();
+  const premier = prep.personnes[0]!.prenom;
+  const message =
+    type === "famille" && prep.foyer
+      ? `La ${prep.foyer!.charAt(0).toLowerCase()}${prep.foyer!.slice(1)} est ajoutée à la liste (${prep.personnes.length} personnes).`
+      : type === "couple"
+        ? `${prep.foyer} sont ajoutés à la liste.`
+        : prep.personnes.length > 1
+          ? `${premier} et son accompagnant sont ajoutés à la liste.`
+          : `${premier} est ajouté à la liste.`;
+  return { ajoute: message, essai: (precedent.essai ?? 0) + 1 };
+}
+
+/** Ajoute une personne au foyer d'un invité (un enfant, un conjoint…), en créant le foyer si besoin. */
+export async function ajouterAuFoyer(formData: FormData): Promise<void> {
+  const { user, mariage } = await accesEcriture();
+  const g = await db.guest.findFirst({ where: { id: id.parse(formData.get("id")), weddingId: mariage.id } });
+  const p = prenom.safeParse(formData.get("prenom"));
+  if (!g || !p.success) return;
+  const foyerId = g.householdId ?? (await db.household.create({ data: { weddingId: mariage.id, name: [g.firstName, g.lastName].filter(Boolean).join(" ") } })).id;
+  if (!g.householdId) await db.guest.update({ where: { id: g.id }, data: { householdId: foyerId } });
+  const n = await db.guest.create({
     data: {
       weddingId: mariage.id,
+      householdId: foyerId,
       firstName: p.data,
-      lastName: nom,
-      email,
-      side: cote.parse(formData.get("side")),
-      category: lien.parse(formData.get("category") || undefined) ?? null,
-      ageGroup: formData.get("ageGroup") === "ENFANT" ? "ENFANT" : "ADULTE",
-      plusOne: formData.get("plusOne") === "on",
+      lastName: texte(60).parse(formData.get("nom") ?? "") ?? g.lastName,
+      side: g.side,
+      category: g.category,
+      ageGroup: formData.get("enfant") === "on" ? "ENFANT" : "ADULTE",
+      tableId: g.tableId,
     },
   });
-  await journal(mariage.id, user.id, g.id, "cree");
-  rafraichir();
-  return { ajoute: [g.firstName, g.lastName].filter(Boolean).join(" "), essai: (precedent.essai ?? 0) + 1 };
+  await journal(mariage.id, user.id, n.id, "cree");
+  rafraichir(g.id);
 }
 
 /** Change la réponse d'un invité en un geste (M4-06). */
@@ -96,7 +138,6 @@ export async function modifierInvite(formData: FormData): Promise<void> {
         category: lien.parse(formData.get("category") || undefined) ?? null,
         ageGroup: age,
         age: age === "ENFANT" ? (ageAns ?? null) : null,
-        plusOne: formData.get("plusOne") === "on",
         accessibility: formData.get("accessibility") === "on",
         email: texte(120).parse(formData.get("email") ?? ""),
         phone: texte(30).parse(formData.get("phone") ?? ""),
@@ -166,7 +207,6 @@ export async function importerInvites(_: EtatImport, formData: FormData): Promis
         side: i.cote,
         category: i.lien,
         ageGroup: i.age,
-        plusOne: i.accompagnant,
         rsvp: i.reponse,
         rsvpAt: i.reponse === "EN_ATTENTE" ? null : new Date(),
         diets: i.regimes,
@@ -178,6 +218,13 @@ export async function importerInvites(_: EtatImport, formData: FormData): Promis
     });
     existants.push({ id: g.id, prenom: i.prenom, nom: i.nom, email: i.email });
     ajoutes++;
+    // Une colonne « Accompagnant » à Oui crée une vraie personne, à nommer plus tard.
+    if (i.accompagnant) {
+      const foyerId = g.householdId ?? (await db.household.create({ data: { weddingId: mariage.id, name: `${[i.prenom, i.nom].filter(Boolean).join(" ")} et son accompagnant` } })).id;
+      if (!g.householdId) await db.guest.update({ where: { id: g.id }, data: { householdId: foyerId } });
+      await db.guest.create({ data: { weddingId: mariage.id, householdId: foyerId, firstName: `${PREFIXE_ACCOMPAGNANT}${i.prenom}`, side: i.cote, category: i.lien, rsvp: i.reponse, rsvpAt: g.rsvpAt } });
+      ajoutes++;
+    }
   }
   await db.activityLog.create({ data: { weddingId: mariage.id, userId: user.id, entity: "Guest", entityId: mariage.id, action: `import-${ajoutes}` } });
   rafraichir();

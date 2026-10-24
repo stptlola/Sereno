@@ -34,7 +34,7 @@ export default async function PagePlanDeTable() {
       <Navigation actif="/plan-de-table" />
       <div>
         <h1 className="font-display text-3xl">Plan de table</h1>
-        <p className="mt-1 text-ink-muted">Dessinez votre salle, ajoutez vos tables, puis laissez Sereno vous proposer un premier placement. Touchez un invité, puis une table, pour le placer.</p>
+        <p className="mt-1 text-ink-muted">Dessinez votre salle, ajoutez vos tables, puis laissez Sereno vous proposer un premier placement. Touchez une place pour y installer quelqu’un.</p>
       </div>
       {invites.length === 0 ? (
         <p className="rounded-md bg-surface-soft p-4">Ajoutez d’abord vos invités : le plan de table se construit à partir de votre liste.</p>

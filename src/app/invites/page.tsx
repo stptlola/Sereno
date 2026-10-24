@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Navigation } from "@/components/navigation";
+import { cleTriFoyer, estAccompagnantAConfirmer } from "@/domain/invites/invitation";
 import { compter, libelleLien, LIENS, repartition, type Cote } from "@/domain/invites/invites";
 import { sansAccents } from "@/domain/planning";
 import { accesEcriture } from "@/lib/acces";
@@ -68,7 +69,7 @@ function LigneInvite({ g }: { g: InviteListe }) {
       <div className="flex min-w-0 flex-1 flex-col">
         <Link href={`/invites/${g.id}`} className="font-semibold hover:underline">
           {[g.firstName, g.lastName].filter(Boolean).join(" ")}
-          {g.plusOne && <span className="font-normal text-ink-muted"> + 1</span>}
+          {estAccompagnantAConfirmer(g.firstName) && <span className="ml-2 rounded-full border border-or px-2 py-0.5 text-[10px] font-semibold text-bronze">prénom à confirmer</span>}
           {g.rsvpOnline && <span className="ml-2 rounded-full bg-surface-soft px-2 py-0.5 text-[10px] font-semibold text-bronze">en ligne</span>}
         </Link>
         <span className="text-xs text-ink-muted">
@@ -130,7 +131,7 @@ export default async function PageInvites({ searchParams }: { searchParams: Prom
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
           <h1 className="font-display text-3xl">Invités</h1>
-          <p className="mt-1 text-ink-muted">Un invité par personne, enfants compris. Le « + 1 » compte une personne de plus.</p>
+          <p className="mt-1 text-ink-muted">Ajoutez vos invités par invitation, comme sur un faire-part : une personne, un couple ou une famille. Chacun compte pour une place.</p>
         </div>
         <div className="flex gap-3 text-sm">
           <Link href="/invites/import" className="text-bronze underline">
@@ -184,7 +185,9 @@ export default async function PageInvites({ searchParams }: { searchParams: Prom
             {(["PARTENAIRE_1", "PARTENAIRE_2", "COMMUN"] as const)
               .filter((s) => s !== "PARTENAIRE_2" || mariage.partner2Name)
               .map((s) => {
-                const liste = filtres.filter((g) => g.side === s).sort((a, b) => ordreLien(a.category) - ordreLien(b.category));
+                const liste = filtres
+                  .filter((g) => g.side === s)
+                  .sort((a, b) => ordreLien(a.category) - ordreLien(b.category) || cleTriFoyer({ foyer: a.household?.name ?? null, nom: a.lastName, prenom: a.firstName, enfant: a.ageGroup === "ENFANT" }).localeCompare(cleTriFoyer({ foyer: b.household?.name ?? null, nom: b.lastName, prenom: b.firstName, enfant: b.ageGroup === "ENFANT" })));
                 const groupes = [...new Set(liste.map((g) => g.category))];
                 return (
                   <div key={s} className="flex flex-col gap-2 rounded-md border border-line bg-surface-raised p-4">

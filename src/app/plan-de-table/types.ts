@@ -47,3 +47,62 @@ export function tailleTable(t: Pick<TableVue, "forme" | "places">): { l: number;
       return { l: Math.max(120, 35 * Math.ceil(n / 2)), p: 90 };
   }
 }
+
+export interface PositionPlace {
+  numero: number;
+  x: number;
+  y: number;
+}
+
+const ECART = 34;
+
+/**
+ * Position des places autour d'une table (M5-17), en centimètres par rapport à son centre, avant rotation.
+ * Ronde et ovale : tout autour ; rectangulaire : sur les deux grands côtés ; carrée : sur les quatre côtés ;
+ * demi-lune (table d'honneur) : face à la salle, sur le côté droit.
+ */
+export function positionsPlaces(t: Pick<TableVue, "forme" | "places">, nombre = t.places): PositionPlace[] {
+  const { l, p } = tailleTable(t);
+  const n = Math.max(1, nombre);
+  const places: PositionPlace[] = [];
+  const reparti = (k: number, longueur: number) => Array.from({ length: k }, (_, i) => -longueur / 2 + (longueur * (i + 0.5)) / k);
+  switch (t.forme) {
+    case "RONDE":
+    case "OVALE": {
+      const rx = l / 2 + ECART;
+      const ry = (t.forme === "RONDE" ? l : p) / 2 + ECART;
+      for (let i = 0; i < n; i++) {
+        const a = -Math.PI / 2 + (2 * Math.PI * i) / n;
+        places.push({ numero: i + 1, x: Math.cos(a) * rx, y: Math.sin(a) * ry });
+      }
+      break;
+    }
+    case "CARREE": {
+      const parCote = [0, 1, 2, 3].map((c) => Math.floor(n / 4) + (c < n % 4 ? 1 : 0));
+      let num = 1;
+      parCote.forEach((k, c) => {
+        for (const d of reparti(k, l)) {
+          const [x, y] = c === 0 ? [d, -p / 2 - ECART] : c === 1 ? [l / 2 + ECART, d] : c === 2 ? [-d, p / 2 + ECART] : [-l / 2 - ECART, -d];
+          places.push({ numero: num++, x, y });
+        }
+      });
+      break;
+    }
+    case "DEMI_LUNE": {
+      for (const [i, d] of reparti(n, l).entries()) places.push({ numero: i + 1, x: d, y: -p / 2 - ECART });
+      break;
+    }
+    default: {
+      const haut = Math.ceil(n / 2);
+      reparti(haut, l).forEach((d, i) => places.push({ numero: i + 1, x: d, y: -p / 2 - ECART }));
+      reparti(n - haut, l).forEach((d, i) => places.push({ numero: haut + i + 1, x: d, y: p / 2 + ECART }));
+    }
+  }
+  return places;
+}
+
+/** Applique la rotation de la table à une position de place. */
+export function tourner(x: number, y: number, degres: number): { x: number; y: number } {
+  const a = (degres * Math.PI) / 180;
+  return { x: x * Math.cos(a) - y * Math.sin(a), y: x * Math.sin(a) + y * Math.cos(a) };
+}

@@ -6,7 +6,8 @@ import { Bouton, classeChamp } from "@/components/ui";
 import { LIENS, REGIMES } from "@/domain/invites/invites";
 import { accesEcriture } from "@/lib/acces";
 import { db } from "@/lib/db";
-import { modifierInvite, supprimerInvite } from "../../actions/invites";
+import { estAccompagnantAConfirmer } from "@/domain/invites/invitation";
+import { ajouterAuFoyer, modifierInvite, supprimerInvite } from "../../actions/invites";
 
 export const metadata: Metadata = { title: "Invité · Sereno" };
 export const dynamic = "force-dynamic";
@@ -32,6 +33,7 @@ export default async function PageInvite({ params }: { params: Promise<{ id: str
     db.miniSite.findUnique({ where: { weddingId: mariage.id }, select: { questions: true } }),
   ]);
   if (!g) notFound();
+  const autresDuFoyer = g.householdId ? await db.guest.findMany({ where: { householdId: g.householdId, id: { not: g.id } }, orderBy: { firstName: "asc" } }) : [];
 
   return (
     <main className="mx-auto flex min-h-dvh max-w-2xl flex-col gap-8 px-6 pt-0 pb-28 lg:pb-12">
@@ -49,6 +51,9 @@ export default async function PageInvite({ params }: { params: Promise<{ id: str
             </p>
           ))}
         </section>
+      )}
+      {estAccompagnantAConfirmer(g.firstName) && (
+        <p className="rounded-md border border-or p-3 text-sm">Accompagnant à confirmer : dès que vous connaissez son prénom, remplacez « {g.firstName} » ci-dessous.</p>
       )}
       <form key={g.updatedAt.getTime()} action={modifierInvite} className="flex flex-col gap-5">
         <input type="hidden" name="id" value={g.id} />
@@ -121,9 +126,6 @@ export default async function PageInvite({ params }: { params: Promise<{ id: str
             <input name="age" type="number" min={0} max={17} defaultValue={g.age ?? ""} className={classeChamp} />
           </label>
           <label className="flex items-center gap-2 pb-3 text-sm">
-            <input type="checkbox" name="plusOne" defaultChecked={g.plusOne} className="h-5 w-5" /> Vient avec un accompagnant (+ 1)
-          </label>
-          <label className="flex items-center gap-2 pb-3 text-sm">
             <input type="checkbox" name="accessibility" defaultChecked={g.accessibility} className="h-5 w-5" /> Doit être placé près d’une sortie (âge, mobilité)
           </label>
         </div>
@@ -167,6 +169,34 @@ export default async function PageInvite({ params }: { params: Promise<{ id: str
         </div>
         <Bouton type="submit">Enregistrer</Bouton>
       </form>
+      <section className="flex flex-col gap-3 border-t border-line pt-6">
+        <h2 className="font-display text-xl">Son foyer{g.household ? ` · ${g.household.name}` : ""}</h2>
+        {autresDuFoyer.length > 0 ? (
+          <ul className="flex flex-col text-sm">
+            {autresDuFoyer.map((m) => (
+              <li key={m.id}>
+                <Link href={`/invites/${m.id}`} className="text-bronze underline">
+                  {[m.firstName, m.lastName].filter(Boolean).join(" ")}
+                </Link>
+                {m.ageGroup === "ENFANT" ? " (enfant)" : ""}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="text-sm text-ink-muted">Seul pour l’instant.</p>
+        )}
+        <form action={ajouterAuFoyer} className="flex flex-wrap items-center gap-2">
+          <input type="hidden" name="id" value={g.id} />
+          <input name="prenom" required maxLength={60} placeholder="Prénom" aria-label="Prénom de la personne à ajouter au foyer" className="min-w-0 flex-1 rounded-sm border border-line bg-surface-raised px-3 py-2 text-sm" />
+          <input name="nom" maxLength={60} placeholder={g.lastName ?? "Nom"} aria-label="Nom de la personne à ajouter au foyer" className="min-w-0 flex-1 rounded-sm border border-line bg-surface-raised px-3 py-2 text-sm" />
+          <label className="flex items-center gap-1.5 text-sm">
+            <input type="checkbox" name="enfant" className="h-4 w-4" /> Enfant
+          </label>
+          <button type="submit" className="rounded-full border border-ink px-4 py-2 text-sm font-semibold">
+            Ajouter au foyer
+          </button>
+        </form>
+      </section>
       <form action={supprimerInvite} className="border-t border-line pt-6">
         <input type="hidden" name="id" value={g.id} />
         <button type="submit" className="text-sm text-alerte underline">

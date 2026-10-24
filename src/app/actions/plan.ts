@@ -101,6 +101,51 @@ export async function placerInvite(guestId: string, tableId: string | null): Pro
   return {};
 }
 
+/**
+ * Installe un invité sur une place précise (M5-17). Si la place est prise, les deux invités échangent leurs places ;
+ * si l'invité installé n'avait pas de place, celui qui occupait la chaise repasse « à placer ».
+ */
+export async function asseoir(guestId: string, tableId: string, place: number): Promise<{ erreur?: string }> {
+  const { mariage } = await accesEcriture();
+  const [g, t] = await Promise.all([
+    db.guest.findFirst({ where: { id: guestId, weddingId: mariage.id } }),
+    db.seatingTable.findFirst({ where: { id: tableId, weddingId: mariage.id } }),
+  ]);
+  if (!g || !t) return { erreur: "Invité ou table introuvable." };
+  const numero = z.coerce.number().int().min(1).max(60).parse(place);
+  const occupant = await db.guest.findFirst({ where: { weddingId: mariage.id, tableId: t.id, seat: numero, id: { not: g.id } } });
+  await db.$transaction([
+    ...(occupant ? [db.guest.update({ where: { id: occupant.id }, data: g.tableId && g.seat ? { tableId: g.tableId, seat: g.seat } : { tableId: null, seat: null } })] : []),
+    db.guest.update({ where: { id: g.id }, data: { tableId: t.id, seat: numero } }),
+  ]);
+  rafraichir();
+  return {};
+}
+
+/** Fait tourner une table ou un élément par pas de 15 degrés. */
+export async function tourner(type: "table" | "element", cible: string, pas: number): Promise<void> {
+  const { mariage } = await accesEcriture();
+  const delta = Math.sign(pas) * 15;
+  if (type === "table") {
+    const t = await db.seatingTable.findFirst({ where: { id: cible, weddingId: mariage.id } });
+    if (t) await db.seatingTable.update({ where: { id: t.id }, data: { rotation: (((t.rotation + delta) % 360) + 360) % 360 } });
+  } else {
+    const e = await db.roomElement.findFirst({ where: { id: cible, weddingId: mariage.id } });
+    if (e) await db.roomElement.update({ where: { id: e.id }, data: { rotation: (((e.rotation + delta) % 360) + 360) % 360 } });
+  }
+  revalidatePath("/plan-de-table");
+}
+
+/** Agrandit ou réduit un élément du plan de salle (par pas de 10 %). */
+export async function redimensionner(cible: string, facteur: number): Promise<void> {
+  const { mariage } = await accesEcriture();
+  const e = await db.roomElement.findFirst({ where: { id: cible, weddingId: mariage.id } });
+  if (!e) return;
+  const f = facteur > 1 ? 1.1 : 1 / 1.1;
+  await db.roomElement.update({ where: { id: e.id }, data: { width: Math.round(Math.min(3000, Math.max(30, e.width * f))), depth: Math.round(Math.min(3000, Math.max(30, e.depth * f))) } });
+  revalidatePath("/plan-de-table");
+}
+
 export type EtatProposition = { faits?: number; nonPlaces?: { nom: string; raison: string }[]; raisons?: Record<string, number>; erreur?: string };
 
 /** Propose et applique un placement complet (M5-13, M5-20) ; tout reste modifiable ensuite. */

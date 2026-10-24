@@ -10,6 +10,7 @@ import {
   ajouterTable,
   modifierSalle,
   modifierTable,
+  asseoir,
   placerInvite,
   proposerPlacement,
   supprimerContrainte,
@@ -18,7 +19,8 @@ import {
   viderPlan,
   type EtatProposition,
 } from "../actions/plan";
-import { PlanSalle } from "./plan-salle";
+import { Panneau } from "./panneau";
+import { PlanSalle, type Selection } from "./plan-salle";
 import type { ElementVue, InviteVue, TableVue } from "./types";
 
 const FORMES = [
@@ -62,6 +64,7 @@ export function PlanDeTable({
 }) {
   const router = useRouter();
   const [selection, setSelection] = useState<string | null>(null);
+  const [cible, setCible] = useState<Selection>(null);
   const [, demarrer] = useTransition();
   const [proposition, proposer, enCalcul] = useActionState<EtatProposition, FormData>(proposerPlacement, {});
   const nomInvite = new Map(tous.map((g) => [g.id, g.nom]));
@@ -136,14 +139,34 @@ export function PlanDeTable({
         <div className="flex flex-col gap-3">
           {selectionne && (
             <p role="status" className="rounded-md bg-ink p-3 text-sm text-surface">
-              Touchez une table pour y placer <strong>{selectionne.nom}</strong>.{" "}
+              Touchez une place ou une table pour y installer <strong>{selectionne.nom}</strong>.{" "}
               <button type="button" className="text-or underline" onClick={() => setSelection(null)}>
                 Annuler
               </button>
             </p>
           )}
-          <PlanSalle largeur={largeur} profondeur={profondeur} tables={tables} elements={elements} inviteSelectionne={selection} surPlacement={() => (setSelection(null), router.refresh())} />
-          <p className="text-xs text-ink-muted">Glissez les tables et les éléments pour reproduire votre salle. Les sorties servent à placer près d’elles les invités qui en ont besoin.</p>
+          <PlanSalle
+            largeur={largeur}
+            profondeur={profondeur}
+            tables={tables}
+            elements={elements}
+            selection={cible}
+            surSelection={(s) => {
+              // Un invité est sélectionné : toucher une place ou une table l'y installe directement.
+              if (selection && s?.type === "place")
+                return demarrer(async () => {
+                  await asseoir(selection, s.tableId, s.numero);
+                  setSelection(null);
+                  router.refresh();
+                });
+              if (selection && s?.type === "table") return placer(selection, s.id);
+              setCible(s);
+            }}
+          />
+          <p className="text-xs text-ink-muted">
+            Touchez une place pour y installer quelqu’un, une table ou un élément pour le tourner ou le modifier. Glissez-les pour reproduire votre salle ; les sorties servent à placer près
+            d’elles les invités qui en ont besoin.
+          </p>
         </div>
 
         <aside className="flex flex-col gap-3">
@@ -204,7 +227,7 @@ export function PlanDeTable({
           {tables.map((t) => {
             const occupe = t.invites.reduce((s, i) => s + (i.accompagnant ? 2 : 1), 0);
             return (
-              <div key={t.id} className={`flex flex-col gap-2 rounded-md border bg-surface-raised p-4 ${occupe > t.places ? "border-alerte" : "border-line"}`}>
+              <div key={t.id} id={`table-${t.id}`} className={`flex scroll-mt-20 flex-col gap-2 rounded-md border bg-surface-raised p-4 ${occupe > t.places ? "border-alerte" : "border-line"}`}>
                 <div className="flex items-baseline justify-between gap-2">
                   <p className="font-semibold">
                     {t.honneur ? "♥ " : `${t.numero}. `}
@@ -276,6 +299,8 @@ export function PlanDeTable({
           </form>
         )}
       </section>
+
+      {cible && <Panneau selection={cible} tables={tables} elements={elements} aPlacer={aPlacer} fermer={() => setCible(null)} apres={() => router.refresh()} />}
 
       <section className="flex flex-col gap-3">
         <h2 className="font-display text-2xl">Contraintes</h2>
