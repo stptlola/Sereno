@@ -5,7 +5,9 @@ import { accesEcriture } from "@/lib/acces";
 import { db } from "@/lib/db";
 import { Deconnexion } from "../tableau-de-bord/deconnexion";
 import { MotDePasse, Notifications, Profil, SuppressionCompte } from "./compte";
+import { retirerTemoin } from "../actions/mariage";
 import { FormulaireParametres } from "./formulaire";
+import { InvitationTemoin } from "./temoins";
 
 export const metadata: Metadata = { title: "Réglages · Sereno" };
 export const dynamic = "force-dynamic";
@@ -21,10 +23,11 @@ function Section({ id, titre, children }: { id?: string; titre: string; children
 
 export default async function PageParametres() {
   const { mariage, user } = await accesEcriture();
-  const [compte, partenaires, aMotDePasse] = await Promise.all([
+  const [compte, partenaires, aMotDePasse, temoins] = await Promise.all([
     db.user.findUniqueOrThrow({ where: { id: user.id }, select: { name: true, email: true, notifHebdo: true, notifRappels: true } }),
     db.member.count({ where: { weddingId: mariage.id, userId: { not: user.id }, role: { in: ["CREATEUR", "COPILOTE"] } } }),
     db.account.count({ where: { userId: user.id, providerId: "credential" } }),
+    db.member.findMany({ where: { weddingId: mariage.id, role: "TEMOIN" }, include: { user: { select: { name: true, email: true } } } }),
   ]);
   return (
     <main className="mx-auto flex min-h-dvh max-w-2xl flex-col gap-8 px-6 pt-0 pb-28 lg:pb-12">
@@ -44,6 +47,31 @@ export default async function PageParametres() {
           culte: mariage.religion ?? "",
         }}
       />
+
+      <Section id="temoins" titre="Vos témoins">
+        <p className="text-sm text-ink-muted">
+          Ils ont leur propre espace : les missions que vous leur confiez (choisissez-les comme responsables d’une tâche), la table de chaque invité le jour J, et un coin secret pour
+          préparer votre enterrement de vie de célibataire. Ils ne voient ni votre budget, ni votre liste d’invités.
+        </p>
+        {temoins.length > 0 && (
+          <ul className="flex flex-col gap-1">
+            {temoins.map((t) => (
+              <li key={t.id} className="flex items-center gap-3 text-sm">
+                <span className="flex-1">
+                  <span className="font-semibold">{t.user.name}</span> · {t.user.email}
+                </span>
+                <form action={retirerTemoin}>
+                  <input type="hidden" name="id" value={t.id} />
+                  <button type="submit" className="text-alerte underline">
+                    Retirer
+                  </button>
+                </form>
+              </li>
+            ))}
+          </ul>
+        )}
+        <InvitationTemoin />
+      </Section>
 
       <Section id="notifications" titre="E-mails">
         <Notifications hebdo={compte.notifHebdo} rappels={compte.notifRappels} />

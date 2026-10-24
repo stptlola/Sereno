@@ -5,6 +5,7 @@ import { CartesChiffres, EnTeteMariage, ProchainesEtapes, type VueTache } from "
 import { bilan } from "@/domain/budget/calculs";
 import { compter } from "@/domain/invites/invites";
 import { ajouterMois, ecartJours, normaliser } from "@/domain/planning";
+import { temoinDe } from "@/lib/acces";
 import { db } from "@/lib/db";
 import { mariageDe, utilisateurRequis } from "@/lib/session";
 import { CaseTache } from "@/components/case-tache";
@@ -17,7 +18,7 @@ export const dynamic = "force-dynamic";
 export default async function TableauDeBord() {
   const user = await utilisateurRequis("/tableau-de-bord");
   const acces = await mariageDe(user.id);
-  if (!acces) redirect("/commencer");
+  if (!acces) redirect((await temoinDe(user.id)) ? "/temoin" : "/commencer");
   const { mariage, role } = acces;
 
   const [taches, postes, copilote, invites] = await Promise.all([

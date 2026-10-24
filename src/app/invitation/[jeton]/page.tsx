@@ -28,10 +28,18 @@ export default async function PageInvitation({ params }: { params: Promise<{ jet
   const session = await sessionCourante();
   const retour = encodeURIComponent(`/invitation/${jeton}`);
   const prenoms = [invitation.wedding.partner1Name, invitation.wedding.partner2Name].filter(Boolean).join(" et ");
-  const dejaMembre = session ? await mariageDe(session.user.id) : null;
+  const temoin = invitation.role === "TEMOIN";
+  const dejaMembre = session ? (temoin ? await db.member.findFirst({ where: { weddingId: invitation.weddingId, userId: session.user.id } }) : await mariageDe(session.user.id)) : null;
 
   return (
-    <PageCompte titre="Vous êtes invité à organiser ce mariage" sousTitre={`Le mariage de ${prenoms}, avec les mêmes droits que votre partenaire.`}>
+    <PageCompte
+      titre={temoin ? "Vous êtes témoin !" : "Vous êtes invité à organiser ce mariage"}
+      sousTitre={
+        temoin
+          ? `${prenoms} vous ouvrent un espace témoin : vos missions, la table de chaque invité le jour J, et un coin secret pour préparer l’enterrement de vie de célibataire.`
+          : `Le mariage de ${prenoms}, avec les mêmes droits que votre partenaire.`
+      }
+    >
       {!session ? (
         <div className="flex flex-col gap-3">
           <Link href={`/inscription?retour=${retour}`} className="rounded-full bg-ink px-6 py-3 text-center font-semibold text-surface">
@@ -42,12 +50,14 @@ export default async function PageInvitation({ params }: { params: Promise<{ jet
           </Link>
         </div>
       ) : dejaMembre ? (
-        <p className="text-ink-muted">Votre compte organise déjà un mariage. Pour l’instant, un compte ne peut suivre qu’un seul mariage.</p>
+        <p className="text-ink-muted">
+          {temoin ? "Vous faites déjà partie de ce mariage." : "Votre compte organise déjà un mariage. Pour l’instant, un compte ne peut suivre qu’un seul mariage."}
+        </p>
       ) : (
         <form action={accepterInvitation}>
           <input type="hidden" name="jeton" value={jeton} />
           <Bouton type="submit" className="w-full">
-            Rejoindre l’organisation
+            {temoin ? "Ouvrir mon espace témoin" : "Rejoindre l’organisation"}
           </Bouton>
         </form>
       )}

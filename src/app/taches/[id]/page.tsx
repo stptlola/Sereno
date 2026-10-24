@@ -20,9 +20,10 @@ const STATUTS = [
 export default async function PageTache({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const { mariage } = await accesEcriture();
-  const tache = await db.task.findFirst({ where: { id, weddingId: mariage.id }, include: { template: true } });
+  const tache = await db.task.findFirst({ where: { id, weddingId: mariage.id, witnessOnly: false }, include: { template: true } });
   if (!tache) notFound();
-  const responsables = [mariage.partner1Name, mariage.partner2Name, "Nous deux"].filter((r): r is string => Boolean(r));
+  const temoins = await db.member.findMany({ where: { weddingId: mariage.id, role: "TEMOIN" }, select: { user: { select: { name: true } } } });
+  const responsables = [mariage.partner1Name, mariage.partner2Name, "Nous deux", ...temoins.map((t) => t.user.name), "Les témoins"].filter((r): r is string => Boolean(r));
   const personnelle = !tache.templateId;
 
   return (

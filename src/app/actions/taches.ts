@@ -22,7 +22,7 @@ async function journal(weddingId: string, userId: string, entityId: string, acti
 export async function modifierTache(formData: FormData): Promise<void> {
   const { user, mariage } = await accesEcriture();
   const id = z.string().min(1).parse(formData.get("id"));
-  const tache = await db.task.findFirst({ where: { id, weddingId: mariage.id } });
+  const tache = await db.task.findFirst({ where: { id, weddingId: mariage.id, witnessOnly: false } });
   if (!tache) redirect("/planning");
   const donnees = schemaTache.parse({
     status: formData.get("status"),
@@ -79,7 +79,7 @@ export async function ajouterTache(formData: FormData): Promise<void> {
 export async function retirerTache(formData: FormData): Promise<void> {
   const { user, mariage } = await accesEcriture();
   const id = z.string().min(1).parse(formData.get("id"));
-  const tache = await db.task.findFirst({ where: { id, weddingId: mariage.id } });
+  const tache = await db.task.findFirst({ where: { id, weddingId: mariage.id, witnessOnly: false } });
   if (tache) {
     if (tache.templateId) await db.task.update({ where: { id }, data: { hidden: true, hiddenByCouple: true, updatedById: user.id } });
     else await db.task.delete({ where: { id } });
@@ -93,7 +93,7 @@ export async function retirerTache(formData: FormData): Promise<void> {
 export async function reafficherTache(formData: FormData): Promise<void> {
   const { user, mariage } = await accesEcriture();
   const id = z.string().min(1).parse(formData.get("id"));
-  await db.task.updateMany({ where: { id, weddingId: mariage.id }, data: { hidden: false, hiddenByCouple: false, updatedById: user.id } });
+  await db.task.updateMany({ where: { id, weddingId: mariage.id, witnessOnly: false }, data: { hidden: false, hiddenByCouple: false, updatedById: user.id } });
   await journal(mariage.id, user.id, id, "reaffichee");
   revalidatePath("/tableau-de-bord");
   revalidatePath("/planning");

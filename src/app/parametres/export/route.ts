@@ -19,7 +19,8 @@ export async function GET() {
         where: { id: m.weddingId },
         include: {
           members: { select: { role: true, joinedAt: true, user: { select: { name: true } } } },
-          tasks: { omit: { weddingId: true } },
+          // La préparation secrète des témoins n'apparaît pas dans l'export du couple.
+          tasks: { where: { witnessOnly: false }, omit: { weddingId: true } },
           budgetCategories: { omit: { weddingId: true }, include: { expenses: { omit: { weddingId: true }, include: { payments: true } } } },
           households: { omit: { weddingId: true } },
           guests: { omit: { weddingId: true }, include: { moments: true } },

@@ -298,6 +298,8 @@ model Task {
   hidden        Boolean       @default(false)
   // Masquée par le couple (et non par une règle d'adaptation) : jamais réaffichée automatiquement.
   hiddenByCouple Boolean      @default(false)
+  // Réservée aux témoins (préparation secrète de l'EVJF/EVG) : jamais visible du couple.
+  witnessOnly    Boolean      @default(false)
   autoCompleted Boolean       @default(false)
   completedAt   DateTime?
   createdById   String?

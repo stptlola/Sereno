@@ -59,7 +59,10 @@ export const GROUPES: GroupeRubriques[] = [
   },
   {
     titre: "Mon mariage",
-    rubriques: [{ slug: "reglages", libelle: "Réglages", href: "/parametres" }],
+    rubriques: [
+      { slug: "temoins", libelle: "Vos témoins", href: "/parametres#temoins" },
+      { slug: "reglages", libelle: "Réglages", href: "/parametres" },
+    ],
   },
 ];
 

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Navigation } from "@/components/navigation";
 import { Bouton, Champ } from "@/components/ui";
 import { accesEcriture } from "@/lib/acces";
+import { db } from "@/lib/db";
 import { ajouterTache } from "../../actions/taches";
 import { ChampsTache } from "../champs";
 
@@ -10,7 +11,8 @@ export const dynamic = "force-dynamic";
 
 export default async function PageNouvelleTache() {
   const { mariage } = await accesEcriture();
-  const responsables = [mariage.partner1Name, mariage.partner2Name, "Nous deux"].filter((r): r is string => Boolean(r));
+  const temoins = await db.member.findMany({ where: { weddingId: mariage.id, role: "TEMOIN" }, select: { user: { select: { name: true } } } });
+  const responsables = [mariage.partner1Name, mariage.partner2Name, "Nous deux", ...temoins.map((t) => t.user.name), "Les témoins"].filter((r): r is string => Boolean(r));
   return (
     <main className="mx-auto flex min-h-dvh max-w-2xl flex-col gap-8 px-6 pt-0 pb-28 lg:pb-12">
       <Navigation actif="/taches/nouvelle" />
