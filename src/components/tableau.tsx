@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { ReactNode } from "react";
 import { grouperParPeriode } from "@/domain/planning/periodes";
 
@@ -11,6 +12,30 @@ export interface VueTache {
   date: Date | null;
   faite: boolean;
   legale?: boolean;
+  enCours?: boolean;
+  responsable?: string | null;
+  /** Lien vers le détail de la tâche (tableau de bord connecté uniquement). */
+  href?: string;
+}
+
+function Titre({ t, className = "" }: { t: VueTache; className?: string }) {
+  return t.href ? (
+    <Link href={t.href} className={`${className} hover:underline`}>
+      {t.titre}
+    </Link>
+  ) : (
+    <span className={className}>{t.titre}</span>
+  );
+}
+
+function Etiquettes({ t }: { t: VueTache }) {
+  return (
+    <>
+      {t.enCours && !t.faite && <span className="shrink-0 rounded-full bg-surface-soft px-2 py-0.5 text-xs font-semibold text-bronze">En cours</span>}
+      {t.responsable && <span className="shrink-0 text-xs text-ink-muted">{t.responsable}</span>}
+      {t.legale && <span className="shrink-0 text-xs font-semibold text-bronze">Démarche</span>}
+    </>
+  );
 }
 
 const formatDate = new Intl.DateTimeFormat("fr-FR", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
@@ -21,10 +46,10 @@ const euros = (centimes: number) =>
 
 function Carte({ libelle, children, pied }: { libelle: string; children: ReactNode; pied?: ReactNode }) {
   return (
-    <div className="flex flex-col gap-1 rounded-md bg-surface-soft p-5">
-      <p className="text-sm text-ink-muted">{libelle}</p>
-      <div className="font-display text-3xl leading-tight">{children}</div>
-      {pied && <div className="mt-1 text-sm text-ink-muted">{pied}</div>}
+    <div className="flex min-w-0 flex-col gap-1 rounded-md bg-surface-soft p-3 sm:p-5">
+      <p className="text-xs text-ink-muted sm:text-sm">{libelle}</p>
+      <div className="font-display text-xl leading-tight sm:text-3xl">{children}</div>
+      {pied && <div className="mt-1 hidden text-sm text-ink-muted sm:block">{pied}</div>}
     </div>
   );
 }
@@ -85,7 +110,7 @@ export function CartesChiffres({
   const avancement = total ? Math.round((faites / total) * 100) : 0;
   const principaux = [...postes].sort((a, b) => b.prevuCentimes - a.prevuCentimes).slice(0, 3);
   return (
-    <section className="grid gap-4 sm:grid-cols-3" aria-label="Votre mariage en chiffres">
+    <section className="grid grid-cols-3 gap-2 sm:gap-4" aria-label="Votre mariage en chiffres">
       <Carte libelle="Avancement" pied={`${faites} tâche${faites > 1 ? "s" : ""} faite${faites > 1 ? "s" : ""} sur ${total}`}>
         {avancement} %
         <Barre pourcent={avancement} />
@@ -127,8 +152,11 @@ export function ProchainesEtapes({
           {caseACocher?.(t)}
           <div className="flex-1">
             <div className="flex flex-wrap items-baseline justify-between gap-2">
-              <p className="font-semibold">{t.titre}</p>
-              {t.date && <span className="text-sm text-bronze">{formatJour.format(t.date)}</span>}
+              <Titre t={t} className="font-semibold" />
+              <span className="flex items-center gap-2">
+                <Etiquettes t={t} />
+                {t.date && <span className="text-sm text-bronze">{formatJour.format(t.date)}</span>}
+              </span>
             </div>
             {t.conseil && <p className="mt-1 text-sm text-ink-muted">{t.conseil}</p>}
           </div>
@@ -195,8 +223,8 @@ export function FrisePlanning({
                   {p.taches.map((t) => (
                     <li key={t.id} className="flex items-center gap-3 border-b border-line py-2 last:border-b-0">
                       {caseACocher?.(t)}
-                      <span className={`flex-1 ${t.faite ? "text-ink-muted line-through" : ""}`}>{t.titre}</span>
-                      {t.legale && <span className="shrink-0 text-xs font-semibold text-bronze">Démarche</span>}
+                      <Titre t={t} className={`flex-1 ${t.faite ? "text-ink-muted line-through" : ""}`} />
+                      <Etiquettes t={t} />
                       {t.date && <span className="shrink-0 text-sm text-ink-muted">{formatJour.format(t.date)}</span>}
                     </li>
                   ))}

@@ -4,8 +4,9 @@ import { CartesChiffres, EnTeteMariage, FrisePlanning, ProchainesEtapes, type Vu
 import { ajouterMois, ecartJours, normaliser } from "@/domain/planning";
 import { db } from "@/lib/db";
 import { mariageDe, utilisateurRequis } from "@/lib/session";
+import { Navigation } from "@/components/navigation";
 import { basculerTache } from "../actions/mariage";
-import { Deconnexion } from "./deconnexion";
+import { reafficherTache } from "../actions/taches";
 import { InvitationCopilote } from "./invitation-copilote";
 
 export const metadata: Metadata = { title: "Tableau de bord · Sereno" };
@@ -32,7 +33,7 @@ export default async function TableauDeBord() {
   if (!acces) redirect("/commencer");
   const { mariage, role } = acces;
 
-  const [taches, postes, copilote] = await Promise.all([
+  const [taches, postes, copilote, masquees] = await Promise.all([
     db.task.findMany({
       where: { weddingId: mariage.id, hidden: false },
       orderBy: [{ dueDate: "asc" }, { createdAt: "asc" }],
@@ -40,6 +41,7 @@ export default async function TableauDeBord() {
     }),
     db.budgetCategory.findMany({ where: { weddingId: mariage.id }, orderBy: { order: "asc" } }),
     db.member.findFirst({ where: { weddingId: mariage.id, role: "COPILOTE" }, include: { user: true } }),
+    db.task.findMany({ where: { weddingId: mariage.id, hiddenByCouple: true }, orderBy: { dueDate: "asc" } }),
   ]);
 
   const aujourdhui = normaliser(new Date());
@@ -51,16 +53,16 @@ export default async function TableauDeBord() {
     date: t.dueDate,
     faite: t.status === "FAIT",
     legale: t.template?.repere === "LEGAL",
+    enCours: t.status === "EN_COURS",
+    responsable: t.assignee,
+    href: `/taches/${t.id}`,
   }));
   const caseACocher = (t: VueTache) => <CaseTache tache={t} />;
   const prenoms = [mariage.partner1Name, mariage.partner2Name].filter(Boolean).join(" et ");
 
   return (
     <main className="mx-auto flex min-h-dvh max-w-3xl flex-col gap-8 px-6 py-10">
-      <header className="flex items-center justify-between gap-4">
-        <p className="text-sm font-semibold tracking-widest text-bronze uppercase">sereno</p>
-        <Deconnexion />
-      </header>
+      <Navigation actif="/tableau-de-bord" />
 
       <EnTeteMariage prenoms={prenoms} jours={ecartJours(aujourdhui, dateMariage)} date={dateMariage} provisoire={mariage.date === null} />
       <CartesChiffres
@@ -80,6 +82,25 @@ export default async function TableauDeBord() {
 
       <ProchainesEtapes taches={vues.filter((v) => !v.faite).slice(0, 3)} aujourdhui={aujourdhui} caseACocher={caseACocher} />
       <FrisePlanning taches={vues} aujourdhui={aujourdhui} dateMariage={dateMariage} caseACocher={caseACocher} />
+
+      {masquees.length > 0 && (
+        <details className="rounded-md border border-line bg-surface-raised p-4">
+          <summary className="cursor-pointer text-sm font-semibold">Tâches masquées ({masquees.length})</summary>
+          <ul className="mt-3 flex flex-col gap-2">
+            {masquees.map((t) => (
+              <li key={t.id} className="flex items-center justify-between gap-3 text-sm">
+                <span className="text-ink-muted">{t.title}</span>
+                <form action={reafficherTache}>
+                  <input type="hidden" name="id" value={t.id} />
+                  <button type="submit" className="text-bronze underline">
+                    Réafficher
+                  </button>
+                </form>
+              </li>
+            ))}
+          </ul>
+        </details>
+      )}
     </main>
   );
 }

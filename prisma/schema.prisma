@@ -201,6 +201,8 @@ model Task {
   assignee      String?
   note          String?
   hidden        Boolean       @default(false)
+  // Masquée par le couple (et non par une règle d'adaptation) : jamais réaffichée automatiquement.
+  hiddenByCouple Boolean      @default(false)
   autoCompleted Boolean       @default(false)
   completedAt   DateTime?
   createdById   String?
