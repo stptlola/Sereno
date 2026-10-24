@@ -144,7 +144,7 @@ export function Demarrage() {
           </div>
         </div>
         <ProchainesEtapes taches={prochaines} aujourdhui={aujourdhui} />
-        <FrisePlanning taches={vues} />
+        <FrisePlanning taches={vues} aujourdhui={aujourdhui} dateMariage={planning.dateMariage} />
         <button type="button" onClick={() => setEtape(0)} className="self-start text-sm text-bronze underline">
           Modifier mes réponses
         </button>

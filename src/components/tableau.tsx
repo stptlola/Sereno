@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { grouperParPeriode } from "@/domain/planning/periodes";
 
 // Vue « tableau de bord », commune au récapitulatif du démarrage (sans compte)
 // et au tableau de bord connecté. Composants sans état : utilisables côté serveur et client.
@@ -137,51 +138,61 @@ export function ProchainesEtapes({
   );
 }
 
-/** Le planning en frise, mois par mois : les deux premiers mois ouverts, les autres repliés avec leur compteur. */
+const formatMoisCourt = new Intl.DateTimeFormat("fr-FR", { month: "long", timeZone: "UTC" });
+
+function plage(du: Date | null, au: Date | null): string {
+  if (!du || !au) return "";
+  const memeMois = du.getUTCFullYear() === au.getUTCFullYear() && du.getUTCMonth() === au.getUTCMonth();
+  if (memeMois) return formatMois.format(du);
+  const memeAnnee = du.getUTCFullYear() === au.getUTCFullYear();
+  return `de ${memeAnnee ? formatMoisCourt.format(du) : formatMois.format(du)} à ${formatMois.format(au)}`;
+}
+
+/**
+ * Le planning en frise qui zoome sur ce qui est proche : ce mois-ci et le mois prochain en détail,
+ * le lointain en grandes périodes, la semaine du mariage et l'après en bas.
+ */
 export function FrisePlanning({
   taches,
+  aujourdhui,
+  dateMariage,
   caseACocher,
-  moisOuverts = 2,
 }: {
   taches: VueTache[];
+  aujourdhui: Date;
+  dateMariage: Date;
   caseACocher?: (t: VueTache) => ReactNode;
-  moisOuverts?: number;
 }) {
-  const groupes: { cle: string; taches: VueTache[] }[] = [];
-  for (const t of taches) {
-    const cle = t.date ? formatMois.format(t.date) : "Sans date";
-    const dernier = groupes[groupes.length - 1];
-    if (dernier?.cle === cle) dernier.taches.push(t);
-    else groupes.push({ cle, taches: [t] });
-  }
-  const premierAFaire = groupes.findIndex((g) => g.taches.some((t) => !t.faite));
-
+  const periodes = grouperParPeriode(taches, aujourdhui, dateMariage);
   return (
     <section className="flex flex-col gap-3">
-      <h2 className="font-display text-2xl">Votre planning, mois par mois</h2>
+      <h2 className="font-display text-2xl">Votre planning</h2>
       <ol className="relative flex flex-col gap-2 border-l-2 border-line pl-5">
-        {groupes.map((g, i) => {
-          const faites = g.taches.filter((t) => t.faite).length;
-          const toutFait = faites === g.taches.length;
-          const ouvert = premierAFaire >= 0 && i >= premierAFaire && i < premierAFaire + moisOuverts;
+        {periodes.map((p) => {
+          const faites = p.taches.filter((t) => t.faite).length;
+          const toutFait = faites === p.taches.length;
+          const alerte = p.cle === "aRattraper";
           return (
-            <li key={g.cle} className="relative">
+            <li key={p.cle} className="relative">
               <span
                 aria-hidden
-                className={`absolute top-4 -left-[27px] h-3 w-3 rounded-full border-2 ${toutFait ? "border-or bg-or" : "border-ink bg-surface"}`}
+                className={`absolute top-5 -left-[27px] h-3 w-3 rounded-full border-2 ${alerte ? "border-alerte bg-alerte" : toutFait ? "border-or bg-or" : "border-ink bg-surface"}`}
               />
-              <details open={ouvert} className="group rounded-md border border-line bg-surface-raised">
+              <details open={p.ouverte} className={`group rounded-md border bg-surface-raised ${alerte ? "border-alerte" : "border-line"}`}>
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-3 p-4 [&::-webkit-details-marker]:hidden">
-                  <span className="font-semibold capitalize">{g.cle}</span>
-                  <span className="flex items-center gap-3 text-sm text-ink-muted">
-                    {faites}/{g.taches.length} faite{faites > 1 ? "s" : ""}
+                  <span className="flex flex-col">
+                    <span className={`font-semibold ${alerte ? "text-alerte" : ""}`}>{p.libelle}</span>
+                    {plage(p.du, p.au) && <span className="text-sm text-ink-muted">{plage(p.du, p.au)}</span>}
+                  </span>
+                  <span className="flex shrink-0 items-center gap-3 text-sm text-ink-muted">
+                    {faites}/{p.taches.length} faite{faites > 1 ? "s" : ""}
                     <span className="transition group-open:rotate-180" aria-hidden>
                       ▾
                     </span>
                   </span>
                 </summary>
                 <ul className="flex flex-col border-t border-line px-4 py-2">
-                  {g.taches.map((t) => (
+                  {p.taches.map((t) => (
                     <li key={t.id} className="flex items-center gap-3 border-b border-line py-2 last:border-b-0">
                       {caseACocher?.(t)}
                       <span className={`flex-1 ${t.faite ? "text-ink-muted line-through" : ""}`}>{t.titre}</span>

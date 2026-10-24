@@ -79,7 +79,7 @@ export default async function TableauDeBord() {
       )}
 
       <ProchainesEtapes taches={vues.filter((v) => !v.faite).slice(0, 3)} aujourdhui={aujourdhui} caseACocher={caseACocher} />
-      <FrisePlanning taches={vues} caseACocher={caseACocher} />
+      <FrisePlanning taches={vues} aujourdhui={aujourdhui} dateMariage={dateMariage} caseACocher={caseACocher} />
     </main>
   );
 }
