@@ -44,13 +44,21 @@ const formatMois = new Intl.DateTimeFormat("fr-FR", { month: "long", year: "nume
 const euros = (centimes: number) =>
   new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(centimes / 100);
 
-function Carte({ libelle, children, pied }: { libelle: string; children: ReactNode; pied?: ReactNode }) {
-  return (
-    <div className="flex min-w-0 flex-col gap-1 rounded-md bg-surface-soft p-3 sm:p-5">
+function Carte({ libelle, children, pied, href }: { libelle: string; children: ReactNode; pied?: ReactNode; href?: string }) {
+  const contenu = (
+    <>
       <p className="text-xs text-ink-muted sm:text-sm">{libelle}</p>
       <div className="font-display text-xl leading-tight sm:text-3xl">{children}</div>
       {pied && <div className="mt-1 hidden text-sm text-ink-muted sm:block">{pied}</div>}
-    </div>
+    </>
+  );
+  const classe = "flex min-w-0 flex-col gap-1 rounded-md bg-surface-soft p-3 sm:p-5";
+  return href ? (
+    <Link href={href} className={`${classe} transition hover:ring-2 hover:ring-or`}>
+      {contenu}
+    </Link>
+  ) : (
+    <div className={classe}>{contenu}</div>
   );
 }
 
@@ -100,12 +108,17 @@ export function CartesChiffres({
   budgetCentimes,
   postes,
   invites,
+  engageCentimes,
+  lienBudget,
 }: {
   faites: number;
   total: number;
   budgetCentimes: number | null;
   postes: { nom: string; prevuCentimes: number }[];
   invites: number | null;
+  /** Montant déjà engagé (tableau de bord connecté) : remplace le détail des postes. */
+  engageCentimes?: number;
+  lienBudget?: string;
 }) {
   const avancement = total ? Math.round((faites / total) * 100) : 0;
   const principaux = [...postes].sort((a, b) => b.prevuCentimes - a.prevuCentimes).slice(0, 3);
@@ -117,13 +130,17 @@ export function CartesChiffres({
       </Carte>
       <Carte
         libelle="Budget"
+        href={lienBudget}
         pied={
-          budgetCentimes
-            ? principaux.map((p) => `${p.nom} ${euros(p.prevuCentimes)}`).join(" · ")
-            : "À compléter quand vous y verrez plus clair."
+          engageCentimes !== undefined && budgetCentimes
+            ? `${euros(engageCentimes)} engagés, ${euros(budgetCentimes - engageCentimes)} disponibles`
+            : budgetCentimes
+              ? principaux.map((p) => `${p.nom} ${euros(p.prevuCentimes)}`).join(" · ")
+              : "À compléter quand vous y verrez plus clair."
         }
       >
         {budgetCentimes ? euros(budgetCentimes) : "À définir"}
+        {engageCentimes !== undefined && budgetCentimes ? <Barre pourcent={(engageCentimes / budgetCentimes) * 100} /> : null}
       </Carte>
       <Carte libelle="Invités" pied={invites ? `Environ ${Math.ceil(invites / 10)} tables de 10` : "Une estimation suffit pour commencer."}>
         {invites ? `${invites}` : "À estimer"}

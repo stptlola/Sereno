@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { CartesChiffres, EnTeteMariage, FrisePlanning, ProchainesEtapes, type VueTache } from "@/components/tableau";
+import { bilan } from "@/domain/budget/calculs";
 import { ajouterMois, ecartJours, filtrer, filtresActifs, lireFiltres, normaliser, rubriqueDe } from "@/domain/planning";
 import { db } from "@/lib/db";
 import { mariageDe, utilisateurRequis } from "@/lib/session";
@@ -44,7 +45,7 @@ export default async function TableauDeBord({ searchParams }: { searchParams: Pr
       orderBy: [{ dueDate: "asc" }, { createdAt: "asc" }],
       include: { template: { select: { repere: true } } },
     }),
-    db.budgetCategory.findMany({ where: { weddingId: mariage.id }, orderBy: { order: "asc" } }),
+    db.budgetCategory.findMany({ where: { weddingId: mariage.id }, orderBy: { order: "asc" }, include: { expenses: { include: { payments: true } } } }),
     db.member.findFirst({ where: { weddingId: mariage.id, role: "COPILOTE" }, include: { user: true } }),
     db.task.findMany({ where: { weddingId: mariage.id, hiddenByCouple: true }, orderBy: { dueDate: "asc" } }),
   ]);
@@ -86,6 +87,22 @@ export default async function TableauDeBord({ searchParams }: { searchParams: Pr
         budgetCentimes={mariage.budgetTotalCents}
         postes={postes.map((p) => ({ nom: p.name, prevuCentimes: p.plannedCents }))}
         invites={mariage.estimatedGuests}
+        lienBudget="/budget"
+        engageCentimes={
+          bilan(
+            mariage.budgetTotalCents,
+            postes.map((p) => ({ id: p.id, nom: p.name, prevuCentimes: p.plannedCents })),
+            postes.flatMap((p) =>
+              p.expenses.map((e) => ({
+                posteId: p.id,
+                prevuCentimes: e.plannedCents,
+                reelCentimes: e.actualCents,
+                statut: e.status,
+                versements: e.payments.map((v) => ({ montantCentimes: v.amountCents, paye: v.isPaid })),
+              })),
+            ),
+          ).engageCentimes
+        }
       />
 
       {role === "CREATEUR" && !copilote && <InvitationCopilote />}

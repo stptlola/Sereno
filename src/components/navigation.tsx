@@ -3,6 +3,7 @@ import { Logo } from "./logo";
 
 const LIENS = [
   { href: "/tableau-de-bord", libelle: "Planning" },
+  { href: "/budget", libelle: "Budget" },
   { href: "/parametres", libelle: "Paramètres" },
 ];
 
