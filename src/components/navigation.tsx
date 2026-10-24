@@ -1,6 +1,8 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { Logo } from "./logo";
+import { MenuComplet } from "./menu-complet";
+import { GROUPES } from "./rubriques";
 
 const trait = { fill: "none", stroke: "currentColor", strokeWidth: 1.8, strokeLinecap: "round", strokeLinejoin: "round" } as const;
 
@@ -32,20 +34,19 @@ const ICONES: Record<string, ReactNode> = {
   ),
 };
 
-const LIENS = [
+const ONGLETS = [
   { href: "/tableau-de-bord", libelle: "Planning", icone: "planning" },
   { href: "/budget", libelle: "Budget", icone: "budget" },
   { href: "/invites", libelle: "Invités", icone: "invites" },
-  { href: "/parametres", libelle: "Réglages", icone: "reglages" },
 ] as const;
 
 /**
- * Navigation de l'application : en-tête complet sur ordinateur ;
- * sur mobile, le logo en haut et une barre d'onglets en bas, avec le bouton d'ajout au centre.
+ * Navigation de l'application.
+ * Grand écran : barre latérale avec toutes les rubriques. Mobile et tablette : logo en haut, et en bas
+ * Planning, Budget, le bouton d'ajout, Invités, et « Tout » qui ouvre toutes les rubriques.
  */
 export function Navigation({ actif }: { actif?: string }) {
-  const [gauche, droite] = [LIENS.slice(0, 2), LIENS.slice(2)];
-  const onglet = (l: (typeof LIENS)[number]) => (
+  const onglet = (l: (typeof ONGLETS)[number]) => (
     <Link
       key={l.href}
       href={l.href}
@@ -59,38 +60,51 @@ export function Navigation({ actif }: { actif?: string }) {
 
   return (
     <>
-      <header className="sticky top-0 z-20 -mx-6 border-b border-line bg-surface/90 px-6 py-3 backdrop-blur">
-        <div className="flex items-center justify-between gap-4">
-          <Link href="/tableau-de-bord" aria-label="Sereno, retour au planning" className="text-ink">
-            <Logo className="h-7 w-auto sm:h-8" />
-          </Link>
-          <nav className="hidden items-center gap-1 text-sm sm:flex" aria-label="Navigation principale">
-            {LIENS.map((l) => (
-              <Link
-                key={l.href}
-                href={l.href}
-                aria-current={actif === l.href ? "page" : undefined}
-                className={`rounded-full px-3 py-2 ${actif === l.href ? "bg-surface-soft font-semibold text-ink" : "text-ink-muted hover:text-ink"}`}
-              >
-                {l.libelle}
-              </Link>
-            ))}
-            <Link href="/taches/nouvelle" className="ml-2 inline-flex items-center gap-2 rounded-full bg-ink px-4 py-2 font-semibold text-surface transition hover:bg-bronze">
-              <span aria-hidden className="text-lg leading-none text-or">
-                +
-              </span>{" "}
-              Ajouter une tâche
-            </Link>
-          </nav>
-        </div>
+      <header className="sticky top-0 z-20 -mx-6 border-b border-line bg-surface/90 px-6 py-3 backdrop-blur lg:hidden">
+        <Link href="/tableau-de-bord" aria-label="Sereno, retour au planning" className="inline-block text-ink">
+          <Logo className="h-7 w-auto" />
+        </Link>
       </header>
+      {/* Espace en haut sur grand écran, où l'en-tête est remplacé par la barre latérale. */}
+      <div className="hidden h-4 lg:block" aria-hidden />
+
+      <aside id="barre-laterale" className="fixed inset-y-0 left-0 z-20 hidden w-64 flex-col gap-6 overflow-y-auto border-r border-line bg-surface px-5 py-6 lg:flex">
+        <Link href="/tableau-de-bord" aria-label="Sereno, retour au planning" className="text-ink">
+          <Logo className="h-8 w-auto" />
+        </Link>
+        <Link href="/taches/nouvelle" className="inline-flex items-center justify-center gap-2 rounded-full bg-ink px-4 py-2.5 text-sm font-semibold text-surface transition hover:bg-bronze">
+          <span aria-hidden className="text-lg leading-none text-or">
+            +
+          </span>{" "}
+          Ajouter une tâche
+        </Link>
+        <nav aria-label="Rubriques" className="flex flex-col gap-5 text-sm">
+          {GROUPES.map((g) => (
+            <div key={g.titre} className="flex flex-col gap-0.5">
+              <p className="mb-1 px-3 text-[11px] font-semibold tracking-widest text-bronze uppercase">{g.titre}</p>
+              {g.rubriques.map((r) => (
+                <Link
+                  key={r.slug}
+                  href={r.href}
+                  aria-current={actif === r.href ? "page" : undefined}
+                  className={`flex items-center justify-between gap-2 rounded-full px-3 py-1.5 ${actif === r.href ? "bg-surface-soft font-semibold text-ink" : r.bientot ? "text-ink-muted hover:text-ink" : "text-ink hover:bg-surface-soft"}`}
+                >
+                  {r.libelle}
+                  {r.bientot && <span className="rounded-full bg-surface-soft px-2 py-0.5 text-[10px] font-semibold text-bronze">Bientôt</span>}
+                </Link>
+              ))}
+            </div>
+          ))}
+        </nav>
+      </aside>
 
       <nav
         aria-label="Navigation principale mobile"
-        className="fixed inset-x-0 bottom-0 z-30 flex items-stretch border-t border-line bg-surface/95 px-2 backdrop-blur sm:hidden"
+        className="fixed inset-x-0 bottom-0 z-30 flex items-stretch border-t border-line bg-surface/95 px-2 backdrop-blur lg:hidden"
         style={{ paddingBottom: "env(safe-area-inset-bottom, 0px)" }}
       >
-        {gauche.map(onglet)}
+        {onglet(ONGLETS[0])}
+        {onglet(ONGLETS[1])}
         <div className="flex flex-1 items-start justify-center">
           <Link
             href="/taches/nouvelle"
@@ -100,7 +114,8 @@ export function Navigation({ actif }: { actif?: string }) {
             +
           </Link>
         </div>
-        {droite.map(onglet)}
+        {onglet(ONGLETS[2])}
+        <MenuComplet actif={actif} />
       </nav>
     </>
   );

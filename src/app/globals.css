@@ -40,3 +40,10 @@ body {
   font-family: var(--font-sans);
   min-height: 100dvh;
 }
+
+/* Grand écran : la barre latérale de navigation occupe 16rem à gauche. */
+@media (min-width: 1024px) {
+  body:has(#barre-laterale) {
+    padding-left: 16rem;
+  }
+}

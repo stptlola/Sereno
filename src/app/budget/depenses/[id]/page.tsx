@@ -35,7 +35,7 @@ export default async function PageDepense({ params }: { params: Promise<{ id: st
   const payeurs = [mariage.partner1Name, mariage.partner2Name, "Nous deux", "Nos parents"].filter((r): r is string => Boolean(r));
 
   return (
-    <main className="mx-auto flex min-h-dvh max-w-2xl flex-col gap-8 px-6 pt-0 pb-28 sm:pb-24">
+    <main className="mx-auto flex min-h-dvh max-w-2xl flex-col gap-8 px-6 pt-0 pb-28 lg:pb-12">
       <Navigation actif="/budget" />
       <Link href="/budget" className="text-sm text-bronze underline">
         ← Retour au budget

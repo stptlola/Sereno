@@ -22,11 +22,15 @@ model User {
   emailVerified Boolean   @default(false)
   image         String?
   tutoiement    Boolean   @default(false)
+  // Préférences d'e-mails (M11-06)
+  notifHebdo    Boolean   @default(true)
+  notifRappels  Boolean   @default(true)
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
   sessions      Session[]
   accounts      Account[]
   memberships   Member[]
+  notifications NotificationLog[]
 
   @@map("user")
 }
@@ -345,6 +349,18 @@ model GuestMoment {
   moment   Moment @relation(fields: [momentId], references: [id], onDelete: Cascade)
 
   @@id([guestId, momentId])
+}
+
+// Journal des e-mails de rappel : au plus un par personne et par jour (M11).
+model NotificationLog {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type      String
+  day       DateTime @db.Date
+  createdAt DateTime @default(now())
+
+  @@unique([userId, day])
 }
 
 // ---------- Historique (M0-09)

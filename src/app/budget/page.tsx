@@ -43,7 +43,7 @@ export default async function PageBudget() {
   const pourcent = b.budgetCentimes ? Math.min(100, Math.round((b.engageCentimes / b.budgetCentimes) * 100)) : 0;
 
   return (
-    <main className="mx-auto flex min-h-dvh max-w-3xl flex-col gap-8 px-6 pt-0 pb-28 sm:pb-24">
+    <main className="mx-auto flex min-h-dvh max-w-3xl flex-col gap-8 px-6 pt-0 pb-28 lg:pb-12">
       <Navigation actif="/budget" />
       <div>
         <h1 className="font-display text-3xl">Budget</h1>

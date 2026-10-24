@@ -124,7 +124,7 @@ export default async function PageInvites({ searchParams }: { searchParams: Prom
   };
 
   return (
-    <main className="mx-auto flex min-h-dvh max-w-4xl flex-col gap-8 px-6 pt-0 pb-28 sm:pb-24">
+    <main className="mx-auto flex min-h-dvh max-w-4xl flex-col gap-8 px-6 pt-0 pb-28 lg:pb-12">
       <Navigation actif="/invites" />
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
