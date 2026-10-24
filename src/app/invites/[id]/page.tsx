@@ -123,6 +123,9 @@ export default async function PageInvite({ params }: { params: Promise<{ id: str
           <label className="flex items-center gap-2 pb-3 text-sm">
             <input type="checkbox" name="plusOne" defaultChecked={g.plusOne} className="h-5 w-5" /> Vient avec un accompagnant (+ 1)
           </label>
+          <label className="flex items-center gap-2 pb-3 text-sm">
+            <input type="checkbox" name="accessibility" defaultChecked={g.accessibility} className="h-5 w-5" /> Doit être placé près d’une sortie (âge, mobilité)
+          </label>
         </div>
 
         {moments.length > 0 && (

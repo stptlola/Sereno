@@ -101,6 +101,7 @@ export async function modifierMariage(precedent: EtatParametres, formData: FormD
     db.activityLog.create({ data: { weddingId: mariage.id, userId: user.id, entity: "Wedding", entityId: mariage.id, action: "modifie" } }),
   ]);
   revalidatePath("/tableau-de-bord");
+  revalidatePath("/planning");
   revalidatePath("/parametres");
 
   const changes = [

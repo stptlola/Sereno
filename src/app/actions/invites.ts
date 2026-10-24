@@ -17,6 +17,7 @@ const MAX_INVITES = 2000;
 function rafraichir(inviteId?: string) {
   revalidatePath("/invites");
   revalidatePath("/tableau-de-bord");
+  revalidatePath("/planning");
   if (inviteId) revalidatePath(`/invites/${inviteId}`);
 }
 
@@ -96,6 +97,7 @@ export async function modifierInvite(formData: FormData): Promise<void> {
         ageGroup: age,
         age: age === "ENFANT" ? (ageAns ?? null) : null,
         plusOne: formData.get("plusOne") === "on",
+        accessibility: formData.get("accessibility") === "on",
         email: texte(120).parse(formData.get("email") ?? ""),
         phone: texte(30).parse(formData.get("phone") ?? ""),
         diets: formData.getAll("diets").map(String).filter((d) => (REGIMES as readonly string[]).includes(d)),

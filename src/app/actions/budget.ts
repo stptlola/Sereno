@@ -20,6 +20,7 @@ async function journal(weddingId: string, userId: string, entity: string, entity
 function rafraichir(depenseId?: string) {
   revalidatePath("/budget");
   revalidatePath("/tableau-de-bord");
+  revalidatePath("/planning");
   if (depenseId) revalidatePath(`/budget/depenses/${depenseId}`);
 }
 

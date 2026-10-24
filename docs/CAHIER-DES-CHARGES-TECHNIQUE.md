@@ -155,4 +155,6 @@ L'écran `/commencer` utilise ce module : le couple répond aux six écrans, voi
 | 4 · Invités (fait) | Ajout rapide avec alerte de doublon, foyers, accompagnants, enfants, régimes et allergies, moments, réponses en un geste, compteurs, vues par côté, A à Z et tableau, recherche, import et export CSV pour Excel | M4-01 à M4-10, M4-17, M4-19 |
 | 5 · Rappels et RGPD (fait) | Rappels par e-mail (tâche planifiée Coolify, un e-mail par jour au plus, désinscription signée en un clic), préférences, prénom et mot de passe, export JSON, suppression du compte avec transmission au partenaire, contact, pages légales (textes à compléter) | M11-01, M11-02, M11-06, M12-01 à M12-07 |
 
-Le MVP est complet : il reste à compléter les textes légaux, configurer le SMTP et la tâche planifiée en production, puis l'ouvrir aux premiers couples testeurs.
+Le MVP est complet, et la V2 a commencé : mini-site et réponses en ligne, puis plan de table (plan de salle à l'échelle, tables de toutes formes, proposition de placement expliquée, contraintes, alertes, supports imprimés et rapport traiteur). Navigation mobile : Planning, Budget, Accueil, Invités, Menu.
+
+Avant l'ouverture : il reste à compléter les textes légaux, configurer le SMTP et la tâche planifiée en production, puis l'ouvrir aux premiers couples testeurs.

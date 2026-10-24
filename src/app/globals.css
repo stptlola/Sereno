@@ -47,3 +47,22 @@ body {
     padding-left: 16rem;
   }
 }
+
+/* Impression des supports (plan de table, rapport traiteur). */
+@media print {
+  .sans-impression {
+    display: none !important;
+  }
+  html,
+  body {
+    background: #fff !important;
+    color: #000 !important;
+    padding: 0 !important;
+  }
+  .saut-de-page {
+    break-after: page;
+  }
+  .garder-ensemble {
+    break-inside: avoid;
+  }
+}

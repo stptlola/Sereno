@@ -35,7 +35,7 @@ const ICONES: Record<string, ReactNode> = {
 };
 
 const ONGLETS = [
-  { href: "/tableau-de-bord", libelle: "Planning", icone: "planning" },
+  { href: "/planning", libelle: "Planning", icone: "planning" },
   { href: "/budget", libelle: "Budget", icone: "budget" },
   { href: "/invites", libelle: "Invités", icone: "invites" },
 ] as const;
@@ -43,7 +43,7 @@ const ONGLETS = [
 /**
  * Navigation de l'application.
  * Grand écran : barre latérale avec toutes les rubriques. Mobile et tablette : logo en haut, et en bas
- * Planning, Budget, le bouton d'ajout, Invités, et « Tout » qui ouvre toutes les rubriques.
+ * Planning, Budget, l'Accueil au centre (mis en avant), Invités, et « Menu » qui ouvre toutes les rubriques.
  */
 export function Navigation({ actif }: { actif?: string }) {
   const onglet = (l: (typeof ONGLETS)[number]) => (
@@ -105,15 +105,20 @@ export function Navigation({ actif }: { actif?: string }) {
       >
         {onglet(ONGLETS[0])}
         {onglet(ONGLETS[1])}
-        <div className="flex flex-1 items-start justify-center">
-          <Link
-            href="/taches/nouvelle"
-            aria-label="Ajouter une tâche"
-            className="-mt-5 flex h-14 w-14 items-center justify-center rounded-full border-4 border-surface bg-ink text-3xl leading-none text-or shadow-md"
-          >
-            +
-          </Link>
-        </div>
+        <Link
+          href="/tableau-de-bord"
+          aria-current={actif === "/tableau-de-bord" ? "page" : undefined}
+          className={`flex min-w-0 flex-1 flex-col items-center gap-0.5 pb-2 text-[11px] ${actif === "/tableau-de-bord" ? "font-semibold text-ink" : "text-ink-muted"}`}
+        >
+          <span className={`-mt-5 flex h-14 w-14 items-center justify-center rounded-full border-4 border-surface shadow-md ${actif === "/tableau-de-bord" ? "bg-ink" : "bg-ink/90"}`}>
+            <svg viewBox="0 0 64 64" className="h-8 w-8" aria-hidden>
+              <circle cx="25" cy="39" r="12.5" fill="none" stroke="var(--color-or)" strokeWidth="5" />
+              <circle cx="40" cy="31" r="12.5" fill="none" stroke="var(--color-or)" strokeWidth="3" />
+              <path d="M40 11.5 L44.5 16 L40 21 L35.5 16 Z" fill="var(--color-or)" />
+            </svg>
+          </span>
+          Accueil
+        </Link>
         {onglet(ONGLETS[2])}
         <MenuComplet actif={actif} />
       </nav>

@@ -57,7 +57,7 @@ export async function POST(request: Request) {
       a: envoi.email,
       sujet: envoi.sujet,
       texte: contenuRappel(envoi, prenom),
-      lien: { libelle: "Ouvrir mon planning", url: `${e.APP_URL}/tableau-de-bord` },
+      lien: { libelle: "Ouvrir mon planning", url: `${e.APP_URL}/planning` },
       desinscription: `${e.APP_URL}/desinscription?u=${encodeURIComponent(envoi.userId)}&s=${signer(e.AUTH_SECRET, donneesLien)}`,
     });
     envoyes++;

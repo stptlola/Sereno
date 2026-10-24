@@ -23,7 +23,7 @@ export async function modifierTache(formData: FormData): Promise<void> {
   const { user, mariage } = await accesEcriture();
   const id = z.string().min(1).parse(formData.get("id"));
   const tache = await db.task.findFirst({ where: { id, weddingId: mariage.id } });
-  if (!tache) redirect("/tableau-de-bord");
+  if (!tache) redirect("/planning");
   const donnees = schemaTache.parse({
     status: formData.get("status"),
     assignee: formData.get("assignee") ?? "",
@@ -43,7 +43,8 @@ export async function modifierTache(formData: FormData): Promise<void> {
   });
   await journal(mariage.id, user.id, id, "modifiee");
   revalidatePath("/tableau-de-bord");
-  redirect("/tableau-de-bord");
+  revalidatePath("/planning");
+  redirect("/planning");
 }
 
 /** Ajoute une tâche personnelle (M2-05). */
@@ -67,7 +68,8 @@ export async function ajouterTache(formData: FormData): Promise<void> {
   });
   await journal(mariage.id, user.id, tache.id, "creee");
   revalidatePath("/tableau-de-bord");
-  redirect("/tableau-de-bord");
+  revalidatePath("/planning");
+  redirect("/planning");
 }
 
 /**
@@ -84,7 +86,8 @@ export async function retirerTache(formData: FormData): Promise<void> {
     await journal(mariage.id, user.id, id, tache.templateId ? "masquee" : "supprimee");
   }
   revalidatePath("/tableau-de-bord");
-  redirect("/tableau-de-bord");
+  revalidatePath("/planning");
+  redirect("/planning");
 }
 
 export async function reafficherTache(formData: FormData): Promise<void> {
@@ -93,4 +96,5 @@ export async function reafficherTache(formData: FormData): Promise<void> {
   await db.task.updateMany({ where: { id, weddingId: mariage.id }, data: { hidden: false, hiddenByCouple: false, updatedById: user.id } });
   await journal(mariage.id, user.id, id, "reaffichee");
   revalidatePath("/tableau-de-bord");
+  revalidatePath("/planning");
 }

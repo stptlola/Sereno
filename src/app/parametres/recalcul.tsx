@@ -78,7 +78,7 @@ export function RecalculTermine({ recalculees, ajoutees, retirees }: { recalcule
         </div>
       </div>
       <p className="text-sm text-ink-muted">Vos tâches faites et vos tâches personnelles n’ont pas bougé.</p>
-      <Link href="/tableau-de-bord" className="self-start rounded-full bg-ink px-6 py-3 font-semibold text-surface">
+      <Link href="/planning" className="self-start rounded-full bg-ink px-6 py-3 font-semibold text-surface">
         Voir mon planning
       </Link>
     </div>

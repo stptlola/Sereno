@@ -28,7 +28,7 @@ export default async function PageTache({ params }: { params: Promise<{ id: stri
   return (
     <main className="mx-auto flex min-h-dvh max-w-2xl flex-col gap-8 px-6 pt-0 pb-28 lg:pb-12">
       <Navigation />
-      <Link href="/tableau-de-bord" className="text-sm text-bronze underline">
+      <Link href="/planning" className="text-sm text-bronze underline">
         ← Retour au planning
       </Link>
       <form action={modifierTache} className="flex flex-col gap-5">

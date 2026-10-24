@@ -131,6 +131,70 @@ model Wedding {
   activity          ActivityLog[]
   invitations       Invitation[]
   site              MiniSite?
+  // Plan de salle (M5-16), en centimètres.
+  roomWidthCm       Int         @default(2000)
+  roomDepthCm       Int         @default(1400)
+  tables            SeatingTable[]
+  roomElements      RoomElement[]
+  seatingRules      SeatingConstraint[]
+}
+
+enum FormeTable {
+  RONDE
+  RECTANGLE
+  OVALE
+  CARREE
+  DEMI_LUNE
+}
+
+// Tables du plan (M5-06, M5-17). Position du centre en centimètres sur le plan de salle.
+model SeatingTable {
+  id        String     @id @default(cuid())
+  weddingId String
+  wedding   Wedding    @relation(fields: [weddingId], references: [id], onDelete: Cascade)
+  name      String
+  number    Int
+  shape     FormeTable @default(RONDE)
+  seats     Int        @default(10)
+  honor     Boolean    @default(false)
+  x         Int        @default(300)
+  y         Int        @default(300)
+  rotation  Int        @default(0)
+  guests    Guest[]
+  createdAt DateTime   @default(now())
+
+  @@index([weddingId])
+}
+
+// Éléments du plan de salle (M5-16) : piste, scène, buffet, bar, DJ, gâteau, cadeaux, sortie…
+model RoomElement {
+  id        String  @id @default(cuid())
+  weddingId String
+  wedding   Wedding @relation(fields: [weddingId], references: [id], onDelete: Cascade)
+  kind      String
+  label     String?
+  x         Int
+  y         Int
+  width     Int
+  depth     Int
+  rotation  Int     @default(0)
+
+  @@index([weddingId])
+}
+
+// Contraintes de placement (M5-20) : deux invités ensemble, ou à séparer.
+model SeatingConstraint {
+  id        String  @id @default(cuid())
+  weddingId String
+  wedding   Wedding @relation(fields: [weddingId], references: [id], onDelete: Cascade)
+  guestAId  String
+  guestA    Guest   @relation("ContrainteA", fields: [guestAId], references: [id], onDelete: Cascade)
+  guestBId  String
+  guestB    Guest   @relation("ContrainteB", fields: [guestBId], references: [id], onDelete: Cascade)
+  together  Boolean
+
+  @@unique([guestAId, guestBId])
+  @@index([weddingId])
 }
 
 // Mini-site du mariage (M5-01, M5-02, M5-05, M5-11, M5-12).
@@ -355,6 +419,13 @@ model Guest {
   rsvpMessage String?
   rsvpAnswers Json?
   rsvpOnline  Boolean       @default(false)
+  // Plan de table (M5-07, M5-17, M5-20)
+  tableId       String?
+  table         SeatingTable? @relation(fields: [tableId], references: [id], onDelete: SetNull)
+  seat          Int?
+  accessibility Boolean       @default(false)
+  constraintsA  SeatingConstraint[] @relation("ContrainteA")
+  constraintsB  SeatingConstraint[] @relation("ContrainteB")
   moments     GuestMoment[]
   createdAt   DateTime      @default(now())
   updatedAt   DateTime      @updatedAt

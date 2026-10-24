@@ -18,7 +18,7 @@ export function MenuComplet({ actif }: { actif?: string }) {
     };
   }, [ouvert]);
 
-  const surRubriqueSecondaire = actif !== undefined && !["/tableau-de-bord", "/budget", "/invites"].includes(actif);
+  const surRubriqueSecondaire = actif !== undefined && !["/tableau-de-bord", "/planning", "/budget", "/invites"].includes(actif);
   return (
     <>
       <button
@@ -39,7 +39,7 @@ export function MenuComplet({ actif }: { actif?: string }) {
           <circle cx="12" cy="18" r="1.6" />
           <circle cx="18" cy="18" r="1.6" />
         </svg>
-        Tout
+        Menu
       </button>
       {/* Affiché au niveau de la page : le flou de la barre du bas emprisonnerait sinon le menu en plein écran. */}
       {ouvert &&

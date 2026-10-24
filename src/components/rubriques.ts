@@ -30,7 +30,8 @@ export const GROUPES: GroupeRubriques[] = [
   {
     titre: "Organiser",
     rubriques: [
-      { slug: "planning", libelle: "Planning", href: "/tableau-de-bord" },
+      { slug: "accueil", libelle: "Accueil", href: "/tableau-de-bord" },
+      { slug: "planning", libelle: "Planning", href: "/planning" },
       { slug: "budget", libelle: "Budget", href: "/budget" },
       { slug: "invites", libelle: "Invités", href: "/invites" },
       { slug: "site", libelle: "Mini-site et réponses", href: "/site" },
@@ -42,7 +43,7 @@ export const GROUPES: GroupeRubriques[] = [
     rubriques: [
       bientot("lieux", "Lieux et réception", "Réception", "Le lieu, le traiteur, les boissons, la musique, la déco : tout ce qui fait la réception, avec un menu et un calcul des boissons."),
       bientot("ceremonie", "Cérémonie", "Cérémonie", "Le déroulé de chaque cérémonie, civile, laïque ou religieuse, et un livret prêt à imprimer."),
-      bientot("plan-de-table", "Plan de table", "Invités", "Un plan de salle à l’échelle, vos invités placés à leur chaise, une proposition automatique et tous les supports imprimés.", ["plan de table"]),
+      { slug: "plan-de-table", libelle: "Plan de table", href: "/plan-de-table" },
       bientot("jour-j", "Jour J", "Jour J", "Le déroulé heure par heure, la checklist du matin, les contacts d’urgence et le plan B météo, sur une vue mobile ultra-simple."),
     ],
   },

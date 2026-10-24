@@ -60,6 +60,7 @@ export async function creerMariageDepuisDemarrage(brut: unknown): Promise<{ ok: 
     });
   });
   revalidatePath("/tableau-de-bord");
+  revalidatePath("/planning");
   return { ok: true };
 }
 
@@ -82,6 +83,7 @@ export async function basculerTache(formData: FormData): Promise<void> {
     }),
   ]);
   revalidatePath("/tableau-de-bord");
+  revalidatePath("/planning");
 }
 
 export type EtatInvitation = { lien?: string; message?: string; erreur?: string };
