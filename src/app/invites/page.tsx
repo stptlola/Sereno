@@ -69,6 +69,7 @@ function LigneInvite({ g }: { g: InviteListe }) {
         <Link href={`/invites/${g.id}`} className="font-semibold hover:underline">
           {[g.firstName, g.lastName].filter(Boolean).join(" ")}
           {g.plusOne && <span className="font-normal text-ink-muted"> + 1</span>}
+          {g.rsvpOnline && <span className="ml-2 rounded-full bg-surface-soft px-2 py-0.5 text-[10px] font-semibold text-bronze">en ligne</span>}
         </Link>
         <span className="text-xs text-ink-muted">
           {[g.household?.name, g.ageGroup === "ENFANT" ? `Enfant${g.age ? `, ${g.age} ans` : ""}` : null, g.diets.join(", ") || null, g.allergies ? `Allergies : ${g.allergies}` : null]

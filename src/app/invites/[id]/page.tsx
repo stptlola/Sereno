@@ -25,10 +25,11 @@ function Choix({ name, valeur, actif, children, type = "radio" }: { name: string
 export default async function PageInvite({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const { mariage } = await accesEcriture();
-  const [g, moments, foyers] = await Promise.all([
+  const [g, moments, foyers, site] = await Promise.all([
     db.guest.findFirst({ where: { id, weddingId: mariage.id }, include: { household: true, moments: true } }),
     db.moment.findMany({ where: { weddingId: mariage.id }, orderBy: { name: "asc" } }),
     db.household.findMany({ where: { weddingId: mariage.id }, orderBy: { name: "asc" } }),
+    db.miniSite.findUnique({ where: { weddingId: mariage.id }, select: { questions: true } }),
   ]);
   if (!g) notFound();
 
@@ -38,6 +39,17 @@ export default async function PageInvite({ params }: { params: Promise<{ id: str
       <Link href="/invites" className="text-sm text-bronze underline">
         ← Retour aux invités
       </Link>
+      {g.rsvpOnline && (
+        <section className="flex flex-col gap-1 rounded-md bg-surface-soft p-4 text-sm">
+          <p className="font-semibold">Réponse en ligne{g.rsvpAt ? ` le ${new Intl.DateTimeFormat("fr-FR", { day: "numeric", month: "long" }).format(g.rsvpAt)}` : ""}</p>
+          {g.rsvpMessage && <p className="italic">« {g.rsvpMessage} »</p>}
+          {Object.entries((g.rsvpAnswers as Record<string, string>) ?? {}).map(([k, v]) => (
+            <p key={k}>
+              {((site?.questions as { id: string; libelle: string }[] | undefined) ?? []).find((q) => q.id === k)?.libelle ?? k} : {v}
+            </p>
+          ))}
+        </section>
+      )}
       <form key={g.updatedAt.getTime()} action={modifierInvite} className="flex flex-col gap-5">
         <input type="hidden" name="id" value={g.id} />
         <div className="grid grid-cols-2 gap-3">

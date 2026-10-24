@@ -33,6 +33,7 @@ export const GROUPES: GroupeRubriques[] = [
       { slug: "planning", libelle: "Planning", href: "/tableau-de-bord" },
       { slug: "budget", libelle: "Budget", href: "/budget" },
       { slug: "invites", libelle: "Invités", href: "/invites" },
+      { slug: "site", libelle: "Mini-site et réponses", href: "/site" },
       bientot("prestataires", "Prestataires", "Prestataires", "Un carnet pour tous vos prestataires : contacts, devis comparés côte à côte, contrats, et les questions à poser à chaque métier."),
     ],
   },

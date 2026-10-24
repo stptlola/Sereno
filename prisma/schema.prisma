@@ -130,6 +130,33 @@ model Wedding {
   moments           Moment[]
   activity          ActivityLog[]
   invitations       Invitation[]
+  site              MiniSite?
+}
+
+// Mini-site du mariage (M5-01, M5-02, M5-05, M5-11, M5-12).
+model MiniSite {
+  id           String    @id @default(cuid())
+  weddingId    String    @unique
+  wedding      Wedding   @relation(fields: [weddingId], references: [id], onDelete: Cascade)
+  slug         String    @unique
+  published    Boolean   @default(false)
+  // Empreinte scrypt du mot de passe facultatif (jamais le mot de passe lui-même).
+  passwordHash String?
+  welcome      String?
+  /** [{ heure, titre, lieu }] */
+  programme    Json      @default("[]")
+  /** [{ nom, adresse }] */
+  lieux        Json      @default("[]")
+  hebergements String?
+  transport    String?
+  cadeauxLien  String?
+  /** [{ question, reponse }] */
+  faq          Json      @default("[]")
+  /** [{ id, libelle, type, choix }] */
+  questions    Json      @default("[]")
+  rsvpDeadline DateTime? @db.Date
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
 }
 
 model Member {
@@ -323,6 +350,11 @@ model Guest {
   rsvpAt      DateTime?
   plusOne     Boolean       @default(false)
   listB       Boolean       @default(false)
+  // Réponse en ligne (M5-03) : lien personnel, message et réponses aux questions du couple.
+  rsvpToken   String?       @unique
+  rsvpMessage String?
+  rsvpAnswers Json?
+  rsvpOnline  Boolean       @default(false)
   moments     GuestMoment[]
   createdAt   DateTime      @default(now())
   updatedAt   DateTime      @updatedAt
