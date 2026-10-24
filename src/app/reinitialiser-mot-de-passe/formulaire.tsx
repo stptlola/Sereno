@@ -3,10 +3,12 @@ import Link from "next/link";
 import { useState } from "react";
 import { Bouton, Champ, Message } from "@/components/ui";
 import { authClient } from "@/lib/auth-client";
+import { usePret } from "@/lib/pret";
 import { messageErreur } from "@/lib/erreurs-auth";
 
 export function FormulaireReinitialisation({ jeton }: { jeton: string | null }) {
   const [fait, setFait] = useState(false);
+  const pret = usePret();
   const [erreur, setErreur] = useState<string | null>(jeton ? null : messageErreur("INVALID_TOKEN"));
 
   async function soumettre(e: React.FormEvent<HTMLFormElement>) {
@@ -31,7 +33,7 @@ export function FormulaireReinitialisation({ jeton }: { jeton: string | null }) 
     );
 
   return (
-    <form onSubmit={soumettre} className="flex flex-col gap-4">
+    <form onSubmit={soumettre} method="post" className="flex flex-col gap-4">
       <Champ
         libelle="Nouveau mot de passe"
         id="motDePasse"
@@ -43,7 +45,7 @@ export function FormulaireReinitialisation({ jeton }: { jeton: string | null }) 
         aide="8 caractères minimum."
       />
       {erreur && <Message>{erreur}</Message>}
-      <Bouton type="submit" disabled={!jeton}>
+      <Bouton type="submit" disabled={!jeton || !pret}>
         Changer mon mot de passe
       </Bouton>
     </form>

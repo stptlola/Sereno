@@ -2,9 +2,11 @@
 import { useState } from "react";
 import { Bouton, Champ, Message, PageCompte } from "@/components/ui";
 import { authClient } from "@/lib/auth-client";
+import { usePret } from "@/lib/pret";
 
 export default function PageMotDePasseOublie() {
   const [envoye, setEnvoye] = useState(false);
+  const pret = usePret();
   const [envoi, setEnvoi] = useState(false);
 
   async function soumettre(e: React.FormEvent<HTMLFormElement>) {
@@ -24,9 +26,9 @@ export default function PageMotDePasseOublie() {
       {envoye ? (
         <Message type="info">Si un compte existe avec cette adresse, un e-mail vient de partir. Pensez à regarder dans les indésirables.</Message>
       ) : (
-        <form onSubmit={soumettre} className="flex flex-col gap-4">
+        <form onSubmit={soumettre} method="post" className="flex flex-col gap-4">
           <Champ libelle="Adresse e-mail" id="email" name="email" type="email" autoComplete="email" required />
-          <Bouton type="submit" disabled={envoi}>
+          <Bouton type="submit" disabled={envoi || !pret}>
             Recevoir le lien
           </Bouton>
         </form>

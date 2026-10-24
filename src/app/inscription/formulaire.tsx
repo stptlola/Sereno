@@ -5,11 +5,13 @@ import { useState } from "react";
 import { BoutonsSociaux } from "@/components/boutons-sociaux";
 import { Bouton, Champ, Message } from "@/components/ui";
 import { authClient } from "@/lib/auth-client";
+import { usePret } from "@/lib/pret";
 import { messageErreur } from "@/lib/erreurs-auth";
 
 export function FormulaireInscription({ retour, google, apple }: { retour: string; google: boolean; apple: boolean }) {
   const router = useRouter();
   const [erreur, setErreur] = useState<string | null>(null);
+  const pret = usePret();
   const [code, setCode] = useState<string | undefined>();
   const [envoi, setEnvoi] = useState(false);
 
@@ -37,7 +39,7 @@ export function FormulaireInscription({ retour, google, apple }: { retour: strin
   return (
     <div className="flex flex-col gap-6">
       <BoutonsSociaux google={google} apple={apple} retour={retour} />
-      <form onSubmit={soumettre} className="flex flex-col gap-4">
+      <form onSubmit={soumettre} method="post" className="flex flex-col gap-4">
         <Champ libelle="Votre prénom" id="prenom" name="prenom" autoComplete="given-name" required />
         <Champ libelle="Adresse e-mail" id="email" name="email" type="email" autoComplete="email" required />
         <Champ
@@ -60,7 +62,7 @@ export function FormulaireInscription({ retour, google, apple }: { retour: strin
             )}
           </Message>
         )}
-        <Bouton type="submit" disabled={envoi}>
+        <Bouton type="submit" disabled={envoi || !pret}>
           {envoi ? "Création…" : "Créer mon compte"}
         </Bouton>
         <p className="text-center text-sm text-ink-muted">
