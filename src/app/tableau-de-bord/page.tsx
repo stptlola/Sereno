@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { CartesChiffres, EnTeteMariage, FrisePlanning, ProchainesEtapes, type VueTache } from "@/components/tableau";
-import { ajouterMois, ecartJours, normaliser } from "@/domain/planning";
+import { ajouterMois, ecartJours, filtrer, filtresActifs, lireFiltres, normaliser, rubriqueDe } from "@/domain/planning";
 import { db } from "@/lib/db";
 import { mariageDe, utilisateurRequis } from "@/lib/session";
 import { Navigation } from "@/components/navigation";
 import { basculerTache } from "../actions/mariage";
 import { reafficherTache } from "../actions/taches";
+import { BarreFiltres } from "./barre-filtres";
 import { InvitationCopilote } from "./invitation-copilote";
 
 export const metadata: Metadata = { title: "Tableau de bord · Sereno" };
@@ -30,7 +31,8 @@ function CaseTache({ tache }: { tache: VueTache }) {
   );
 }
 
-export default async function TableauDeBord() {
+export default async function TableauDeBord({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
+  const filtres = lireFiltres(await searchParams);
   const user = await utilisateurRequis("/tableau-de-bord");
   const acces = await mariageDe(user.id);
   if (!acces) redirect("/commencer");
@@ -49,7 +51,7 @@ export default async function TableauDeBord() {
 
   const aujourdhui = normaliser(new Date());
   const dateMariage = mariage.date ?? ajouterMois(mariage.startDate, 12);
-  const vues: VueTache[] = taches.map((t) => ({
+  const versVue = (t: (typeof taches)[number]): VueTache => ({
     id: t.id,
     titre: t.title,
     conseil: t.tip,
@@ -59,7 +61,17 @@ export default async function TableauDeBord() {
     enCours: t.status === "EN_COURS",
     responsable: t.assignee,
     href: `/taches/${t.id}`,
-  }));
+  });
+  const vues = taches.map(versVue);
+  const actifs = filtresActifs(filtres);
+  const filtrees = actifs
+    ? filtrer(
+        taches.map((t) => ({ t, titre: t.title, statut: t.status, responsable: t.assignee, categorie: t.category })),
+        filtres,
+      ).map((x) => versVue(x.t))
+    : vues;
+  const responsables = [...new Set([mariage.partner1Name, mariage.partner2Name, ...taches.map((t) => t.assignee)].filter((r): r is string => Boolean(r)))];
+  const rubriques = [...new Set(taches.map((t) => rubriqueDe(t.category)))].sort((a, b) => a.localeCompare(b, "fr"));
   const caseACocher = (t: VueTache) => <CaseTache tache={t} />;
   const prenoms = [mariage.partner1Name, mariage.partner2Name].filter(Boolean).join(" et ");
 
@@ -84,7 +96,14 @@ export default async function TableauDeBord() {
       )}
 
       <ProchainesEtapes taches={vues.filter((v) => !v.faite).slice(0, 3)} aujourdhui={aujourdhui} caseACocher={caseACocher} />
-      <FrisePlanning taches={vues} aujourdhui={aujourdhui} dateMariage={dateMariage} caseACocher={caseACocher} />
+      <FrisePlanning
+        taches={filtrees}
+        aujourdhui={aujourdhui}
+        dateMariage={dateMariage}
+        caseACocher={caseACocher}
+        toutOuvrir={actifs}
+        avant={<BarreFiltres responsables={responsables} rubriques={rubriques} total={filtrees.length} />}
+      />
 
       {masquees.length > 0 && (
         <details className="rounded-md border border-line bg-surface-raised p-4">

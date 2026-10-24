@@ -185,16 +185,24 @@ export function FrisePlanning({
   aujourdhui,
   dateMariage,
   caseACocher,
+  toutOuvrir = false,
+  avant,
 }: {
   taches: VueTache[];
   aujourdhui: Date;
   dateMariage: Date;
   caseACocher?: (t: VueTache) => ReactNode;
+  /** Ouvre toutes les périodes (quand des filtres sont actifs). */
+  toutOuvrir?: boolean;
+  /** Contenu affiché sous le titre (barre de filtres). */
+  avant?: ReactNode;
 }) {
   const periodes = grouperParPeriode(taches, aujourdhui, dateMariage);
   return (
-    <section className="flex flex-col gap-3">
+    <section className="flex flex-col gap-3" id="planning">
       <h2 className="font-display text-2xl">Votre planning</h2>
+      {avant}
+      {periodes.length === 0 && <p className="text-ink-muted">Aucune tâche ne correspond à votre recherche.</p>}
       <ol className="relative flex flex-col gap-2 border-l-2 border-line pl-5">
         {periodes.map((p) => {
           const faites = p.taches.filter((t) => t.faite).length;
@@ -206,7 +214,7 @@ export function FrisePlanning({
                 aria-hidden
                 className={`absolute top-5 -left-[27px] h-3 w-3 rounded-full border-2 ${alerte ? "border-alerte bg-alerte" : toutFait ? "border-or bg-or" : "border-ink bg-surface"}`}
               />
-              <details open={p.ouverte} className={`group rounded-md border bg-surface-raised ${alerte ? "border-alerte" : "border-line"}`}>
+              <details open={toutOuvrir || p.ouverte} className={`group rounded-md border bg-surface-raised ${alerte ? "border-alerte" : "border-line"}`}>
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-3 p-4 [&::-webkit-details-marker]:hidden">
                   <span className="flex flex-col">
                     <span className={`font-semibold ${alerte ? "text-alerte" : ""}`}>{p.libelle}</span>
