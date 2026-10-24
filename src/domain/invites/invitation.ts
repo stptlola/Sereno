@@ -54,3 +54,53 @@ export function preparerInvitation(type: TypeInvitation, saisies: readonly Perso
 export function cleTriFoyer(g: { foyer: string | null; nom: string | null; prenom: string; enfant: boolean }): string {
   return `${sansAccents(g.foyer ?? `${g.nom ?? ""} ${g.prenom}`)}|${g.enfant ? 1 : 0}|${sansAccents(g.prenom)}`;
 }
+
+export interface MembreInvitation {
+  id: string;
+  prenom: string;
+  nom: string | null;
+  foyerId: string | null;
+  foyer: string | null;
+  enfant: boolean;
+  reponse: "EN_ATTENTE" | "PRESENT" | "ABSENT";
+  cote: string;
+  lien: string | null;
+}
+
+export interface InvitationListe<T extends MembreInvitation = MembreInvitation> {
+  cle: string;
+  titre: string;
+  /** Prénoms des membres (« Léa, Lily et Marc »), vide pour une personne seule. */
+  prenoms: string;
+  membres: T[];
+  /** Réponse commune, ou « MIXTE » si les membres n'ont pas répondu pareil. */
+  reponse: MembreInvitation["reponse"] | "MIXTE";
+  cote: string;
+  lien: string | null;
+}
+
+const enumerer = (noms: string[]) => (noms.length <= 1 ? noms.join("") : `${noms.slice(0, -1).join(", ")} et ${noms[noms.length - 1]}`);
+
+/**
+ * Regroupe les invités par invitation (leur foyer), pour une ligne par invitation dans la liste :
+ * « Katy et Hervé Stephant », « Famille Meurisse ». Une personne sans foyer forme sa propre invitation.
+ */
+export function regrouperParInvitation<T extends MembreInvitation>(invites: readonly T[]): InvitationListe<T>[] {
+  const parCle = new Map<string, T[]>();
+  for (const g of invites) parCle.set(g.foyerId ?? g.id, [...(parCle.get(g.foyerId ?? g.id) ?? []), g]);
+  return [...parCle.entries()].map(([cle, membres]) => {
+    // Adultes d'abord, puis l'ordre de saisie (tri stable) : « Katy et Hervé », comme sur l'invitation.
+    const tries = [...membres].sort((a, b) => Number(a.enfant) - Number(b.enfant));
+    const seul = tries.length === 1;
+    const reponses = new Set(tries.map((m) => m.reponse));
+    return {
+      cle,
+      titre: seul ? [tries[0]!.prenom, tries[0]!.nom].filter(Boolean).join(" ") : (tries[0]!.foyer ?? enumerer(tries.map((m) => m.prenom))),
+      prenoms: seul ? "" : enumerer(tries.map((m) => m.prenom)),
+      membres: tries,
+      reponse: reponses.size === 1 ? tries[0]!.reponse : "MIXTE",
+      cote: tries[0]!.cote,
+      lien: tries.find((m) => !m.enfant)?.lien ?? tries[0]!.lien,
+    };
+  });
+}

@@ -120,6 +120,32 @@ export async function changerReponse(formData: FormData): Promise<void> {
   rafraichir(g.id);
 }
 
+/** Réponse pour toute une invitation en un geste (M4-06). */
+export async function changerReponseInvitation(formData: FormData): Promise<void> {
+  const { user, mariage } = await accesEcriture();
+  const ids = formData.getAll("id").map(String).slice(0, 30);
+  const rsvp = z.enum(["EN_ATTENTE", "PRESENT", "ABSENT"]).parse(formData.get("rsvp"));
+  const { count } = await db.guest.updateMany({ where: { id: { in: ids }, weddingId: mariage.id }, data: { rsvp, rsvpAt: rsvp === "EN_ATTENTE" ? null : new Date() } });
+  if (count) await db.activityLog.create({ data: { weddingId: mariage.id, userId: user.id, entity: "Guest", entityId: ids[0]!, action: `reponse-${rsvp}-${count}` } });
+  rafraichir();
+}
+
+/** Retire toute une invitation (ses membres et son foyer). */
+export async function supprimerInvitation(formData: FormData): Promise<void> {
+  const { user, mariage } = await accesEcriture();
+  const ids = formData.getAll("id").map(String).slice(0, 30);
+  const membres = await db.guest.findMany({ where: { id: { in: ids }, weddingId: mariage.id }, select: { id: true, householdId: true } });
+  if (!membres.length) return;
+  const foyers = [...new Set(membres.map((m) => m.householdId).filter((f): f is string => Boolean(f)))];
+  await db.$transaction([
+    db.guest.deleteMany({ where: { id: { in: membres.map((m) => m.id) }, weddingId: mariage.id } }),
+    // Un foyer qui n'a plus personne disparaît aussi.
+    db.household.deleteMany({ where: { id: { in: foyers }, weddingId: mariage.id, guests: { none: {} } } }),
+    db.activityLog.create({ data: { weddingId: mariage.id, userId: user.id, entity: "Guest", entityId: membres[0]!.id, action: `invitation-supprimee-${membres.length}` } }),
+  ]);
+  rafraichir();
+}
+
 export async function modifierInvite(formData: FormData): Promise<void> {
   const { user, mariage } = await accesEcriture();
   const g = await db.guest.findFirst({ where: { id: id.parse(formData.get("id")), weddingId: mariage.id } });

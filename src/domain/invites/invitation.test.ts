@@ -56,3 +56,34 @@ describe("ajout par invitation", () => {
     expect(preparerInvitation("famille", [{ prenom: " ", nom: "", enfant: false }], "Durand", false)).toHaveProperty("erreur");
   });
 });
+
+import { regrouperParInvitation } from "./invitation";
+
+describe("liste par invitation", () => {
+  const m = (id: string, prenom: string, x: Partial<Parameters<typeof regrouperParInvitation>[0][number]> = {}) => ({
+    id, prenom, nom: "Meurisse", foyerId: null as string | null, foyer: null as string | null, enfant: false, reponse: "EN_ATTENTE" as const, cote: "PARTENAIRE_1", lien: "famille", ...x,
+  });
+
+  it("regroupe un foyer sur une seule ligne, adultes d'abord", () => {
+    const [inv] = regrouperParInvitation([m("1", "Marc", { foyerId: "f", foyer: "Famille Meurisse", enfant: true }), m("2", "Léa", { foyerId: "f", foyer: "Famille Meurisse" }), m("3", "Lily", { foyerId: "f", foyer: "Famille Meurisse" })]);
+    expect(inv?.titre).toBe("Famille Meurisse");
+    expect(inv?.prenoms).toBe("Léa, Lily et Marc");
+    expect(inv?.membres).toHaveLength(3);
+  });
+
+  it("une personne seule garde son nom complet, sans liste de prénoms", () => {
+    const [inv] = regrouperParInvitation([m("1", "Sylvie", { nom: "Cerf" })]);
+    expect(inv).toMatchObject({ titre: "Sylvie Cerf", prenoms: "" });
+  });
+
+  it("garde l'ordre de saisie du couple", () => {
+    const [inv] = regrouperParInvitation([m("1", "Katy", { foyerId: "f", foyer: "Katy et Hervé Stephant" }), m("2", "Hervé", { foyerId: "f", foyer: "Katy et Hervé Stephant" })]);
+    expect(inv?.prenoms).toBe("Katy et Hervé");
+  });
+
+  it("signale des réponses différentes au sein d'un foyer", () => {
+    const [inv] = regrouperParInvitation([m("1", "Katy", { foyerId: "f", foyer: "Katy et Hervé Stephant", reponse: "PRESENT" }), m("2", "Hervé", { foyerId: "f", foyer: "Katy et Hervé Stephant", reponse: "ABSENT" })]);
+    expect(inv?.reponse).toBe("MIXTE");
+    expect(inv?.titre).toBe("Katy et Hervé Stephant");
+  });
+});

@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Navigation } from "@/components/navigation";
-import { cleTriFoyer, estAccompagnantAConfirmer } from "@/domain/invites/invitation";
+import { estAccompagnantAConfirmer, regrouperParInvitation } from "@/domain/invites/invitation";
 import { compter, libelleLien, LIENS, repartition, type Cote } from "@/domain/invites/invites";
 import { sansAccents } from "@/domain/planning";
 import { accesEcriture } from "@/lib/acces";
 import { db } from "@/lib/db";
 import { ajouterMoment, changerReponse } from "../actions/invites";
 import { AjoutInvite } from "./ajout";
+import { LigneInvitation } from "./ligne-invitation";
 import { OutilsInvites } from "./outils";
 
 export const metadata: Metadata = { title: "Invités · Sereno" };
@@ -37,7 +38,8 @@ function charger(weddingId: string) {
   return db.guest.findMany({
     where: { weddingId },
     include: { household: true, moments: true },
-    orderBy: [{ lastName: "asc" }, { firstName: "asc" }],
+    // Ordre de saisie : les membres d'une invitation gardent l'ordre de l'invitation (« Katy et Hervé »).
+    orderBy: [{ createdAt: "asc" }],
   });
 }
 
@@ -60,26 +62,6 @@ function BoutonsReponse({ g }: { g: InviteListe }) {
         </form>
       ))}
     </div>
-  );
-}
-
-function LigneInvite({ g }: { g: InviteListe }) {
-  return (
-    <li className="flex flex-wrap items-center gap-x-3 gap-y-1 border-b border-line py-2 last:border-b-0">
-      <div className="flex min-w-0 flex-1 flex-col">
-        <Link href={`/invites/${g.id}`} className="font-semibold hover:underline">
-          {[g.firstName, g.lastName].filter(Boolean).join(" ")}
-          {estAccompagnantAConfirmer(g.firstName) && <span className="ml-2 rounded-full border border-or px-2 py-0.5 text-[10px] font-semibold text-bronze">prénom à confirmer</span>}
-          {g.rsvpOnline && <span className="ml-2 rounded-full bg-surface-soft px-2 py-0.5 text-[10px] font-semibold text-bronze">en ligne</span>}
-        </Link>
-        <span className="text-xs text-ink-muted">
-          {[g.household?.name, g.ageGroup === "ENFANT" ? `Enfant${g.age ? `, ${g.age} ans` : ""}` : null, g.diets.join(", ") || null, g.allergies ? `Allergies : ${g.allergies}` : null]
-            .filter(Boolean)
-            .join(" · ")}
-        </span>
-      </div>
-      <BoutonsReponse g={g} />
-    </li>
   );
 }
 
@@ -114,6 +96,27 @@ export default async function PageInvites({ searchParams }: { searchParams: Prom
     if (q && !sansAccents([g.firstName, g.lastName, g.email, g.household?.name].filter(Boolean).join(" ")).includes(q)) return false;
     return true;
   });
+
+  const invitations = (liste: typeof filtres) =>
+    regrouperParInvitation(
+      liste.map((g) => ({
+        id: g.id,
+        prenom: g.firstName,
+        nom: g.lastName,
+        foyerId: g.householdId,
+        foyer: g.household?.name ?? null,
+        enfant: g.ageGroup === "ENFANT",
+        reponse: g.rsvp,
+        cote: g.side,
+        lien: g.category,
+        details: [g.ageGroup === "ENFANT" ? `Enfant${g.age ? `, ${g.age} ans` : ""}` : null, g.diets.join(", ") || null, g.allergies ? `Allergies : ${g.allergies}` : null].filter(Boolean).join(" · "),
+        aConfirmer: estAccompagnantAConfirmer(g.firstName),
+        enLigne: g.rsvpOnline,
+      })),
+    );
+  const versLigne = (inv: ReturnType<typeof invitations>[number]) => (
+    <LigneInvitation key={inv.cle} titre={inv.titre} prenoms={inv.prenoms} reponse={inv.reponse} membres={inv.membres} />
+  );
 
   const nomCote: Record<Cote, string> = {
     PARTENAIRE_1: `Côté ${mariage.partner1Name}`,
@@ -185,26 +188,19 @@ export default async function PageInvites({ searchParams }: { searchParams: Prom
             {(["PARTENAIRE_1", "PARTENAIRE_2", "COMMUN"] as const)
               .filter((s) => s !== "PARTENAIRE_2" || mariage.partner2Name)
               .map((s) => {
-                const liste = filtres
-                  .filter((g) => g.side === s)
-                  .sort((a, b) => ordreLien(a.category) - ordreLien(b.category) || cleTriFoyer({ foyer: a.household?.name ?? null, nom: a.lastName, prenom: a.firstName, enfant: a.ageGroup === "ENFANT" }).localeCompare(cleTriFoyer({ foyer: b.household?.name ?? null, nom: b.lastName, prenom: b.firstName, enfant: b.ageGroup === "ENFANT" })));
-                const groupes = [...new Set(liste.map((g) => g.category))];
+                const liste = filtres.filter((g) => g.side === s);
+                const invs = invitations(liste).sort((x, y) => ordreLien(x.lien) - ordreLien(y.lien) || x.titre.localeCompare(y.titre, "fr"));
+                const groupes = [...new Set(invs.map((i) => i.lien))];
                 return (
                   <div key={s} className="flex flex-col gap-2 rounded-md border border-line bg-surface-raised p-4">
                     <h2 className="flex items-baseline justify-between font-display text-xl">
-                      {nomCote[s]} <span className="font-sans text-sm text-ink-muted">{liste.reduce((n, g) => n + (g.plusOne ? 2 : 1), 0)}</span>
+                      {nomCote[s]} <span className="font-sans text-sm text-ink-muted">{liste.length}</span>
                     </h2>
                     {liste.length === 0 && <p className="text-sm text-ink-muted">Personne pour l’instant.</p>}
                     {groupes.map((lien) => (
                       <div key={lien ?? "aucun"}>
                         <p className="mt-2 text-xs font-semibold text-bronze uppercase">{libelleLien(lien)}</p>
-                        <ul>
-                          {liste
-                            .filter((g) => g.category === lien)
-                            .map((g) => (
-                              <LigneInvite key={g.id} g={g} />
-                            ))}
-                        </ul>
+                        <ul>{invs.filter((i) => i.lien === lien).map(versLigne)}</ul>
                       </div>
                     ))}
                   </div>
@@ -215,11 +211,9 @@ export default async function PageInvites({ searchParams }: { searchParams: Prom
 
         {vue === "alpha" && filtres.length > 0 && (
           <ul className="rounded-md border border-line bg-surface-raised px-4">
-            {[...filtres]
-              .sort((a, b) => (a.lastName ?? a.firstName).localeCompare(b.lastName ?? b.firstName, "fr") || a.firstName.localeCompare(b.firstName, "fr"))
-              .map((g) => (
-                <LigneInvite key={g.id} g={g} />
-              ))}
+            {invitations(filtres)
+              .sort((x, y) => (x.membres[0]!.nom ?? x.titre).localeCompare(y.membres[0]!.nom ?? y.titre, "fr") || x.titre.localeCompare(y.titre, "fr"))
+              .map(versLigne)}
           </ul>
         )}
 
