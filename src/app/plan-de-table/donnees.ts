@@ -23,12 +23,16 @@ export async function chargerPlan(weddingId: string) {
     y: t.y,
     rotation: t.rotation,
     verrouille: t.locked,
-    invites: invites.filter((g) => g.tableId === t.id).map((g) => ({ id: g.id, nom: nom(g), place: g.seat, enfant: g.ageGroup === "ENFANT", accompagnant: g.plusOne, regimes: g.diets, cote: g.side })),
+    invites: invites.filter((g) => g.tableId === t.id).map((g) => ({ id: g.id, nom: nom(g), prenom: g.firstName, nomFamille: g.lastName, place: g.seat, enfant: g.ageGroup === "ENFANT", accompagnant: g.plusOne, regimes: g.diets, cote: g.side, marie: g.isCouple })),
   }));
   const elements: ElementVue[] = elementsBruts.map((e) => ({ id: e.id, type: e.kind, libelle: e.label ?? e.kind, x: e.x, y: e.y, largeur: e.width, profondeur: e.depth, rotation: e.rotation, verrouille: e.locked }));
-  const aPlacer: InviteVue[] = invites.filter((g) => !g.tableId).map((g) => ({ id: g.id, nom: nom(g), cote: g.side, accompagnant: g.plusOne, enfant: g.ageGroup === "ENFANT", reponse: g.rsvp }));
+  // Les mariés en tête de la liste des personnes à placer.
+  const aPlacer: InviteVue[] = invites
+    .filter((g) => !g.tableId)
+    .sort((a, b) => Number(b.isCouple) - Number(a.isCouple))
+    .map((g) => ({ id: g.id, nom: nom(g), prenom: g.firstName, nomFamille: g.lastName, cote: g.side, accompagnant: g.plusOne, enfant: g.ageGroup === "ENFANT", reponse: g.rsvp, marie: g.isCouple }));
   const lesAlertes = alertes(
-    invites.map((g) => ({ id: g.id, nom: nom(g), foyer: g.householdId, cote: g.side, lien: g.category, enfant: g.ageGroup === "ENFANT", accompagnant: g.plusOne, accessibilite: g.accessibility, tableId: g.tableId })),
+    invites.map((g) => ({ id: g.id, nom: nom(g), foyer: g.householdId, cote: g.side, lien: g.category, enfant: g.ageGroup === "ENFANT", accompagnant: g.plusOne, accessibilite: g.accessibility, tableId: g.tableId, marie: g.isCouple })),
     tablesBrutes.map((t) => ({ id: t.id, nom: t.name, places: t.seats, honneur: t.honor, x: t.x, y: t.y })),
     regles.map((r) => ({ a: r.guestAId, b: r.guestBId, type: r.together ? "ENSEMBLE" : "SEPARES" })),
   );

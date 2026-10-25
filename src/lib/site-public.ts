@@ -22,7 +22,7 @@ export async function chargerSitePublic(slug: string) {
 
 /** Le foyer d'un invité, à partir de son lien personnel : lui seul, ou tous les membres de son foyer. */
 export async function foyerDuJeton(siteWeddingId: string, jeton: string) {
-  const g = await db.guest.findFirst({ where: { rsvpToken: jeton, weddingId: siteWeddingId } });
+  const g = await db.guest.findFirst({ where: { rsvpToken: jeton, weddingId: siteWeddingId, isCouple: false } });
   if (!g) return null;
   const membres = g.householdId
     ? await db.guest.findMany({ where: { householdId: g.householdId, weddingId: siteWeddingId }, include: { moments: true }, orderBy: [{ ageGroup: "asc" }, { firstName: "asc" }] })

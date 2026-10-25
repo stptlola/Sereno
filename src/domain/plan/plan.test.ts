@@ -46,6 +46,15 @@ describe("proposition de placement", () => {
     expect(tableDe(p, "c1")).toBe(tableDe(p, "c2"));
   });
 
+  it("installe les mariés à la table d'honneur, et les garde ensemble sinon", () => {
+    const avecHonneur = proposerPlan([i("lea", { marie: true }), i("sam", { marie: true }), i("a")], [t("h", 2, 0, 0, true), t("1", 8)], [], opt);
+    expect(tableDe(avecHonneur, "lea")).toBe("h");
+    expect(tableDe(avecHonneur, "sam")).toBe("h");
+    expect(avecHonneur.placements.find((x) => x.inviteId === "lea")?.raison).toBe("À la table d’honneur");
+    const sans = proposerPlan([i("lea", { marie: true }), i("sam", { marie: true }), i("a"), i("b")], [t("1", 2), t("2", 2)], [], opt);
+    expect(tableDe(sans, "lea")).toBe(tableDe(sans, "sam"));
+  });
+
   it("signale les invités qui ne trouvent pas de place", () => {
     const p = proposerPlan([i("a"), i("b"), i("c")], [t("1", 2)], [], opt);
     expect(p.nonPlaces).toHaveLength(1);

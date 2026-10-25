@@ -13,7 +13,7 @@ export async function GET() {
   const acces = await mariageDe(session.user.id);
   if (!acces) return new Response("Aucun mariage", { status: 404 });
   const { mariage } = acces;
-  const invites = await db.guest.findMany({ where: { weddingId: mariage.id }, include: { household: true }, orderBy: [{ lastName: "asc" }, { firstName: "asc" }] });
+  const invites = await db.guest.findMany({ where: { weddingId: mariage.id, isCouple: false }, include: { household: true }, orderBy: [{ lastName: "asc" }, { firstName: "asc" }] });
   const cote = { PARTENAIRE_1: mariage.partner1Name, PARTENAIRE_2: mariage.partner2Name ?? "Partenaire 2", COMMUN: "Commun" } as const;
   const csv = versCsv(
     invites.map((g) => ({

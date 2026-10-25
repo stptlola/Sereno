@@ -3,12 +3,13 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { startTransition, useActionState, useCallback, useEffect, useRef, useState, useTransition } from "react";
 import { asseoir, placerInvite, proposerPlacement, verrouillerTout, type EtatProposition } from "../../actions/plan";
-import { couleursCote, initiales, type ElementVue, type InviteVue, type TableVue } from "../types";
+import type { ElementVue, InviteVue, TableVue } from "../types";
+import { Avatar, type Affichage } from "./avatar";
 import { Canevas, type Selection, type Vue } from "./canevas";
 import { PanneauAjouter, PanneauElement, PanneauPlace, PanneauSalle, PanneauTable } from "./panneaux";
 
 type Tiroir = "plan" | "ajouter" | null;
-type Attrape = { id: string; nom: string; cote: string; depuis: "rail" | "place"; x: number; y: number; bouge: boolean };
+type Attrape = { id: string; nom: string; cote: string; enfant?: boolean; marie?: boolean; depuis: "rail" | "place"; x: number; y: number; bouge: boolean };
 
 /**
  * Éditeur du plan de table, sur le modèle des meilleurs outils, en plus doux (M5-16, M5-17) :
@@ -32,6 +33,24 @@ export function Editeur({ largeur, profondeur, tables, elements, aPlacer }: { la
     vue.current = v;
   }, []);
   const installes = tables.reduce((s, t) => s + t.invites.length, 0);
+  // Personnages ou initiales : une préférence d'affichage, gardée sur cet appareil.
+  const [affichage, setAffichage] = useState<Affichage>("personnages");
+  useEffect(() => {
+    try {
+      const a = localStorage.getItem("sereno:plan-affichage");
+      if (a === "initiales" || a === "personnages") setAffichage(a);
+    } catch {
+      /* stockage indisponible : affichage par défaut */
+    }
+  }, []);
+  const changerAffichage = (a: Affichage) => {
+    setAffichage(a);
+    try {
+      localStorage.setItem("sereno:plan-affichage", a);
+    } catch {
+      /* rien */
+    }
+  };
   const toutVerrouille = tables.length + elements.length > 0 && tables.every((t) => t.verrouille) && elements.every((e) => e.verrouille);
 
   // Sur iPhone, Safari zoome la page entière quand on pince : on l'en empêche dans l'éditeur,
@@ -59,7 +78,7 @@ export function Editeur({ largeur, profondeur, tables, elements, aPlacer }: { la
   const inviteChoisi = aPlacer.find((g) => g.id === choisi);
 
   // ---- Glisser-déposer d'un invité (depuis la liste ou depuis une chaise)
-  const attraper = (inv: { id: string; nom: string; cote: string }, e: React.PointerEvent, depuis: Attrape["depuis"]) => {
+  const attraper = (inv: { id: string; nom: string; cote: string; enfant?: boolean; marie?: boolean }, e: React.PointerEvent, depuis: Attrape["depuis"]) => {
     setAttrape({ ...inv, depuis, x: e.clientX, y: e.clientY, bouge: false });
   };
   useEffect(() => {
@@ -173,6 +192,21 @@ export function Editeur({ largeur, profondeur, tables, elements, aPlacer }: { la
             {toutVerrouille ? "🔓 Tout déverrouiller" : "🔒 Tout verrouiller"}
           </button>
         </div>
+        <div className="flex flex-col gap-2 rounded-md bg-surface-soft p-3">
+          <p className="text-sm font-semibold">Affichage des invités</p>
+          <div className="flex gap-2">
+            {(
+              [
+                ["personnages", "Personnages"],
+                ["initiales", "Initiales"],
+              ] as const
+            ).map(([v, l]) => (
+              <button key={v} type="button" aria-pressed={affichage === v} onClick={() => changerAffichage(v)} className={`rounded-full border px-3 py-1.5 text-sm ${affichage === v ? "border-ink bg-ink text-surface" : "border-line bg-surface-raised"}`}>
+                {l}
+              </button>
+            ))}
+          </div>
+        </div>
         <PanneauSalle largeur={largeur} profondeur={profondeur} apres={rafraichir} />
         <div className="flex flex-wrap gap-3 text-sm">
           <Link href="/plan-de-table/imprimer" className="text-bronze underline">
@@ -188,14 +222,11 @@ export function Editeur({ largeur, profondeur, tables, elements, aPlacer }: { la
       </>
     );
   const ouvert = Boolean(contenu);
-  const pastille = (g: { id: string; nom: string; cote: string }, taille = "h-11 w-11 text-sm") => {
-    const c = couleursCote(g.cote);
-    return (
-      <span className={`flex ${taille} shrink-0 items-center justify-center rounded-full border-2 border-surface font-bold shadow-md`} style={{ background: c.fond, color: c.texte }}>
-        {initiales(g.nom)}
-      </span>
-    );
-  };
+  const pastille = (g: { nom: string; cote: string; enfant?: boolean; marie?: boolean }, taille = "h-11 w-11") => (
+    <svg viewBox="-32 -32 64 64" className={`${taille} shrink-0 overflow-visible drop-shadow-md`} aria-hidden>
+      <Avatar cx={0} cy={0} r={28} nom={g.nom} cote={g.cote} enfant={g.enfant} marie={g.marie} affichage={affichage} />
+    </svg>
+  );
   const flottant = "flex items-center gap-1.5 rounded-full border border-line bg-surface/95 px-3 py-2 text-sm font-semibold shadow-md backdrop-blur";
 
   return (
@@ -212,13 +243,15 @@ export function Editeur({ largeur, profondeur, tables, elements, aPlacer }: { la
         surAttraperInvite={(inv, e) => attraper(inv, e, "place")}
         ignorerClic={() => vientDeGlisser.current}
         margeDroite={84}
+        affichage={affichage}
       />
 
       {/* En haut : fermer et titre à gauche ; imprimer et ajouter à droite. */}
       <div className="pointer-events-none absolute inset-x-3 top-3 flex items-start justify-between gap-2" style={{ top: "calc(0.75rem + env(safe-area-inset-top, 0px))" }}>
-        <div className="pointer-events-auto flex items-center gap-2">
-          <Link href="/plan-de-table" aria-label="Fermer l’éditeur" className="flex h-11 w-11 items-center justify-center rounded-full bg-ink text-lg text-surface shadow-md">
-            ✕
+        {/* « Terminer » quitte l'éditeur : masqué quand un tiroir est ouvert, pour ne pas le confondre avec « Fermer ». */}
+        <div className={`pointer-events-auto flex items-center gap-2 transition-opacity ${ouvert ? "pointer-events-none opacity-0" : ""}`}>
+          <Link href="/plan-de-table" aria-label="Terminer et quitter l’éditeur" className="flex h-11 items-center gap-1 rounded-full bg-ink px-4 text-sm font-semibold text-surface shadow-md">
+            ‹ Terminer
           </Link>
           <span className={`${flottant} hidden sm:flex`}>
             Plan de la réception <span className="font-normal text-ink-muted">· {installes} installés</span>
@@ -283,7 +316,10 @@ export function Editeur({ largeur, profondeur, tables, elements, aPlacer }: { la
                 className={`flex flex-col items-center gap-0.5 rounded-full p-0.5 [touch-action:pan-y] ${choisi === g.id ? "ring-2 ring-bronze" : ""}`}
               >
                 {pastille(g)}
-                <span className="max-w-14 truncate text-[10px]">{g.nom.split(" ")[0]}</span>
+                <span className="max-w-14 truncate text-[10px] leading-tight">
+                  {g.prenom}
+                  {g.nomFamille && <span className="block truncate text-ink-muted">{g.nomFamille}</span>}
+                </span>
               </button>
             </li>
           ))}

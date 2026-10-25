@@ -204,6 +204,7 @@ export async function proposerPlacement(_: EtatProposition, formData: FormData):
       accompagnant: g.plusOne,
       accessibilite: g.accessibility,
       tableId: g.tableId,
+      marie: g.isCouple,
     })),
     tables.map((t) => ({ id: t.id, nom: t.name, places: t.seats, honneur: t.honor, x: t.x, y: t.y })),
     regles.map((r) => ({ a: r.guestAId, b: r.guestBId, type: r.together ? "ENSEMBLE" : "SEPARES" })),

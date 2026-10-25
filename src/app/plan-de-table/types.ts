@@ -9,7 +9,7 @@ export interface TableVue {
   y: number;
   rotation: number;
   verrouille: boolean;
-  invites: { id: string; nom: string; place: number | null; enfant: boolean; accompagnant: boolean; regimes: string[]; cote: string }[];
+  invites: { id: string; nom: string; prenom: string; nomFamille: string | null; place: number | null; enfant: boolean; accompagnant: boolean; regimes: string[]; cote: string; marie: boolean }[];
 }
 
 export interface ElementVue {
@@ -27,10 +27,13 @@ export interface ElementVue {
 export interface InviteVue {
   id: string;
   nom: string;
+  prenom: string;
+  nomFamille: string | null;
   cote: string;
   accompagnant: boolean;
   enfant: boolean;
   reponse: string;
+  marie: boolean;
 }
 
 /** Taille d'une table sur le plan (cm), selon sa forme et son nombre de places. */

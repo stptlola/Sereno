@@ -16,9 +16,9 @@ export default async function PageSite() {
   const { mariage } = await accesEcriture();
   const site = await db.miniSite.findUnique({ where: { weddingId: mariage.id } });
   const [enLigne, enAttente, total] = await Promise.all([
-    db.guest.count({ where: { weddingId: mariage.id, rsvpOnline: true } }),
-    db.guest.count({ where: { weddingId: mariage.id, rsvp: "EN_ATTENTE" } }),
-    db.guest.count({ where: { weddingId: mariage.id } }),
+    db.guest.count({ where: { weddingId: mariage.id, isCouple: false, rsvpOnline: true } }),
+    db.guest.count({ where: { weddingId: mariage.id, isCouple: false, rsvp: "EN_ATTENTE" } }),
+    db.guest.count({ where: { weddingId: mariage.id, isCouple: false } }),
   ]);
   const base = env().APP_URL.replace(/^https?:\/\//, "");
 

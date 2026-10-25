@@ -41,7 +41,7 @@ export async function trouverInvitation(_: EtatPublic, formData: FormData): Prom
   const prenom = String(formData.get("prenom") ?? "").trim();
   const nom = String(formData.get("nom") ?? "").trim();
   if (!prenom || !nom) return { erreur: "Indiquez votre prénom et votre nom, comme sur votre invitation." };
-  const candidats = await db.guest.findMany({ where: { weddingId: acces.site.weddingId }, select: { id: true, firstName: true, lastName: true } });
+  const candidats = await db.guest.findMany({ where: { weddingId: acces.site.weddingId, isCouple: false }, select: { id: true, firstName: true, lastName: true } });
   const trouve = candidats.filter((g) => memeNom({ prenom: g.firstName, nom: g.lastName }, { prenom, nom }));
   if (trouve.length !== 1) return { erreur: "Nous ne retrouvons pas votre invitation. Vérifiez l’orthographe, ou utilisez le lien reçu par e-mail." };
   await assurerLiensPersonnels(acces.site.weddingId);

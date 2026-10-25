@@ -50,7 +50,7 @@ export async function ajouterInvitation(precedent: EtatAjout, formData: FormData
   const prep = preparerInvitation(type, lignes, String(formData.get("nomCommun") ?? ""), formData.get("accompagnant") === "on");
   if ("erreur" in prep) return { erreur: prep.erreur, essai: precedent.essai };
 
-  const existants = await db.guest.findMany({ where: { weddingId: mariage.id }, select: { id: true, firstName: true, lastName: true, email: true } });
+  const existants = await db.guest.findMany({ where: { weddingId: mariage.id, isCouple: false }, select: { id: true, firstName: true, lastName: true, email: true } });
   if (existants.length + prep.personnes.length > MAX_INVITES) return { erreur: "Vous avez atteint le nombre maximal d’invités." };
   if (formData.get("confirmerDoublon") !== "1") {
     for (const p of prep.personnes.filter((x) => !x.aConfirmer)) {
@@ -134,7 +134,7 @@ export async function changerReponseInvitation(formData: FormData): Promise<void
 export async function supprimerInvitation(formData: FormData): Promise<void> {
   const { user, mariage } = await accesEcriture();
   const ids = formData.getAll("id").map(String).slice(0, 30);
-  const membres = await db.guest.findMany({ where: { id: { in: ids }, weddingId: mariage.id }, select: { id: true, householdId: true } });
+  const membres = await db.guest.findMany({ where: { id: { in: ids }, weddingId: mariage.id, isCouple: false }, select: { id: true, householdId: true } });
   if (!membres.length) return;
   const foyers = [...new Set(membres.map((m) => m.householdId).filter((f): f is string => Boolean(f)))];
   await db.$transaction([
@@ -184,7 +184,7 @@ export async function modifierInvite(formData: FormData): Promise<void> {
 
 export async function supprimerInvite(formData: FormData): Promise<void> {
   const { user, mariage } = await accesEcriture();
-  const g = await db.guest.findFirst({ where: { id: id.parse(formData.get("id")), weddingId: mariage.id } });
+  const g = await db.guest.findFirst({ where: { id: id.parse(formData.get("id")), weddingId: mariage.id, isCouple: false } });
   if (g) {
     await db.guest.delete({ where: { id: g.id } });
     await journal(mariage.id, user.id, g.id, "supprime");
@@ -211,7 +211,7 @@ export async function importerInvites(_: EtatImport, formData: FormData): Promis
   const r = importer(await fichier.text(), { p1: mariage.partner1Name, p2: mariage.partner2Name });
   if (!r.invites.length) return { ajoutes: 0, erreurs: r.erreurs };
 
-  const existants = (await db.guest.findMany({ where: { weddingId: mariage.id }, select: { id: true, firstName: true, lastName: true, email: true } })).map((e) => ({
+  const existants = (await db.guest.findMany({ where: { weddingId: mariage.id, isCouple: false }, select: { id: true, firstName: true, lastName: true, email: true } })).map((e) => ({
     id: e.id,
     prenom: e.firstName,
     nom: e.lastName,

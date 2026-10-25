@@ -2,7 +2,8 @@
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState, useTransition } from "react";
 import { deplacer } from "../../actions/plan";
-import { couleursCote, initiales, positionsPlaces, tailleTable, tourner, type ElementVue, type TableVue } from "../types";
+import { positionsPlaces, tailleTable, tourner, type ElementVue, type TableVue } from "../types";
+import { Avatar, type Affichage } from "./avatar";
 
 export type Selection = { type: "place"; tableId: string; numero: number } | { type: "table"; id: string } | { type: "element"; id: string } | null;
 export interface Vue {
@@ -45,6 +46,7 @@ export function Canevas({
   surAttraperInvite,
   ignorerClic,
   margeDroite = 0,
+  affichage = "personnages",
 }: {
   largeur: number;
   profondeur: number;
@@ -58,11 +60,12 @@ export function Canevas({
   commandes?: React.RefObject<{ zoomer: (f: number) => void; recentrer: () => void } | null>;
   lectureSeule?: boolean;
   /** Un invité assis est attrapé : l'éditeur gère le glisser-déposer vers une autre place ou vers la liste. */
-  surAttraperInvite?: (invite: { id: string; nom: string; cote: string }, e: React.PointerEvent) => void;
+  surAttraperInvite?: (invite: { id: string; nom: string; cote: string; enfant: boolean; marie: boolean }, e: React.PointerEvent) => void;
   /** Vrai juste après un glisser-déposer, pour ne pas ouvrir le panneau de la place relâchée. */
   ignorerClic?: () => boolean;
   /** Largeur (px) couverte à droite par la liste des invités : le plan se cadre dans la partie visible. */
   margeDroite?: number;
+  affichage?: Affichage;
 }) {
   const router = useRouter();
   const conteneur = useRef<HTMLDivElement>(null);
@@ -300,10 +303,11 @@ export function Canevas({
                 <g transform={`rotate(${t.rotation})`} fill={fond} stroke={trop ? "var(--color-alerte)" : choisie ? "var(--color-bronze)" : "var(--color-ink)"} strokeWidth={choisie || trop ? 10 : 5}>
                   {forme}
                 </g>
-                <text textAnchor="middle" y={-4} fontSize="38" fontWeight="700" fill={texte}>
-                  {t.honneur ? "♥" : t.numero}
+                {/* Le nom de la table, réduit pour tenir dans la table. */}
+                <text textAnchor="middle" y={-6} fontSize={Math.min(34, (Math.min(l, p * 1.6) * 0.82) / Math.max(4, t.nom.length * 0.56))} fontWeight="700" fill={texte}>
+                  {t.honneur && !t.nom.toLowerCase().includes("honneur") ? `♥ ${t.nom}` : t.nom}
                 </text>
-                <text textAnchor="middle" y={32} fontSize="24" fill={trop ? "var(--color-alerte)" : texte}>
+                <text textAnchor="middle" y={28} fontSize="22" fill={trop ? "var(--color-alerte)" : texte} opacity={0.8}>
                   {t.invites.length}/{t.places}
                 </text>
                 {t.verrouille && !lectureSeule && (
@@ -317,7 +321,6 @@ export function Canevas({
                 const occupant = parPlace.get(pl.numero);
                 const active = selection?.type === "place" && selection.tableId === t.id && selection.numero === pl.numero;
                 const d = Math.hypot(r.x, r.y) || 1;
-                const c = occupant ? couleursCote(occupant.cote) : null;
                 return (
                   <g
                     key={pl.numero}
@@ -328,7 +331,7 @@ export function Canevas({
                     onPointerDown={(e) => {
                       if (lectureSeule) return;
                       e.stopPropagation();
-                      if (occupant) surAttraperInvite?.({ id: occupant.id, nom: occupant.nom, cote: occupant.cote }, e);
+                      if (occupant) surAttraperInvite?.({ id: occupant.id, nom: occupant.nom, cote: occupant.cote, enfant: occupant.enfant, marie: occupant.marie }, e);
                     }}
                     onClick={(e) => {
                       if (lectureSeule) return;
@@ -339,22 +342,27 @@ export function Canevas({
                   >
                     {/* Zone de dépôt un peu plus large que la chaise, plus facile à viser au doigt. */}
                     <circle cx={r.x} cy={r.y} r="34" fill="transparent" />
-                    <circle
-                      cx={r.x}
-                      cy={r.y}
-                      r="25"
-                      fill={c ? c.fond : "var(--color-surface-raised)"}
-                      stroke={active ? "var(--color-bronze)" : occupant ? "var(--color-surface)" : "var(--color-ink-muted)"}
-                      strokeWidth={active ? 8 : occupant ? 4 : 3}
-                      strokeDasharray={occupant ? "" : "6 5"}
-                      style={occupant ? { filter: "drop-shadow(0 2px 3px rgb(0 0 0 / 0.18))" } : undefined}
-                    />
-                    <text x={r.x} y={r.y} textAnchor="middle" dominantBaseline="central" fontSize={occupant ? 19 : 18} fontWeight="700" fill={c ? c.texte : "var(--color-ink-muted)"} style={{ pointerEvents: "none" }}>
-                      {occupant ? initiales(occupant.nom) : pl.numero}
-                    </text>
+                    {occupant ? (
+                      <Avatar cx={r.x} cy={r.y} r={26} nom={occupant.nom} cote={occupant.cote} enfant={occupant.enfant} marie={occupant.marie} affichage={affichage} contour={active ? "var(--color-bronze)" : undefined} />
+                    ) : (
+                      <>
+                        <circle cx={r.x} cy={r.y} r="25" fill="var(--color-surface-raised)" stroke={active ? "var(--color-bronze)" : "var(--color-ink-muted)"} strokeWidth={active ? 8 : 3} strokeDasharray="6 5" />
+                        <text x={r.x} y={r.y} textAnchor="middle" dominantBaseline="central" fontSize="18" fontWeight="700" fill="var(--color-ink-muted)" style={{ pointerEvents: "none" }}>
+                          {pl.numero}
+                        </text>
+                      </>
+                    )}
                     {occupant && (
-                      <text x={r.x + (r.x / d) * 54} y={r.y + (r.y / d) * 54} textAnchor="middle" dominantBaseline="central" fontSize="21" fontWeight="600" fill="var(--color-ink)" stroke="var(--color-surface-raised)" strokeWidth="7" paintOrder="stroke" style={{ pointerEvents: "none" }}>
-                        {occupant.nom.split(" ")[0]}
+                      // Prénom, et nom de famille en dessous : on reconnaît les familles d'un coup d'œil.
+                      <text x={r.x + (r.x / d) * 62} y={r.y + (r.y / d) * 62} textAnchor="middle" fill="var(--color-ink)" stroke="var(--color-surface-raised)" strokeWidth="7" paintOrder="stroke" style={{ pointerEvents: "none" }}>
+                        <tspan x={r.x + (r.x / d) * 62} dy={occupant.nomFamille ? -4 : 7} fontSize="21" fontWeight="700">
+                          {occupant.prenom}
+                        </tspan>
+                        {occupant.nomFamille && (
+                          <tspan x={r.x + (r.x / d) * 62} dy="21" fontSize="17" fill="var(--color-ink-muted)">
+                            {occupant.nomFamille}
+                          </tspan>
+                        )}
                       </text>
                     )}
                   </g>

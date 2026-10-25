@@ -24,7 +24,7 @@ export default async function PageImprimer({ searchParams }: { searchParams: Pro
   const [tables, presents, enAttente] = await Promise.all([
     db.seatingTable.findMany({ where: { weddingId: mariage.id }, orderBy: [{ honor: "desc" }, { number: "asc" }] }),
     db.guest.findMany({ where: { weddingId: mariage.id, rsvp: "PRESENT", tableId: { not: null } }, orderBy: [{ lastName: "asc" }, { firstName: "asc" }] }),
-    db.guest.count({ where: { weddingId: mariage.id, rsvp: "EN_ATTENTE" } }),
+    db.guest.count({ where: { weddingId: mariage.id, isCouple: false, rsvp: "EN_ATTENTE" } }),
   ]);
   const nomTable = new Map(tables.map((t) => [t.id, t.honor ? t.name : `Table ${t.number}${t.name !== `Table ${t.number}` ? ` · ${t.name}` : ""}`]));
   const prenoms = [mariage.partner1Name, mariage.partner2Name].filter(Boolean).join(" & ");

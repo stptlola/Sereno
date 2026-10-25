@@ -36,7 +36,8 @@ type InviteListe = Awaited<ReturnType<typeof charger>>[number];
 
 function charger(weddingId: string) {
   return db.guest.findMany({
-    where: { weddingId },
+    // Les mariés ne sont pas des invités : ils n'apparaissent que sur le plan de table.
+    where: { weddingId, isCouple: false },
     include: { household: true, moments: true },
     // Ordre de saisie : les membres d'une invitation gardent l'ordre de l'invitation (« Katy et Hervé »).
     orderBy: [{ createdAt: "asc" }],

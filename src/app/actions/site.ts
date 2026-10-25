@@ -101,7 +101,7 @@ export async function relancerRetardataires(_: EtatSite): Promise<EtatSite> {
   const site = await db.miniSite.findUnique({ where: { weddingId: mariage.id } });
   if (!site?.published) return { erreur: "Mettez d’abord votre site en ligne." };
   await assurerLiensPersonnels(mariage.id);
-  const enAttente = await db.guest.findMany({ where: { weddingId: mariage.id, rsvp: "EN_ATTENTE", email: { not: null } }, include: { household: true } });
+  const enAttente = await db.guest.findMany({ where: { weddingId: mariage.id, isCouple: false, rsvp: "EN_ATTENTE", email: { not: null } }, include: { household: true } });
   // Un seul e-mail par foyer, à la première adresse connue.
   const parFoyer = new Map<string, (typeof enAttente)[number]>();
   for (const g of enAttente) if (!parFoyer.has(g.householdId ?? g.id)) parFoyer.set(g.householdId ?? g.id, g);

@@ -12,6 +12,8 @@ export interface InvitePlan {
   accessibilite: boolean;
   /** Table déjà choisie par le couple (conservée si l'on garde les placements). */
   tableId: string | null;
+  /** L'un des mariés : installé d'office à la table d'honneur. */
+  marie?: boolean;
 }
 
 export interface TablePlan {
@@ -85,9 +87,10 @@ const distance = (a: { x: number; y: number }, b: { x: number; y: number }) => M
 export function proposerPlan(
   invites: readonly InvitePlan[],
   tables: readonly TablePlan[],
-  contraintes: readonly Contrainte[],
+  contraintesDuCouple: readonly Contrainte[],
   options: OptionsProposition,
 ): Proposition {
+  let contraintes = contraintesDuCouple;
   const tablesLibres = tables.filter((t) => !t.honneur);
   const honneur = tables.find((t) => t.honneur);
   const occupation = new Map(tables.map((t) => [t.id, [] as InvitePlan[]]));
@@ -106,6 +109,19 @@ export function proposerPlan(
     const t = i.tableId ? tables.find((x) => x.id === i.tableId) : undefined;
     if (options.garderPlaces && t) placer(i, t, "Placé par vous");
     else aPlacer.push(i);
+  }
+
+  // 2. Les mariés à la table d'honneur ; sans table d'honneur, ils restent ensemble comme un groupe.
+  const maries = aPlacer.filter((i) => i.marie);
+  if (honneur) {
+    for (const m of maries) {
+      if (libres(honneur) >= sieges(m)) {
+        placer(m, honneur, "À la table d’honneur");
+        aPlacer.splice(aPlacer.indexOf(m), 1);
+      }
+    }
+  } else if (maries.length === 2) {
+    contraintes = [...contraintes, { a: maries[0]!.id, b: maries[1]!.id, type: "ENSEMBLE" }];
   }
 
   const procheSortie = (t: TablePlan) => (options.sorties.length ? Math.min(...options.sorties.map((s) => distance(s, t))) : 0);

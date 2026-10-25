@@ -38,6 +38,13 @@ export async function creerMariageDepuisDemarrage(brut: unknown): Promise<{ ok: 
           create: p.postesBudget.map((b) => ({ name: b.nom, plannedCents: b.prevuCentimes, order: b.ordre })),
         },
         moments: { create: [{ name: "Vin d’honneur" }, { name: "Dîner" }] },
+        // Les mariés, à placer sur le plan de table et comptés par le traiteur.
+        guests: {
+          create: [
+            { firstName: p.mariage.partner1Name, side: "PARTENAIRE_1", category: "marie", rsvp: "PRESENT", isCouple: true },
+            ...(p.mariage.partner2Name ? [{ firstName: p.mariage.partner2Name, side: "PARTENAIRE_2" as const, category: "marie", rsvp: "PRESENT" as const, isCouple: true }] : []),
+          ],
+        },
       },
     });
     await tx.task.createMany({

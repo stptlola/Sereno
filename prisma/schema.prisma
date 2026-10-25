@@ -430,6 +430,8 @@ model Guest {
   table         SeatingTable? @relation(fields: [tableId], references: [id], onDelete: SetNull)
   seat          Int?
   accessibility Boolean       @default(false)
+  // L'un des mariés : à placer sur le plan et compté par le traiteur, mais absent de la liste d'invités.
+  isCouple      Boolean       @default(false)
   constraintsA  SeatingConstraint[] @relation("ContrainteA")
   constraintsB  SeatingConstraint[] @relation("ContrainteB")
   moments     GuestMoment[]

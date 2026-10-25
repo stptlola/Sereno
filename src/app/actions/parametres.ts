@@ -62,9 +62,23 @@ export async function modifierMariage(precedent: EtatParametres, formData: FormD
     },
   );
   const parModele = new Map(taches.map((t) => [t.templateId!, t.id]));
+  // Les prénoms des mariés suivent les réglages, sur le plan de table aussi.
+  const maries = await db.guest.findMany({ where: { weddingId: mariage.id, isCouple: true } });
+  const marie2 = maries.find((g) => g.side === "PARTENAIRE_2");
+  const synchroMaries = [
+    db.guest.updateMany({ where: { weddingId: mariage.id, isCouple: true, side: "PARTENAIRE_1" }, data: { firstName: d.partner1Name } }),
+    ...(d.partner2Name
+      ? marie2
+        ? [db.guest.update({ where: { id: marie2.id }, data: { firstName: d.partner2Name } })]
+        : [db.guest.create({ data: { weddingId: mariage.id, firstName: d.partner2Name, side: "PARTENAIRE_2", category: "marie", rsvp: "PRESENT", isCouple: true } })]
+      : marie2
+        ? [db.guest.delete({ where: { id: marie2.id } })]
+        : []),
+  ];
   const modeles = new Map(MODELE_TACHES.map((m) => [m.id, m]));
 
   await db.$transaction([
+    ...synchroMaries,
     db.wedding.update({
       where: { id: mariage.id },
       data: {

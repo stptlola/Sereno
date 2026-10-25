@@ -29,7 +29,7 @@ export default async function TableauDeBord() {
     }),
     db.budgetCategory.findMany({ where: { weddingId: mariage.id }, orderBy: { order: "asc" }, include: { expenses: { include: { payments: true } } } }),
     db.member.findFirst({ where: { weddingId: mariage.id, role: "COPILOTE" }, include: { user: true } }),
-    db.guest.findMany({ where: { weddingId: mariage.id }, select: { side: true, ageGroup: true, rsvp: true, diets: true, plusOne: true, firstName: true } }),
+    db.guest.findMany({ where: { weddingId: mariage.id, isCouple: false }, select: { side: true, ageGroup: true, rsvp: true, diets: true, plusOne: true, firstName: true } }),
   ]);
   const compteurs = compter(
     invites.map((g) => ({ prenom: g.firstName, nom: null, cote: g.side, lien: null, age: g.ageGroup, email: null, reponse: g.rsvp, regimes: g.diets, accompagnant: g.plusOne, moments: [] })),
