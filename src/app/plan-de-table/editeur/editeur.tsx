@@ -1,161 +1,297 @@
 "use client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { startTransition, useActionState, useCallback, useRef, useState, useTransition } from "react";
+import { startTransition, useActionState, useCallback, useEffect, useRef, useState, useTransition } from "react";
 import { asseoir, placerInvite, proposerPlacement, type EtatProposition } from "../../actions/plan";
-import type { ElementVue, InviteVue, TableVue } from "../types";
+import { couleursCote, initiales, type ElementVue, type InviteVue, type TableVue } from "../types";
 import { Canevas, type Selection, type Vue } from "./canevas";
-import { PanneauAjouter, PanneauElement, PanneauInvites, PanneauPlace, PanneauSalle, PanneauTable } from "./panneaux";
+import { PanneauAjouter, PanneauElement, PanneauPlace, PanneauSalle, PanneauTable } from "./panneaux";
 
-type Outil = "invites" | "ajouter" | "salle" | null;
+type Tiroir = "plan" | "ajouter" | null;
+type Attrape = { id: string; nom: string; cote: string; depuis: "rail" | "place"; x: number; y: number; bouge: boolean };
 
 /**
- * Éditeur du plan de table en plein écran (M5-16, M5-17) : le plan seul, quelques boutons flottants,
- * et un panneau qui s'ouvre selon ce que l'on touche (place, table, élément) ou l'outil choisi.
+ * Éditeur du plan de table, sur le modèle des meilleurs outils, en plus doux (M5-16, M5-17) :
+ * les invités à placer attendent sur le bord droit ; on les glisse sur une chaise. Un tiroir latéral,
+ * avec son onglet, s'ouvre selon ce que l'on touche : le plan, une place, une table, un élément.
  */
 export function Editeur({ largeur, profondeur, tables, elements, aPlacer }: { largeur: number; profondeur: number; tables: TableVue[]; elements: ElementVue[]; aPlacer: InviteVue[] }) {
   const router = useRouter();
   const [selection, setSelection] = useState<Selection>(null);
-  const [outil, setOutil] = useState<Outil>(null);
-  const [invite, setInvite] = useState<string | null>(null);
+  const [tiroir, setTiroir] = useState<Tiroir>(null);
+  const [choisi, setChoisi] = useState<string | null>(null);
+  const [attrape, setAttrape] = useState<Attrape | null>(null);
   const [, demarrer] = useTransition();
   const vue = useRef<Vue | null>(null);
   const commandes = useRef<{ zoomer: (f: number) => void; recentrer: () => void } | null>(null);
+  const vientDeGlisser = useRef(false);
   const [proposition, proposer, enCalcul] = useActionState<EtatProposition, FormData>(proposerPlacement, {});
-  const [resultatVu, setResultatVu] = useState(0);
+  const [messageVu, setMessageVu] = useState(false);
   const rafraichir = useCallback(() => router.refresh(), [router]);
   const surVue = useCallback((v: Vue) => {
     vue.current = v;
   }, []);
-  const choisi = aPlacer.find((g) => g.id === invite);
+  const installes = tables.reduce((s, t) => s + t.invites.length, 0);
+  const inviteChoisi = aPlacer.find((g) => g.id === choisi);
 
-  function surSelection(s: Selection) {
-    // Un invité est choisi : toucher une place ou une table l'y installe directement.
-    if (invite && s?.type === "place")
-      return demarrer(async () => {
-        await asseoir(invite, s.tableId, s.numero);
-        setInvite(null);
+  // ---- Glisser-déposer d'un invité (depuis la liste ou depuis une chaise)
+  const attraper = (inv: { id: string; nom: string; cote: string }, e: React.PointerEvent, depuis: Attrape["depuis"]) => {
+    setAttrape({ ...inv, depuis, x: e.clientX, y: e.clientY, bouge: false });
+  };
+  useEffect(() => {
+    if (!attrape) return;
+    const bouge = (e: PointerEvent) =>
+      setAttrape((a) => (a && (a.bouge || Math.hypot(e.clientX - a.x, e.clientY - a.y) > 8) ? { ...a, x: e.clientX, y: e.clientY, bouge: true } : a));
+    const lache = (e: PointerEvent) => {
+      const a = attrape;
+      setAttrape(null);
+      if (!a) return;
+      setAttrape((courant) => courant);
+      const bougé = Math.hypot(e.clientX - a.x, e.clientY - a.y) > 8 || a.bouge;
+      if (!bougé) {
+        if (a.depuis === "rail") setChoisi((c) => (c === a.id ? null : a.id));
+        return;
+      }
+      vientDeGlisser.current = true;
+      setTimeout(() => (vientDeGlisser.current = false), 80);
+      const sous = document.elementFromPoint(e.clientX, e.clientY);
+      const place = sous?.closest<HTMLElement | SVGElement>("[data-place]")?.getAttribute("data-place");
+      const table = sous?.closest<HTMLElement | SVGElement>("[data-table]")?.getAttribute("data-table");
+      const versListe = Boolean(sous?.closest("[data-rail]"));
+      demarrer(async () => {
+        if (place) {
+          const [tableId, numero] = place.split(":");
+          await asseoir(a.id, tableId!, Number(numero));
+        } else if (table) await placerInvite(a.id, table);
+        else if (versListe && a.depuis === "place") await placerInvite(a.id, null);
         rafraichir();
       });
-    if (invite && s?.type === "table")
+    };
+    window.addEventListener("pointermove", bouge);
+    window.addEventListener("pointerup", lache, { once: true });
+    return () => {
+      window.removeEventListener("pointermove", bouge);
+      window.removeEventListener("pointerup", lache);
+    };
+    // On ne réabonne qu'au début d'un nouveau geste.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [attrape?.id, attrape?.depuis]);
+
+  function surSelection(s: Selection) {
+    if (choisi && s?.type === "place")
       return demarrer(async () => {
-        await placerInvite(invite, s.id);
-        setInvite(null);
+        await asseoir(choisi, s.tableId, s.numero);
+        setChoisi(null);
+        rafraichir();
+      });
+    if (choisi && s?.type === "table")
+      return demarrer(async () => {
+        await placerInvite(choisi, s.id);
+        setChoisi(null);
         rafraichir();
       });
     setSelection(s);
-    if (s) setOutil(null);
+    setTiroir(null);
   }
-
-  const ouvrirOutil = (o: Outil) => {
-    setSelection(null);
-    setOutil(outil === o ? null : o);
-  };
   const fermer = () => {
     setSelection(null);
-    setOutil(null);
+    setTiroir(null);
   };
 
-  let panneau: React.ReactNode = null;
-  if (selection?.type === "place") panneau = <PanneauPlace key={`${selection.tableId}-${selection.numero}`} selection={selection} tables={tables} aPlacer={aPlacer} apres={rafraichir} fermer={fermer} />;
+  const ongletActif = selection ? ({ place: "Place", table: "Table", element: "Élément" } as const)[selection.type] : tiroir === "ajouter" ? "Ajouter" : tiroir === "plan" ? "Plan" : null;
+  let contenu: React.ReactNode = null;
+  if (selection?.type === "place") contenu = <PanneauPlace key={`${selection.tableId}-${selection.numero}`} selection={selection} tables={tables} aPlacer={aPlacer} apres={rafraichir} fermer={fermer} />;
   else if (selection?.type === "table") {
     const t = tables.find((x) => x.id === selection.id);
-    if (t) panneau = <PanneauTable key={`${t.id}-${t.nom}-${t.places}-${t.forme}`} table={t} apres={rafraichir} fermer={fermer} />;
+    if (t) contenu = <PanneauTable key={`${t.id}-${t.nom}-${t.places}-${t.forme}-${t.honneur}`} table={t} apres={rafraichir} fermer={fermer} />;
   } else if (selection?.type === "element") {
     const e = elements.find((x) => x.id === selection.id);
-    if (e) panneau = <PanneauElement key={`${e.id}-${e.largeur}-${e.profondeur}-${e.rotation}`} element={e} apres={rafraichir} fermer={fermer} />;
-  } else if (outil === "invites") panneau = <PanneauInvites aPlacer={aPlacer} selection={invite} choisir={(id) => (setInvite(id), id && setOutil(null))} />;
-  else if (outil === "ajouter") panneau = <PanneauAjouter vue={vue.current} apres={rafraichir} fermer={fermer} />;
-  else if (outil === "salle") panneau = <PanneauSalle largeur={largeur} profondeur={profondeur} apres={rafraichir} />;
-
-  const barre = "inline-flex h-10 shrink-0 items-center gap-1.5 rounded-full border px-3 text-sm font-semibold shadow-sm";
-  const actif = (o: Outil) => (outil === o ? "border-ink bg-ink text-surface" : "border-line bg-surface-raised");
-
-  return (
-    <div className="fixed inset-0 z-50 flex flex-col bg-surface" style={{ paddingTop: "env(safe-area-inset-top, 0px)" }}>
-      {/* Une seule ligne, même sur un petit téléphone : le plan garde toute la place. */}
-      <header className="flex items-center gap-1.5 overflow-x-auto border-b border-line px-2 py-2">
-        <Link href="/plan-de-table" aria-label="Fermer l’éditeur" className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-surface-soft text-lg">
-          ✕
-        </Link>
-        <p className="mr-auto hidden truncate font-display text-lg sm:block">Plan de la réception</p>
-        <button type="button" onClick={() => ouvrirOutil("invites")} className={`${barre} ${actif("invites")} ml-auto sm:ml-0`}>
-          Invités <span className={outil === "invites" ? "text-or" : "text-bronze"}>{aPlacer.length}</span>
-        </button>
-        <button type="button" onClick={() => ouvrirOutil("ajouter")} aria-label="Ajouter une table ou un élément" className={`${barre} ${actif("ajouter")}`}>
-          +<span className="hidden sm:inline"> Ajouter</span>
-        </button>
-        <button type="button" onClick={() => ouvrirOutil("salle")} className={`${barre} ${actif("salle")}`}>
-          Salle
-        </button>
+    if (e) contenu = <PanneauElement key={`${e.id}-${e.largeur}-${e.profondeur}-${e.rotation}`} element={e} apres={rafraichir} fermer={fermer} />;
+  } else if (tiroir === "ajouter") contenu = <PanneauAjouter vue={vue.current} apres={rafraichir} fermer={fermer} />;
+  else if (tiroir === "plan")
+    contenu = (
+      <>
+        <p className="font-display text-xl">Le plan</p>
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            const f = new FormData();
-            f.set("garder", "on");
-            setResultatVu(0);
+            const f = new FormData(e.currentTarget);
+            setMessageVu(false);
             startTransition(() => proposer(f));
           }}
+          className="flex flex-col gap-2 rounded-md bg-surface-soft p-3"
         >
-          <button type="submit" disabled={enCalcul} aria-label="Placer automatiquement" className={`${barre} border-ink bg-ink text-surface`}>
-            ✨<span className="hidden sm:inline">{enCalcul ? " Placement…" : " Placer automatiquement"}</span>
-            <span className="sm:hidden">{enCalcul ? "…" : " Auto"}</span>
+          <p className="text-sm font-semibold">Placer les invités automatiquement</p>
+          <p className="text-xs text-ink-muted">Foyers ensemble, contraintes respectées, sorties et table d’honneur, puis par affinités.</p>
+          <label className="flex items-center gap-2 text-sm">
+            <input type="checkbox" name="garder" defaultChecked className="h-4 w-4" /> Garder ceux déjà placés
+          </label>
+          <label className="flex items-center gap-2 text-sm">
+            <input type="checkbox" name="melanger" className="h-4 w-4" /> Mélanger les deux côtés
+          </label>
+          <button type="submit" disabled={enCalcul} className="self-start rounded-full bg-ink px-4 py-2 text-sm font-semibold text-surface">
+            {enCalcul ? "Placement…" : "✨ Placer automatiquement"}
           </button>
         </form>
-      </header>
+        <PanneauSalle largeur={largeur} profondeur={profondeur} apres={rafraichir} />
+        <div className="flex flex-wrap gap-3 text-sm">
+          <Link href="/plan-de-table/imprimer" className="text-bronze underline">
+            Imprimer
+          </Link>
+          <Link href="/plan-de-table/traiteur" className="text-bronze underline">
+            Rapport traiteur
+          </Link>
+          <Link href="/plan-de-table" className="text-bronze underline">
+            Contraintes de placement
+          </Link>
+        </div>
+      </>
+    );
+  const ouvert = Boolean(contenu);
+  const pastille = (g: { id: string; nom: string; cote: string }, taille = "h-11 w-11 text-sm") => {
+    const c = couleursCote(g.cote);
+    return (
+      <span className={`flex ${taille} shrink-0 items-center justify-center rounded-full border-2 border-surface font-bold shadow-md`} style={{ background: c.fond, color: c.texte }}>
+        {initiales(g.nom)}
+      </span>
+    );
+  };
+  const flottant = "flex items-center gap-1.5 rounded-full border border-line bg-surface/95 px-3 py-2 text-sm font-semibold shadow-md backdrop-blur";
 
-      {choisi && (
-        <p role="status" className="flex items-center gap-2 bg-ink px-4 py-2 text-sm text-surface">
-          Touchez une place ou une table pour y installer <strong>{choisi.nom}</strong>.
-          <button type="button" onClick={() => setInvite(null)} className="ml-auto text-or underline">
-            Annuler
-          </button>
-        </p>
-      )}
-      {proposition.faits !== undefined && resultatVu === 0 && (
-        <div role="status" className="flex flex-wrap items-center gap-x-3 gap-y-1 bg-surface-soft px-4 py-2 text-sm">
-          <strong>
-            {proposition.faits} invité{proposition.faits > 1 ? "s" : ""} placé{proposition.faits > 1 ? "s" : ""}
-          </strong>
-          {Object.entries(proposition.raisons ?? {}).map(([r, n]) => (
-            <span key={r} className="text-ink-muted">
-              {r} : {n}
-            </span>
-          ))}
-          {proposition.nonPlaces?.length ? <span className="text-alerte">{proposition.nonPlaces.length} sans place : ajoutez des tables</span> : null}
-          <button type="button" onClick={() => setResultatVu(1)} aria-label="Fermer le message" className="ml-auto">
+  return (
+    <div className="fixed inset-0 z-50 overflow-hidden bg-surface-soft" style={{ paddingTop: "env(safe-area-inset-top, 0px)" }}>
+      <Canevas
+        largeur={largeur}
+        profondeur={profondeur}
+        tables={tables}
+        elements={elements}
+        selection={selection}
+        surSelection={surSelection}
+        surVue={surVue}
+        commandes={commandes}
+        surAttraperInvite={(inv, e) => attraper(inv, e, "place")}
+        ignorerClic={() => vientDeGlisser.current}
+        margeDroite={84}
+      />
+
+      {/* En haut : fermer et titre à gauche ; imprimer et ajouter à droite. */}
+      <div className="pointer-events-none absolute inset-x-3 top-3 flex items-start justify-between gap-2" style={{ top: "calc(0.75rem + env(safe-area-inset-top, 0px))" }}>
+        <div className="pointer-events-auto flex items-center gap-2">
+          <Link href="/plan-de-table" aria-label="Fermer l’éditeur" className="flex h-11 w-11 items-center justify-center rounded-full bg-ink text-lg text-surface shadow-md">
             ✕
+          </Link>
+          <span className={`${flottant} hidden sm:flex`}>
+            Plan de la réception <span className="font-normal text-ink-muted">· {installes} installés</span>
+          </span>
+        </div>
+        <div className="pointer-events-auto flex items-center gap-2">
+          <Link href="/plan-de-table/imprimer" className={`${flottant} hidden sm:flex`}>
+            Imprimer
+          </Link>
+          <button type="button" onClick={() => (ouvert ? fermer() : setTiroir("plan"))} aria-expanded={ouvert} aria-controls="tiroir-plan" className={flottant}>
+            Plan
+          </button>
+          <button type="button" onClick={() => (setSelection(null), setTiroir(tiroir === "ajouter" ? null : "ajouter"))} aria-label="Ajouter une table ou un élément" className="flex h-11 w-11 items-center justify-center rounded-full bg-ink text-2xl text-or shadow-md">
+            +
           </button>
         </div>
-      )}
-      {proposition.erreur && <p className="bg-surface-soft px-4 py-2 text-sm text-alerte">{proposition.erreur}</p>}
-
-      <div className="relative min-h-0 flex-1">
-        <Canevas largeur={largeur} profondeur={profondeur} tables={tables} elements={elements} selection={selection} surSelection={surSelection} surVue={surVue} commandes={commandes} />
-        <div className={`absolute right-3 flex flex-col gap-2 ${panneau ? "bottom-[calc(50%+0.75rem)] lg:bottom-3 lg:right-[25rem]" : "bottom-3"}`}>
-          {[
-            ["+", "Zoomer", () => commandes.current?.zoomer(1.4)],
-            ["−", "Dézoomer", () => commandes.current?.zoomer(1 / 1.4)],
-            ["⤢", "Recentrer le plan", () => commandes.current?.recentrer()],
-          ].map(([t, l, f]) => (
-            <button key={l as string} type="button" onClick={f as () => void} aria-label={l as string} className="h-11 w-11 rounded-full border border-line bg-surface text-xl font-semibold shadow-md">
-              {t as string}
-            </button>
-          ))}
-        </div>
-        {panneau && (
-          <section
-            aria-label="Panneau"
-            className="absolute inset-x-0 bottom-0 flex max-h-[50%] flex-col gap-3 overflow-y-auto rounded-t-md border-t border-line bg-surface p-4 shadow-2xl lg:inset-x-auto lg:top-0 lg:right-0 lg:max-h-none lg:w-96 lg:rounded-none lg:border-t-0 lg:border-l"
-            style={{ paddingBottom: "calc(1rem + env(safe-area-inset-bottom, 0px))" }}
-          >
-            <button type="button" onClick={fermer} aria-label="Fermer le panneau" className="absolute top-3 right-3 flex h-9 w-9 items-center justify-center rounded-full bg-surface-soft">
-              ✕
-            </button>
-            {panneau}
-          </section>
-        )}
       </div>
+
+      {(inviteChoisi || (proposition.faits !== undefined && !messageVu)) && (
+        <div className="pointer-events-none absolute inset-x-0 top-16 flex justify-center px-3" style={{ top: "calc(4.25rem + env(safe-area-inset-top, 0px))" }}>
+          <p role="status" className="pointer-events-auto flex max-w-full flex-wrap items-center gap-x-3 gap-y-1 rounded-full bg-ink px-4 py-2 text-sm text-surface shadow-md">
+            {inviteChoisi ? (
+              <>
+                Touchez une chaise pour <strong>{inviteChoisi.nom}</strong>
+                <button type="button" onClick={() => setChoisi(null)} className="text-or underline">
+                  Annuler
+                </button>
+              </>
+            ) : (
+              <>
+                <strong>
+                  {proposition.faits} invité{(proposition.faits ?? 0) > 1 ? "s" : ""} placé{(proposition.faits ?? 0) > 1 ? "s" : ""}
+                </strong>
+                {proposition.nonPlaces?.length ? <span className="text-or">{proposition.nonPlaces.length} sans place</span> : null}
+                <button type="button" onClick={() => setMessageVu(true)} aria-label="Fermer le message" className="text-or">
+                  ✕
+                </button>
+              </>
+            )}
+          </p>
+        </div>
+      )}
+
+      {/* Bord droit : les invités à placer, à glisser sur une chaise. */}
+      <aside
+        data-rail
+        aria-label={`Invités à placer : ${aPlacer.length}`}
+        className={`absolute right-2 flex w-16 flex-col items-center gap-2 rounded-full border border-line bg-surface/95 py-3 shadow-md backdrop-blur transition-opacity ${ouvert ? "pointer-events-none opacity-0" : "opacity-100"}`}
+        style={{ top: "calc(4.75rem + env(safe-area-inset-top, 0px))", bottom: "10.5rem" }}
+      >
+        <span className="text-[10px] font-semibold tracking-wide text-bronze uppercase">À placer</span>
+        <span className="font-display text-lg leading-none">{aPlacer.length}</span>
+        <ul className="flex min-h-0 flex-1 flex-col items-center gap-2 overflow-y-auto px-1 py-1">
+          {aPlacer.length === 0 && <li className="px-1 text-center text-[10px] text-ink-muted">Tout le monde est placé</li>}
+          {aPlacer.map((g) => (
+            <li key={g.id}>
+              <button
+                type="button"
+                aria-pressed={choisi === g.id}
+                aria-label={`${g.nom} : glisser sur une chaise, ou toucher puis toucher une chaise`}
+                onPointerDown={(e) => attraper(g, e, "rail")}
+                className={`flex flex-col items-center gap-0.5 rounded-full p-0.5 [touch-action:pan-y] ${choisi === g.id ? "ring-2 ring-bronze" : ""}`}
+              >
+                {pastille(g)}
+                <span className="max-w-14 truncate text-[10px]">{g.nom.split(" ")[0]}</span>
+              </button>
+            </li>
+          ))}
+        </ul>
+        {aPlacer.length > 0 && (
+          <button type="button" onClick={() => (setSelection(null), setTiroir("plan"))} aria-label="Placer automatiquement" className="flex h-10 w-10 items-center justify-center rounded-full bg-ink text-lg text-or">
+            ✨
+          </button>
+        )}
+      </aside>
+
+      {/* Zoom, en bas à droite. */}
+      <div className={`absolute bottom-4 flex flex-col gap-2 transition-all ${ouvert ? "right-[min(86vw,22rem)] mr-3" : "right-3"}`} style={{ bottom: "calc(1rem + env(safe-area-inset-bottom, 0px))" }}>
+        {[
+          ["+", "Zoomer", () => commandes.current?.zoomer(1.4)],
+          ["−", "Dézoomer", () => commandes.current?.zoomer(1 / 1.4)],
+          ["⤢", "Recentrer le plan", () => commandes.current?.recentrer()],
+        ].map(([t, l, f]) => (
+          <button key={l as string} type="button" onClick={f as () => void} aria-label={l as string} className="h-11 w-11 rounded-full border border-line bg-surface/95 text-xl font-semibold shadow-md backdrop-blur">
+            {t as string}
+          </button>
+        ))}
+      </div>
+
+      {/* Tiroir latéral, avec son onglet vertical, comme sur les outils de référence. */}
+      <div id="tiroir-plan" className={`absolute top-0 right-0 bottom-0 z-10 w-[min(86vw,22rem)] transition-transform duration-300 ${ouvert ? "translate-x-0" : "pointer-events-none translate-x-full"}`}>
+        {/* L'onglet n'apparaît que tiroir ouvert : fermé, il couvrirait la liste des invités. */}
+        {ouvert && (
+          <button type="button" onClick={fermer} aria-label={`Fermer le panneau ${ongletActif}`} className="absolute top-1/3 -left-10 flex h-36 w-10 items-center justify-center rounded-l-md border border-r-0 border-line bg-surface shadow-md">
+            <span className="rotate-180 text-sm font-semibold tracking-wide [writing-mode:vertical-rl]">{ongletActif} ›</span>
+          </button>
+        )}
+        <section aria-label={`Panneau ${ongletActif ?? ""}`} className="flex h-full flex-col gap-3 overflow-y-auto border-l border-line bg-surface p-4 pt-6 shadow-2xl" style={{ paddingBottom: "calc(1rem + env(safe-area-inset-bottom, 0px))" }}>
+          {ouvert && (
+            <button type="button" onClick={fermer} aria-label="Fermer le panneau" className="self-end rounded-full bg-surface-soft px-3 py-1 text-sm">
+              Fermer
+            </button>
+          )}
+          {contenu}
+        </section>
+      </div>
+
+      {/* L'invité attrapé suit le doigt. */}
+      {attrape?.bouge && (
+        <div className="pointer-events-none fixed z-[60] -translate-x-1/2 -translate-y-1/2" style={{ left: attrape.x, top: attrape.y }}>
+          {pastille(attrape, "h-14 w-14 text-base scale-110")}
+        </div>
+      )}
     </div>
   );
 }

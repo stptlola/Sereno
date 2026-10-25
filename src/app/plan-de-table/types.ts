@@ -8,7 +8,7 @@ export interface TableVue {
   x: number;
   y: number;
   rotation: number;
-  invites: { id: string; nom: string; place: number | null; enfant: boolean; accompagnant: boolean; regimes: string[] }[];
+  invites: { id: string; nom: string; place: number | null; enfant: boolean; accompagnant: boolean; regimes: string[]; cote: string }[];
 }
 
 export interface ElementVue {
@@ -106,3 +106,19 @@ export function tourner(x: number, y: number, degres: number): { x: number; y: n
   const a = (degres * Math.PI) / 180;
   return { x: x * Math.cos(a) - y * Math.sin(a), y: x * Math.sin(a) + y * Math.cos(a) };
 }
+
+/** Couleurs des pastilles d'invités, selon le côté : l'or, le charbon, ou le grège pour les invités communs. */
+export function couleursCote(cote: string): { fond: string; texte: string } {
+  if (cote === "PARTENAIRE_1") return { fond: "var(--color-or)", texte: "var(--color-ink)" };
+  if (cote === "PARTENAIRE_2") return { fond: "var(--color-ink)", texte: "var(--color-surface)" };
+  return { fond: "var(--color-grege)", texte: "var(--color-ink)" };
+}
+
+export const initiales = (nom: string) =>
+  nom
+    .split(" ")
+    .filter(Boolean)
+    .map((m) => m[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();

@@ -22,7 +22,7 @@ export async function chargerPlan(weddingId: string) {
     x: t.x,
     y: t.y,
     rotation: t.rotation,
-    invites: invites.filter((g) => g.tableId === t.id).map((g) => ({ id: g.id, nom: nom(g), place: g.seat, enfant: g.ageGroup === "ENFANT", accompagnant: g.plusOne, regimes: g.diets })),
+    invites: invites.filter((g) => g.tableId === t.id).map((g) => ({ id: g.id, nom: nom(g), place: g.seat, enfant: g.ageGroup === "ENFANT", accompagnant: g.plusOne, regimes: g.diets, cote: g.side })),
   }));
   const elements: ElementVue[] = elementsBruts.map((e) => ({ id: e.id, type: e.kind, libelle: e.label ?? e.kind, x: e.x, y: e.y, largeur: e.width, profondeur: e.depth, rotation: e.rotation }));
   const aPlacer: InviteVue[] = invites.filter((g) => !g.tableId).map((g) => ({ id: g.id, nom: nom(g), cote: g.side, accompagnant: g.plusOne, enfant: g.ageGroup === "ENFANT", reponse: g.rsvp }));

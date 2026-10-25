@@ -2,7 +2,7 @@
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState, useTransition } from "react";
 import { deplacer } from "../../actions/plan";
-import { positionsPlaces, tailleTable, tourner, type ElementVue, type TableVue } from "../types";
+import { couleursCote, initiales, positionsPlaces, tailleTable, tourner, type ElementVue, type TableVue } from "../types";
 
 export type Selection = { type: "place"; tableId: string; numero: number } | { type: "table"; id: string } | { type: "element"; id: string } | null;
 export interface Vue {
@@ -42,6 +42,9 @@ export function Canevas({
   surVue,
   commandes,
   lectureSeule = false,
+  surAttraperInvite,
+  ignorerClic,
+  margeDroite = 0,
 }: {
   largeur: number;
   profondeur: number;
@@ -54,6 +57,12 @@ export function Canevas({
   /** Reçoit les commandes de zoom de l'éditeur. */
   commandes?: React.RefObject<{ zoomer: (f: number) => void; recentrer: () => void } | null>;
   lectureSeule?: boolean;
+  /** Un invité assis est attrapé : l'éditeur gère le glisser-déposer vers une autre place ou vers la liste. */
+  surAttraperInvite?: (invite: { id: string; nom: string; cote: string }, e: React.PointerEvent) => void;
+  /** Vrai juste après un glisser-déposer, pour ne pas ouvrir le panneau de la place relâchée. */
+  ignorerClic?: () => boolean;
+  /** Largeur (px) couverte à droite par la liste des invités : le plan se cadre dans la partie visible. */
+  margeDroite?: number;
 }) {
   const router = useRouter();
   const conteneur = useRef<HTMLDivElement>(null);
@@ -65,24 +74,28 @@ export function Canevas({
   const geste = useRef<{ type: "fond"; vue: Vue; depart: { x: number; y: number }; ecart?: number; milieu?: { x: number; y: number } } | null>(null);
   const glisse = useRef<{ cible: Objet; dx: number; dy: number; depart: { x: number; y: number }; bouge: boolean; derniere?: { x: number; y: number } } | null>(null);
 
-  // Le cadre garde les proportions de l'écran.
-  const ajusterProportions = useCallback((v: Vue): Vue => {
-    const c = conteneur.current;
-    if (!c || !c.clientWidth) return v;
-    const ratio = c.clientHeight / c.clientWidth;
-    const l = Math.max(v.l, v.p / ratio);
-    const p = l * ratio;
-    return { x: v.x - (l - v.l) / 2, y: v.y - (p - v.p) / 2, l, p };
-  }, []);
+  // Le cadre garde les proportions de l'écran, et place le contenu dans la partie visible (hors liste des invités).
+  const ajusterProportions = useCallback(
+    (v: Vue): Vue => {
+      const c = conteneur.current;
+      if (!c || !c.clientWidth) return v;
+      const visible = Math.max(120, c.clientWidth - margeDroite);
+      const ratio = c.clientHeight / visible;
+      const l = Math.max(v.l, v.p / ratio);
+      const p = l * ratio;
+      return { x: v.x - (l - v.l) / 2, y: v.y - (p - v.p) / 2, l: (l * c.clientWidth) / visible, p };
+    },
+    [margeDroite],
+  );
 
   // Sur téléphone, on cadre assez près pour lire les prénoms ; on se déplace ensuite du doigt.
   const rapprocher = useCallback(
     (v: Vue): Vue => {
       const etroit = (conteneur.current?.clientWidth ?? 1000) < 640;
-      if (!etroit || v.l <= 800 || lectureSeule) return ajusterProportions(v);
+      if (!etroit || v.l <= 520 || lectureSeule) return ajusterProportions(v);
       const cx = v.x + v.l / 2;
       const cy = v.y + v.p / 2;
-      return ajusterProportions({ x: cx - 400, y: cy - 300, l: 800, p: 600 });
+      return ajusterProportions({ x: cx - 260, y: cy - 260, l: 520, p: 520 });
     },
     [ajusterProportions, lectureSeule],
   );
@@ -266,7 +279,7 @@ export function Canevas({
             );
           return (
             <g key={t.id} transform={`translate(${x} ${y})`}>
-              <g className={lectureSeule ? "" : "cursor-move"} onPointerDown={(e) => objetBas(e, { type: "table", id: t.id }, x, y)} onPointerUp={() => objetHaut({ type: "table", id: t.id })} role="button" aria-label={`${t.nom}, ${t.invites.length} sur ${t.places} places`}>
+              <g data-table={t.id} className={lectureSeule ? "" : "cursor-move"} onPointerDown={(e) => objetBas(e, { type: "table", id: t.id }, x, y)} onPointerUp={() => objetHaut({ type: "table", id: t.id })} role="button" aria-label={`${t.nom}, ${t.invites.length} sur ${t.places} places`}>
                 <g transform={`rotate(${t.rotation})`} fill={fond} stroke={trop ? "var(--color-alerte)" : choisie ? "var(--color-bronze)" : "var(--color-ink)"} strokeWidth={choisie || trop ? 10 : 5}>
                   {forme}
                 </g>
@@ -282,25 +295,43 @@ export function Canevas({
                 const occupant = parPlace.get(pl.numero);
                 const active = selection?.type === "place" && selection.tableId === t.id && selection.numero === pl.numero;
                 const d = Math.hypot(r.x, r.y) || 1;
+                const c = occupant ? couleursCote(occupant.cote) : null;
                 return (
                   <g
                     key={pl.numero}
                     role="button"
+                    data-place={`${t.id}:${pl.numero}`}
                     aria-label={`${t.nom}, place ${pl.numero}${occupant ? ` : ${occupant.nom}` : " : libre"}`}
-                    className={lectureSeule ? "" : "cursor-pointer"}
-                    onPointerDown={(e) => !lectureSeule && e.stopPropagation()}
+                    className={lectureSeule ? "" : occupant ? "cursor-grab" : "cursor-pointer"}
+                    onPointerDown={(e) => {
+                      if (lectureSeule) return;
+                      e.stopPropagation();
+                      if (occupant) surAttraperInvite?.({ id: occupant.id, nom: occupant.nom, cote: occupant.cote }, e);
+                    }}
                     onClick={(e) => {
                       if (lectureSeule) return;
                       e.stopPropagation();
+                      if (ignorerClic?.()) return;
                       surSelection?.({ type: "place", tableId: t.id, numero: pl.numero });
                     }}
                   >
-                    <circle cx={r.x} cy={r.y} r="24" fill={occupant ? "var(--color-or)" : "var(--color-surface-raised)"} stroke={active ? "var(--color-bronze)" : "var(--color-ink-muted)"} strokeWidth={active ? 8 : 3} strokeDasharray={occupant ? "" : "6 5"} />
-                    <text x={r.x} y={r.y} textAnchor="middle" dominantBaseline="central" fontSize="20" fontWeight="600" fill="var(--color-ink)">
-                      {occupant ? occupant.nom.split(" ").map((m) => m[0]).join("").slice(0, 2) : pl.numero}
+                    {/* Zone de dépôt un peu plus large que la chaise, plus facile à viser au doigt. */}
+                    <circle cx={r.x} cy={r.y} r="34" fill="transparent" />
+                    <circle
+                      cx={r.x}
+                      cy={r.y}
+                      r="25"
+                      fill={c ? c.fond : "var(--color-surface-raised)"}
+                      stroke={active ? "var(--color-bronze)" : occupant ? "var(--color-surface)" : "var(--color-ink-muted)"}
+                      strokeWidth={active ? 8 : occupant ? 4 : 3}
+                      strokeDasharray={occupant ? "" : "6 5"}
+                      style={occupant ? { filter: "drop-shadow(0 2px 3px rgb(0 0 0 / 0.18))" } : undefined}
+                    />
+                    <text x={r.x} y={r.y} textAnchor="middle" dominantBaseline="central" fontSize={occupant ? 19 : 18} fontWeight="700" fill={c ? c.texte : "var(--color-ink-muted)"} style={{ pointerEvents: "none" }}>
+                      {occupant ? initiales(occupant.nom) : pl.numero}
                     </text>
                     {occupant && (
-                      <text x={r.x + (r.x / d) * 52} y={r.y + (r.y / d) * 52} textAnchor="middle" dominantBaseline="central" fontSize="22" fill="var(--color-ink)" stroke="var(--color-surface-raised)" strokeWidth="6" paintOrder="stroke">
+                      <text x={r.x + (r.x / d) * 54} y={r.y + (r.y / d) * 54} textAnchor="middle" dominantBaseline="central" fontSize="21" fontWeight="600" fill="var(--color-ink)" stroke="var(--color-surface-raised)" strokeWidth="7" paintOrder="stroke" style={{ pointerEvents: "none" }}>
                         {occupant.nom.split(" ")[0]}
                       </text>
                     )}
