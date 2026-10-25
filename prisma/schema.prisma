@@ -160,6 +160,8 @@ model SeatingTable {
   x         Int        @default(300)
   y         Int        @default(300)
   rotation  Int        @default(0)
+  // Verrouillée : ne se déplace plus sur le plan (reste modifiable depuis son panneau).
+  locked    Boolean    @default(false)
   guests    Guest[]
   createdAt DateTime   @default(now())
 
@@ -178,6 +180,8 @@ model RoomElement {
   width     Int
   depth     Int
   rotation  Int     @default(0)
+  // Verrouillé : ne se déplace plus sur le plan.
+  locked    Boolean @default(false)
 
   @@index([weddingId])
 }

@@ -8,6 +8,7 @@ export interface TableVue {
   x: number;
   y: number;
   rotation: number;
+  verrouille: boolean;
   invites: { id: string; nom: string; place: number | null; enfant: boolean; accompagnant: boolean; regimes: string[]; cote: string }[];
 }
 
@@ -20,6 +21,7 @@ export interface ElementVue {
   largeur: number;
   profondeur: number;
   rotation: number;
+  verrouille: boolean;
 }
 
 export interface InviteVue {

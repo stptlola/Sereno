@@ -12,7 +12,7 @@ export interface Vue {
   p: number;
 }
 
-type Objet = { type: "table" | "element"; id: string };
+type Objet = { type: "table" | "element"; id: string; verrou?: boolean };
 
 /** Cadre initial : les tables et éléments, ou toute la salle s'il n'y a encore rien. */
 function cadrer(largeur: number, profondeur: number, tables: TableVue[], elements: ElementVue[]): Vue {
@@ -73,6 +73,8 @@ export function Canevas({
   const pointeurs = useRef(new Map<number, { x: number; y: number }>());
   const geste = useRef<{ type: "fond"; vue: Vue; depart: { x: number; y: number }; ecart?: number; milieu?: { x: number; y: number } } | null>(null);
   const glisse = useRef<{ cible: Objet; dx: number; dy: number; depart: { x: number; y: number }; bouge: boolean; derniere?: { x: number; y: number } } | null>(null);
+  // Objet verrouillé touché : le geste déplace le plan, et un simple toucher le sélectionne.
+  const cibleVerrouillee = useRef<Objet | null>(null);
 
   // Le cadre garde les proportions de l'écran, et place le contenu dans la partie visible (hors liste des invités).
   const ajusterProportions = useCallback(
@@ -178,8 +180,12 @@ export function Canevas({
     const g = geste.current;
     pointeurs.current.delete(e.pointerId);
     if (pointeurs.current.size === 0) {
-      // Un simple toucher sur le fond désélectionne.
-      if (g && Math.hypot(e.clientX - g.depart.x, e.clientY - g.depart.y) < 6 && !g.ecart) surSelection?.(null);
+      // Un simple toucher sur le fond désélectionne ; sur un objet verrouillé, il le sélectionne.
+      if (g && Math.hypot(e.clientX - g.depart.x, e.clientY - g.depart.y) < 6 && !g.ecart) {
+        const v = cibleVerrouillee.current;
+        surSelection?.(v ? (v.type === "table" ? { type: "table", id: v.id } : { type: "element", id: v.id }) : null);
+      }
+      cibleVerrouillee.current = null;
       geste.current = null;
     } else geste.current = { type: "fond", vue, depart: [...pointeurs.current.values()][0]! };
   }
@@ -187,6 +193,11 @@ export function Canevas({
   // ---- Tables et éléments : glisser pour déplacer, toucher pour sélectionner
   function objetBas(e: React.PointerEvent, cible: Objet, x: number, y: number) {
     if (lectureSeule) return;
+    if (cible.verrou) {
+      // On laisse le geste au fond : il déplace le plan au lieu de l'objet.
+      cibleVerrouillee.current = cible;
+      return;
+    }
     e.stopPropagation();
     capturer(e);
     const p = versPlan(e.clientX, e.clientY);
@@ -203,6 +214,7 @@ export function Canevas({
     setPositions((s) => ({ ...s, [g.cible.id]: d }));
   }
   function objetHaut(cible: Objet) {
+    if (cible.verrou) return;
     const g = glisse.current;
     glisse.current = null;
     if (!g) return;
@@ -249,11 +261,16 @@ export function Canevas({
           const sortie = el.type === "sortie";
           const choisi = selection?.type === "element" && selection.id === el.id;
           return (
-            <g key={el.id} transform={`translate(${x} ${y}) rotate(${el.rotation})`} className={lectureSeule ? "" : "cursor-move"} onPointerDown={(e) => objetBas(e, { type: "element", id: el.id }, x, y)} onPointerUp={() => objetHaut({ type: "element", id: el.id })} role="button" aria-label={`Élément : ${el.libelle}`}>
+            <g key={el.id} transform={`translate(${x} ${y}) rotate(${el.rotation})`} className={lectureSeule || el.verrouille ? "" : "cursor-move"} onPointerDown={(e) => objetBas(e, { type: "element", id: el.id, verrou: el.verrouille }, x, y)} onPointerUp={() => objetHaut({ type: "element", id: el.id, verrou: el.verrouille })} role="button" aria-label={`Élément : ${el.libelle}${el.verrouille ? " (verrouillé)" : ""}`}>
               <rect x={-el.largeur / 2} y={-el.profondeur / 2} width={el.largeur} height={el.profondeur} rx="16" fill={sortie ? "var(--color-or)" : "var(--color-surface-soft)"} stroke={choisi ? "var(--color-bronze)" : "var(--color-ink-muted)"} strokeWidth={choisi ? 10 : 3} strokeDasharray={sortie || choisi ? "" : "12 8"} />
               <text textAnchor="middle" dominantBaseline="middle" fontSize={Math.min(40, Math.max(18, el.profondeur / 2.4))} fill="var(--color-ink)">
                 {el.libelle}
               </text>
+              {el.verrouille && !lectureSeule && (
+                <text x={el.largeur / 2 - 18} y={-el.profondeur / 2 + 20} textAnchor="middle" dominantBaseline="central" fontSize="22" style={{ pointerEvents: "none" }}>
+                  🔒
+                </text>
+              )}
             </g>
           );
         })}
@@ -279,7 +296,7 @@ export function Canevas({
             );
           return (
             <g key={t.id} transform={`translate(${x} ${y})`}>
-              <g data-table={t.id} className={lectureSeule ? "" : "cursor-move"} onPointerDown={(e) => objetBas(e, { type: "table", id: t.id }, x, y)} onPointerUp={() => objetHaut({ type: "table", id: t.id })} role="button" aria-label={`${t.nom}, ${t.invites.length} sur ${t.places} places`}>
+              <g data-table={t.id} className={lectureSeule || t.verrouille ? "" : "cursor-move"} onPointerDown={(e) => objetBas(e, { type: "table", id: t.id, verrou: t.verrouille }, x, y)} onPointerUp={() => objetHaut({ type: "table", id: t.id, verrou: t.verrouille })} role="button" aria-label={`${t.nom}, ${t.invites.length} sur ${t.places} places${t.verrouille ? " (verrouillée)" : ""}`}>
                 <g transform={`rotate(${t.rotation})`} fill={fond} stroke={trop ? "var(--color-alerte)" : choisie ? "var(--color-bronze)" : "var(--color-ink)"} strokeWidth={choisie || trop ? 10 : 5}>
                   {forme}
                 </g>
@@ -289,6 +306,11 @@ export function Canevas({
                 <text textAnchor="middle" y={32} fontSize="24" fill={trop ? "var(--color-alerte)" : texte}>
                   {t.invites.length}/{t.places}
                 </text>
+                {t.verrouille && !lectureSeule && (
+                  <text textAnchor="middle" y={62} fontSize="22" style={{ pointerEvents: "none" }}>
+                    🔒
+                  </text>
+                )}
               </g>
               {places.map((pl) => {
                 const r = tourner(pl.x, pl.y, t.rotation);

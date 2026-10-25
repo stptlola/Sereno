@@ -14,6 +14,7 @@ import {
   supprimerElement,
   supprimerTable,
   tourner,
+  verrouiller,
 } from "../../actions/plan";
 import type { ElementVue, InviteVue, TableVue } from "../types";
 import type { Selection, Vue } from "./canevas";
@@ -126,6 +127,9 @@ export function PanneauTable({ table: t, apres, fermer }: { table: TableVue; apr
           </button>
         ))}
       </div>
+      <button type="button" disabled={enCours} onClick={() => agir(() => verrouiller("table", t.id, !t.verrouille))} aria-pressed={t.verrouille} className={t.verrouille ? boutonActif : bouton}>
+        {t.verrouille ? "🔒 Verrouillée : toucher pour déverrouiller" : "🔓 Verrouiller sa position"}
+      </button>
       <div className="flex flex-wrap gap-2">
         <button type="button" disabled={enCours} onClick={() => agir(() => tourner("table", t.id, -1))} className={bouton}>
           ⟲ Tourner
@@ -168,6 +172,9 @@ export function PanneauElement({ element: e, apres, fermer }: { element: Element
         {nombre("depth", "Profondeur", "cm")}
         {nombre("rotation", "Angle", "°")}
       </div>
+      <button type="button" disabled={enCours} onClick={() => agir(() => verrouiller("element", e.id, !e.verrouille))} aria-pressed={e.verrouille} className={e.verrouille ? boutonActif : bouton}>
+        {e.verrouille ? "🔒 Verrouillé : toucher pour déverrouiller" : "🔓 Verrouiller sa position"}
+      </button>
       <div className="flex flex-wrap gap-2">
         <button type="button" disabled={enCours} onClick={() => agir(() => tourner("element", e.id, -1))} className={bouton}>
           ⟲ Tourner

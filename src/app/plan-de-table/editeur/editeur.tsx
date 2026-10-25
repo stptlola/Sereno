@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { startTransition, useActionState, useCallback, useEffect, useRef, useState, useTransition } from "react";
-import { asseoir, placerInvite, proposerPlacement, type EtatProposition } from "../../actions/plan";
+import { asseoir, placerInvite, proposerPlacement, verrouillerTout, type EtatProposition } from "../../actions/plan";
 import { couleursCote, initiales, type ElementVue, type InviteVue, type TableVue } from "../types";
 import { Canevas, type Selection, type Vue } from "./canevas";
 import { PanneauAjouter, PanneauElement, PanneauPlace, PanneauSalle, PanneauTable } from "./panneaux";
@@ -32,6 +32,30 @@ export function Editeur({ largeur, profondeur, tables, elements, aPlacer }: { la
     vue.current = v;
   }, []);
   const installes = tables.reduce((s, t) => s + t.invites.length, 0);
+  const toutVerrouille = tables.length + elements.length > 0 && tables.every((t) => t.verrouille) && elements.every((e) => e.verrouille);
+
+  // Sur iPhone, Safari zoome la page entière quand on pince : on l'en empêche dans l'éditeur,
+  // pour que le pincement zoome uniquement le plan.
+  useEffect(() => {
+    const bloquer = (e: Event) => e.preventDefault();
+    const plusieursDoigts = (e: TouchEvent) => {
+      if (e.touches.length > 1) e.preventDefault();
+    };
+    document.addEventListener("gesturestart", bloquer, { passive: false });
+    document.addEventListener("gesturechange", bloquer, { passive: false });
+    document.addEventListener("gestureend", bloquer, { passive: false });
+    document.addEventListener("touchmove", plusieursDoigts, { passive: false });
+    const html = document.documentElement;
+    const avant = html.style.overscrollBehavior;
+    html.style.overscrollBehavior = "none";
+    return () => {
+      document.removeEventListener("gesturestart", bloquer);
+      document.removeEventListener("gesturechange", bloquer);
+      document.removeEventListener("gestureend", bloquer);
+      document.removeEventListener("touchmove", plusieursDoigts);
+      html.style.overscrollBehavior = avant;
+    };
+  }, []);
   const inviteChoisi = aPlacer.find((g) => g.id === choisi);
 
   // ---- Glisser-déposer d'un invité (depuis la liste ou depuis une chaise)
@@ -103,10 +127,10 @@ export function Editeur({ largeur, profondeur, tables, elements, aPlacer }: { la
   if (selection?.type === "place") contenu = <PanneauPlace key={`${selection.tableId}-${selection.numero}`} selection={selection} tables={tables} aPlacer={aPlacer} apres={rafraichir} fermer={fermer} />;
   else if (selection?.type === "table") {
     const t = tables.find((x) => x.id === selection.id);
-    if (t) contenu = <PanneauTable key={`${t.id}-${t.nom}-${t.places}-${t.forme}-${t.honneur}`} table={t} apres={rafraichir} fermer={fermer} />;
+    if (t) contenu = <PanneauTable key={`${t.id}-${t.nom}-${t.places}-${t.forme}-${t.honneur}-${t.verrouille}`} table={t} apres={rafraichir} fermer={fermer} />;
   } else if (selection?.type === "element") {
     const e = elements.find((x) => x.id === selection.id);
-    if (e) contenu = <PanneauElement key={`${e.id}-${e.largeur}-${e.profondeur}-${e.rotation}`} element={e} apres={rafraichir} fermer={fermer} />;
+    if (e) contenu = <PanneauElement key={`${e.id}-${e.largeur}-${e.profondeur}-${e.rotation}-${e.verrouille}`} element={e} apres={rafraichir} fermer={fermer} />;
   } else if (tiroir === "ajouter") contenu = <PanneauAjouter vue={vue.current} apres={rafraichir} fermer={fermer} />;
   else if (tiroir === "plan")
     contenu = (
@@ -133,6 +157,22 @@ export function Editeur({ largeur, profondeur, tables, elements, aPlacer }: { la
             {enCalcul ? "Placement…" : "✨ Placer automatiquement"}
           </button>
         </form>
+        <div className="flex flex-col gap-2 rounded-md bg-surface-soft p-3">
+          <p className="text-sm font-semibold">Verrouiller le plan</p>
+          <p className="text-xs text-ink-muted">Une fois la salle installée, verrouillez tables et éléments : ils ne bougeront plus quand vous placez vos invités.</p>
+          <button
+            type="button"
+            onClick={() =>
+              demarrer(async () => {
+                await verrouillerTout(!toutVerrouille);
+                rafraichir();
+              })
+            }
+            className="self-start rounded-full border border-ink px-4 py-2 text-sm font-semibold"
+          >
+            {toutVerrouille ? "🔓 Tout déverrouiller" : "🔒 Tout verrouiller"}
+          </button>
+        </div>
         <PanneauSalle largeur={largeur} profondeur={profondeur} apres={rafraichir} />
         <div className="flex flex-wrap gap-3 text-sm">
           <Link href="/plan-de-table/imprimer" className="text-bronze underline">
@@ -159,7 +199,7 @@ export function Editeur({ largeur, profondeur, tables, elements, aPlacer }: { la
   const flottant = "flex items-center gap-1.5 rounded-full border border-line bg-surface/95 px-3 py-2 text-sm font-semibold shadow-md backdrop-blur";
 
   return (
-    <div className="fixed inset-0 z-50 overflow-hidden bg-surface-soft" style={{ paddingTop: "env(safe-area-inset-top, 0px)" }}>
+    <div className="fixed inset-0 z-50 overflow-hidden overscroll-none bg-surface-soft" style={{ paddingTop: "env(safe-area-inset-top, 0px)" }}>
       <Canevas
         largeur={largeur}
         profondeur={profondeur}

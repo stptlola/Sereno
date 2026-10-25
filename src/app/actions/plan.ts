@@ -95,8 +95,9 @@ export async function supprimerTable(formData: FormData): Promise<void> {
 export async function deplacer(type: "table" | "element", cible: string, x: number, y: number, rotation?: number): Promise<void> {
   const { mariage } = await accesEcriture();
   const pos = { x: borne(x, mariage.roomWidthCm), y: borne(y, mariage.roomDepthCm), ...(rotation !== undefined ? { rotation: ((Math.round(rotation) % 360) + 360) % 360 } : {}) };
-  if (type === "table") await db.seatingTable.updateMany({ where: { id: cible, weddingId: mariage.id }, data: pos });
-  else await db.roomElement.updateMany({ where: { id: cible, weddingId: mariage.id }, data: pos });
+  // Un objet verrouillé ne se déplace pas, même si l'écran l'envoyait par erreur.
+  if (type === "table") await db.seatingTable.updateMany({ where: { id: cible, weddingId: mariage.id, locked: false }, data: pos });
+  else await db.roomElement.updateMany({ where: { id: cible, weddingId: mariage.id, locked: false }, data: pos });
   revalidatePath("/plan-de-table");
 }
 
@@ -136,6 +137,24 @@ export async function asseoir(guestId: string, tableId: string, place: number): 
   ]);
   rafraichir();
   return {};
+}
+
+/** Verrouille ou déverrouille une table ou un élément sur le plan. */
+export async function verrouiller(type: "table" | "element", cible: string, verrou: boolean): Promise<void> {
+  const { mariage } = await accesEcriture();
+  if (type === "table") await db.seatingTable.updateMany({ where: { id: cible, weddingId: mariage.id }, data: { locked: verrou } });
+  else await db.roomElement.updateMany({ where: { id: cible, weddingId: mariage.id }, data: { locked: verrou } });
+  revalidatePath("/plan-de-table");
+}
+
+/** Verrouille ou déverrouille tout le plan d'un coup. */
+export async function verrouillerTout(verrou: boolean): Promise<void> {
+  const { mariage } = await accesEcriture();
+  await db.$transaction([
+    db.seatingTable.updateMany({ where: { weddingId: mariage.id }, data: { locked: verrou } }),
+    db.roomElement.updateMany({ where: { weddingId: mariage.id }, data: { locked: verrou } }),
+  ]);
+  revalidatePath("/plan-de-table");
 }
 
 /** Fait tourner une table ou un élément par pas de 15 degrés. */
