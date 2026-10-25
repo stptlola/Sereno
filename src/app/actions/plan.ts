@@ -24,6 +24,22 @@ const ELEMENTS = {
 } as const;
 export type TypeElement = keyof typeof ELEMENTS;
 
+const borne = (v: number, max: number) => Math.round(Math.min(Math.max(Number.isFinite(v) ? v : 0, 0), max));
+
+/** Décale un ajout s'il tombe sur une table ou un élément existant, pour qu'il reste visible et touchable. */
+async function placeLibre(weddingId: string, x: number, y: number, largeur: number, profondeur: number): Promise<{ x: number; y: number }> {
+  const [tables, elements] = await Promise.all([
+    db.seatingTable.findMany({ where: { weddingId }, select: { x: true, y: true } }),
+    db.roomElement.findMany({ where: { weddingId }, select: { x: true, y: true } }),
+  ]);
+  const occupes = [...tables, ...elements];
+  let p = { x, y };
+  for (let i = 0; i < 12 && occupes.some((o) => Math.hypot(o.x - p.x, o.y - p.y) < 220); i++) {
+    p = { x: borne(x + 280 * (((i % 4) % 2 === 0 ? 1 : -1) * (1 + Math.floor(i / 4))), largeur), y: borne(y + (i % 4 >= 2 ? 280 : 0), profondeur) };
+  }
+  return p;
+}
+
 function rafraichir() {
   revalidatePath("/plan-de-table");
   revalidatePath("/invites");
@@ -35,6 +51,7 @@ export async function ajouterTable(formData: FormData): Promise<void> {
   const numero = existantes.reduce((m, t) => Math.max(m, t.number), 0) + 1;
   const honneur = formData.get("honor") === "on";
   const n = existantes.length;
+  const voulu = formData.get("x") ? await placeLibre(mariage.id, borne(Number(formData.get("x")), mariage.roomWidthCm), borne(Number(formData.get("y")), mariage.roomDepthCm), mariage.roomWidthCm, mariage.roomDepthCm) : null;
   await db.seatingTable.create({
     data: {
       weddingId: mariage.id,
@@ -43,9 +60,9 @@ export async function ajouterTable(formData: FormData): Promise<void> {
       shape: z.enum(FORMES).catch(honneur ? "RECTANGLE" : "RONDE").parse(formData.get("shape")),
       seats: z.coerce.number().int().min(1).max(40).catch(10).parse(formData.get("seats")),
       honor: honneur,
-      // Disposition initiale en grille, que le couple ajuste ensuite sur le plan.
-      x: Math.min(mariage.roomWidthCm - 150, 250 + (n % 5) * 350),
-      y: Math.min(mariage.roomDepthCm - 150, 250 + Math.floor(n / 5) * 350),
+      // Au centre de la vue de l'éditeur si elle est donnée, sinon en grille ; le couple ajuste ensuite.
+      x: voulu ? voulu.x : Math.min(mariage.roomWidthCm - 150, 250 + (n % 5) * 350),
+      y: voulu ? voulu.y : Math.min(mariage.roomDepthCm - 150, 250 + Math.floor(n / 5) * 350),
     },
   });
   rafraichir();
@@ -73,7 +90,6 @@ export async function supprimerTable(formData: FormData): Promise<void> {
   rafraichir();
 }
 
-const borne = (v: number, max: number) => Math.round(Math.min(Math.max(v, 0), max));
 
 /** Déplacement d'une table ou d'un élément sur le plan de salle (glisser-déposer). */
 export async function deplacer(type: "table" | "element", cible: string, x: number, y: number, rotation?: number): Promise<void> {
@@ -230,7 +246,62 @@ export async function ajouterElement(formData: FormData): Promise<void> {
   const { mariage } = await accesEcriture();
   const kind = z.enum(Object.keys(ELEMENTS) as [TypeElement, ...TypeElement[]]).parse(formData.get("kind"));
   const e = ELEMENTS[kind];
-  await db.roomElement.create({ data: { weddingId: mariage.id, kind, label: e.label, x: Math.round(mariage.roomWidthCm / 2), y: Math.round(mariage.roomDepthCm / 2), width: e.w, depth: e.d } });
+  const { x, y } = await placeLibre(
+    mariage.id,
+    formData.get("x") ? borne(Number(formData.get("x")), mariage.roomWidthCm) : Math.round(mariage.roomWidthCm / 2),
+    formData.get("y") ? borne(Number(formData.get("y")), mariage.roomDepthCm) : Math.round(mariage.roomDepthCm / 2),
+    mariage.roomWidthCm,
+    mariage.roomDepthCm,
+  );
+  await db.roomElement.create({ data: { weddingId: mariage.id, kind, label: e.label, x, y, width: e.w, depth: e.d } });
+  revalidatePath("/plan-de-table");
+}
+
+/** Nom, dimensions (cm) et angle d'un élément du plan de salle (M5-16). */
+export async function modifierElement(formData: FormData): Promise<void> {
+  const { mariage } = await accesEcriture();
+  const e = await db.roomElement.findFirst({ where: { id: id.parse(formData.get("id")), weddingId: mariage.id } });
+  if (!e) return;
+  const cm = (v: FormDataEntryValue | null, def: number) => z.coerce.number().int().min(20).max(5000).catch(def).parse(v);
+  await db.roomElement.update({
+    where: { id: e.id },
+    data: {
+      label: z.string().trim().min(1).max(60).catch(e.label ?? e.kind).parse(formData.get("label")),
+      width: cm(formData.get("width"), e.width),
+      depth: cm(formData.get("depth"), e.depth),
+      rotation: ((z.coerce.number().int().catch(e.rotation).parse(formData.get("rotation")) % 360) + 360) % 360,
+    },
+  });
+  revalidatePath("/plan-de-table");
+}
+
+/** Duplique un élément ou une table (sans ses invités), légèrement décalé. */
+export async function dupliquer(type: "table" | "element", cible: string): Promise<void> {
+  const { mariage } = await accesEcriture();
+  if (type === "element") {
+    const e = await db.roomElement.findFirst({ where: { id: cible, weddingId: mariage.id } });
+    if (e) {
+      const p = await placeLibre(mariage.id, borne(e.x + 80, mariage.roomWidthCm), borne(e.y + 80, mariage.roomDepthCm), mariage.roomWidthCm, mariage.roomDepthCm);
+      await db.roomElement.create({ data: { weddingId: mariage.id, kind: e.kind, label: e.label, width: e.width, depth: e.depth, rotation: e.rotation, ...p } });
+    }
+  } else {
+    const t = await db.seatingTable.findFirst({ where: { id: cible, weddingId: mariage.id } });
+    if (t) {
+      const numero = (await db.seatingTable.aggregate({ where: { weddingId: mariage.id }, _max: { number: true } }))._max.number! + 1;
+      await db.seatingTable.create({
+        data: {
+          weddingId: mariage.id,
+          number: numero,
+          name: `Table ${numero}`,
+          shape: t.shape,
+          seats: t.seats,
+          honor: false,
+          rotation: t.rotation,
+          ...(await placeLibre(mariage.id, borne(t.x + 300, mariage.roomWidthCm), t.y, mariage.roomWidthCm, mariage.roomDepthCm)),
+        },
+      });
+    }
+  }
   revalidatePath("/plan-de-table");
 }
 
