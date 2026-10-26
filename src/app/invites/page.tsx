@@ -26,9 +26,11 @@ const REPONSES = [
 
 function Chiffre({ libelle, valeur }: { libelle: string; valeur: number | string }) {
   return (
-    <div className="flex min-w-0 flex-col gap-1 rounded-md bg-surface-soft p-3 sm:p-5">
-      <p className="text-xs text-ink-muted sm:text-sm">{libelle}</p>
-      <p className="font-display text-xl sm:text-3xl">{valeur}</p>
+    <div className="flex min-w-0 flex-col gap-1 rounded-md bg-surface-soft p-3 [container-type:inline-size] sm:p-5">
+      <p className="truncate text-xs text-ink-muted sm:text-sm">{libelle}</p>
+      <p className="font-display leading-tight whitespace-nowrap" style={{ fontSize: "clamp(1rem, 18cqw, 1.875rem)" }}>
+        {valeur}
+      </p>
     </div>
   );
 }
@@ -215,31 +217,37 @@ export default async function PageInvites({ searchParams }: { searchParams: Prom
         )}
         {tous.length > 0 && filtres.length === 0 && <p className="text-ink-muted">Aucun invité ne correspond à votre recherche.</p>}
 
-        {vue === "" && filtres.length > 0 && (
-          <div className="grid gap-4 md:grid-cols-3">
-            {(["PARTENAIRE_1", "PARTENAIRE_2", "COMMUN"] as const)
-              .filter((s) => s !== "PARTENAIRE_2" || mariage.partner2Name)
-              .map((s) => {
-                const liste = filtres.filter((g) => g.side === s);
-                const invs = invitations(liste).sort((x, y) => ordreLien(x.lien) - ordreLien(y.lien) || x.titre.localeCompare(y.titre, "fr"));
-                const groupes = [...new Set(invs.map((i) => i.lien))];
-                return (
-                  <div key={s} className="flex flex-col gap-2 rounded-md border border-line bg-surface-raised p-4">
-                    <h2 className="flex items-baseline justify-between font-display text-xl">
-                      {nomCote[s]} <span className="font-sans text-sm text-ink-muted">{liste.length}</span>
-                    </h2>
-                    {liste.length === 0 && <p className="text-sm text-ink-muted">Personne pour l’instant.</p>}
-                    {groupes.map((lien) => (
-                      <div key={lien ?? "aucun"}>
-                        <p className="mt-2 text-xs font-semibold text-bronze uppercase">{libelleLien(lien)}</p>
-                        <ul>{invs.filter((i) => i.lien === lien).map(versLigne)}</ul>
-                      </div>
-                    ))}
-                  </div>
-                );
-              })}
-          </div>
-        )}
+        {vue === "" && filtres.length > 0 && (() => {
+          const cotes = (["PARTENAIRE_1", "PARTENAIRE_2", "COMMUN"] as const).filter((s) => s !== "PARTENAIRE_2" || mariage.partner2Name);
+          const occupes = cotes.filter((s) => filtres.some((g) => g.side === s));
+          const vides = cotes.filter((s) => !occupes.includes(s));
+          return (
+            <>
+              {/* Seuls les côtés qui ont du monde prennent une colonne ; les autres tiennent en une ligne. */}
+              <div className={`grid gap-4 ${occupes.length >= 3 ? "lg:grid-cols-2 2xl:grid-cols-3" : occupes.length === 2 ? "lg:grid-cols-2" : ""}`}>
+                {occupes.map((s) => {
+                  const liste = filtres.filter((g) => g.side === s);
+                  const invs = invitations(liste).sort((x, y) => ordreLien(x.lien) - ordreLien(y.lien) || x.titre.localeCompare(y.titre, "fr"));
+                  const groupes = [...new Set(invs.map((i) => i.lien))];
+                  return (
+                    <div key={s} className="flex min-w-0 flex-col gap-2 rounded-md border border-line bg-surface-raised p-4">
+                      <h2 className="flex items-baseline justify-between font-display text-xl">
+                        {nomCote[s]} <span className="font-sans text-sm text-ink-muted">{liste.length}</span>
+                      </h2>
+                      {groupes.map((lien) => (
+                        <div key={lien ?? "aucun"}>
+                          <p className="mt-2 text-xs font-semibold text-bronze uppercase">{libelleLien(lien)}</p>
+                          <ul>{invs.filter((i) => i.lien === lien).map(versLigne)}</ul>
+                        </div>
+                      ))}
+                    </div>
+                  );
+                })}
+              </div>
+              {vides.length > 0 && <p className="text-sm text-ink-muted">{vides.map((s) => nomCote[s]).join(" · ")} : personne pour l’instant.</p>}
+            </>
+          );
+        })()}
 
         {vue === "alpha" && filtres.length > 0 && (
           <ul className="rounded-md border border-line bg-surface-raised px-4">

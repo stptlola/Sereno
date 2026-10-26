@@ -17,9 +17,12 @@ export const dynamic = "force-dynamic";
 
 function Chiffre({ libelle, valeur, alerte = false }: { libelle: string; valeur: string; alerte?: boolean }) {
   return (
-    <div className="flex min-w-0 flex-col gap-1 rounded-md bg-surface-soft p-3 sm:p-5">
+    // La taille du chiffre suit la largeur réelle de la carte : « 25 000 € » ne se coupe jamais.
+    <div className="flex min-w-0 flex-col gap-1 rounded-md bg-surface-soft p-3 [container-type:inline-size] sm:p-5">
       <p className="text-xs text-ink-muted sm:text-sm">{libelle}</p>
-      <p className={`font-display text-xl break-words sm:text-2xl lg:text-3xl ${alerte ? "text-alerte" : ""}`}>{valeur}</p>
+      <p className={`font-display leading-tight whitespace-nowrap ${alerte ? "text-alerte" : ""}`} style={{ fontSize: "clamp(1rem, 15cqw, 1.875rem)" }}>
+        {valeur}
+      </p>
     </div>
   );
 }

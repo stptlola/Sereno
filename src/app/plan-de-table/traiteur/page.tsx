@@ -16,13 +16,15 @@ export default async function RapportTraiteur() {
   const { mariage } = await accesEcriture();
   const [tables, presents, site] = await Promise.all([
     db.seatingTable.findMany({ where: { weddingId: mariage.id }, orderBy: [{ honor: "desc" }, { number: "asc" }] }),
-    db.guest.findMany({ where: { weddingId: mariage.id, rsvp: "PRESENT" }, orderBy: [{ lastName: "asc" }, { firstName: "asc" }] }),
+    // Tous ceux qui sont attendus : présents et sans réponse (sauf la liste B en attente), jamais les absents.
+    db.guest.findMany({ where: { weddingId: mariage.id, rsvp: { in: ["PRESENT", "EN_ATTENTE"] }, NOT: { listB: true, rsvp: "EN_ATTENTE" } }, orderBy: [{ lastName: "asc" }, { firstName: "asc" }] }),
     db.miniSite.findUnique({ where: { weddingId: mariage.id }, select: { mealOptions: true } }),
   ]);
   const plats = site?.mealOptions ?? [];
   const couverts = (liste: typeof presents) => ({
     adultes: liste.reduce((s, g) => s + (g.ageGroup === "ADULTE" ? 1 : 0) + (g.plusOne ? 1 : 0), 0),
     enfants: liste.filter((g) => g.ageGroup === "ENFANT").length,
+    enAttente: liste.filter((g) => g.rsvp === "EN_ATTENTE").length,
   });
   const total = couverts(presents);
   const speciaux = presents.filter((g) => g.diets.length || g.allergies);
@@ -41,9 +43,15 @@ export default async function RapportTraiteur() {
         <h1 className="font-display text-3xl">Rapport pour le traiteur</h1>
         <p className="text-ink-muted">
           Mariage de {prenoms}
-          {mariage.date ? `, ${formatDate.format(mariage.date)}` : ""}. Établi le {new Intl.DateTimeFormat("fr-FR", { day: "numeric", month: "long", year: "numeric" }).format(new Date())}, d’après les réponses reçues.
+          {mariage.date ? `, ${formatDate.format(mariage.date)}` : ""}. Établi le {new Intl.DateTimeFormat("fr-FR", { day: "numeric", month: "long", year: "numeric" }).format(new Date())}, d’après les réponses reçues à cette date.
         </p>
       </header>
+      {total.enAttente > 0 && (
+        <p className="rounded-md border border-or p-3 text-sm">
+          Ce rapport compte les invités présents <strong>et les {total.enAttente} qui n’ont pas encore répondu</strong>, pour une estimation complète. Les absents ne sont pas comptés.
+          Imprimez-le de nouveau après votre date limite de réponse, pour des chiffres définitifs.
+        </p>
+      )}
       <section className="grid grid-cols-3 gap-3 text-center">
         {[
           ["Couverts adultes", total.adultes],
@@ -56,6 +64,11 @@ export default async function RapportTraiteur() {
           </div>
         ))}
       </section>
+      {total.enAttente > 0 && (
+        <p className="-mt-3 text-center text-sm text-ink-muted">
+          Dont {total.enAttente} en attente de réponse · {presents.length - total.enAttente} confirmé{presents.length - total.enAttente > 1 ? "s" : ""}
+        </p>
+      )}
       <section>
         <h2 className="font-display text-xl">Régimes</h2>
         <p>
@@ -83,6 +96,7 @@ export default async function RapportTraiteur() {
               <th className="py-2 pr-3">Table</th>
               <th className="py-2 pr-3">Adultes</th>
               <th className="py-2 pr-3">Enfants</th>
+              <th className="py-2 pr-3">Dont en attente</th>
               {plats.length > 0 && <th className="py-2 pr-3">Plats</th>}
               <th className="py-2">Repas spéciaux et allergies</th>
             </tr>
@@ -95,6 +109,7 @@ export default async function RapportTraiteur() {
                   <td className="py-2 pr-3 font-semibold">{gr.nom}</td>
                   <td className="py-2 pr-3">{c.adultes}</td>
                   <td className="py-2 pr-3">{c.enfants}</td>
+                  <td className="py-2 pr-3 text-ink-muted">{c.enAttente || "—"}</td>
                   {plats.length > 0 && (
                     <td className="py-2 pr-3">
                       {compterPlats(gr.invites.map((g) => ({ plat: g.mealChoice })), plats)

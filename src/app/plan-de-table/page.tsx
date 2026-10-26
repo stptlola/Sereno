@@ -41,9 +41,11 @@ export default async function PagePlanDeTable() {
               ["Installés", `${installes}/${installes + d.aPlacer.length}`],
               ["Places", places],
             ].map(([l, v]) => (
-              <div key={l} className="rounded-md bg-surface-soft p-3 sm:p-5">
-                <p className="text-xs text-ink-muted sm:text-sm">{l}</p>
-                <p className="font-display text-xl sm:text-3xl">{v}</p>
+              <div key={l} className="min-w-0 rounded-md bg-surface-soft p-3 [container-type:inline-size] sm:p-5">
+                <p className="truncate text-xs text-ink-muted sm:text-sm">{l}</p>
+                <p className="font-display leading-tight whitespace-nowrap" style={{ fontSize: "clamp(1rem, 16cqw, 1.875rem)" }}>
+                  {v}
+                </p>
               </div>
             ))}
           </section>

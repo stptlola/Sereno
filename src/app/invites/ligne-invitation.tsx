@@ -102,7 +102,8 @@ export function LigneInvitation({ titre, prenoms, membres, reponse }: { titre: s
         }}
       >
         <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-          <button type="button" onClick={() => (decalage ? setDecalage(0) : setDeplie(!deplie))} aria-expanded={deplie} className="flex min-w-0 flex-1 flex-col text-left">
+          {/* Au moins 12rem pour le nom : faute de place, les boutons passent dessous au lieu de casser le nom mot par mot. */}
+          <button type="button" onClick={() => (decalage ? setDecalage(0) : setDeplie(!deplie))} aria-expanded={deplie} className="flex min-w-0 flex-[1_1_12rem] flex-col text-left">
             <span className="font-semibold">
               {titre}
               {membres.some((m) => m.aConfirmer) && <span className="ml-2 rounded-full border border-or px-2 py-0.5 text-[10px] font-semibold text-bronze">prénom à confirmer</span>}
