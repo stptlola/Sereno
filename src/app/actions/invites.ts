@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import type { Prisma } from "@prisma/client";
 import { z } from "zod";
 import { nettoyerPlat } from "@/domain/invites/adresses";
 import { preparerInvitation, PREFIXE_ACCOMPAGNANT } from "@/domain/invites/invitation";
@@ -119,6 +120,61 @@ export async function changerReponse(formData: FormData): Promise<void> {
   await db.guest.update({ where: { id: g.id }, data: { rsvp, rsvpAt: rsvp === "EN_ATTENTE" ? null : new Date() } });
   await journal(mariage.id, user.id, g.id, `reponse-${rsvp}`);
   rafraichir(g.id);
+}
+
+/** Modification d'un champ depuis le tableau des invités, enregistrée aussitôt. Seuls ces champs sont modifiables ainsi. */
+export async function modifierChamp(guestId: string, champ: "firstName" | "lastName" | "side" | "category" | "ageGroup", valeur: string): Promise<{ erreur?: string }> {
+  const { user, mariage } = await accesEcriture();
+  const g = await db.guest.findFirst({ where: { id: guestId, weddingId: mariage.id, isCouple: false } });
+  if (!g) return { erreur: "Invité introuvable." };
+  let data: Prisma.GuestUpdateInput;
+  switch (champ) {
+    case "firstName": {
+      const v = prenom.safeParse(valeur);
+      if (!v.success) return { erreur: "Le prénom est obligatoire." };
+      data = { firstName: v.data };
+      break;
+    }
+    case "lastName":
+      data = { lastName: texte(60).parse(valeur) };
+      break;
+    case "side":
+      data = { side: cote.parse(valeur) };
+      break;
+    case "category":
+      data = { category: lien.parse(valeur || undefined) ?? null };
+      break;
+    case "ageGroup":
+      data = { ageGroup: valeur === "ENFANT" ? "ENFANT" : "ADULTE", ...(valeur === "ENFANT" ? {} : { age: null }) };
+      break;
+    default:
+      return { erreur: "Champ non modifiable." };
+  }
+  await db.guest.update({ where: { id: g.id }, data });
+  await journal(mariage.id, user.id, g.id, "modifie");
+  rafraichir(g.id);
+  return {};
+}
+
+/** Action sur plusieurs invités d'un coup, depuis le tableau : réponse, côté, liste A ou B, suppression. */
+export async function actionGroupee(ids: string[], action: "reponse" | "cote" | "liste" | "supprimer", valeur = ""): Promise<{ faits: number }> {
+  const { user, mariage } = await accesEcriture();
+  const liste = Array.isArray(ids) ? ids.filter((i): i is string => typeof i === "string").slice(0, 500) : [];
+  const cibles = await db.guest.findMany({ where: { id: { in: liste }, weddingId: mariage.id, isCouple: false }, select: { id: true, householdId: true } });
+  const where = { id: { in: cibles.map((c) => c.id) }, weddingId: mariage.id };
+  if (!cibles.length) return { faits: 0 };
+  if (action === "reponse") {
+    const rsvp = z.enum(["EN_ATTENTE", "PRESENT", "ABSENT"]).parse(valeur);
+    await db.guest.updateMany({ where, data: { rsvp, rsvpAt: rsvp === "EN_ATTENTE" ? null : new Date() } });
+  } else if (action === "cote") await db.guest.updateMany({ where, data: { side: cote.parse(valeur) } });
+  else if (action === "liste") await db.guest.updateMany({ where, data: { listB: valeur === "B" } });
+  else if (action === "supprimer") {
+    const foyers = [...new Set(cibles.map((c) => c.householdId).filter((f): f is string => Boolean(f)))];
+    await db.$transaction([db.guest.deleteMany({ where }), db.household.deleteMany({ where: { id: { in: foyers }, weddingId: mariage.id, guests: { none: {} } } })]);
+  }
+  await db.activityLog.create({ data: { weddingId: mariage.id, userId: user.id, entity: "Guest", entityId: cibles[0]!.id, action: `groupe-${action}-${cibles.length}` } });
+  rafraichir();
+  return { faits: cibles.length };
 }
 
 /** Réponse pour toute une invitation en un geste (M4-06). */

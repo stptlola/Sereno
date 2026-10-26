@@ -10,6 +10,7 @@ import { ajouterMoment, changerReponse } from "../actions/invites";
 import { AjoutInvite } from "./ajout";
 import { CollecteAdresses } from "./collecte";
 import { LigneInvitation } from "./ligne-invitation";
+import { TableauInvites } from "./tableau";
 import { OutilsInvites } from "./outils";
 
 export const metadata: Metadata = { title: "Invités · Sereno" };
@@ -45,28 +46,6 @@ function charger(weddingId: string) {
     // Ordre de saisie : les membres d'une invitation gardent l'ordre de l'invitation (« Katy et Hervé »).
     orderBy: [{ createdAt: "asc" }],
   });
-}
-
-function BoutonsReponse({ g }: { g: InviteListe }) {
-  return (
-    <div className="flex shrink-0 gap-1" role="group" aria-label={`Réponse de ${g.firstName}`}>
-      {REPONSES.map((r) => (
-        <form key={r.valeur} action={changerReponse}>
-          <input type="hidden" name="id" value={g.id} />
-          <input type="hidden" name="rsvp" value={r.valeur} />
-          <button
-            type="submit"
-            aria-pressed={g.rsvp === r.valeur}
-            title={r.libelle}
-            aria-label={`${r.libelle}${g.rsvp === r.valeur ? " (réponse actuelle)" : ""}`}
-            className={`h-8 min-w-10 rounded-full border px-2 text-xs font-semibold ${g.rsvp === r.valeur ? r.classe : "border-line text-ink-muted hover:border-ink"}`}
-          >
-            {r.court}
-          </button>
-        </form>
-      ))}
-    </div>
-  );
 }
 
 export default async function PageInvites({ searchParams }: { searchParams: Promise<Params> }) {
@@ -141,7 +120,8 @@ export default async function PageInvites({ searchParams }: { searchParams: Prom
   };
 
   return (
-    <main className="mx-auto flex min-h-dvh max-w-4xl flex-col gap-8 px-6 pt-0 pb-28 lg:pb-12">
+    // En vue Tableau, la page s'élargit pour que le tableau tienne sans défiler.
+    <main className={`mx-auto flex min-h-dvh flex-col gap-8 px-6 pt-0 pb-28 lg:pb-12 ${un(params.vue) === "tableau" ? "max-w-6xl" : "max-w-4xl"}`}>
       <Navigation actif="/invites" />
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
@@ -258,52 +238,30 @@ export default async function PageInvites({ searchParams }: { searchParams: Prom
         )}
 
         {vue === "tableau" && filtres.length > 0 && (
-          <>
-            <p className="-mb-2 text-xs text-ink-muted">Réponse : Oui = présent · ? = en attente de réponse · Non = absent. Touchez un nom pour ouvrir sa fiche.</p>
-            <div className="overflow-x-auto rounded-md border border-line bg-surface-raised">
-              <table className="w-full text-left text-sm">
-                <thead className="bg-surface-soft text-xs text-ink-muted">
-                  <tr>
-                    {["Invité", "Côté", "Lien", "Foyer", "Âge", "Régimes", "Moments", "Réponse"].map((h, i) => (
-                      <th key={h} className={`px-2.5 py-2 font-semibold whitespace-nowrap ${i === 0 ? "sticky left-0 z-10 bg-surface-soft" : ""}`}>
-                        {h}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {[...filtres]
-                    // Les membres d'un même foyer restent côte à côte.
-                    .sort((x, y) => (x.household?.name ?? `${x.lastName ?? ""} ${x.firstName}`).localeCompare(y.household?.name ?? `${y.lastName ?? ""} ${y.firstName}`, "fr"))
-                    .map((g) => {
-                      const sesMoments = moments.filter((m) => g.moments.some((x) => x.momentId === m.id)).map((m) => m.name);
-                      return (
-                        <tr key={g.id} className="border-t border-line">
-                          <td className="sticky left-0 z-10 bg-surface-raised px-2.5 py-2 whitespace-nowrap">
-                            <Link href={`/invites/${g.id}`} className="font-semibold hover:underline">
-                              {[g.firstName, g.lastName].filter(Boolean).join(" ")}
-                            </Link>
-                            {g.listB && <span className="ml-2 rounded-full bg-surface-soft px-2 py-0.5 text-[10px] font-semibold text-bronze">liste B</span>}
-                          </td>
-                          <td className="px-2.5 py-2 whitespace-nowrap">{nomCote[g.side].replace("Côté ", "")}</td>
-                          <td className="px-2.5 py-2 whitespace-nowrap">{g.category ? libelleLien(g.category) : "—"}</td>
-                          <td className="max-w-[11rem] truncate px-2.5 py-2" title={g.household?.name ?? undefined}>
-                            {g.household?.name ?? "—"}
-                          </td>
-                          <td className="px-2.5 py-2 whitespace-nowrap">{g.ageGroup === "ENFANT" ? `Enfant${g.age ? `, ${g.age} ans` : ""}` : "Adulte"}</td>
-                          <td className="px-2.5 py-2 whitespace-nowrap">{g.diets.join(", ") || "—"}</td>
-                          {/* Sans moment précis, l'invité est attendu à tous les moments. */}
-                          <td className="px-2.5 py-2 whitespace-nowrap">{sesMoments.length === 0 || sesMoments.length === moments.length ? "Tous" : sesMoments.join(", ")}</td>
-                          <td className="px-2.5 py-2">
-                            <BoutonsReponse g={g} />
-                          </td>
-                        </tr>
-                      );
-                    })}
-                </tbody>
-              </table>
-            </div>
-          </>
+          <TableauInvites
+            cotes={(["PARTENAIRE_1", "PARTENAIRE_2", "COMMUN"] as const).filter((c) => c !== "PARTENAIRE_2" || mariage.partner2Name).map((c) => ({ valeur: c, libelle: nomCote[c].replace("Côté ", "") }))}
+            liens={LIENS.map((l) => ({ cle: l.cle, libelle: l.libelle }))}
+            lignes={[...filtres]
+              // Par défaut, les membres d'un même foyer restent côte à côte.
+              .sort((x, y) => (x.household?.name ?? `${x.lastName ?? ""} ${x.firstName}`).localeCompare(y.household?.name ?? `${y.lastName ?? ""} ${y.firstName}`, "fr"))
+              .map((g) => {
+                const sesMoments = moments.filter((m) => g.moments.some((x) => x.momentId === m.id)).map((m) => m.name);
+                return {
+                  id: g.id,
+                  prenom: g.firstName,
+                  nom: g.lastName ?? "",
+                  cote: g.side,
+                  lien: g.category ?? "",
+                  foyer: g.household?.name ?? "",
+                  enfant: g.ageGroup === "ENFANT",
+                  age: g.age,
+                  regimes: g.diets.join(", "),
+                  moments: sesMoments.length === 0 || sesMoments.length === moments.length ? "Tous" : sesMoments.join(", "),
+                  reponse: g.rsvp,
+                  listeB: g.listB,
+                };
+              })}
+          />
         )}
       </section>
 
