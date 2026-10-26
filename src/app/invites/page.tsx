@@ -6,7 +6,7 @@ import { compter, libelleLien, LIENS, repartition, type Cote } from "@/domain/in
 import { sansAccents } from "@/domain/planning";
 import { accesEcriture } from "@/lib/acces";
 import { db } from "@/lib/db";
-import { ajouterMoment, changerReponse } from "../actions/invites";
+import { ajouterMoment, supprimerMoment } from "../actions/invites";
 import { AjoutInvite } from "./ajout";
 import { CollecteAdresses } from "./collecte";
 import { LigneInvitation } from "./ligne-invitation";
@@ -103,16 +103,22 @@ export default async function PageInvites({ searchParams }: { searchParams: Prom
         details: [g.listB ? "Liste B" : null, g.ageGroup === "ENFANT" ? `Enfant${g.age ? `, ${g.age} ans` : ""}` : null, g.diets.join(", ") || null, g.allergies ? `Allergies : ${g.allergies}` : null].filter(Boolean).join(" · "),
         aConfirmer: estAccompagnantAConfirmer(g.firstName),
         enLigne: g.rsvpOnline,
+        moments: g.moments.map((x) => x.momentId),
       })),
     );
   const versLigne = (inv: ReturnType<typeof invitations>[number]) => (
-    <LigneInvitation key={inv.cle} titre={inv.titre} prenoms={inv.prenoms} reponse={inv.reponse} membres={inv.membres} />
+    <LigneInvitation key={inv.cle} cle={inv.cle} titre={inv.titre} prenoms={inv.prenoms} reponse={inv.reponse} membres={inv.membres} foyer={inv.membres[0]!.foyer} lien={inv.lien} options={optionsInvitation} />
   );
 
   const nomCote: Record<Cote, string> = {
     PARTENAIRE_1: `Côté ${mariage.partner1Name}`,
     PARTENAIRE_2: `Côté ${mariage.partner2Name ?? "partenaire 2"}`,
     COMMUN: "Commun",
+  };
+  const optionsInvitation = {
+    moments: moments.map((m) => ({ id: m.id, nom: m.name })),
+    cotes: (["PARTENAIRE_1", "PARTENAIRE_2", "COMMUN"] as const).filter((c) => c !== "PARTENAIRE_2" || mariage.partner2Name).map((c) => ({ valeur: c, libelle: nomCote[c] })),
+    liens: LIENS.map((l) => ({ cle: l.cle, libelle: l.libelle })),
   };
   const ordreLien = (cle: string | null) => {
     const i = LIENS.findIndex((l) => l.cle === cle);
@@ -199,15 +205,17 @@ export default async function PageInvites({ searchParams }: { searchParams: Prom
 
         {vue === "" && filtres.length > 0 && (() => {
           const cotes = (["PARTENAIRE_1", "PARTENAIRE_2", "COMMUN"] as const).filter((s) => s !== "PARTENAIRE_2" || mariage.partner2Name);
-          const occupes = cotes.filter((s) => filtres.some((g) => g.side === s));
+          // Une invitation reste entière, dans la colonne de son premier adulte, même si ses membres sont de côtés différents.
+          const toutes = invitations(filtres);
+          const occupes = cotes.filter((s) => toutes.some((i) => i.cote === s));
           const vides = cotes.filter((s) => !occupes.includes(s));
           return (
             <>
               {/* Seuls les côtés qui ont du monde prennent une colonne ; les autres tiennent en une ligne. */}
               <div className={`grid gap-4 ${occupes.length >= 3 ? "lg:grid-cols-2 2xl:grid-cols-3" : occupes.length === 2 ? "lg:grid-cols-2" : ""}`}>
                 {occupes.map((s) => {
-                  const liste = filtres.filter((g) => g.side === s);
-                  const invs = invitations(liste).sort((x, y) => ordreLien(x.lien) - ordreLien(y.lien) || x.titre.localeCompare(y.titre, "fr"));
+                  const invs = toutes.filter((i) => i.cote === s).sort((x, y) => ordreLien(x.lien) - ordreLien(y.lien) || x.titre.localeCompare(y.titre, "fr"));
+                  const liste = invs.flatMap((i) => i.membres);
                   const groupes = [...new Set(invs.map((i) => i.lien))];
                   return (
                     <div key={s} className="flex min-w-0 flex-col gap-2 rounded-md border border-line bg-surface-raised p-4">
@@ -265,13 +273,25 @@ export default async function PageInvites({ searchParams }: { searchParams: Prom
         )}
       </section>
 
-      <form action={ajouterMoment} className="flex flex-wrap items-center gap-2 text-sm">
-        <span className="text-ink-muted">Vos moments : {moments.map((m) => m.name).join(", ") || "aucun"}.</span>
-        <input name="name" maxLength={60} placeholder="Ajouter un moment (brunch…)" aria-label="Nouveau moment" className="rounded-full border border-line bg-surface-raised px-3 py-1.5" />
-        <button type="submit" className="text-bronze underline">
-          Ajouter
-        </button>
-      </form>
+      <section className="flex flex-wrap items-center gap-2 text-sm" aria-label="Vos moments">
+        <span className="text-ink-muted">Vos moments :</span>
+        {moments.length === 0 && <span className="text-ink-muted">aucun.</span>}
+        {moments.map((m) => (
+          <form key={m.id} action={supprimerMoment} className="flex items-center gap-1 rounded-full bg-surface-soft py-1 pr-1.5 pl-3">
+            <input type="hidden" name="id" value={m.id} />
+            {m.name}
+            <button type="submit" aria-label={`Supprimer le moment ${m.name}`} title="Supprimer ce moment" className="flex h-5 w-5 items-center justify-center rounded-full text-ink-muted hover:bg-surface-raised hover:text-alerte">
+              ✕
+            </button>
+          </form>
+        ))}
+        <form action={ajouterMoment} className="flex items-center gap-2">
+          <input name="name" maxLength={60} placeholder="Ajouter un moment (brunch…)" aria-label="Nouveau moment" className="rounded-full border border-line bg-surface-raised px-3 py-1.5" />
+          <button type="submit" className="text-bronze underline">
+            Ajouter
+          </button>
+        </form>
+      </section>
     </main>
   );
 }

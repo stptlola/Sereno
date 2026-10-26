@@ -265,6 +265,70 @@ export async function ajouterMoment(formData: FormData): Promise<void> {
   rafraichir();
 }
 
+/** Supprime un moment (ex. : « Test ») : les invitations à ce moment disparaissent avec lui. */
+export async function supprimerMoment(formData: FormData): Promise<void> {
+  const { mariage } = await accesEcriture();
+  await db.moment.deleteMany({ where: { id: id.parse(formData.get("id")), weddingId: mariage.id } });
+  rafraichir();
+}
+
+/**
+ * Moments auxquels un invité est convié, après un changement. Sans moment précis, un invité est convié à tous :
+ * retirer un moment revient alors à le convier à tous les autres.
+ */
+function momentsApres(actuels: string[], tous: string[], moment: string, invite: boolean): string[] {
+  const base = actuels.length ? actuels : tous;
+  const suivants = invite ? [...new Set([...base, moment])] : base.filter((m) => m !== moment);
+  return suivants;
+}
+
+async function enregistrerMoments(guestId: string, momentIds: string[]) {
+  await db.$transaction([
+    db.guestMoment.deleteMany({ where: { guestId } }),
+    ...(momentIds.length ? [db.guestMoment.createMany({ data: momentIds.map((momentId) => ({ guestId, momentId })) })] : []),
+  ]);
+}
+
+/** Convie (ou non) une ou plusieurs personnes à un moment : toute une invitation, ou une seule personne. */
+export async function convierAuMoment(guestIds: string[], momentId: string, invite: boolean): Promise<void> {
+  const { mariage } = await accesEcriture();
+  const ids = Array.isArray(guestIds) ? guestIds.filter((i): i is string => typeof i === "string").slice(0, 30) : [];
+  const [moment, tous, invites] = await Promise.all([
+    db.moment.findFirst({ where: { id: momentId, weddingId: mariage.id } }),
+    db.moment.findMany({ where: { weddingId: mariage.id }, select: { id: true } }),
+    db.guest.findMany({ where: { id: { in: ids }, weddingId: mariage.id }, include: { moments: true } }),
+  ]);
+  if (!moment) return;
+  for (const g of invites) {
+    await enregistrerMoments(
+      g.id,
+      momentsApres(
+        g.moments.map((m) => m.momentId),
+        tous.map((m) => m.id),
+        moment.id,
+        invite,
+      ),
+    );
+  }
+  rafraichir();
+}
+
+/** Modifie toute une invitation d'un coup : nom du foyer, côté, lien (M4-03). */
+export async function modifierInvitation(guestIds: string[], changes: { foyer?: string; cote?: string; lien?: string }): Promise<void> {
+  const { user, mariage } = await accesEcriture();
+  const ids = Array.isArray(guestIds) ? guestIds.filter((i): i is string => typeof i === "string").slice(0, 30) : [];
+  const membres = await db.guest.findMany({ where: { id: { in: ids }, weddingId: mariage.id, isCouple: false }, select: { id: true, householdId: true } });
+  if (!membres.length) return;
+  const where = { id: { in: membres.map((m) => m.id) }, weddingId: mariage.id };
+  if (changes.cote !== undefined) await db.guest.updateMany({ where, data: { side: cote.parse(changes.cote) } });
+  if (changes.lien !== undefined) await db.guest.updateMany({ where, data: { category: lien.parse(changes.lien || undefined) ?? null } });
+  const foyerId = membres[0]!.householdId;
+  const nouveauNom = z.string().trim().min(1).max(80).safeParse(changes.foyer ?? "");
+  if (changes.foyer !== undefined && foyerId && nouveauNom.success) await db.household.updateMany({ where: { id: foyerId, weddingId: mariage.id }, data: { name: nouveauNom.data } });
+  await journal(mariage.id, user.id, membres[0]!.id, "invitation-modifiee");
+  rafraichir();
+}
+
 export type EtatImport = { ajoutes?: number; ignores?: number; erreurs?: { ligne: number; message: string }[]; erreur?: string };
 
 /** Importe un fichier CSV ou exporté d'Excel : colonnes reconnues par leur nom, doublons ignorés (M4-09, M4-10). */

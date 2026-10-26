@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
-import { useRef, useState, useTransition } from "react";
-import { changerReponse, changerReponseInvitation, supprimerInvitation } from "../actions/invites";
+import { useEffect, useRef, useState, useTransition } from "react";
+import { changerReponse, changerReponseInvitation, convierAuMoment, modifierChamp, modifierInvitation, supprimerInvitation } from "../actions/invites";
 
 export interface MembreLigne {
   id: string;
@@ -12,6 +12,15 @@ export interface MembreLigne {
   details: string;
   aConfirmer: boolean;
   enLigne: boolean;
+  cote: string;
+  /** Moments auxquels la personne est conviée ; vide = tous. */
+  moments: string[];
+}
+
+export interface OptionsInvitation {
+  moments: { id: string; nom: string }[];
+  cotes: { valeur: string; libelle: string }[];
+  liens: { cle: string; libelle: string }[];
 }
 
 const REPONSES = [
@@ -26,14 +35,76 @@ const OUVERT = -112;
  * Une ligne par invitation (foyer) : la réponse s'applique à tous en un geste,
  * on déplie pour répondre personne par personne, et l'on glisse vers la gauche pour supprimer.
  */
-export function LigneInvitation({ titre, prenoms, membres, reponse }: { titre: string; prenoms: string; membres: MembreLigne[]; reponse: string }) {
+export function LigneInvitation({
+  cle,
+  titre,
+  prenoms,
+  membres,
+  reponse,
+  foyer,
+  lien,
+  options,
+}: {
+  /** Identifiant stable de l'invitation : elle reste dépliée si elle change de colonne (de côté). */
+  cle: string;
+  titre: string;
+  prenoms: string;
+  membres: MembreLigne[];
+  reponse: string;
+  foyer: string | null;
+  lien: string | null;
+  options: OptionsInvitation;
+}) {
   const [decalage, setDecalage] = useState(0);
-  const [deplie, setDeplie] = useState(false);
+  const ligne = useRef<HTMLLIElement>(null);
+  const [deplie, setDeplieEtat] = useState(false);
+  // L'invitation dépliée le reste après un changement de côté, qui la fait passer dans une autre colonne.
+  useEffect(() => {
+    try {
+      if (sessionStorage.getItem("sereno:invitation-ouverte") === cle) {
+        setDeplieEtat(true);
+        ligne.current?.scrollIntoView({ block: "nearest" });
+      }
+    } catch {
+      /* stockage indisponible */
+    }
+  }, [cle]);
+  const setDeplie = (v: boolean) => {
+    setDeplieEtat(v);
+    try {
+      if (v) sessionStorage.setItem("sereno:invitation-ouverte", cle);
+      else if (sessionStorage.getItem("sereno:invitation-ouverte") === cle) sessionStorage.removeItem("sereno:invitation-ouverte");
+    } catch {
+      /* rien */
+    }
+  };
   const [confirmer, setConfirmer] = useState(false);
   const [enCours, demarrer] = useTransition();
   const geste = useRef<{ x: number; y: number; depart: number; horizontal: boolean | null } | null>(null);
   const ids = membres.map((m) => m.id);
   const seul = membres.length === 1;
+  const petit = "rounded-sm border border-line bg-surface-raised px-2 py-1.5 text-sm";
+  const coteCommun = new Set(membres.map((m) => m.cote)).size === 1 ? membres[0]!.cote : "";
+  // Sans moment précis, une personne est conviée à tous les moments.
+  const conviee = (m: MembreLigne, momentId: string) => m.moments.length === 0 || m.moments.includes(momentId);
+  const agirSur = (f: () => Promise<unknown>) =>
+    demarrer(async () => {
+      await f();
+    });
+  const puce = (libelle: string, actif: boolean, surClic: () => void, aria: string, petitePuce = false) => (
+    <button
+      key={libelle}
+      type="button"
+      disabled={enCours}
+      aria-pressed={actif}
+      aria-label={aria}
+      onClick={surClic}
+      className={`rounded-full border ${petitePuce ? "px-2 py-0.5 text-[11px]" : "px-2.5 py-1 text-xs"} ${actif ? "border-ink bg-ink text-surface" : "border-line bg-surface-raised text-ink-muted line-through decoration-ink-muted/50"}`}
+    >
+      {actif ? "✓ " : ""}
+      {libelle}
+    </button>
+  );
 
   const repondre = (rsvp: string, cible: string[]) =>
     demarrer(async () => {
@@ -68,7 +139,7 @@ export function LigneInvitation({ titre, prenoms, membres, reponse }: { titre: s
   );
 
   return (
-    <li className="relative overflow-hidden border-b border-line last:border-b-0">
+    <li ref={ligne} className="relative overflow-hidden border-b border-line last:border-b-0">
       {/* Zone de suppression, révélée en glissant vers la gauche. */}
       <div className="absolute inset-y-0 right-0 flex w-28 items-center justify-center bg-alerte">
         <button type="button" disabled={enCours} onClick={() => (confirmer ? supprimer() : setConfirmer(true))} className="h-full w-full px-2 text-sm font-semibold text-white" tabIndex={decalage ? 0 : -1}>
@@ -117,18 +188,80 @@ export function LigneInvitation({ titre, prenoms, membres, reponse }: { titre: s
           {boutons(reponse, ids, titre)}
         </div>
         {deplie && (
-          <div className="mt-2 flex flex-col gap-1 rounded-sm bg-surface-soft p-3">
-            {!seul &&
-              membres.map((m) => (
-                <div key={m.id} className="flex flex-wrap items-center gap-x-3 gap-y-1 py-1">
-                  <Link href={`/invites/${m.id}`} className="min-w-0 flex-1 text-sm">
-                    <span className="font-semibold underline">{[m.prenom, m.nom].filter(Boolean).join(" ")}</span>
-                    {m.enfant && <span className="text-ink-muted"> (enfant)</span>}
-                    {m.details && <span className="block text-xs text-ink-muted">{m.details}</span>}
-                  </Link>
-                  {boutons(m.reponse, [m.id], m.prenom)}
+          <div className="mt-2 flex flex-col gap-3 rounded-sm bg-surface-soft p-3">
+            {/* Pour toute l'invitation : nom du foyer, côté, lien et moments, appliqués à tous d'un coup. */}
+            <div className="flex flex-col gap-2">
+              <p className="text-xs font-semibold tracking-wide text-bronze uppercase">{seul ? "Modifier" : "Pour toute l’invitation"}</p>
+              <div className="flex flex-wrap items-center gap-2">
+                {!seul && foyer !== null && (
+                  <input
+                    key={foyer}
+                    defaultValue={foyer}
+                    maxLength={80}
+                    aria-label="Nom du foyer"
+                    onBlur={(e) => e.target.value.trim() && e.target.value.trim() !== foyer && agirSur(() => modifierInvitation(ids, { foyer: e.target.value }))}
+                    className={`${petit} min-w-0 flex-[1_1_12rem] font-semibold`}
+                  />
+                )}
+                <select key={`c-${coteCommun}`} defaultValue={coteCommun} aria-label="Côté de toute l’invitation" onChange={(e) => agirSur(() => modifierInvitation(ids, { cote: e.target.value }))} className={petit}>
+                  {coteCommun === "" && <option value="">Côtés différents</option>}
+                  {options.cotes.map((c) => (
+                    <option key={c.valeur} value={c.valeur}>
+                      {c.libelle}
+                    </option>
+                  ))}
+                </select>
+                <select key={`l-${lien}`} defaultValue={lien ?? ""} aria-label="Lien de toute l’invitation" onChange={(e) => agirSur(() => modifierInvitation(ids, { lien: e.target.value }))} className={petit}>
+                  <option value="">Lien…</option>
+                  {options.liens.map((l) => (
+                    <option key={l.cle} value={l.cle}>
+                      {l.libelle}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              {options.moments.length > 0 && (
+                <div className="flex flex-wrap items-center gap-1.5" role="group" aria-label={seul ? "Moments" : "Moments de toute l’invitation"}>
+                  <span className="text-xs text-ink-muted">{seul ? "Convié au :" : "Tous conviés au :"}</span>
+                  {options.moments.map((mo) => {
+                    const tousConvies = membres.every((m) => conviee(m, mo.id));
+                    return puce(mo.nom, tousConvies, () => agirSur(() => convierAuMoment(ids, mo.id, !tousConvies)), `${mo.nom} : ${tousConvies ? "retirer" : "convier"} ${seul ? "" : "toute l’invitation"}`);
+                  })}
                 </div>
-              ))}
+              )}
+            </div>
+            {!seul && (
+              <div className="flex flex-col gap-2 border-t border-line pt-2">
+                <p className="text-xs font-semibold tracking-wide text-bronze uppercase">Personne par personne</p>
+                {membres.map((m) => (
+                  <div key={`${m.id}-${m.cote}-${m.moments.join(",")}`} className="flex flex-col gap-1 py-1">
+                    <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                      <Link href={`/invites/${m.id}`} className="min-w-0 flex-[1_1_10rem] text-sm">
+                        <span className="font-semibold underline">{[m.prenom, m.nom].filter(Boolean).join(" ")}</span>
+                        {m.enfant && <span className="text-ink-muted"> (enfant)</span>}
+                        {m.details && <span className="block text-xs text-ink-muted">{m.details}</span>}
+                      </Link>
+                      <select defaultValue={m.cote} aria-label={`Côté de ${m.prenom}`} onChange={(e) => agirSur(() => modifierChamp(m.id, "side", e.target.value))} className={`${petit} py-1 text-xs`}>
+                        {options.cotes.map((c) => (
+                          <option key={c.valeur} value={c.valeur}>
+                            {c.libelle}
+                          </option>
+                        ))}
+                      </select>
+                      {boutons(m.reponse, [m.id], m.prenom)}
+                    </div>
+                    {options.moments.length > 1 && (
+                      <div className="flex flex-wrap items-center gap-1.5" role="group" aria-label={`Moments de ${m.prenom}`}>
+                        {options.moments.map((mo) => {
+                          const oui = conviee(m, mo.id);
+                          return puce(mo.nom, oui, () => agirSur(() => convierAuMoment([m.id], mo.id, !oui)), `${mo.nom} : ${oui ? "retirer" : "convier"} ${m.prenom}`, true);
+                        })}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
             <div className="flex flex-wrap gap-4 pt-1 text-sm">
               {seul && (
                 <Link href={`/invites/${membres[0]!.id}`} className="text-bronze underline">
