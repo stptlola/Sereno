@@ -52,7 +52,7 @@ export function AjoutInvite({ prenoms }: { prenoms: { p1: string; p2: string | n
       </div>
 
       {type !== "personne" && (
-        <input name="nomCommun" maxLength={60} placeholder={type === "famille" ? "Nom de famille" : "Nom de famille commun (facultatif)"} aria-label="Nom de famille commun" className={champ} />
+        <input name="nomCommun" maxLength={60} placeholder={type === "famille" ? "Nom de famille (ex. : Lecerf)" : "Nom de famille commun, ex. : Lecerf (facultatif)"} aria-label="Nom de famille commun" className={champ} />
       )}
       <div className="flex flex-col gap-2">
         {Array.from({ length: nbLignes }, (_, i) => (

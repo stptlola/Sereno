@@ -22,6 +22,16 @@ describe("ajout par invitation", () => {
     expect(r.personnes.map((p) => p.nom)).toEqual(["Durand", "Durand"]);
   });
 
+  it("retire « Famille » tapé dans le nom commun", () => {
+    const r = preparerInvitation("couple", [{ prenom: "Sylvie", nom: "", enfant: false }, { prenom: "Christian", nom: "", enfant: false }], "Famille Lecerf", false);
+    if ("erreur" in r) throw new Error(r.erreur);
+    expect(r.foyer).toBe("Sylvie et Christian Lecerf");
+    expect(r.personnes.map((p) => p.nom)).toEqual(["Lecerf", "Lecerf"]);
+    const f = preparerInvitation("famille", [{ prenom: "Léa", nom: "", enfant: false }], "la famille Meurisse", false);
+    if ("erreur" in f) throw new Error(f.erreur);
+    expect(f.personnes[0]?.nom).toBe("Meurisse");
+  });
+
   it("un couple aux noms différents garde chaque nom", () => {
     const r = preparerInvitation("couple", [{ prenom: "Zoé", nom: "Durand", enfant: false }, { prenom: "Inès", nom: "Moreau", enfant: false }], "", false);
     if ("erreur" in r) throw new Error(r.erreur);

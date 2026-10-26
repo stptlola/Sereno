@@ -26,7 +26,8 @@ export const estAccompagnantAConfirmer = (prenom: string) => prenom.startsWith(P
  * et nomme le foyer (« Zoé et Paul Durand », « Famille Durand »).
  */
 export function preparerInvitation(type: TypeInvitation, saisies: readonly PersonneSaisie[], nomCommun: string, accompagnant: boolean): InvitationPreparee | { erreur: string } {
-  const commun = nomCommun.trim().slice(0, 60);
+  // « Famille Lecerf » tapé à la place de « Lecerf » : on garde seulement le nom de famille.
+  const commun = nomCommun.trim().replace(/^(la\s+)?famille\s+/i, "").slice(0, 60);
   const personnes = saisies
     .map((p) => ({ prenom: p.prenom.trim().slice(0, 60), nom: (p.nom.trim() || commun).slice(0, 60) || null, enfant: p.enfant, aConfirmer: false }))
     .filter((p) => p.prenom);

@@ -258,40 +258,52 @@ export default async function PageInvites({ searchParams }: { searchParams: Prom
         )}
 
         {vue === "tableau" && filtres.length > 0 && (
-          <div className="overflow-x-auto rounded-md border border-line bg-surface-raised">
-            <table className="w-full min-w-[720px] text-left text-sm">
-              <thead className="bg-surface-soft text-xs text-ink-muted">
-                <tr>
-                  {["Invité", "Côté", "Lien", "Foyer", "Âge", "Régimes", "Moments", "Réponse"].map((h) => (
-                    <th key={h} className="px-3 py-2 font-semibold">
-                      {h}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {filtres.map((g) => (
-                  <tr key={g.id} className="border-t border-line">
-                    <td className="px-3 py-2">
-                      <Link href={`/invites/${g.id}`} className="font-semibold hover:underline">
-                        {[g.firstName, g.lastName].filter(Boolean).join(" ")}
-                        {g.plusOne ? " + 1" : ""}
-                      </Link>
-                    </td>
-                    <td className="px-3 py-2">{nomCote[g.side].replace("Côté ", "")}</td>
-                    <td className="px-3 py-2">{g.category ? libelleLien(g.category) : "—"}</td>
-                    <td className="px-3 py-2">{g.household?.name ?? "—"}</td>
-                    <td className="px-3 py-2">{g.ageGroup === "ENFANT" ? "Enfant" : "Adulte"}</td>
-                    <td className="px-3 py-2">{g.diets.join(", ") || "—"}</td>
-                    <td className="px-3 py-2">{moments.filter((m) => g.moments.some((x) => x.momentId === m.id)).map((m) => m.name).join(", ") || "—"}</td>
-                    <td className="px-3 py-2">
-                      <BoutonsReponse g={g} />
-                    </td>
+          <>
+            <p className="-mb-2 text-xs text-ink-muted">Réponse : Oui = présent · ? = en attente de réponse · Non = absent. Touchez un nom pour ouvrir sa fiche.</p>
+            <div className="overflow-x-auto rounded-md border border-line bg-surface-raised">
+              <table className="w-full text-left text-sm">
+                <thead className="bg-surface-soft text-xs text-ink-muted">
+                  <tr>
+                    {["Invité", "Côté", "Lien", "Foyer", "Âge", "Régimes", "Moments", "Réponse"].map((h, i) => (
+                      <th key={h} className={`px-2.5 py-2 font-semibold whitespace-nowrap ${i === 0 ? "sticky left-0 z-10 bg-surface-soft" : ""}`}>
+                        {h}
+                      </th>
+                    ))}
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                </thead>
+                <tbody>
+                  {[...filtres]
+                    // Les membres d'un même foyer restent côte à côte.
+                    .sort((x, y) => (x.household?.name ?? `${x.lastName ?? ""} ${x.firstName}`).localeCompare(y.household?.name ?? `${y.lastName ?? ""} ${y.firstName}`, "fr"))
+                    .map((g) => {
+                      const sesMoments = moments.filter((m) => g.moments.some((x) => x.momentId === m.id)).map((m) => m.name);
+                      return (
+                        <tr key={g.id} className="border-t border-line">
+                          <td className="sticky left-0 z-10 bg-surface-raised px-2.5 py-2 whitespace-nowrap">
+                            <Link href={`/invites/${g.id}`} className="font-semibold hover:underline">
+                              {[g.firstName, g.lastName].filter(Boolean).join(" ")}
+                            </Link>
+                            {g.listB && <span className="ml-2 rounded-full bg-surface-soft px-2 py-0.5 text-[10px] font-semibold text-bronze">liste B</span>}
+                          </td>
+                          <td className="px-2.5 py-2 whitespace-nowrap">{nomCote[g.side].replace("Côté ", "")}</td>
+                          <td className="px-2.5 py-2 whitespace-nowrap">{g.category ? libelleLien(g.category) : "—"}</td>
+                          <td className="max-w-[11rem] truncate px-2.5 py-2" title={g.household?.name ?? undefined}>
+                            {g.household?.name ?? "—"}
+                          </td>
+                          <td className="px-2.5 py-2 whitespace-nowrap">{g.ageGroup === "ENFANT" ? `Enfant${g.age ? `, ${g.age} ans` : ""}` : "Adulte"}</td>
+                          <td className="px-2.5 py-2 whitespace-nowrap">{g.diets.join(", ") || "—"}</td>
+                          {/* Sans moment précis, l'invité est attendu à tous les moments. */}
+                          <td className="px-2.5 py-2 whitespace-nowrap">{sesMoments.length === 0 || sesMoments.length === moments.length ? "Tous" : sesMoments.join(", ")}</td>
+                          <td className="px-2.5 py-2">
+                            <BoutonsReponse g={g} />
+                          </td>
+                        </tr>
+                      );
+                    })}
+                </tbody>
+              </table>
+            </div>
+          </>
         )}
       </section>
 
