@@ -59,12 +59,14 @@ export default async function PageReponse({ params, searchParams }: { params: Pr
             reponse: m.rsvp,
             regimes: m.diets,
             allergies: m.allergies ?? "",
+            plat: m.mealChoice ?? "",
             moments: (m.moments.length ? m.moments.map((x) => x.momentId) : w.moments.map((x) => x.id)).map((id) => nomsMoments.get(id) ?? "").filter(Boolean),
           }))}
           regimes={REGIMES}
           questions={(site.questions as unknown as QuestionPerso[]) ?? []}
           reponsesPerso={(foyer.invite.rsvpAnswers as Record<string, string>) ?? {}}
           message={foyer.invite.rsvpMessage ?? ""}
+          plats={site.mealOptions}
         />
       ) : (
         <p className="rounded-md bg-surface-soft p-4 text-center">La date limite de réponse est passée. Pour toute question, contactez directement les mariés.</p>

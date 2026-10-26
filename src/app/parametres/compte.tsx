@@ -14,7 +14,7 @@ function envoiManuel(action: (fd: FormData) => void) {
   };
 }
 
-export function Notifications({ hebdo, rappels }: { hebdo: boolean; rappels: boolean }) {
+export function Notifications({ hebdo, rappels, reponses }: { hebdo: boolean; rappels: boolean; reponses: boolean }) {
   const [etat, action, enCours] = useActionState<EtatCompte, FormData>(modifierNotifications, {});
   return (
     <form onSubmit={envoiManuel(action)} className="flex flex-col gap-3">
@@ -29,7 +29,14 @@ export function Notifications({ hebdo, rappels }: { hebdo: boolean; rappels: boo
         <input type="checkbox" name="notifRappels" defaultChecked={rappels} className="mt-1 h-5 w-5" />
         <span>
           <span className="font-semibold">Les rappels d’échéances importantes</span>
-          <span className="block text-sm text-ink-muted">Une semaine avant une démarche en mairie ou une échéance importante.</span>
+          <span className="block text-sm text-ink-muted">Une semaine avant une démarche en mairie, une échéance importante ou un paiement.</span>
+        </span>
+      </label>
+      <label className="flex items-start gap-3">
+        <input type="checkbox" name="notifReponses" defaultChecked={reponses} className="mt-1 h-5 w-5" />
+        <span>
+          <span className="font-semibold">Les nouvelles réponses de vos invités</span>
+          <span className="block text-sm text-ink-muted">Un résumé des réponses reçues en ligne la veille.</span>
         </span>
       </label>
       <p className="text-sm text-ink-muted">Jamais plus d’un e-mail par jour. Les e-mails liés à votre compte (mot de passe oublié, par exemple) restent envoyés.</p>

@@ -21,6 +21,15 @@ export function contenuRappel(e: EmailRappel, prenom: string): string {
         .join("\n")}\nUne fois réglé, cochez-le dans votre budget.`,
     );
   }
+  if (e.reponses?.length) {
+    const oui = e.reponses.filter((r) => r.reponse === "PRESENT").map((r) => r.nom);
+    const non = e.reponses.filter((r) => r.reponse === "ABSENT").map((r) => r.nom);
+    parties.push(
+      [`${e.reponses.length === 1 ? "Une nouvelle réponse" : `${e.reponses.length} nouvelles réponses`} à votre invitation :`, oui.length ? `• Seront là : ${oui.join(", ")}` : "", non.length ? `• Ne pourront pas venir : ${non.join(", ")}` : ""]
+        .filter(Boolean)
+        .join("\n"),
+    );
+  }
   if (e.priorites.length) {
     parties.push(
       `${e.type === "mensuel" ? "Pour ce mois-ci" : "Cette semaine"}, voici vos prochaines étapes :\n${e.priorites
@@ -28,6 +37,6 @@ export function contenuRappel(e: EmailRappel, prenom: string): string {
         .join("\n")}`,
     );
   }
-  parties.push(e.type === "mensuel" ? "Rien ne presse : vous avez de l’avance. Profitez-en." : "Une chose à la fois, et tout se fera.");
+  if (e.type !== "reponses") parties.push(e.type === "mensuel" ? "Rien ne presse : vous avez de l’avance. Profitez-en." : "Une chose à la fois, et tout se fera.");
   return parties.join("\n\n");
 }

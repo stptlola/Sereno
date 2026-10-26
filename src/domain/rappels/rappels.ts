@@ -17,6 +17,8 @@ export interface DestinataireRappel {
   prenom: string;
   hebdo: boolean;
   rappels: boolean;
+  /** Résumé des nouvelles réponses des invités (M11-04). */
+  resumeReponses?: boolean;
   /** Types déjà envoyés aujourd'hui (pour ne jamais dépasser un e-mail par jour). */
   dejaEnvoyeAujourdhui: boolean;
 }
@@ -35,17 +37,20 @@ export interface MariageRappel {
   taches: TacheRappel[];
   /** Acomptes et soldes (M11-03) : rappel une semaine avant l'échéance. */
   paiements?: PaiementRappel[];
+  /** Réponses reçues en ligne depuis le dernier envoi (M11-04). */
+  reponses?: { nom: string; reponse: "PRESENT" | "ABSENT" }[];
   destinataires: DestinataireRappel[];
 }
 
 export interface EmailRappel {
   userId: string;
   email: string;
-  type: "hebdo" | "mensuel" | "echeance" | "hebdo+echeance";
+  type: "hebdo" | "mensuel" | "echeance" | "hebdo+echeance" | "reponses";
   sujet: string;
   priorites: TacheRappel[];
   echeances: TacheRappel[];
   paiements: PaiementRappel[];
+  reponses: { nom: string; reponse: "PRESENT" | "ABSENT" }[];
 }
 
 export const JOURS_AVANT_RAPPEL = 7;
@@ -79,8 +84,10 @@ export function planifierRappels(jour: Date, mariages: readonly MariageRappel[])
       if (d.dejaEnvoyeAujourdhui) continue;
       const veutRecap = d.hebdo && jourDuRecap && priorites.length > 0;
       const veutEcheance = d.rappels && (echeances.length > 0 || paiements.length > 0);
-      if (!veutRecap && !veutEcheance) continue;
-      const type: EmailRappel["type"] = veutRecap && veutEcheance ? "hebdo+echeance" : veutRecap ? (modeMensuel ? "mensuel" : "hebdo") : "echeance";
+      const reponses = d.resumeReponses !== false ? (m.reponses ?? []) : [];
+      if (!veutRecap && !veutEcheance && !reponses.length) continue;
+      const type: EmailRappel["type"] =
+        veutRecap && veutEcheance ? "hebdo+echeance" : veutRecap ? (modeMensuel ? "mensuel" : "hebdo") : veutEcheance ? "echeance" : "reponses";
       const euros = (c: number) => new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR", maximumFractionDigits: c % 100 ? 2 : 0 }).format(c / 100);
       const sujet = veutEcheance
         ? echeances.length
@@ -88,10 +95,12 @@ export function planifierRappels(jour: Date, mariages: readonly MariageRappel[])
           : paiements.length === 1
             ? `Dans une semaine : ${paiements[0]!.libelle.charAt(0).toLowerCase()}${paiements[0]!.libelle.slice(1)} (${euros(paiements[0]!.montantCentimes)})`
             : `Dans une semaine : ${paiements.length} paiements à prévoir`
-        : modeMensuel
-          ? "Votre mois : on garde le cap, tranquillement"
-          : `Votre semaine : ${priorites.length} petite${priorites.length > 1 ? "s" : ""} chose${priorites.length > 1 ? "s" : ""} à faire`;
-      envois.push({ userId: d.userId, email: d.email, type, sujet, priorites: veutRecap ? priorites : [], echeances: veutEcheance ? echeances : [], paiements: veutEcheance ? paiements : [] });
+        : !veutRecap
+          ? `${reponses.length} nouvelle${reponses.length > 1 ? "s" : ""} réponse${reponses.length > 1 ? "s" : ""} à votre invitation`
+          : modeMensuel
+            ? "Votre mois : on garde le cap, tranquillement"
+            : `Votre semaine : ${priorites.length} petite${priorites.length > 1 ? "s" : ""} chose${priorites.length > 1 ? "s" : ""} à faire`;
+      envois.push({ userId: d.userId, email: d.email, type, sujet, priorites: veutRecap ? priorites : [], echeances: veutEcheance ? echeances : [], paiements: veutEcheance ? paiements : [], reponses });
     }
   }
   return envois;

@@ -67,7 +67,7 @@ export default async function PageInvite({
     }),
     db.miniSite.findUnique({
       where: { weddingId: mariage.id },
-      select: { questions: true },
+      select: { questions: true, mealOptions: true },
     }),
   ]);
   if (!g) notFound();
@@ -258,6 +258,9 @@ export default async function PageInvite({
             />{" "}
             Doit être placé près d’une sortie (âge, mobilité)
           </label>
+          <label className="flex items-center gap-2 pb-3 text-sm">
+            <input type="checkbox" name="listB" defaultChecked={g.listB} className="h-5 w-5" /> Liste B : à inviter si des places se libèrent
+          </label>
         </div>
 
         {moments.length > 0 && (
@@ -297,6 +300,19 @@ export default async function PageInvite({
             ))}
           </div>
         </fieldset>
+        {(site?.mealOptions.length ?? 0) > 0 && (
+          <label className="flex flex-col gap-1.5">
+            <span className="text-sm font-semibold">Plat choisi</span>
+            <select name="mealChoice" defaultValue={g.mealChoice ?? ""} className={classeChamp}>
+              <option value="">Pas encore choisi</option>
+              {site!.mealOptions.map((o) => (
+                <option key={o} value={o}>
+                  {o}
+                </option>
+              ))}
+            </select>
+          </label>
+        )}
         <label className="flex flex-col gap-1.5">
           <span className="text-sm font-semibold">Allergies</span>
           <input
@@ -329,6 +345,11 @@ export default async function PageInvite({
             />
           </label>
         </div>
+        <label className="flex flex-col gap-1.5">
+          <span className="text-sm font-semibold">Adresse postale{g.household ? " du foyer" : ""}</span>
+          <textarea name="adresse" rows={3} maxLength={400} defaultValue={g.household?.address ?? ""} placeholder={"12 rue des Lys\n69002 LYON"} className={classeChamp} />
+          <span className="text-xs text-ink-muted">Pour vos faire-part. Commune à tout le foyer.</span>
+        </label>
         <Bouton type="submit">Enregistrer</Bouton>
       </form>
       {!g.isCouple && (

@@ -91,7 +91,7 @@ export function doublonDe(nouveau: Pick<Invite, "prenom" | "nom" | "email">, exi
 
 // ---------- CSV (séparateur « ; », lisible directement par Excel en français)
 
-const COLONNES = ["Prénom", "Nom", "Côté", "Lien", "Enfant", "Accompagnant", "Réponse", "Régimes", "Allergies", "E-mail", "Téléphone", "Foyer", "Table"] as const;
+const COLONNES = ["Prénom", "Nom", "Côté", "Lien", "Enfant", "Liste", "Réponse", "Plat", "Régimes", "Allergies", "E-mail", "Téléphone", "Foyer", "Adresse", "Table"] as const;
 
 function cellule(v: string | number | null | undefined): string {
   const s = v === null || v === undefined ? "" : String(v);
@@ -104,20 +104,41 @@ export interface LigneExport {
   cote: string;
   lien: string;
   enfant: boolean;
-  accompagnant: boolean;
+  listeB?: boolean;
   reponse: string;
+  plat?: string | null;
   regimes: string[];
   allergies: string | null;
   email: string | null;
   telephone: string | null;
   foyer: string | null;
+  /** Adresse postale du foyer, sur une seule ligne dans le tableur. */
+  adresse?: string | null;
   table: string | null;
 }
 
 export function versCsv(lignes: readonly LigneExport[]): string {
   const entete = COLONNES.join(";");
   const corps = lignes.map((l) =>
-    [l.prenom, l.nom, l.cote, l.lien, l.enfant ? "Oui" : "Non", l.accompagnant ? "Oui" : "Non", l.reponse, l.regimes.join(", "), l.allergies, l.email, l.telephone, l.foyer, l.table].map(cellule).join(";"),
+    [
+      l.prenom,
+      l.nom,
+      l.cote,
+      l.lien,
+      l.enfant ? "Oui" : "Non",
+      l.listeB ? "B" : "A",
+      l.reponse,
+      l.plat ?? "",
+      l.regimes.join(", "),
+      l.allergies,
+      l.email,
+      l.telephone,
+      l.foyer,
+      (l.adresse ?? "").replace(/\s*\n\s*/g, ", "),
+      l.table,
+    ]
+      .map(cellule)
+      .join(";"),
   );
   // Marque UTF-8 en tête : Excel affiche alors correctement les accents.
   return "\uFEFF" + [entete, ...corps].join("\r\n") + "\r\n";

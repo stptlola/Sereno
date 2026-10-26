@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { BoutonImprimer } from "@/components/bouton-imprimer";
+import { compterPlats } from "@/domain/invites/adresses";
 import { REGIMES } from "@/domain/invites/invites";
 import { accesEcriture } from "@/lib/acces";
 import { db } from "@/lib/db";
@@ -13,10 +14,12 @@ const formatDate = new Intl.DateTimeFormat("fr-FR", { weekday: "long", day: "num
 /** Rapport pour le traiteur (M5-10) : couverts adultes et enfants, régimes et allergies, table par table. */
 export default async function RapportTraiteur() {
   const { mariage } = await accesEcriture();
-  const [tables, presents] = await Promise.all([
+  const [tables, presents, site] = await Promise.all([
     db.seatingTable.findMany({ where: { weddingId: mariage.id }, orderBy: [{ honor: "desc" }, { number: "asc" }] }),
     db.guest.findMany({ where: { weddingId: mariage.id, rsvp: "PRESENT" }, orderBy: [{ lastName: "asc" }, { firstName: "asc" }] }),
+    db.miniSite.findUnique({ where: { weddingId: mariage.id }, select: { mealOptions: true } }),
   ]);
+  const plats = site?.mealOptions ?? [];
   const couverts = (liste: typeof presents) => ({
     adultes: liste.reduce((s, g) => s + (g.ageGroup === "ADULTE" ? 1 : 0) + (g.plusOne ? 1 : 0), 0),
     enfants: liste.filter((g) => g.ageGroup === "ENFANT").length,
@@ -62,6 +65,16 @@ export default async function RapportTraiteur() {
             .join(" · ") || "Aucun régime particulier."}
         </p>
       </section>
+      {plats.length > 0 && (
+        <section>
+          <h2 className="font-display text-xl">Plats</h2>
+          <p>
+            {compterPlats(presents.map((g) => ({ plat: g.mealChoice })), plats)
+              .map((x) => `${x.plat} : ${x.nombre}`)
+              .join(" · ")}
+          </p>
+        </section>
+      )}
       <section className="overflow-x-auto">
         <h2 className="mb-2 font-display text-xl">Table par table</h2>
         <table className="w-full text-left text-sm">
@@ -70,6 +83,7 @@ export default async function RapportTraiteur() {
               <th className="py-2 pr-3">Table</th>
               <th className="py-2 pr-3">Adultes</th>
               <th className="py-2 pr-3">Enfants</th>
+              {plats.length > 0 && <th className="py-2 pr-3">Plats</th>}
               <th className="py-2">Repas spéciaux et allergies</th>
             </tr>
           </thead>
@@ -81,6 +95,14 @@ export default async function RapportTraiteur() {
                   <td className="py-2 pr-3 font-semibold">{gr.nom}</td>
                   <td className="py-2 pr-3">{c.adultes}</td>
                   <td className="py-2 pr-3">{c.enfants}</td>
+                  {plats.length > 0 && (
+                    <td className="py-2 pr-3">
+                      {compterPlats(gr.invites.map((g) => ({ plat: g.mealChoice })), plats)
+                        .filter((x) => x.nombre)
+                        .map((x) => `${x.nombre} ${x.plat.toLowerCase()}`)
+                        .join(", ")}
+                    </td>
+                  )}
                   <td className="py-2">
                     {gr.invites
                       .filter((g) => g.diets.length || g.allergies)

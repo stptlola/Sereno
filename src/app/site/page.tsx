@@ -70,6 +70,7 @@ export default async function PageSite() {
               faq: (site.faq as { question: string; reponse: string }[]) ?? [],
               questions: ((site.questions as unknown as QuestionPerso[]) ?? []).map((q) => ({ libelle: q.libelle, type: q.type, choix: q.choix.join(", ") })),
               rsvpDeadline: site.rsvpDeadline ? site.rsvpDeadline.toISOString().slice(0, 10) : "",
+              plats: site.mealOptions.join(", "),
             }}
           />
         </>

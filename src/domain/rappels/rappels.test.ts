@@ -56,6 +56,13 @@ describe("rappels par e-mail", () => {
     expect(e?.sujet).toMatch(/^Dans une semaine : acompte du traiteur \(1\s200\s€\)$/);
   });
 
+  it("envoie le résumé des nouvelles réponses, même un mardi, sauf si on l'a désactivé", () => {
+    const m = mariage({ taches: [], reponses: [{ nom: "Zoé Durand", reponse: "PRESENT" }, { nom: "Paul Durand", reponse: "ABSENT" }] });
+    const [e] = planifierRappels(mardi, [m]);
+    expect(e).toMatchObject({ type: "reponses", sujet: "2 nouvelles réponses à votre invitation" });
+    expect(planifierRappels(mardi, [{ ...m, destinataires: [dest({ resumeReponses: false })] }])).toEqual([]);
+  });
+
   it("passe au rythme mensuel pour un mariage lointain sans tâche proche", () => {
     const loin = mariage({ dateMariage: jour(2028, 9, 16), taches: [t("z", jour(2027, 3, 1))] });
     expect(planifierRappels(jour(2026, 11, 9), [loin])).toEqual([]);

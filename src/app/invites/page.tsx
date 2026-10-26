@@ -8,6 +8,7 @@ import { accesEcriture } from "@/lib/acces";
 import { db } from "@/lib/db";
 import { ajouterMoment, changerReponse } from "../actions/invites";
 import { AjoutInvite } from "./ajout";
+import { CollecteAdresses } from "./collecte";
 import { LigneInvitation } from "./ligne-invitation";
 import { OutilsInvites } from "./outils";
 
@@ -86,13 +87,21 @@ export default async function PageInvites({ searchParams }: { searchParams: Prom
     })),
   );
   const r = repartition(c.parCote);
+  const listeB = tous.filter((g) => g.listB).length;
+  const [recues, aTrier] = await Promise.all([
+    db.addressSubmission.count({ where: { weddingId: mariage.id, status: { not: "IGNOREE" } } }),
+    db.addressSubmission.findMany({ where: { weddingId: mariage.id, status: "A_TRIER" }, orderBy: { createdAt: "asc" } }),
+  ]);
 
   const q = sansAccents(un(params.q));
   const reponse = un(params.reponse);
   const moment = un(params.moment);
   const vue = un(params.vue);
+  const liste = un(params.liste);
   const filtres = tous.filter((g) => {
     if (reponse && g.rsvp !== reponse) return false;
+    if (liste === "A" && g.listB) return false;
+    if (liste === "B" && !g.listB) return false;
     if (moment && !g.moments.some((m) => m.momentId === moment)) return false;
     if (q && !sansAccents([g.firstName, g.lastName, g.email, g.household?.name].filter(Boolean).join(" ")).includes(q)) return false;
     return true;
@@ -110,7 +119,7 @@ export default async function PageInvites({ searchParams }: { searchParams: Prom
         reponse: g.rsvp,
         cote: g.side,
         lien: g.category,
-        details: [g.ageGroup === "ENFANT" ? `Enfant${g.age ? `, ${g.age} ans` : ""}` : null, g.diets.join(", ") || null, g.allergies ? `Allergies : ${g.allergies}` : null].filter(Boolean).join(" · "),
+        details: [g.listB ? "Liste B" : null, g.ageGroup === "ENFANT" ? `Enfant${g.age ? `, ${g.age} ans` : ""}` : null, g.diets.join(", ") || null, g.allergies ? `Allergies : ${g.allergies}` : null].filter(Boolean).join(" · "),
         aConfirmer: estAccompagnantAConfirmer(g.firstName),
         enLigne: g.rsvpOnline,
       })),
@@ -170,6 +179,28 @@ export default async function PageInvites({ searchParams }: { searchParams: Prom
       )}
 
       <AjoutInvite prenoms={{ p1: mariage.partner1Name, p2: mariage.partner2Name }} />
+
+      <CollecteAdresses jeton={mariage.addressToken} recues={recues} aTrier={aTrier} invites={tous.map((g) => ({ id: g.id, nom: [g.firstName, g.lastName].filter(Boolean).join(" ") }))} />
+
+      {listeB > 0 || liste ? (
+        <nav className="-mb-2 flex flex-wrap items-center gap-2 text-sm" aria-label="Listes A et B">
+          <span className="text-ink-muted">Listes :</span>
+          {[
+            ["", `Tout le monde (${tous.length})`],
+            ["A", `Liste A (${tous.length - listeB})`],
+            ["B", `Liste B (${listeB})`],
+          ].map(([v, l]) => {
+            const p = new URLSearchParams(Object.entries(params).flatMap(([k, x]) => (typeof x === "string" && k !== "liste" ? [[k, x]] : [])));
+            if (v) p.set("liste", v);
+            return (
+              <Link key={v} href={`/invites${p.size ? `?${p}` : ""}`} aria-current={liste === v ? "page" : undefined} className={`rounded-full border px-3 py-1 ${liste === v ? "border-ink bg-ink text-surface" : "border-line"}`}>
+                {l}
+              </Link>
+            );
+          })}
+          <span className="text-xs text-ink-muted">La liste B : ceux que vous inviterez si des places se libèrent.</span>
+        </nav>
+      ) : null}
 
       <section className="flex flex-col gap-4">
         <OutilsInvites total={filtres.length} moments={moments} />

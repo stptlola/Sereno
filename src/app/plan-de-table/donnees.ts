@@ -8,7 +8,8 @@ export async function chargerPlan(weddingId: string) {
   const [tablesBrutes, elementsBruts, invites, regles] = await Promise.all([
     db.seatingTable.findMany({ where: { weddingId }, orderBy: [{ honor: "desc" }, { number: "asc" }] }),
     db.roomElement.findMany({ where: { weddingId } }),
-    db.guest.findMany({ where: { weddingId, rsvp: { not: "ABSENT" } }, orderBy: [{ lastName: "asc" }, { firstName: "asc" }] }),
+    // Ni les absents, ni la liste B tant qu'elle n'a pas répondu oui.
+    db.guest.findMany({ where: { weddingId, rsvp: { not: "ABSENT" }, NOT: { listB: true, rsvp: "EN_ATTENTE" } }, orderBy: [{ lastName: "asc" }, { firstName: "asc" }] }),
     db.seatingConstraint.findMany({ where: { weddingId } }),
   ]);
   const nom = (g: { firstName: string; lastName: string | null }) => [g.firstName, g.lastName].filter(Boolean).join(" ");

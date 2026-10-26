@@ -187,7 +187,7 @@ export type EtatProposition = { faits?: number; nonPlaces?: { nom: string; raiso
 export async function proposerPlacement(_: EtatProposition, formData: FormData): Promise<EtatProposition> {
   const { mariage } = await accesEcriture();
   const [invites, tables, regles, sorties] = await Promise.all([
-    db.guest.findMany({ where: { weddingId: mariage.id, rsvp: { not: "ABSENT" } }, include: { household: true } }),
+    db.guest.findMany({ where: { weddingId: mariage.id, rsvp: { not: "ABSENT" }, NOT: { listB: true, rsvp: "EN_ATTENTE" } }, include: { household: true } }),
     db.seatingTable.findMany({ where: { weddingId: mariage.id } }),
     db.seatingConstraint.findMany({ where: { weddingId: mariage.id } }),
     db.roomElement.findMany({ where: { weddingId: mariage.id, kind: "sortie" } }),

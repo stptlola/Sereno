@@ -25,6 +25,8 @@ export async function POST(request: Request) {
     include: {
       tasks: { where: { hidden: false }, select: { id: true, title: true, dueDate: true, status: true, template: { select: { repere: true } } } },
       expenses: { select: { label: true, vendor: true, payments: { select: { id: true, amountCents: true, dueDate: true, isPaid: true } } } },
+      // Réponses reçues en ligne depuis l'envoi d'hier (M11-04).
+      guests: { where: { rsvpOnline: true, isCouple: false, rsvpAt: { gte: new Date(Date.now() - 24 * 3600 * 1000) }, rsvp: { in: ["PRESENT", "ABSENT"] } }, select: { firstName: true, lastName: true, rsvp: true } },
       members: { where: { role: { in: ["CREATEUR", "COPILOTE"] } }, include: { user: { include: { notifications: { where: { day: aujourdhui } } } } } },
     },
   });
@@ -33,6 +35,7 @@ export async function POST(request: Request) {
     prenoms: [m.partner1Name, m.partner2Name].filter(Boolean).join(" et "),
     dateMariage: m.date,
     taches: m.tasks.map((t) => ({ id: t.id, titre: t.title, echeance: t.dueDate, faite: t.status === "FAIT", repere: t.template?.repere ?? null })),
+    reponses: m.guests.map((g) => ({ nom: [g.firstName, g.lastName].filter(Boolean).join(" "), reponse: g.rsvp as "PRESENT" | "ABSENT" })),
     paiements: m.expenses.flatMap((e) =>
       e.payments.map((p) => ({ id: p.id, libelle: e.vendor ? `${e.label} (${e.vendor})` : e.label, montantCentimes: p.amountCents, echeance: p.dueDate, paye: p.isPaid })),
     ),
@@ -42,6 +45,7 @@ export async function POST(request: Request) {
       prenom: mb.user.name,
       hebdo: mb.user.notifHebdo,
       rappels: mb.user.notifRappels,
+      resumeReponses: mb.user.notifReponses,
       dejaEnvoyeAujourdhui: mb.user.notifications.length > 0,
     })),
   }));
@@ -61,7 +65,7 @@ export async function POST(request: Request) {
       a: envoi.email,
       sujet: envoi.sujet,
       texte: contenuRappel(envoi, prenom),
-      lien: { libelle: "Ouvrir mon planning", url: `${e.APP_URL}/planning` },
+      lien: envoi.type === "reponses" ? { libelle: "Voir ma liste d’invités", url: `${e.APP_URL}/invites` } : { libelle: "Ouvrir mon planning", url: `${e.APP_URL}/planning` },
       desinscription: `${e.APP_URL}/desinscription?u=${encodeURIComponent(envoi.userId)}&s=${signer(e.AUTH_SECRET, donneesLien)}`,
     });
     envoyes++;

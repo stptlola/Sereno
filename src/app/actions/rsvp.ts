@@ -4,6 +4,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
+import { nettoyerPlat } from "@/domain/invites/adresses";
 import { REGIMES } from "@/domain/invites/invites";
 import { memeNom, nettoyerReponsesPerso, reponsesOuvertes, validerReponses, type QuestionPerso } from "@/domain/site/site";
 import { normaliser } from "@/domain/planning";
@@ -88,7 +89,14 @@ export async function repondre(_: EtatPublic, formData: FormData): Promise<EtatP
     ...valides.map((r) =>
       db.guest.update({
         where: { id: r.guestId },
-        data: { rsvp: r.reponse, rsvpAt: maintenant, rsvpOnline: true, diets: r.regimes, allergies: r.allergies },
+        data: {
+          rsvp: r.reponse,
+          rsvpAt: maintenant,
+          rsvpOnline: true,
+          diets: r.regimes,
+          allergies: r.allergies,
+          mealChoice: r.reponse === "PRESENT" ? nettoyerPlat(String(formData.get(`plat-${r.guestId}`) ?? ""), site.mealOptions) : null,
+        },
       }),
     ),
     db.guest.update({ where: { id: foyer.invite.id }, data: { rsvpMessage: message, rsvpAnswers: perso } }),

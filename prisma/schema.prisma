@@ -25,6 +25,7 @@ model User {
   // Préférences d'e-mails (M11-06)
   notifHebdo    Boolean   @default(true)
   notifRappels  Boolean   @default(true)
+  notifReponses Boolean   @default(true)
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
   sessions      Session[]
@@ -135,6 +136,9 @@ model Wedding {
   roomWidthCm       Int         @default(2000)
   roomDepthCm       Int         @default(1400)
   tables            SeatingTable[]
+  // Collecte d'adresses par lien (M4-11) : jeton public, et adresses reçues à trier.
+  addressToken      String?     @unique
+  addressSubmissions AddressSubmission[]
   roomElements      RoomElement[]
   seatingRules      SeatingConstraint[]
 }
@@ -201,6 +205,24 @@ model SeatingConstraint {
   @@index([weddingId])
 }
 
+// Adresse envoyée par un invité via le lien de collecte (M4-11), quand elle n'a pas pu être rattachée sûrement.
+model AddressSubmission {
+  id        String   @id @default(cuid())
+  weddingId String
+  wedding   Wedding  @relation(fields: [weddingId], references: [id], onDelete: Cascade)
+  firstName String
+  lastName  String
+  address   String
+  email     String?
+  phone     String?
+  // Rattachée à un invité (automatiquement ou par le couple), ou écartée.
+  guestId   String?
+  status    String   @default("A_TRIER")
+  createdAt DateTime @default(now())
+
+  @@index([weddingId, status])
+}
+
 // Mini-site du mariage (M5-01, M5-02, M5-05, M5-11, M5-12).
 model MiniSite {
   id           String    @id @default(cuid())
@@ -222,6 +244,8 @@ model MiniSite {
   faq          Json      @default("[]")
   /** [{ id, libelle, type, choix }] */
   questions    Json      @default("[]")
+  /** Plats proposés aux invités dans leur réponse (M4-16). */
+  mealOptions  String[]  @default([])
   rsvpDeadline DateTime? @db.Date
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
@@ -432,6 +456,8 @@ model Guest {
   accessibility Boolean       @default(false)
   // L'un des mariés : à placer sur le plan et compté par le traiteur, mais absent de la liste d'invités.
   isCouple      Boolean       @default(false)
+  // Plat choisi dans la réponse en ligne (M4-16).
+  mealChoice    String?
   constraintsA  SeatingConstraint[] @relation("ContrainteA")
   constraintsB  SeatingConstraint[] @relation("ContrainteB")
   moments     GuestMoment[]

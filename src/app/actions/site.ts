@@ -88,6 +88,7 @@ export async function modifierSite(_: EtatSite, formData: FormData): Promise<Eta
       faq: tableau("faq", ["question", "reponse"], 8).filter((f) => f.question && f.reponse),
       questions: questions as unknown as Prisma.InputJsonValue,
       rsvpDeadline: lireDateJour(formData.get("rsvpDeadline")),
+      mealOptions: [...new Set(ligne(formData.get("plats"), 300).split(",").map((x) => x.trim()).filter(Boolean))].slice(0, 8),
     },
   });
   revalidatePath("/site");
@@ -101,7 +102,7 @@ export async function relancerRetardataires(_: EtatSite): Promise<EtatSite> {
   const site = await db.miniSite.findUnique({ where: { weddingId: mariage.id } });
   if (!site?.published) return { erreur: "Mettez d’abord votre site en ligne." };
   await assurerLiensPersonnels(mariage.id);
-  const enAttente = await db.guest.findMany({ where: { weddingId: mariage.id, isCouple: false, rsvp: "EN_ATTENTE", email: { not: null } }, include: { household: true } });
+  const enAttente = await db.guest.findMany({ where: { weddingId: mariage.id, isCouple: false, listB: false, rsvp: "EN_ATTENTE", email: { not: null } }, include: { household: true } });
   // Un seul e-mail par foyer, à la première adresse connue.
   const parFoyer = new Map<string, (typeof enAttente)[number]>();
   for (const g of enAttente) if (!parFoyer.has(g.householdId ?? g.id)) parFoyer.set(g.householdId ?? g.id, g);

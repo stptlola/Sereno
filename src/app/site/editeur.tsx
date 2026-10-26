@@ -16,6 +16,7 @@ export interface ValeursSite {
   faq: { question: string; reponse: string }[];
   questions: { libelle: string; type: string; choix: string }[];
   rsvpDeadline: string;
+  plats: string;
 }
 
 const lignes = <T,>(liste: T[], n: number, vide: T): T[] => [...liste, ...Array.from({ length: Math.max(0, n - liste.length) }, () => vide)].slice(0, n);
@@ -117,6 +118,11 @@ export function EditeurSite({ valeurs, adresseBase }: { valeurs: ValeursSite; ad
           <span className="font-semibold">Date limite de réponse</span>
           <input name="rsvpDeadline" type="date" defaultValue={valeurs.rsvpDeadline} className={`${petit} w-48`} />
           <span className="text-ink-muted">Conseil : environ six semaines avant le jour J.</span>
+        </label>
+        <label className="flex flex-col gap-1 text-sm">
+          <span className="font-semibold">Plats proposés (facultatif)</span>
+          <input name="plats" defaultValue={valeurs.plats} placeholder="Viande, Poisson, Végétarien, Menu enfant" maxLength={300} className={petit} />
+          <span className="text-ink-muted">Séparés par des virgules : chaque invité présent choisira le sien, et le traiteur aura le décompte.</span>
         </label>
         <p className="text-sm font-semibold">Vos questions (facultatif)</p>
         {lignes(valeurs.questions, 4, { libelle: "", type: "texte", choix: "" }).map((q, i) => (

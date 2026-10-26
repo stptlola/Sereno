@@ -43,9 +43,12 @@ describe("doublons", () => {
 
 describe("export et import CSV", () => {
   it("échappe les points-virgules et guillemets, avec la marque UTF-8 pour Excel", () => {
-    const csv = versCsv([{ prenom: "Zoé", nom: 'O"Neil; Jr', cote: "Léa", lien: "Ami", enfant: false, accompagnant: true, reponse: "Présent", regimes: ["Végan"], allergies: null, email: null, telephone: null, foyer: null, table: "3" }]);
+    const csv = versCsv([
+      { prenom: "Zoé", nom: 'O"Neil; Jr', cote: "Léa", lien: "Ami", enfant: false, listeB: true, reponse: "Présent", plat: "Poisson", regimes: ["Végan"], allergies: null, email: null, telephone: null, foyer: null, adresse: "12 rue des Lys\n69002 LYON", table: "3" },
+    ]);
     expect(csv.startsWith("\uFEFFPrénom;Nom")).toBe(true);
-    expect(lireCsv(csv)[1]).toEqual(["Zoé", 'O"Neil; Jr', "Léa", "Ami", "Non", "Oui", "Présent", "Végan", "", "", "", "", "3"]);
+    // L'adresse tient sur une ligne dans le tableur.
+    expect(lireCsv(csv)[1]).toEqual(["Zoé", 'O"Neil; Jr', "Léa", "Ami", "Non", "B", "Présent", "Poisson", "Végan", "", "", "", "", "12 rue des Lys, 69002 LYON", "3"]);
   });
 
   it("reconnaît les colonnes dans n'importe quel ordre et liste les erreurs ligne par ligne", () => {
@@ -62,7 +65,7 @@ describe("export et import CSV", () => {
   });
 
   it("relit son propre export", () => {
-    const csv = versCsv([{ prenom: "Zoé", nom: "Durand", cote: "Sam", lien: "Ami proche", enfant: false, accompagnant: false, reponse: "Présent", regimes: ["Sans gluten"], allergies: "Noix", email: "zoe@ex.fr", telephone: "0600000000", foyer: "Famille Durand", table: null }]);
+    const csv = versCsv([{ prenom: "Zoé", nom: "Durand", cote: "Sam", lien: "Ami proche", enfant: false, reponse: "Présent", regimes: ["Sans gluten"], allergies: "Noix", email: "zoe@ex.fr", telephone: "0600000000", foyer: "Famille Durand", table: null }]);
     const r = importer(csv, { p1: "Léa", p2: "Sam" });
     expect(r.erreurs).toEqual([]);
     expect(r.invites[0]).toMatchObject({ prenom: "Zoé", cote: "PARTENAIRE_2", lien: "amiProche", reponse: "PRESENT", regimes: ["Sans gluten"], allergies: "Noix", foyer: "Famille Durand" });

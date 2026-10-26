@@ -24,7 +24,7 @@ function Section({ id, titre, children }: { id?: string; titre: string; children
 export default async function PageParametres() {
   const { mariage, user } = await accesEcriture();
   const [compte, partenaires, aMotDePasse, temoins] = await Promise.all([
-    db.user.findUniqueOrThrow({ where: { id: user.id }, select: { name: true, email: true, notifHebdo: true, notifRappels: true } }),
+    db.user.findUniqueOrThrow({ where: { id: user.id }, select: { name: true, email: true, notifHebdo: true, notifRappels: true, notifReponses: true } }),
     db.member.count({ where: { weddingId: mariage.id, userId: { not: user.id }, role: { in: ["CREATEUR", "COPILOTE"] } } }),
     db.account.count({ where: { userId: user.id, providerId: "credential" } }),
     db.member.findMany({ where: { weddingId: mariage.id, role: "TEMOIN" }, include: { user: { select: { name: true, email: true } } } }),
@@ -74,7 +74,7 @@ export default async function PageParametres() {
       </Section>
 
       <Section id="notifications" titre="E-mails">
-        <Notifications hebdo={compte.notifHebdo} rappels={compte.notifRappels} />
+        <Notifications hebdo={compte.notifHebdo} rappels={compte.notifRappels} reponses={compte.notifReponses} />
       </Section>
 
       <Section titre="Mon compte">

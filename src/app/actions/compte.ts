@@ -23,7 +23,7 @@ export async function modifierNotifications(_: EtatCompte, formData: FormData): 
   const user = await utilisateur();
   await db.user.update({
     where: { id: user.id },
-    data: { notifHebdo: formData.get("notifHebdo") === "on", notifRappels: formData.get("notifRappels") === "on" },
+    data: { notifHebdo: formData.get("notifHebdo") === "on", notifRappels: formData.get("notifRappels") === "on", notifReponses: formData.get("notifReponses") === "on" },
   });
   revalidatePath("/parametres");
   return { message: "Vos préférences d’e-mails sont enregistrées." };

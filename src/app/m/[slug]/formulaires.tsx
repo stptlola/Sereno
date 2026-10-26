@@ -50,6 +50,7 @@ export interface MembreFormulaire {
   regimes: string[];
   allergies: string;
   moments: string[];
+  plat: string;
 }
 
 export function FormReponse({
@@ -60,6 +61,7 @@ export function FormReponse({
   questions,
   reponsesPerso,
   message,
+  plats = [],
 }: {
   slug: string;
   jeton: string;
@@ -68,6 +70,7 @@ export function FormReponse({
   questions: { id: string; libelle: string; type: "texte" | "choix"; choix: string[] }[];
   reponsesPerso: Record<string, string>;
   message: string;
+  plats?: string[];
 }) {
   const [etat, action, enCours] = useActionState<EtatPublic, FormData>(repondre, {});
   const [presences, setPresences] = useState<Record<string, string>>(Object.fromEntries(membres.map((m) => [m.id, m.reponse === "EN_ATTENTE" ? "" : m.reponse])));
@@ -93,6 +96,19 @@ export function FormReponse({
           {presences[m.id] === "PRESENT" && (
             <>
               {m.moments.length > 0 && <p className="text-sm text-ink-muted">Attendu au : {m.moments.join(", ")}.</p>}
+              {plats.length > 0 && (
+                <label className="flex flex-col gap-1.5">
+                  <span className="text-sm font-semibold">Votre plat</span>
+                  <select name={`plat-${m.id}`} defaultValue={m.plat} aria-label={`Plat de ${m.prenom}`} className={classeChamp}>
+                    <option value="">Choisir…</option>
+                    {plats.map((p) => (
+                      <option key={p} value={p}>
+                        {p}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+              )}
               <div className="flex flex-col gap-2">
                 <p className="text-sm font-semibold">Un régime alimentaire ?</p>
                 <div className="flex flex-wrap gap-2">

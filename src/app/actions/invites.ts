@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
+import { nettoyerPlat } from "@/domain/invites/adresses";
 import { preparerInvitation, PREFIXE_ACCOMPAGNANT } from "@/domain/invites/invitation";
 import { doublonDe, importer, LIENS, REGIMES } from "@/domain/invites/invites";
 import { accesEcriture } from "@/lib/acces";
@@ -154,6 +155,12 @@ export async function modifierInvite(formData: FormData): Promise<void> {
   const ageAns = z.coerce.number().int().min(0).max(17).optional().catch(undefined).parse(formData.get("age") || undefined);
   const momentsVoulus = formData.getAll("moments").map(String);
   const momentsDuMariage = await db.moment.findMany({ where: { weddingId: mariage.id, id: { in: momentsVoulus } }, select: { id: true } });
+  const site = await db.miniSite.findUnique({ where: { weddingId: mariage.id }, select: { mealOptions: true } });
+  const foyerId = await foyer(mariage.id, texte(80).parse(formData.get("household") ?? ""));
+  // L'adresse postale est celle du foyer (M4-11) : un invité seul en reçoit un, à son nom, s'il en indique une.
+  const adresse = texte(400).parse(String(formData.get("adresse") ?? "").replace(/\r\n?/g, "\n"));
+  const foyerFinal = foyerId ?? (adresse ? (await db.household.create({ data: { weddingId: mariage.id, name: [g.firstName, g.lastName].filter(Boolean).join(" ") } })).id : null);
+  if (foyerFinal && formData.has("adresse")) await db.household.update({ where: { id: foyerFinal }, data: { address: adresse } });
   await db.$transaction([
     db.guest.update({
       where: { id: g.id },
@@ -165,11 +172,13 @@ export async function modifierInvite(formData: FormData): Promise<void> {
         ageGroup: age,
         age: age === "ENFANT" ? (ageAns ?? null) : null,
         accessibility: formData.get("accessibility") === "on",
+        listB: formData.get("listB") === "on",
+        mealChoice: nettoyerPlat(String(formData.get("mealChoice") ?? ""), site?.mealOptions ?? []),
         email: texte(120).parse(formData.get("email") ?? ""),
         phone: texte(30).parse(formData.get("phone") ?? ""),
         diets: formData.getAll("diets").map(String).filter((d) => (REGIMES as readonly string[]).includes(d)),
         allergies: texte(300).parse(formData.get("allergies") ?? ""),
-        householdId: await foyer(mariage.id, texte(80).parse(formData.get("household") ?? "")),
+        householdId: foyerFinal,
       },
     }),
     db.guestMoment.deleteMany({ where: { guestId: g.id } }),
