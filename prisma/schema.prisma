@@ -375,11 +375,27 @@ model Expense {
   momentId     String?
   moment       Moment?        @relation(fields: [momentId], references: [id], onDelete: SetNull)
   payments     Payment[]
+  lines        ExpenseLine[]
   createdAt    DateTime       @default(now())
   updatedAt    DateTime       @updatedAt
 
   @@index([weddingId])
   @@index([categoryId])
+}
+
+// Détail d'une dépense en lignes (salle, ménage, caution…) : le prévu et le réel de la dépense en sont la somme.
+model ExpenseLine {
+  id           String   @id @default(cuid())
+  expenseId    String
+  expense      Expense  @relation(fields: [expenseId], references: [id], onDelete: Cascade)
+  label        String
+  plannedCents Int?
+  actualCents  Int?
+  // Caution : rendue après l'événement, donc hors du total.
+  isDeposit    Boolean  @default(false)
+  createdAt    DateTime @default(now())
+
+  @@index([expenseId])
 }
 
 model Payment {

@@ -37,7 +37,7 @@ export default async function PageBudget() {
   const postes = await db.budgetCategory.findMany({
     where: { weddingId: mariage.id },
     orderBy: { order: "asc" },
-    include: { expenses: { include: { payments: true }, orderBy: { createdAt: "asc" } } },
+    include: { expenses: { include: { payments: true, _count: { select: { lines: true } } }, orderBy: { createdAt: "asc" } } },
   });
   const depenses = postes.flatMap((p) =>
     p.expenses.map((e) => ({
@@ -185,6 +185,11 @@ export default async function PageBudget() {
                         <li key={e.id} className="flex flex-wrap items-center gap-x-3 gap-y-1 border-b border-line py-2 last:border-b-0">
                           <Link href={`/budget/depenses/${e.id}`} className="flex-1 font-semibold hover:underline">
                             {e.label}
+                            {e._count.lines > 0 && (
+                              <span className="ml-2 text-xs font-normal text-ink-muted">
+                                {e._count.lines} ligne{e._count.lines > 1 ? "s" : ""}
+                              </span>
+                            )}
                           </Link>
                           <span className={`rounded-full border px-2.5 py-0.5 text-xs font-semibold ${s.classe}`}>{s.libelle}</span>
                           <span className="text-sm">{euros(engage(dep))}</span>

@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { lireEuros, statutAutomatique } from "@/domain/budget/calculs";
+import { totauxDetail } from "@/domain/budget/detail";
 import { accesEcriture, lireDateJour } from "@/lib/acces";
 import { db } from "@/lib/db";
 
@@ -60,6 +61,7 @@ export async function ajouterDepense(formData: FormData): Promise<void> {
 
 export async function modifierDepense(formData: FormData): Promise<void> {
   const { user, mariage } = await accesEcriture();
+  const detaillee = (await db.expenseLine.count({ where: { expenseId: String(formData.get("id") ?? ""), expense: { weddingId: mariage.id } } })) > 0;
   const d = await depenseDuMariage(id.parse(formData.get("id")), mariage.id);
   const posteId = id.parse(formData.get("posteId"));
   const poste = await db.budgetCategory.findFirst({ where: { id: posteId, weddingId: mariage.id } });
@@ -68,8 +70,8 @@ export async function modifierDepense(formData: FormData): Promise<void> {
     data: {
       label: libelle.catch(d.label).parse(formData.get("label")),
       categoryId: poste ? poste.id : d.categoryId,
-      plannedCents: lireEuros(formData.get("planned")),
-      actualCents: lireEuros(formData.get("actual")),
+      // Une dépense détaillée en lignes tire son prévu et son réel du détail : on ne les remplace pas ici.
+      ...(detaillee ? {} : { plannedCents: lireEuros(formData.get("planned")), actualCents: lireEuros(formData.get("actual")) }),
       vendor: texte(120).parse(formData.get("vendor") ?? ""),
       payer: texte(60).parse(formData.get("payer") ?? ""),
       note: texte(2000).parse(formData.get("note") ?? ""),
@@ -89,6 +91,56 @@ export async function supprimerDepense(formData: FormData): Promise<void> {
   await journal(mariage.id, user.id, "Expense", d.id, "supprimee");
   rafraichir();
   redirect("/budget");
+}
+
+/** Recalcule le prévu et le réel d'une dépense détaillée à partir de ses lignes (les cautions à part). */
+async function synchroniserDetail(depenseId: string) {
+  const lignes = await db.expenseLine.findMany({ where: { expenseId: depenseId } });
+  if (!lignes.length) return;
+  const t = totauxDetail(lignes.map((l) => ({ prevuCentimes: l.plannedCents, reelCentimes: l.actualCents, caution: l.isDeposit })));
+  await db.expense.update({ where: { id: depenseId }, data: { plannedCents: t.prevuCentimes, actualCents: t.reelCentimes } });
+  await majStatut(depenseId);
+}
+
+export async function ajouterLigne(formData: FormData): Promise<void> {
+  const { user, mariage } = await accesEcriture();
+  const d = await db.expense.findFirst({ where: { id: id.parse(formData.get("depenseId")), weddingId: mariage.id } });
+  const libelle = z.string().trim().min(1).max(120).safeParse(formData.get("label"));
+  if (!d || !libelle.success) return;
+  // Première ligne : le montant déjà saisi sur la dépense devient une ligne, pour ne rien perdre.
+  if ((await db.expenseLine.count({ where: { expenseId: d.id } })) === 0 && (d.plannedCents || d.actualCents)) {
+    await db.expenseLine.create({ data: { expenseId: d.id, label: d.label, plannedCents: d.plannedCents, actualCents: d.actualCents } });
+  }
+  await db.expenseLine.create({ data: { expenseId: d.id, label: libelle.data, plannedCents: lireEuros(formData.get("planned")), isDeposit: formData.get("isDeposit") === "on" || /caution/i.test(libelle.data) } });
+  await synchroniserDetail(d.id);
+  await journal(mariage.id, user.id, "Expense", d.id, "ligne-ajoutee");
+  rafraichir(d.id);
+}
+
+export async function modifierLigne(formData: FormData): Promise<void> {
+  const { mariage } = await accesEcriture();
+  const l = await db.expenseLine.findFirst({ where: { id: id.parse(formData.get("id")), expense: { weddingId: mariage.id } } });
+  if (!l) return;
+  await db.expenseLine.update({
+    where: { id: l.id },
+    data: {
+      label: z.string().trim().min(1).max(120).catch(l.label).parse(formData.get("label")),
+      plannedCents: lireEuros(formData.get("planned")),
+      actualCents: lireEuros(formData.get("actual")),
+      isDeposit: formData.get("isDeposit") === "on",
+    },
+  });
+  await synchroniserDetail(l.expenseId);
+  rafraichir(l.expenseId);
+}
+
+export async function supprimerLigne(formData: FormData): Promise<void> {
+  const { mariage } = await accesEcriture();
+  const l = await db.expenseLine.findFirst({ where: { id: id.parse(formData.get("id")), expense: { weddingId: mariage.id } } });
+  if (!l) return;
+  await db.expenseLine.delete({ where: { id: l.id } });
+  await synchroniserDetail(l.expenseId);
+  rafraichir(l.expenseId);
 }
 
 export async function ajouterVersement(formData: FormData): Promise<void> {
