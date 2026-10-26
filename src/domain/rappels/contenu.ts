@@ -13,6 +13,14 @@ export function contenuRappel(e: EmailRappel, prenom: string): string {
         : `Quelques échéances importantes arrivent dans une semaine :\n${e.echeances.map((t) => `• ${t.titre}`).join("\n")}`,
     );
   }
+  if (e.paiements?.length) {
+    const euros = (c: number) => new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR", maximumFractionDigits: c % 100 ? 2 : 0 }).format(c / 100);
+    parties.push(
+      `${e.paiements.length === 1 ? "Un paiement est prévu" : "Des paiements sont prévus"} dans une semaine :\n${e.paiements
+        .map((p) => `• ${p.libelle} : ${euros(p.montantCentimes)}, le ${formatJour.format(p.echeance!)}`)
+        .join("\n")}\nUne fois réglé, cochez-le dans votre budget.`,
+    );
+  }
   if (e.priorites.length) {
     parties.push(
       `${e.type === "mensuel" ? "Pour ce mois-ci" : "Cette semaine"}, voici vos prochaines étapes :\n${e.priorites

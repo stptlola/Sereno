@@ -5,7 +5,10 @@ import { CartesChiffres, EnTeteMariage, ProchainesEtapes, type VueTache } from "
 import { bilan } from "@/domain/budget/calculs";
 import { compter } from "@/domain/invites/invites";
 import { ajouterMois, ecartJours, normaliser } from "@/domain/planning";
+import { prochainsPaiements } from "@/domain/budget/echeancier";
 import { temoinDe } from "@/lib/acces";
+import { euros } from "@/lib/format";
+import { chargerPaiements } from "@/lib/paiements";
 import { db } from "@/lib/db";
 import { mariageDe, utilisateurRequis } from "@/lib/session";
 import { CaseTache } from "@/components/case-tache";
@@ -21,6 +24,7 @@ export default async function TableauDeBord() {
   if (!acces) redirect((await temoinDe(user.id)) ? "/temoin" : "/commencer");
   const { mariage, role } = acces;
 
+  const paiementsProches = prochainsPaiements((await chargerPaiements(acces.mariage.id)).paiements, 3);
   const [taches, postes, copilote, invites] = await Promise.all([
     db.task.findMany({
       where: { weddingId: mariage.id, hidden: false },
@@ -94,6 +98,32 @@ export default async function TableauDeBord() {
       <Link href="/planning" className="-mt-4 self-start text-sm font-semibold text-bronze underline">
         Voir tout le planning
       </Link>
+      {paiementsProches.length > 0 && (
+        <section className="flex flex-col gap-3" aria-label="Prochains paiements">
+          <h2 className="font-display text-2xl">Prochains paiements</h2>
+          <ul className="flex flex-col rounded-md border border-line bg-surface-raised px-4">
+            {paiementsProches.map((p) => {
+              const retard = p.echeance!.getTime() < aujourdhui.getTime();
+              return (
+                <li key={p.id} className="flex items-center justify-between gap-3 border-b border-line py-3 last:border-b-0">
+                  <span className="min-w-0">
+                    <span className="block truncate font-semibold">{p.depense}</span>
+                    <span className={`block text-xs ${retard ? "font-semibold text-alerte" : "text-ink-muted"}`}>
+                      {retard ? "À régulariser · " : ""}
+                      {new Intl.DateTimeFormat("fr-FR", { weekday: "short", day: "numeric", month: "short", timeZone: "UTC" }).format(p.echeance!)}
+                      {p.prestataire ? ` · ${p.prestataire}` : ""}
+                    </span>
+                  </span>
+                  <span className="font-semibold">{euros(p.montantCentimes)}</span>
+                </li>
+              );
+            })}
+          </ul>
+          <Link href="/budget/echeancier" className="-mt-1 self-start text-sm font-semibold text-bronze underline">
+            Voir l’échéancier
+          </Link>
+        </section>
+      )}
     </main>
   );
 }

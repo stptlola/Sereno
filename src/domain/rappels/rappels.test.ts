@@ -47,6 +47,15 @@ describe("rappels par e-mail", () => {
     expect(planifierRappels(lundi, [mariage({ destinataires: [dest({ dejaEnvoyeAujourdhui: true })] })])).toEqual([]);
   });
 
+  it("rappelle un paiement une semaine avant, dans le même e-mail que le reste", () => {
+    const m = mariage({ taches: [], paiements: [{ id: "p", libelle: "Acompte du traiteur", montantCentimes: 120000, echeance: jour(2026, 11, 3), paye: false }, { id: "q", libelle: "Solde", montantCentimes: 1, echeance: jour(2026, 11, 3), paye: true }] });
+    const [e] = planifierRappels(mardi, [m]);
+    expect(e?.type).toBe("echeance");
+    expect(e?.paiements.map((p) => p.id)).toEqual(["p"]);
+    // Espaces insécables du français : « 1 200 € ».
+    expect(e?.sujet).toMatch(/^Dans une semaine : acompte du traiteur \(1\s200\s€\)$/);
+  });
+
   it("passe au rythme mensuel pour un mariage lointain sans tâche proche", () => {
     const loin = mariage({ dateMariage: jour(2028, 9, 16), taches: [t("z", jour(2027, 3, 1))] });
     expect(planifierRappels(jour(2026, 11, 9), [loin])).toEqual([]);

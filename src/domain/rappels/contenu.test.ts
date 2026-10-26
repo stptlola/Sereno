@@ -6,7 +6,7 @@ import { contenuRappel } from "./contenu";
 describe("contenu des rappels", () => {
   it("annonce l'échéance puis les priorités, sans culpabiliser", () => {
     const t = { id: "a", titre: "Déposer le dossier de mariage à la mairie", echeance: jour(2026, 11, 2), faite: false, repere: "LEGAL" };
-    const texte = contenuRappel({ userId: "u", email: "e", type: "hebdo+echeance", sujet: "", priorites: [t], echeances: [t] }, "Léa");
+    const texte = contenuRappel({ userId: "u", email: "e", type: "hebdo+echeance", sujet: "", priorites: [t], echeances: [t], paiements: [] }, "Léa");
     expect(texte).toContain("Bonjour Léa");
     expect(texte).toContain("prévue le lundi 2 novembre");
     expect(texte).toContain("Cette semaine");

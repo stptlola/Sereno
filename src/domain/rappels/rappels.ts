@@ -21,10 +21,20 @@ export interface DestinataireRappel {
   dejaEnvoyeAujourdhui: boolean;
 }
 
+export interface PaiementRappel {
+  id: string;
+  libelle: string;
+  montantCentimes: number;
+  echeance: Date | null;
+  paye: boolean;
+}
+
 export interface MariageRappel {
   prenoms: string;
   dateMariage: Date | null;
   taches: TacheRappel[];
+  /** Acomptes et soldes (M11-03) : rappel une semaine avant l'échéance. */
+  paiements?: PaiementRappel[];
   destinataires: DestinataireRappel[];
 }
 
@@ -35,6 +45,7 @@ export interface EmailRappel {
   sujet: string;
   priorites: TacheRappel[];
   echeances: TacheRappel[];
+  paiements: PaiementRappel[];
 }
 
 export const JOURS_AVANT_RAPPEL = 7;
@@ -57,6 +68,7 @@ export function planifierRappels(jour: Date, mariages: readonly MariageRappel[])
   for (const m of mariages) {
     const aFaire = m.taches.filter((t) => !t.faite && t.echeance).sort((a, b) => a.echeance!.getTime() - b.echeance!.getTime());
     const echeances = aFaire.filter((t) => (t.repere === "LEGAL" || t.repere === "IMPORTANT") && ecartJours(dansSept, t.echeance!) === 0);
+    const paiements = (m.paiements ?? []).filter((p) => !p.paye && p.echeance && ecartJours(dansSept, p.echeance) === 0);
     const lointain = m.dateMariage ? ecartJours(auj, m.dateMariage) > SEUIL_LOINTAIN_JOURS : false;
     const rienAvant30Jours = !aFaire.some((t) => ecartJours(auj, t.echeance!) <= 30);
     const modeMensuel = lointain && rienAvant30Jours;
@@ -66,15 +78,20 @@ export function planifierRappels(jour: Date, mariages: readonly MariageRappel[])
     for (const d of m.destinataires) {
       if (d.dejaEnvoyeAujourdhui) continue;
       const veutRecap = d.hebdo && jourDuRecap && priorites.length > 0;
-      const veutEcheance = d.rappels && echeances.length > 0;
+      const veutEcheance = d.rappels && (echeances.length > 0 || paiements.length > 0);
       if (!veutRecap && !veutEcheance) continue;
       const type: EmailRappel["type"] = veutRecap && veutEcheance ? "hebdo+echeance" : veutRecap ? (modeMensuel ? "mensuel" : "hebdo") : "echeance";
+      const euros = (c: number) => new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR", maximumFractionDigits: c % 100 ? 2 : 0 }).format(c / 100);
       const sujet = veutEcheance
-        ? `Dans une semaine : ${echeances[0]!.titre.charAt(0).toLowerCase()}${echeances[0]!.titre.slice(1)}`
+        ? echeances.length
+          ? `Dans une semaine : ${echeances[0]!.titre.charAt(0).toLowerCase()}${echeances[0]!.titre.slice(1)}`
+          : paiements.length === 1
+            ? `Dans une semaine : ${paiements[0]!.libelle.charAt(0).toLowerCase()}${paiements[0]!.libelle.slice(1)} (${euros(paiements[0]!.montantCentimes)})`
+            : `Dans une semaine : ${paiements.length} paiements à prévoir`
         : modeMensuel
           ? "Votre mois : on garde le cap, tranquillement"
           : `Votre semaine : ${priorites.length} petite${priorites.length > 1 ? "s" : ""} chose${priorites.length > 1 ? "s" : ""} à faire`;
-      envois.push({ userId: d.userId, email: d.email, type, sujet, priorites: veutRecap ? priorites : [], echeances: veutEcheance ? echeances : [] });
+      envois.push({ userId: d.userId, email: d.email, type, sujet, priorites: veutRecap ? priorites : [], echeances: veutEcheance ? echeances : [], paiements: veutEcheance ? paiements : [] });
     }
   }
   return envois;

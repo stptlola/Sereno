@@ -4,7 +4,10 @@ import { Navigation } from "@/components/navigation";
 import { classeChamp } from "@/components/ui";
 import { bilan, engage, messageDepassement, resteAPayer } from "@/domain/budget/calculs";
 import { suggestionsRestantes } from "@/domain/budget/suggestions";
+import { financement, prochainsPaiements } from "@/domain/budget/echeancier";
+import { normaliser } from "@/domain/planning";
 import { accesEcriture } from "@/lib/acces";
+import { chargerPaiements } from "@/lib/paiements";
 import { db } from "@/lib/db";
 import { champEuros, euros, eurosArrondis, STATUTS_DEPENSE } from "@/lib/format";
 import { ajouterDepense, ajouterPoste, modifierPoste, supprimerPoste } from "../actions/budget";
@@ -23,6 +26,11 @@ function Chiffre({ libelle, valeur, alerte = false }: { libelle: string; valeur:
 
 export default async function PageBudget() {
   const { mariage } = await accesEcriture();
+  const { paiements, financements } = await chargerPaiements(mariage.id);
+  const prochains = prochainsPaiements(paiements, 2);
+  const aVenir = paiements.filter((p) => !p.paye);
+  const enRetard = aVenir.filter((p) => p.echeance && p.echeance.getTime() < normaliser(new Date()).getTime()).length;
+  const parts = financement(financements);
   const postes = await db.budgetCategory.findMany({
     where: { weddingId: mariage.id },
     orderBy: { order: "asc" },
@@ -90,6 +98,52 @@ export default async function PageBudget() {
           ))}
         </section>
       )}
+
+      <div className="grid gap-3 sm:grid-cols-2">
+        <Link href="/budget/echeancier" className="flex flex-col gap-2 rounded-md border border-line bg-surface-raised p-4 transition hover:border-or">
+          <span className="flex items-baseline justify-between gap-2">
+            <span className="font-display text-xl">Échéancier</span>
+            <span className="text-sm text-ink-muted">
+              {aVenir.length} à venir{enRetard ? <span className="font-semibold text-alerte"> · {enRetard} en retard</span> : null}
+            </span>
+          </span>
+          {prochains.length ? (
+            prochains.map((p) => (
+              <span key={p.id} className="flex justify-between gap-3 text-sm">
+                <span className="truncate">
+                  {p.depense} · {new Intl.DateTimeFormat("fr-FR", { day: "numeric", month: "short", timeZone: "UTC" }).format(p.echeance!)}
+                </span>
+                <span className="font-semibold">{euros(p.montantCentimes)}</span>
+              </span>
+            ))
+          ) : (
+            <span className="text-sm text-ink-muted">Ajoutez acomptes et soldes à vos dépenses : ils apparaîtront ici, avec un rappel une semaine avant.</span>
+          )}
+        </Link>
+        <section className="flex flex-col gap-2 rounded-md border border-line bg-surface-raised p-4" aria-label="Qui finance quoi">
+          <p className="font-display text-xl">Qui finance quoi</p>
+          {parts.length === 0 ? (
+            <p className="text-sm text-ink-muted">Indiquez « qui paie » sur vos dépenses pour voir la part de chacun.</p>
+          ) : (
+            <ul className="flex flex-col gap-2">
+              {parts.map((p) => (
+                <li key={p.payeur} className="flex flex-col gap-1 text-sm">
+                  <span className="flex justify-between gap-3">
+                    <span className={p.payeur === "Non précisé" ? "text-ink-muted" : "font-semibold"}>{p.payeur}</span>
+                    <span>
+                      {eurosArrondis(p.engageCentimes)} <span className="text-ink-muted">· {p.part} %</span>
+                    </span>
+                  </span>
+                  <span className="h-1.5 overflow-hidden rounded-full bg-surface-soft" aria-hidden>
+                    <span className="block h-full rounded-full bg-or" style={{ width: `${p.part}%` }} />
+                  </span>
+                  {p.resteCentimes > 0 && <span className="text-xs text-ink-muted">Reste à régler : {eurosArrondis(p.resteCentimes)}</span>}
+                </li>
+              ))}
+            </ul>
+          )}
+        </section>
+      </div>
 
       <section className="flex flex-col gap-3">
         <h2 className="font-display text-2xl">Vos postes</h2>

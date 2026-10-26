@@ -24,6 +24,7 @@ export async function POST(request: Request) {
   const mariages = await db.wedding.findMany({
     include: {
       tasks: { where: { hidden: false }, select: { id: true, title: true, dueDate: true, status: true, template: { select: { repere: true } } } },
+      expenses: { select: { label: true, vendor: true, payments: { select: { id: true, amountCents: true, dueDate: true, isPaid: true } } } },
       members: { where: { role: { in: ["CREATEUR", "COPILOTE"] } }, include: { user: { include: { notifications: { where: { day: aujourdhui } } } } } },
     },
   });
@@ -32,6 +33,9 @@ export async function POST(request: Request) {
     prenoms: [m.partner1Name, m.partner2Name].filter(Boolean).join(" et "),
     dateMariage: m.date,
     taches: m.tasks.map((t) => ({ id: t.id, titre: t.title, echeance: t.dueDate, faite: t.status === "FAIT", repere: t.template?.repere ?? null })),
+    paiements: m.expenses.flatMap((e) =>
+      e.payments.map((p) => ({ id: p.id, libelle: e.vendor ? `${e.label} (${e.vendor})` : e.label, montantCentimes: p.amountCents, echeance: p.dueDate, paye: p.isPaid })),
+    ),
     destinataires: m.members.map((mb) => ({
       userId: mb.userId,
       email: mb.user.email,
